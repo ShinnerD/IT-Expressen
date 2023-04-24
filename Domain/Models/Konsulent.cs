@@ -8,6 +8,8 @@ namespace Domain.Models
 {
     internal class Konsulent
     {
+        public int MyProperty { get; set; }
+
         /// <summary>
         /// Dette er en test metode tilføjet for at teste, hvordan kode bliver tilføjet til Wiki inde i Azure Devops.
         /// </summary>
@@ -17,5 +19,7 @@ namespace Domain.Models
         {
             return number.ToString();
         }
+
+
     }
 }
