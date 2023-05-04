@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Repository
+namespace Dal.Repository
 {
-    internal class InvoiceRepository
+    internal class ConsultantRepository
     {
     }
 }
