@@ -1,3 +1,5 @@
+using DAL.Linq;
+
 namespace GUI
 {
     public partial class Login : Form
@@ -6,6 +8,10 @@ namespace GUI
         {
             InitializeComponent();
         }
+
+        DataClassesDataContext dataClassesDataContext = new DataClassesDataContext(DbConnectionString.ConnectionString);
+
+
 
         private void bt_CreateUser_Click(object sender, EventArgs e)
         {
@@ -59,5 +65,34 @@ namespace GUI
             this.Show();
         }
 
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_Login_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var user = (from s in dataClassesDataContext.Users where s.User_name == tb_UserName.Text select s).First();
+                if (user.Password == tb_Password.Text)
+                {
+                    this.Hide();
+                    MessageBox.Show("Login successfull!");
+                    //GUI.Admin a = new Admin();
+                    //a.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Username or password incorrect");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+        }
     }
 }
