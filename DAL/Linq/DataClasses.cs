@@ -1,4 +1,4 @@
-namespace DAL
+namespace DAL.Linq
 {
     partial class DataClassesDataContext
     {

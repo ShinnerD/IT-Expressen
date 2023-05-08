@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL.Linq;
 using Interfaces.Models;
 
-namespace Dal.Repository
+namespace Domain.Services
 {
-    internal class InvoiceRepository
+    public class UserService
     {
+        public List<IUserModel> GetAllUsers()
+        {
+            var  userRepo = new DAL.Linq
+        }
 
     }
 }
