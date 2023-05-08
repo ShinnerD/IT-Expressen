@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-/// <summary>
-/// written by Erik. Model too Invites that have atrributes that is relavent too the case and project
-/// </summary>
+
 
 namespace Domain.Models
 {
-    internal class InvitesModel
+    /// <summary>
+    /// written by Erik.Model too Invites that have atrributes that is relavent too the case and project
+    /// </summary>
+    public class InvitesModel
     {
         public int ProjectId { get; set; }
         public int UserId { get; set; }

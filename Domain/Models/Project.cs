@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/// <summary>
-/// written by Erik. Model too Project that have atrributes that is relavent too the case and project
-/// </summary>
 
 namespace Domain.Models
 {
-    internal class Project
+    /// <summary>
+    /// written by Erik. Model too Project that have atrributes that is relavent too the case and project
+    /// </summary>
+
+    public class Project
     {
         public int ProjectId { get; set; }
         public int UserId { get; set; }

@@ -7,19 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/// <summary>
-/// written by Erik. Model too User that have atrributes that is relavent too the case and project
-/// </summary>
-
 namespace Domain.Models
 {
-    internal class UserModel
+    /// <summary>
+    /// written by Erik. Model too User that have atrributes that is relavent too the case and project
+    /// </summary>
+    public class UserModel
     {
         public int TLF { get; set; }
 
         public string Name { get; set; }
 
-        public int LastName { get; set; }
+        public string LastName { get; set; } 
 
         public string Mail { get; set; }
 
