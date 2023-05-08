@@ -46,9 +46,9 @@
             // 
             // bt_CreateUser
             // 
-            bt_CreateUser.Location = new Point(330, 340);
+            bt_CreateUser.Location = new Point(310, 327);
             bt_CreateUser.Name = "bt_CreateUser";
-            bt_CreateUser.Size = new Size(75, 23);
+            bt_CreateUser.Size = new Size(95, 23);
             bt_CreateUser.TabIndex = 0;
             bt_CreateUser.Text = "Create User";
             bt_CreateUser.UseVisualStyleBackColor = true;
@@ -140,9 +140,9 @@
             // 
             // lb_NotAUser
             // 
-            lb_NotAUser.Location = new Point(170, 307);
+            lb_NotAUser.Location = new Point(170, 327);
             lb_NotAUser.Name = "lb_NotAUser";
-            lb_NotAUser.Size = new Size(235, 30);
+            lb_NotAUser.Size = new Size(131, 56);
             lb_NotAUser.TabIndex = 10;
             lb_NotAUser.Text = "Not a user? Click the \"Greate User\" to create your profile";
             // 
@@ -154,6 +154,7 @@
             bt_Login.TabIndex = 11;
             bt_Login.Text = "Login";
             bt_Login.UseVisualStyleBackColor = true;
+            bt_Login.Click += bt_Login_Click;
             // 
             // bt_cancel
             // 
