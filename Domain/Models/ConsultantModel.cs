@@ -4,19 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/// <summary>
-/// written by Erik. Model too Consultant that have atrributes that is relavent too the case and project
-/// </summary>
+
 namespace Domain.Models
 {
-    internal class ConsultantModel
+    /// <summary>
+    /// written by Erik. Model too Consultant that have atrributes that is relavent too the case and project
+    /// </summary>
+    public class ConsultantModel
     {
 
-        public int TLF { get; set; }
+        public int PhoneNumber { get; set; }
 
-        public string Name { get; set; }
+        public string UserName { get; set; }
 
-        public int LastName { get; set; }
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
 
         public string Mail { get; set; }
 
@@ -31,6 +34,8 @@ namespace Domain.Models
         public string Address { get; set; }
 
         public int ZipCode { get; set; }
+
+        public string Country { get; set; }
 
         public int ID { get; set; }
 

@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/// <summary>
-/// written by Erik. Model too  Specialisation that have atrributes that is relavent too the case and project
-/// </summary>
+
 
 namespace Domain.Models
 {
-    internal class Invoice
+    /// <summary>
+    /// written by Erik. Model too  Specialisation that have atrributes that is relavent too the case and project
+    /// </summary>
+    public class Invoice
     {
         public int InvoiceId { get; set; }
         public int ProjectId { get; set; }
