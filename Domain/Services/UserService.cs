@@ -13,10 +13,7 @@ namespace Domain.Services
         public List<IUserModel> GetAllUsers()
         {
             var  userRepo = new DAL.Repository.UserRepository();
-            return userRepo.GetAllUsers();
-            
-
+            return userRepo.GetAllUsers();    
         }
-
     }
 }

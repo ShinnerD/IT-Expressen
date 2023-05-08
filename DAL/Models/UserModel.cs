@@ -61,6 +61,6 @@ namespace DAL.Models
 
         public bool? ActiveStatus { get; set; }
 
-        public int Specialization { get; set; }
+        public List<string>? Specialization { get; set; }
     }
 }

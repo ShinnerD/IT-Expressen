@@ -17,7 +17,8 @@ namespace DAL.Repository
         {
             var AlldtoUsers = dbcontext.Users;
 
-            var result = new List<DAL.Models.UserModel>();
+            List<IUserModel> result = new List<IUserModel>();
+
 
             foreach (var dto in AlldtoUsers)
             {
@@ -37,7 +38,7 @@ namespace DAL.Repository
                 user.ActiveStatus = (bool?)dto.Active_Status;
                 user.CreationDate = (DateTime?)dto.Creation_Date;
                 user.UserType = dto.User_Type;
-                //user.Specialization = dto.Specialisations_Lines;
+                //user.Specialization = dto.Specialisations_Lines.First(i => i.User_Id == user.ID).Spec_Id;
 
                 result.Add(user);
             }
