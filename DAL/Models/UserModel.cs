@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Interfaces.Models;
 
-namespace Domain.Models
+namespace DAL.Models
 {
     //public interface IUserModel
     //{
@@ -26,14 +27,14 @@ namespace Domain.Models
     //    string UserName { get; set; }
     //    string UserType { get; set; }
     //    int ZipCode { get; set; }
-    }
+    //}
 
     /// <summary>
     /// written by Erik. Model too User that have atrributes that is relavent too the case and project
     /// </summary>
-    public class UserModel /*: IUserModel*/
+    public class UserModel : IUserModel
     {
-        public int PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
 
         public string UserName { get; set; }
 
@@ -47,18 +48,18 @@ namespace Domain.Models
 
         public string UserType { get; set; }
 
-        public DateTime CreationDate { get; set; }
+        public DateTime? CreationDate { get; set; }
 
         public string NameCity { get; set; }
 
         public string Address { get; set; }
 
-        public int ZipCode { get; set; }
+        public string ZipCode { get; set; }
         public string Country { get; set; }
 
         public int ID { get; set; }
 
-        public bool ActiveStatus { get; set; }
+        public bool? ActiveStatus { get; set; }
 
         public int Specialization { get; set; }
     }
