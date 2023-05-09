@@ -50,6 +50,9 @@
             label10 = new Label();
             tb_PhoneNr = new TextBox();
             label11 = new Label();
+            bt_CreateUser = new Button();
+            tb_UserType = new TextBox();
+            comboBox1 = new ComboBox();
             SuspendLayout();
             // 
             // tb_UserName
@@ -228,11 +231,40 @@
             label11.TabIndex = 21;
             label11.Text = "Re-Enter password";
             // 
+            // bt_CreateUser
+            // 
+            bt_CreateUser.Location = new Point(139, 383);
+            bt_CreateUser.Name = "bt_CreateUser";
+            bt_CreateUser.Size = new Size(75, 23);
+            bt_CreateUser.TabIndex = 22;
+            bt_CreateUser.Text = "Ok";
+            bt_CreateUser.UseVisualStyleBackColor = true;
+            bt_CreateUser.Click += bt_CreateUser_Click;
+            // 
+            // tb_UserType
+            // 
+            tb_UserType.Location = new Point(421, 67);
+            tb_UserType.Name = "tb_UserType";
+            tb_UserType.Size = new Size(179, 23);
+            tb_UserType.TabIndex = 23;
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "Manager", "Consultant" });
+            comboBox1.Location = new Point(421, 125);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(121, 23);
+            comboBox1.TabIndex = 24;
+            // 
             // CreateUser
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(comboBox1);
+            Controls.Add(tb_UserType);
+            Controls.Add(bt_CreateUser);
             Controls.Add(label11);
             Controls.Add(label10);
             Controls.Add(label9);
@@ -285,5 +317,8 @@
         private Label label10;
         private TextBox tb_PhoneNr;
         private Label label11;
+        private Button bt_CreateUser;
+        private TextBox tb_UserType;
+        private ComboBox comboBox1;
     }
 }
