@@ -1,17 +1,12 @@
 ﻿using DAL.Linq;
-using System;
-using System.Collections.Generic;
-using System.Data.Linq.Mapping;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Interfaces.Models;
+using Interfaces.Repositories;
 
 namespace DAL.Repository
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
-        DataClassesDataContext dbcontext = new DataClassesDataContext(DbConnectionString.ConnectionString);
+        private DataClassesDataContext dbcontext = new DataClassesDataContext(DbConnectionString.ConnectionString);
 
         public List<IUserModel> GetAllUsers()
         {
@@ -44,6 +39,31 @@ namespace DAL.Repository
             return result;
         }
 
+        public IUserModel GetUser(string username)
+        {
+            IUserModel user = new DAL.Models.UserModel();
+
+            var dbUser = dbcontext.Users.FirstOrDefault(i => i.User_name == username);
+
+            if (dbUser != null)
+            {
+                user.ID = dbUser.User_ID;
+                user.Address = dbUser.Street_Address;
+                user.UserName = dbUser.User_name;
+                user.Password = dbUser.Password;
+                user.FirstName = dbUser.First_Name;
+                user.LastName = dbUser.Last_Name;
+                user.EMail = dbUser.Email;
+                user.NameCity = dbUser.City;
+                user.ZipCode = dbUser.Zip_Code;
+                user.PhoneNumber = dbUser.Phone_Number;
+                user.Country = dbUser.Country;
+                user.ActiveStatus = dbUser.Active_Status;
+                user.CreationDate = dbUser.Creation_Date;
+                user.UserType = dbUser.User_Type;
+            }
+
+            return user;
+        }
     }
 }
-
