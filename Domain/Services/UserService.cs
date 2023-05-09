@@ -1,6 +1,7 @@
 ﻿using DAL.Repository;
 using Interfaces.Models;
 using Interfaces.Services;
+using Interfaces.Repositories;
 
 namespace Domain.Services
 {
