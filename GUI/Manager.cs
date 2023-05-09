@@ -16,5 +16,18 @@ namespace GUI
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenNewProjectForm();
+        }
+
+        private void OpenNewProjectForm()
+        {
+            this.Hide();
+            Form newProjectForm = new NewProject();
+            newProjectForm.ShowDialog();
+            this.Show();
+        }
     }
 }
