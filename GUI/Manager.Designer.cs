@@ -38,13 +38,13 @@
             label8 = new Label();
             label9 = new Label();
             tb_Firstname = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
-            textBox5 = new TextBox();
-            textBox6 = new TextBox();
-            textBox7 = new TextBox();
-            textBox8 = new TextBox();
+            tb_Email = new TextBox();
+            tb_Phonenumber = new TextBox();
+            tb_Lastname = new TextBox();
+            tb_Address = new TextBox();
+            tb_City = new TextBox();
+            tb_Zipcode = new TextBox();
+            tb_Country = new TextBox();
             bt_ViewProjects = new Button();
             bt_NewProject = new Button();
             SuspendLayout();
@@ -137,54 +137,54 @@
             tb_Firstname.Size = new Size(231, 31);
             tb_Firstname.TabIndex = 9;
             // 
-            // textBox2
+            // tb_Email
             // 
-            textBox2.Location = new Point(197, 88);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(231, 31);
-            textBox2.TabIndex = 10;
+            tb_Email.Location = new Point(197, 88);
+            tb_Email.Name = "tb_Email";
+            tb_Email.Size = new Size(231, 31);
+            tb_Email.TabIndex = 10;
             // 
-            // textBox3
+            // tb_Phonenumber
             // 
-            textBox3.Location = new Point(655, 85);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(231, 31);
-            textBox3.TabIndex = 11;
+            tb_Phonenumber.Location = new Point(655, 85);
+            tb_Phonenumber.Name = "tb_Phonenumber";
+            tb_Phonenumber.Size = new Size(231, 31);
+            tb_Phonenumber.TabIndex = 11;
             // 
-            // textBox4
+            // tb_Lastname
             // 
-            textBox4.Location = new Point(655, 35);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(231, 31);
-            textBox4.TabIndex = 12;
+            tb_Lastname.Location = new Point(655, 35);
+            tb_Lastname.Name = "tb_Lastname";
+            tb_Lastname.Size = new Size(231, 31);
+            tb_Lastname.TabIndex = 12;
             // 
-            // textBox5
+            // tb_Address
             // 
-            textBox5.Location = new Point(655, 138);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(231, 31);
-            textBox5.TabIndex = 13;
+            tb_Address.Location = new Point(655, 138);
+            tb_Address.Name = "tb_Address";
+            tb_Address.Size = new Size(231, 31);
+            tb_Address.TabIndex = 13;
             // 
-            // textBox6
+            // tb_City
             // 
-            textBox6.Location = new Point(197, 141);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(231, 31);
-            textBox6.TabIndex = 14;
+            tb_City.Location = new Point(197, 141);
+            tb_City.Name = "tb_City";
+            tb_City.Size = new Size(231, 31);
+            tb_City.TabIndex = 14;
             // 
-            // textBox7
+            // tb_Zipcode
             // 
-            textBox7.Location = new Point(197, 198);
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(231, 31);
-            textBox7.TabIndex = 15;
+            tb_Zipcode.Location = new Point(197, 198);
+            tb_Zipcode.Name = "tb_Zipcode";
+            tb_Zipcode.Size = new Size(231, 31);
+            tb_Zipcode.TabIndex = 15;
             // 
-            // textBox8
+            // tb_Country
             // 
-            textBox8.Location = new Point(655, 195);
-            textBox8.Name = "textBox8";
-            textBox8.Size = new Size(231, 31);
-            textBox8.TabIndex = 16;
+            tb_Country.Location = new Point(655, 195);
+            tb_Country.Name = "tb_Country";
+            tb_Country.Size = new Size(231, 31);
+            tb_Country.TabIndex = 16;
             // 
             // bt_ViewProjects
             // 
@@ -194,6 +194,7 @@
             bt_ViewProjects.TabIndex = 17;
             bt_ViewProjects.Text = "ViewProjects";
             bt_ViewProjects.UseVisualStyleBackColor = true;
+            bt_ViewProjects.Click += bt_ViewProjects_Click;
             // 
             // bt_NewProject
             // 
@@ -212,13 +213,13 @@
             ClientSize = new Size(965, 384);
             Controls.Add(bt_NewProject);
             Controls.Add(bt_ViewProjects);
-            Controls.Add(textBox8);
-            Controls.Add(textBox7);
-            Controls.Add(textBox6);
-            Controls.Add(textBox5);
-            Controls.Add(textBox4);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
+            Controls.Add(tb_Country);
+            Controls.Add(tb_Zipcode);
+            Controls.Add(tb_City);
+            Controls.Add(tb_Address);
+            Controls.Add(tb_Lastname);
+            Controls.Add(tb_Phonenumber);
+            Controls.Add(tb_Email);
             Controls.Add(tb_Firstname);
             Controls.Add(label9);
             Controls.Add(label8);
@@ -248,13 +249,13 @@
         private Label label8;
         private Label label9;
         private TextBox tb_Firstname;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private TextBox textBox4;
-        private TextBox textBox5;
-        private TextBox textBox6;
-        private TextBox textBox7;
-        private TextBox textBox8;
+        private TextBox tb_Email;
+        private TextBox tb_Phonenumber;
+        private TextBox tb_Lastname;
+        private TextBox tb_Address;
+        private TextBox tb_City;
+        private TextBox tb_Zipcode;
+        private TextBox tb_Country;
         private Button bt_ViewProjects;
         private Button bt_NewProject;
     }
