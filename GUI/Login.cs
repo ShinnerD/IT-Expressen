@@ -61,7 +61,7 @@ namespace GUI
         private void OpenManagerForm()
         {
             this.Hide();
-            Manager manager = new Manager();
+            Manager manager = new Manager("");
             manager.ShowDialog();
             this.Show();
         }
@@ -79,7 +79,7 @@ namespace GUI
                 if (user.Password == tb_Password.Text && user.User_Type == "manager")
                 {
                     this.Hide();
-                    GUI.Manager a = new Manager();
+                    GUI.Manager a = new Manager(user.User_name);
                     a.Show();
                 }
                 if (user.Password == tb_Password.Text && user.User_Type == "consultant")
