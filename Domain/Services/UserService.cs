@@ -32,5 +32,8 @@ namespace Domain.Services
             }
             return "";
         }
-    }
+        public void AddUser(IUserModel dto)
+        {
+            UserRepo.AddUser(dto);
+        }
 }

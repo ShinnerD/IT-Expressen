@@ -41,12 +41,18 @@
             lb_NotAUser = new Label();
             bt_Login = new Button();
             bt_cancel = new Button();
+            lb_connectionTest = new Label();
+            statusStrip1 = new StatusStrip();
+            SLB_Test = new ToolStripStatusLabel();
+            toolStripStatusLabel1 = new ToolStripStatusLabel();
+            toolStripProgressBar1 = new ToolStripProgressBar();
             ((System.ComponentModel.ISupportInitialize)pic_ProfilePic).BeginInit();
+            statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // bt_CreateUser
             // 
-            bt_CreateUser.Location = new Point(310, 327);
+            bt_CreateUser.Location = new Point(310, 316);
             bt_CreateUser.Name = "bt_CreateUser";
             bt_CreateUser.Size = new Size(95, 23);
             bt_CreateUser.TabIndex = 0;
@@ -140,7 +146,7 @@
             // 
             // lb_NotAUser
             // 
-            lb_NotAUser.Location = new Point(170, 327);
+            lb_NotAUser.Location = new Point(170, 316);
             lb_NotAUser.Name = "lb_NotAUser";
             lb_NotAUser.Size = new Size(131, 56);
             lb_NotAUser.TabIndex = 10;
@@ -165,11 +171,48 @@
             bt_cancel.Text = "Cancel";
             bt_cancel.UseVisualStyleBackColor = true;
             // 
+            // lb_connectionTest
+            // 
+            lb_connectionTest.AutoSize = true;
+            lb_connectionTest.Location = new Point(63, 285);
+            lb_connectionTest.Name = "lb_connectionTest";
+            lb_connectionTest.Size = new Size(64, 15);
+            lb_connectionTest.TabIndex = 13;
+            lb_connectionTest.Text = "checking...";
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.Items.AddRange(new ToolStripItem[] { SLB_Test, toolStripStatusLabel1, toolStripProgressBar1 });
+            statusStrip1.Location = new Point(0, 374);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new Size(553, 22);
+            statusStrip1.TabIndex = 14;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // SLB_Test
+            // 
+            SLB_Test.Name = "SLB_Test";
+            SLB_Test.Size = new Size(118, 17);
+            SLB_Test.Text = "toolStripStatusLabel1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new Size(118, 17);
+            toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            // 
+            // toolStripProgressBar1
+            // 
+            toolStripProgressBar1.Name = "toolStripProgressBar1";
+            toolStripProgressBar1.Size = new Size(100, 16);
+            // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(553, 396);
+            Controls.Add(statusStrip1);
+            Controls.Add(lb_connectionTest);
             Controls.Add(bt_cancel);
             Controls.Add(bt_Login);
             Controls.Add(lb_NotAUser);
@@ -186,8 +229,9 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Login";
             Text = "Form1";
-            Load += Login_Load_1;
             ((System.ComponentModel.ISupportInitialize)pic_ProfilePic).EndInit();
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -207,5 +251,10 @@
         private Label lb_NotAUser;
         private Button bt_Login;
         private Button bt_cancel;
+        private Label lb_connectionTest;
+        private StatusStrip statusStrip1;
+        private ToolStripStatusLabel SLB_Test;
+        private ToolStripStatusLabel toolStripStatusLabel1;
+        private ToolStripProgressBar toolStripProgressBar1;
     }
 }

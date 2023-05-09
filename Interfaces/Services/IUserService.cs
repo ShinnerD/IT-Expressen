@@ -11,5 +11,6 @@ namespace Interfaces.Services
         string GetUserType(string userName);
 
         bool UsernameExists(string userName);
+        public void AddUser(IUserModel dto);
     }
 }
