@@ -29,5 +29,19 @@ namespace DAL.Repository
 
             specRepo.AddSpecializationsToProject(newProject.Project_ID, specializations);
         }
+        /// <summary>
+        /// Jonas
+        /// </summary>
+        /// <param name="id"></param>
+        public void Delete(int id)
+        {
+            var project = dbContext.Projects.FirstOrDefault(i => i.Project_ID == id);
+            if (project != null)
+            {
+                project.Project_Status = "deleted";
+                dbContext.SubmitChanges();
+            }
+
+        }
     }
 }

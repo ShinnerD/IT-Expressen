@@ -37,7 +37,7 @@
             label7 = new Label();
             label8 = new Label();
             label9 = new Label();
-            textBox1 = new TextBox();
+            tb_Firstname = new TextBox();
             textBox2 = new TextBox();
             textBox3 = new TextBox();
             textBox4 = new TextBox();
@@ -46,6 +46,7 @@
             textBox7 = new TextBox();
             textBox8 = new TextBox();
             bt_ViewProjects = new Button();
+            bt_NewProject = new Button();
             SuspendLayout();
             // 
             // label1
@@ -129,12 +130,12 @@
             label9.TabIndex = 8;
             label9.Text = "Country:";
             // 
-            // textBox1
+            // tb_Firstname
             // 
-            textBox1.Location = new Point(197, 35);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(231, 31);
-            textBox1.TabIndex = 9;
+            tb_Firstname.Location = new Point(197, 35);
+            tb_Firstname.Name = "tb_Firstname";
+            tb_Firstname.Size = new Size(231, 31);
+            tb_Firstname.TabIndex = 9;
             // 
             // textBox2
             // 
@@ -194,11 +195,22 @@
             bt_ViewProjects.Text = "ViewProjects";
             bt_ViewProjects.UseVisualStyleBackColor = true;
             // 
+            // bt_NewProject
+            // 
+            bt_NewProject.Location = new Point(792, 300);
+            bt_NewProject.Name = "bt_NewProject";
+            bt_NewProject.Size = new Size(115, 48);
+            bt_NewProject.TabIndex = 18;
+            bt_NewProject.Text = "NewProject";
+            bt_NewProject.UseVisualStyleBackColor = true;
+            bt_NewProject.Click += bt_NewProject_Click;
+            // 
             // Manager
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(965, 384);
+            Controls.Add(bt_NewProject);
             Controls.Add(bt_ViewProjects);
             Controls.Add(textBox8);
             Controls.Add(textBox7);
@@ -207,7 +219,7 @@
             Controls.Add(textBox4);
             Controls.Add(textBox3);
             Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(tb_Firstname);
             Controls.Add(label9);
             Controls.Add(label8);
             Controls.Add(label7);
@@ -235,7 +247,7 @@
         private Label label7;
         private Label label8;
         private Label label9;
-        private TextBox textBox1;
+        private TextBox tb_Firstname;
         private TextBox textBox2;
         private TextBox textBox3;
         private TextBox textBox4;
@@ -244,5 +256,6 @@
         private TextBox textBox7;
         private TextBox textBox8;
         private Button bt_ViewProjects;
+        private Button bt_NewProject;
     }
 }
