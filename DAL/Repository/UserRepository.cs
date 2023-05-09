@@ -19,7 +19,6 @@ namespace DAL.Repository
 
             List<IUserModel> result = new List<IUserModel>();
 
-
             foreach (var dto in AlldtoUsers)
             {
                 var user = new DAL.Models.UserModel();
@@ -44,6 +43,7 @@ namespace DAL.Repository
             }
             return result;
         }
+
     }
 }
 
