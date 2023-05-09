@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace Interfaces.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
         public interface IUserModel
-        {
+        {     
+
             bool? ActiveStatus { get; set; }
             string Address { get; set; }
             string Country { get; set; }
@@ -23,5 +27,6 @@ namespace Interfaces.Models
             string UserName { get; set; }
             string UserType { get; set; }
             string ZipCode { get; set; }
+
         }   
 }
