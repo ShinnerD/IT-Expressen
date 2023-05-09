@@ -66,7 +66,7 @@ namespace DAL.Repository
         /// <summary>
         /// Private repository class method. Transfers the properties of database dto objects to ProjectModels. /DK
         /// </summary>
-        /// <param name="dtoProjects">An EntitySet of Linq.Project items.</param>
+        /// <param name="dtoProjects">A List of Linq.Project items.</param>
         /// <returns></returns>
         private List<IProjectModel> TransferAllProjectProperties(List<Linq.Project> dtoProjects)
         {
