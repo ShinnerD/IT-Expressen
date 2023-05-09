@@ -76,10 +76,10 @@ namespace GUI
             try
             {
                 var user = (from s in dataClassesDataContext.Users where s.User_name == tb_UserName.Text select s).First();
-                if (user.Password == tb_Password.Text && user.User_Type == "admin")
+                if (user.Password == tb_Password.Text && user.User_Type == "manager")
                 {
                     this.Hide();
-                    GUI.Admin a = new Admin();
+                    GUI.Manager a = new Manager();
                     a.Show();
                 }
                 if (user.Password == tb_Password.Text && user.User_Type == "consultant")
@@ -88,10 +88,10 @@ namespace GUI
                     GUI.Consultant a = new Consultant();
                     a.Show();
                 }
-                if (user.Password == tb_Password.Text && user.User_Type == "manager")
+                if (user.Password == tb_Password.Text && user.User_Type == "admin")
                 {
                     this.Hide();
-                    GUI.Manager a = new Manager();
+                    GUI.Admin a = new Admin();
                     a.Show();
                 }
 
