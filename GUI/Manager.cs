@@ -29,5 +29,7 @@ namespace GUI
             newProjectForm.ShowDialog();
             this.Show();
         }
+
+        
     }
 }
