@@ -1,4 +1,5 @@
 using DAL.Linq;
+using System.Threading.Tasks;
 
 namespace GUI
 {
@@ -10,8 +11,6 @@ namespace GUI
         }
 
         DataClassesDataContext dataClassesDataContext = new DataClassesDataContext(DbConnectionString.ConnectionString);
-
-
 
         private void bt_CreateUser_Click(object sender, EventArgs e)
         {
@@ -37,10 +36,12 @@ namespace GUI
         }
         private void OpenAdminForm()
         {
+            var user = (from s in dataClassesDataContext.Users where s.User_name == "admin" select s).First();
             this.Hide();
             Admin Admin = new Admin();
             Admin.ShowDialog();
             this.Show();
+
         }
         private void OpenConsultantForm()
         {
@@ -75,24 +76,44 @@ namespace GUI
             try
             {
                 var user = (from s in dataClassesDataContext.Users where s.User_name == tb_UserName.Text select s).First();
-                if (user.Password == tb_Password.Text)
+                if (user.Password == tb_Password.Text && user.User_Type == "manager")
                 {
                     this.Hide();
-                    MessageBox.Show("Login successfull!");
-                    //GUI.Admin a = new Admin();
-                    //a.Show();
+                    GUI.Manager a = new Manager();
+                    a.Show();
                 }
-                else
+                if (user.Password == tb_Password.Text && user.User_Type == "consultant")
                 {
-                    MessageBox.Show("Username or password incorrect");
+                    this.Hide();
+                    GUI.Consultant a = new Consultant();
+                    a.Show();
+                }
+                if (user.Password == tb_Password.Text && user.User_Type == "admin")
+                {
+                    this.Hide();
+                    GUI.Admin a = new Admin();
+                    a.Show();
                 }
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Username or password incorrect");
             }
-            
+
+        }
+        //private void TestDBConnection()
+        //{
+        //    Action<object> action = (object obj) =>;
+
+        //    Task t1 = new Task(dataClassesDataContext.DatabaseExists);
+
+        //    t1.Start();
+        //}
+
+        private void Login_Load_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

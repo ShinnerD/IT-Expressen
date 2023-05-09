@@ -169,7 +169,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(553, 392);
+            ClientSize = new Size(553, 396);
             Controls.Add(bt_cancel);
             Controls.Add(bt_Login);
             Controls.Add(lb_NotAUser);
@@ -186,6 +186,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Login";
             Text = "Form1";
+            Load += Login_Load_1;
             ((System.ComponentModel.ISupportInitialize)pic_ProfilePic).EndInit();
             ResumeLayout(false);
             PerformLayout();
