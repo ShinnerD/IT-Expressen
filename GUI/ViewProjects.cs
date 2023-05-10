@@ -16,7 +16,8 @@ namespace GUI
 {
     public partial class ViewProjects : Form
     {
-        DataClassesDataContext dbContext = new DataClassesDataContext(DbConnectionString.ConnectionString);
+        IProjectService projectService = new Domain.Services.ProjectService();
+
         public int userId { get; set; }
 
         public ViewProjects(int userId)
