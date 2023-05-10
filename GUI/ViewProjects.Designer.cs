@@ -1,6 +1,6 @@
 ﻿namespace GUI
 {
-    partial class Admin
+    partial class ViewProjects
     {
         /// <summary>
         /// Required designer variable.
@@ -28,45 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
-            lb_test = new Label();
+            dgv_Viewproject = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dgv_Viewproject).BeginInit();
             SuspendLayout();
             // 
-            // label1
+            // dgv_Viewproject
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(361, 144);
-            label1.Name = "label1";
-            label1.Size = new Size(43, 15);
-            label1.TabIndex = 0;
-            label1.Text = "Admin";
+            dgv_Viewproject.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv_Viewproject.Location = new Point(12, 12);
+            dgv_Viewproject.Name = "dgv_Viewproject";
+            dgv_Viewproject.RowHeadersWidth = 62;
+            dgv_Viewproject.RowTemplate.Height = 33;
+            dgv_Viewproject.Size = new Size(840, 444);
+            dgv_Viewproject.TabIndex = 0;
+            dgv_Viewproject.CellContentClick += dgv_Viewproject_CellContentClick;
             // 
-            // lb_test
+            // ViewProjects
             // 
-            lb_test.AutoSize = true;
-            lb_test.Location = new Point(379, 218);
-            lb_test.Name = "lb_test";
-            lb_test.Size = new Size(26, 15);
-            lb_test.TabIndex = 1;
-            lb_test.Text = "test";
-            // 
-            // Admin
-            // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(lb_test);
-            Controls.Add(label1);
-            Name = "Admin";
-            Text = "Admin";
-            Load += Admin_Load;
+            ClientSize = new Size(899, 533);
+            Controls.Add(dgv_Viewproject);
+            Name = "ViewProjects";
+            Text = "ViewProjects";
+            ((System.ComponentModel.ISupportInitialize)dgv_Viewproject).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private Label label1;
-        private Label lb_test;
+        private DataGridView dgv_Viewproject;
     }
 }
