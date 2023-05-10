@@ -38,6 +38,27 @@ namespace DAL.Repository
             }
             return result;
         }
+        public void AddUser(IUserModel dto)
+        {
+            var faf = new Linq.User
+            {
+                User_name = dto.UserName,
+                Password = dto.Password,
+                User_Type = dto.UserType,
+                First_Name = dto.FirstName,
+                Last_Name = dto.LastName,
+                Street_Address = dto.Address,
+                City = dto.NameCity,
+                Zip_Code = dto.ZipCode,
+                Country = dto.Country,
+                Phone_Number = dto.PhoneNumber,
+                Email = dto.EMail,
+                Active_Status = true,
+                Creation_Date = DateTime.Now,              
+            };
+            dbcontext.Users.InsertOnSubmit(faf);
+            dbcontext.SubmitChanges();
+        }
 
         public IUserModel GetUser(string username)
         {

@@ -1,16 +1,25 @@
 using DAL.Linq;
+using Domain.Services;
+using Interfaces.Models;
+using Interfaces.Services;
+using Microsoft.IdentityModel.Tokens;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace GUI
 {
     public partial class Login : Form
     {
+        public List<IUserModel> allUsers { get; set; }
+        IUserService userService = new UserService();
+
         public Login()
         {
             InitializeComponent();
+            LoadUserData();
+            AsyncTask();
         }
 
-        DataClassesDataContext dataClassesDataContext = new DataClassesDataContext(DbConnectionString.ConnectionString);
 
         private void bt_CreateUser_Click(object sender, EventArgs e)
         {
@@ -34,9 +43,10 @@ namespace GUI
         {
             OpenManagerForm();
         }
+        // 
         private void OpenAdminForm()
         {
-            var user = (from s in dataClassesDataContext.Users where s.User_name == "admin" select s).First();
+            
             this.Hide();
             Admin Admin = new Admin();
             Admin.ShowDialog();
@@ -75,26 +85,26 @@ namespace GUI
         {
             try
             {
-                var user = (from s in dataClassesDataContext.Users where s.User_name == tb_UserName.Text select s).First();
-                if (user.Password == tb_Password.Text && user.User_Type == "manager")
+                var user = userService.GetAllUsers();
+                var targetUser = user.Where(i => i.UserName == tb_UserName.Text).FirstOrDefault();
+                if (targetUser.Password == tb_Password.Text && targetUser.UserType == "manager")
                 {
                     this.Hide();
                     GUI.Manager a = new Manager(user.User_name);
                     a.Show();
                 }
-                if (user.Password == tb_Password.Text && user.User_Type == "consultant")
+                if (targetUser.Password == tb_Password.Text && targetUser.UserType == "consultant")
                 {
                     this.Hide();
                     GUI.Consultant a = new Consultant();
                     a.Show();
                 }
-                if (user.Password == tb_Password.Text && user.User_Type == "admin")
+                if (targetUser.Password == tb_Password.Text && targetUser.UserType == "admin")
                 {
                     this.Hide();
                     GUI.Admin a = new Admin();
                     a.Show();
                 }
-
             }
             catch (Exception ex)
             {
@@ -102,18 +112,32 @@ namespace GUI
             }
 
         }
-        //private void TestDBConnection()
-        //{
-        //    Action<object> action = (object obj) =>;
+        public void AsyncTask()
+        {
+            Task t = new Task(WakeUpDB);
+            t.Start();
 
-        //    Task t1 = new Task(dataClassesDataContext.DatabaseExists);
-
-        //    t1.Start();
-        //}
-
-        private void Login_Load_1(object sender, EventArgs e)
+        }
+        public void WakeUpDB()
         {
 
+            var user = userService.GetAllUsers();
+            var anyUser = user.Where(i => i.UserName.IsNullOrEmpty());
+            if (anyUser != null)
+            {
+                lb_connectionTest.Invoke((MethodInvoker)(() => lb_connectionTest.Text = "OK!"));
+
+            }
+            if (anyUser == null)
+            {
+                lb_connectionTest.Invoke((MethodInvoker)(() => lb_connectionTest.Text = "No connection!"));
+            }
+
+        }
+        private void LoadUserData()
+        {
+            var UserService = new Domain.Services.UserService();
+            allUsers = UserService.GetAllUsers();
         }
     }
 }
