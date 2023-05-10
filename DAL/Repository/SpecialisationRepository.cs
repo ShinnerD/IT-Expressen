@@ -10,7 +10,7 @@ namespace DAL.Repository
     {
         private DataClassesDataContext dbContext = new DataClassesDataContext(DbConnectionString.ConnectionString);
 
-        /// <returns>A list of string representing the currently defined list of specializations in the database.</returns>
+        /// <summary>A list of string representing the currently defined list of specializations in the database. /DK</summary>
         public List<string> GetCurrentSpecializationsList()
         {
             List<string> list = new List<string>();
@@ -25,23 +25,21 @@ namespace DAL.Repository
             return list;
         }
 
-        /// <returns>An integer representing the generated ID for a specialization the Database
-        /// that matches the given string. /DK</returns>
+        /// <summary>An integer representing the generated ID for a specialization the Database
+        /// that matches the given string. /DK</summary>
         public int GetSpecializationID(string specialization)
         {
             return dbContext.Specialisations.FirstOrDefault(i => i.Specialisation1 == specialization).Spec_Id;
         }
 
 
-        /// <returns>A string that represents the Specialization with the provided specialization Id</returns>
+        /// <summary>A string that represents the Specialization with the provided specialization Id /DK</summary>
         public string GetSpecializationString(int specId)
         {
             return dbContext.Specialisations.FirstOrDefault(i => i.Spec_Id == specId).Specialisation1;
         }
 
-        /// <summary>
-        /// Adds the specializations given in the parameters to the database and relates them to the project.
-        /// </summary>
+        /// <summary> Adds the specializations given in the parameters to the database and relates them to the project. /DK</summary>
         public void AddToProject(int projectId, List<string> specializations)
         {
             if (specializations != null)
@@ -66,7 +64,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Removes the listed specializations from the project in the database. /MK
+        /// Removes the listed specializations from the project in the database. /DK
         /// </summary>
         public void RemoveFromProject(int  projectId, List<string> specializations) 
         {
