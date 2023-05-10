@@ -1,8 +1,10 @@
+using Azure;
 using DAL.Linq;
 using Domain.Services;
 using Interfaces.Models;
 using Interfaces.Services;
 using Microsoft.IdentityModel.Tokens;
+using System.Data.Linq.Mapping;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -18,6 +20,7 @@ namespace GUI
             InitializeComponent();
             LoadUserData();
             AsyncTask();
+            test();
         }
 
 
@@ -46,7 +49,7 @@ namespace GUI
         // 
         private void OpenAdminForm()
         {
-            
+
             this.Hide();
             Admin Admin = new Admin();
             Admin.ShowDialog();
@@ -114,24 +117,36 @@ namespace GUI
         }
         public void AsyncTask()
         {
+
             Task t = new Task(WakeUpDB);
             t.Start();
 
         }
-        public void WakeUpDB()
+        public void test()
         {
 
+            if (lb_connectionTest.Text == "OK!")
+            {
+                pb_ConnectionStatus.Image = img_RedGreen.Images[1];
+            }
+        }
+        public async void WakeUpDB()
+        {
+            await Task.Delay(5000);
             var user = userService.GetAllUsers();
             var anyUser = user.Where(i => i.UserName.IsNullOrEmpty());
             if (anyUser != null)
             {
-                lb_connectionTest.Invoke((MethodInvoker)(() => lb_connectionTest.Text = "OK!"));
 
+                lb_connectionTest.Invoke((MethodInvoker)(() => lb_connectionTest.Text = "OK!"));
+                pb_ConnectionStatus.Image = img_RedGreen.Images[1];
             }
             if (anyUser == null)
             {
                 lb_connectionTest.Invoke((MethodInvoker)(() => lb_connectionTest.Text = "No connection!"));
+                pb_ConnectionStatus.Image = img_RedGreen.Images[0];
             }
+
 
         }
         private void LoadUserData()

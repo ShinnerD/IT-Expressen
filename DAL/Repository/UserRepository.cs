@@ -38,25 +38,31 @@ namespace DAL.Repository
             }
             return result;
         }
-        public void AddUser(IUserModel dto)
+
+        public void AddUser(string UserName, string Password, string UserType, string FirstName, string LastName, string Address, string City, string ZipCode, string Country, string PhoneNumber, string Email, bool ActiveStatus, DateTime CreationDate)
         {
-            var faf = new Linq.User
+            IUserModel user = new DAL.Models.UserModel();
+
+            var userModel = new Linq.User()
             {
-                User_name = dto.UserName,
-                Password = dto.Password,
-                User_Type = dto.UserType,
-                First_Name = dto.FirstName,
-                Last_Name = dto.LastName,
-                Street_Address = dto.Address,
-                City = dto.NameCity,
-                Zip_Code = dto.ZipCode,
-                Country = dto.Country,
-                Phone_Number = dto.PhoneNumber,
-                Email = dto.EMail,
-                Active_Status = true,
-                Creation_Date = DateTime.Now,              
+                
+                User_name = UserName,
+                Password = Password,
+                User_Type = UserType,
+                First_Name = FirstName,
+                Last_Name = LastName,
+                Street_Address = Address,
+                City = City,
+                Zip_Code = ZipCode,
+                Country = Country,
+                Phone_Number = PhoneNumber,
+                Email = Email,
+                Active_Status = ActiveStatus,
+                Creation_Date = CreationDate,
+
             };
-            dbcontext.Users.InsertOnSubmit(faf);
+            
+            dbcontext.Users.InsertOnSubmit(userModel);
             dbcontext.SubmitChanges();
         }
 
@@ -69,19 +75,20 @@ namespace DAL.Repository
             if (dbUser != null)
             {
                 user.ID = dbUser.User_ID;
-                user.Address = dbUser.Street_Address;
                 user.UserName = dbUser.User_name;
                 user.Password = dbUser.Password;
+                user.UserType = dbUser.User_Type;
                 user.FirstName = dbUser.First_Name;
                 user.LastName = dbUser.Last_Name;
                 user.EMail = dbUser.Email;
+                user.Address = dbUser.Street_Address;
                 user.NameCity = dbUser.City;
                 user.ZipCode = dbUser.Zip_Code;
                 user.PhoneNumber = dbUser.Phone_Number;
                 user.Country = dbUser.Country;
                 user.ActiveStatus = dbUser.Active_Status;
                 user.CreationDate = dbUser.Creation_Date;
-                user.UserType = dbUser.User_Type;
+                
             }
 
             return user;

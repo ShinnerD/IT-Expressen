@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             bt_CreateUser = new Button();
             bt_AdminAccess = new Button();
             bt_ConsultantAccess = new Button();
@@ -42,12 +44,13 @@
             bt_Login = new Button();
             bt_cancel = new Button();
             lb_connectionTest = new Label();
-            statusStrip1 = new StatusStrip();
-            SLB_Test = new ToolStripStatusLabel();
-            toolStripStatusLabel1 = new ToolStripStatusLabel();
-            toolStripProgressBar1 = new ToolStripProgressBar();
+            groupBox1 = new GroupBox();
+            pb_ConnectionStatus = new PictureBox();
+            label2 = new Label();
+            img_RedGreen = new ImageList(components);
             ((System.ComponentModel.ISupportInitialize)pic_ProfilePic).BeginInit();
-            statusStrip1.SuspendLayout();
+            groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pb_ConnectionStatus).BeginInit();
             SuspendLayout();
             // 
             // bt_CreateUser
@@ -173,46 +176,57 @@
             // 
             // lb_connectionTest
             // 
-            lb_connectionTest.AutoSize = true;
-            lb_connectionTest.Location = new Point(63, 285);
+            lb_connectionTest.Location = new Point(377, 14);
             lb_connectionTest.Name = "lb_connectionTest";
-            lb_connectionTest.Size = new Size(64, 15);
+            lb_connectionTest.Size = new Size(99, 15);
             lb_connectionTest.TabIndex = 13;
-            lb_connectionTest.Text = "checking...";
+            lb_connectionTest.Text = "Please wait....";
+            lb_connectionTest.TextAlign = ContentAlignment.TopRight;
             // 
-            // statusStrip1
+            // groupBox1
             // 
-            statusStrip1.Items.AddRange(new ToolStripItem[] { SLB_Test, toolStripStatusLabel1, toolStripProgressBar1 });
-            statusStrip1.Location = new Point(0, 374);
-            statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(553, 22);
-            statusStrip1.TabIndex = 14;
-            statusStrip1.Text = "statusStrip1";
+            groupBox1.Controls.Add(pb_ConnectionStatus);
+            groupBox1.Controls.Add(label2);
+            groupBox1.Controls.Add(lb_connectionTest);
+            groupBox1.Location = new Point(12, 375);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(529, 35);
+            groupBox1.TabIndex = 15;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Connection Status";
             // 
-            // SLB_Test
+            // pb_ConnectionStatus
             // 
-            SLB_Test.Name = "SLB_Test";
-            SLB_Test.Size = new Size(118, 17);
-            SLB_Test.Text = "toolStripStatusLabel1";
+            pb_ConnectionStatus.Image = Properties.Resources.Red_Circle;
+            pb_ConnectionStatus.Location = new Point(482, 14);
+            pb_ConnectionStatus.Name = "pb_ConnectionStatus";
+            pb_ConnectionStatus.Size = new Size(18, 15);
+            pb_ConnectionStatus.SizeMode = PictureBoxSizeMode.StretchImage;
+            pb_ConnectionStatus.TabIndex = 16;
+            pb_ConnectionStatus.TabStop = false;
             // 
-            // toolStripStatusLabel1
+            // label2
             // 
-            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new Size(118, 17);
-            toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            label2.Location = new Point(167, 14);
+            label2.Name = "label2";
+            label2.Size = new Size(204, 18);
+            label2.TabIndex = 14;
+            label2.Text = "Checking connection to databebase";
             // 
-            // toolStripProgressBar1
+            // img_RedGreen
             // 
-            toolStripProgressBar1.Name = "toolStripProgressBar1";
-            toolStripProgressBar1.Size = new Size(100, 16);
+            img_RedGreen.ColorDepth = ColorDepth.Depth8Bit;
+            img_RedGreen.ImageStream = (ImageListStreamer)resources.GetObject("img_RedGreen.ImageStream");
+            img_RedGreen.TransparentColor = Color.Transparent;
+            img_RedGreen.Images.SetKeyName(0, "Red.png");
+            img_RedGreen.Images.SetKeyName(1, "green-check-transparent-background-21.png");
             // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(553, 396);
-            Controls.Add(statusStrip1);
-            Controls.Add(lb_connectionTest);
+            ClientSize = new Size(553, 413);
+            Controls.Add(groupBox1);
             Controls.Add(bt_cancel);
             Controls.Add(bt_Login);
             Controls.Add(lb_NotAUser);
@@ -230,8 +244,8 @@
             Name = "Login";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)pic_ProfilePic).EndInit();
-            statusStrip1.ResumeLayout(false);
-            statusStrip1.PerformLayout();
+            groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pb_ConnectionStatus).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -252,9 +266,9 @@
         private Button bt_Login;
         private Button bt_cancel;
         private Label lb_connectionTest;
-        private StatusStrip statusStrip1;
-        private ToolStripStatusLabel SLB_Test;
-        private ToolStripStatusLabel toolStripStatusLabel1;
-        private ToolStripProgressBar toolStripProgressBar1;
+        private GroupBox groupBox1;
+        private PictureBox pb_ConnectionStatus;
+        private Label label2;
+        private ImageList img_RedGreen;
     }
 }

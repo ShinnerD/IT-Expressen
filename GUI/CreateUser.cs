@@ -27,8 +27,21 @@ namespace GUI
         public void CreatNewUser()
         {
             IUserService userService = new Domain.Services.UserService();
+           
+            userService.AddUser(
+                tb_UserName.Text,
+                tb_Password.Text,
+                tb_UserType.Text,
+                tb_FirstName.Text,
+                tb_LastName.Text,
+                tb_Address.Text,
+                tb_City.Text,
+                tb_ZipCode.Text,
+                tb_Country.Text,
+                tb_PhoneNr.Text,
+                tb_Email.Text,
 
-            userService.AddUser(tb_UserName.Text, tb_Password.Text);
+                );
 
 
 
