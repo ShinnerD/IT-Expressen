@@ -7,8 +7,9 @@ using DAL.Linq;
 using Interfaces.Models;
 using Domain.Models;
 using System.Reflection;
+///Writen by Erik
 
-namespace Dal.Repository
+namespace DAL.Repository
 {
     public class InvitesRepository
     {

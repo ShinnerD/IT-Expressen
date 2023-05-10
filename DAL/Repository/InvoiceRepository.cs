@@ -7,8 +7,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Interfaces.Models;
+///Writen by Erik
 
-namespace Dal.Repository
+namespace DAL.Repository
 {
     public class InvoiceRepository
     {
@@ -22,15 +23,15 @@ namespace Dal.Repository
             List<InvoiceModel> result = new List<InvoiceModel>();
 
             var dbInvoices = DataContext.Invoices;
-            foreach (var dbInvoice in dbInvoices)
+            foreach (var dbInvoiced in dbInvoices)
             {
                 InvoiceModel Invoice = new InvoiceModel();
 
-                Invoice.InvoiceId = dbInvoice.Invoice_ID;
-                Invoice.ProjectId = (int)dbInvoice.Project_ID;
-                Invoice.LineID = dbInvoice.Invoice_ID;
-                Invoice.TotalPrice = (int)dbInvoice.Total_Price;
-                Invoice.InvoiceDate = dbInvoice.Invoice_Date;
+                Invoice.InvoiceId = dbInvoiced.Invoice_ID;
+                Invoice.ProjectId = (int)dbInvoiced.Project_ID;
+                Invoice.LineID = (int)dbInvoiced.Line_ID;
+                Invoice.TotalPrice = (int)dbInvoiced.Total_Price;
+                Invoice.InvoiceDate = dbInvoiced.Invoice_Date;
 
 
 
@@ -41,8 +42,8 @@ namespace Dal.Repository
 
 
         }
-            public InvoiceModel GetInvoice(int invoice)
-        {
+            public InvoiceModel GetInvoiceID(int invoice)
+            {
 
             InvoiceModel result = new InvoiceModel();
 
@@ -51,13 +52,28 @@ namespace Dal.Repository
 
             result.InvoiceId = dbInvoice.Invoice_ID;
             result.ProjectId = (int)dbInvoice.Project_ID;
-            result.LineID = dbInvoice.Invoice_ID;
+            result.LineID = (int)dbInvoice.Line_ID;
+            result.TotalPrice = (int)dbInvoice.Total_Price;
+            result.InvoiceDate = dbInvoice.Invoice_Date;
+
+            return result;
+            }
+
+        public InvoiceModel GetInvoiceProjectID(int invoice)
+        {
+
+            InvoiceModel result = new InvoiceModel();
+
+            var dbInvoice = DataContext.Invoices.FirstOrDefault(i => i.Project_ID == invoice);
+
+
+            result.InvoiceId = dbInvoice.Invoice_ID;
+            result.ProjectId = (int)dbInvoice.Project_ID;
+            result.LineID = (int)dbInvoice.Line_ID;
             result.TotalPrice = (int)dbInvoice.Total_Price;
             result.InvoiceDate = dbInvoice.Invoice_Date;
 
             return result;
         }
-
-
     }
 }
