@@ -26,27 +26,9 @@ namespace GUI
         }
         public void CreatNewUser()
         {
-            using (DataClassesDataContext dbcontext = new DataClassesDataContext(DbConnectionString.ConnectionString))
-            {
-                User newUser = new User()
-                {
-                    User_name = tb_UserName.Text,
-                    Password = tb_Password.Text,
-                    User_Type = tb_UserType.Text,
-                    First_Name = tb_FirstName.Text,
-                    Last_Name = tb_LastName.Text,
-                    Street_Address = tb_Address.Text,
-                    City = tb_City.Text,
-                    Zip_Code = tb_ZipCode.Text,
-                    Country = tb_Country.Text,
-                    Phone_Number = tb_PhoneNr.Text,
-                    Email = tb_Email.Text,
-                    Creation_Date = DateTime.Now,
+            IUserService userService = new Domain.Services.UserService();
 
-                };
-                dbcontext.Users.InsertOnSubmit(newUser);
-                dbcontext.SubmitChanges();
-            }
+            userService.AddUser(tb_UserName.Text, tb_Password.Text);
 
 
 

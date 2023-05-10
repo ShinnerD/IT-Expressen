@@ -11,6 +11,6 @@ namespace Interfaces.Services
         string GetUserType(string userName);
 
         bool UsernameExists(string userName);
-        void AddUser(IUserModel dto);
+        void AddUser(string UserName, string password);
     }
 }

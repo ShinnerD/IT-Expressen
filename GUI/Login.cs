@@ -86,11 +86,11 @@ namespace GUI
             try
             {
                 var user = userService.GetAllUsers();
-                var targetUser = user.Where(i => i.UserName == tb_UserName.Text).FirstOrDefault();
+                var targetUser = user.Where(i => i.UserName == tb_UserName.Text).First();
                 if (targetUser.Password == tb_Password.Text && targetUser.UserType == "manager")
                 {
                     this.Hide();
-                    GUI.Manager a = new Manager(user.User_name);
+                    GUI.Manager a = new Manager(targetUser.UserName);
                     a.Show();
                 }
                 if (targetUser.Password == tb_Password.Text && targetUser.UserType == "consultant")

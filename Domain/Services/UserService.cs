@@ -32,9 +32,14 @@ namespace Domain.Services
             }
             return "";
         }
-        public void AddUser(IUserModel dto)
+        public void AddUser(string UserName, string password)
         {
-            userRepo.AddUser(dto);
+            IUserModel newUser = new DAL.Models.UserModel();
+
+            newUser.UserName = UserName;
+            newUser.Password = password;
+
+            userRepo.AddUser(newUser);
         }
     }
 }
