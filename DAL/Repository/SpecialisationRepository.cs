@@ -35,7 +35,7 @@ namespace DAL.Repository
         /// <summary>
         /// Adds the specializations given in the parameters to the database and relates them to the project.
         /// </summary>
-        public void AddSpecializationsToProject(int projectId, List<string> specializations)
+        public void AddToProject(int projectId, List<string> specializations)
         {
             if (specializations != null)
             {
@@ -56,6 +56,20 @@ namespace DAL.Repository
                 dbContext.Projects_Specialisation_Lines.InsertAllOnSubmit(newSpecLineRows);
                 dbContext.SubmitChanges();
             }
+        }
+
+        /// <summary>
+        /// Removes the listed specializations from the project in the database. /MK
+        /// </summary>
+        /// <param name="projectId"></param>
+        /// <param name="specializations"></param>
+        public void RemoveFromProject(int  projectId, List<string> specializations) 
+        {
+            var targetSpecIds = dbContext.Specialisations.Where(i => specializations.Contains(i.Specialisation1)).Select(x => x.Spec_Id).ToList();
+            var targetSpecLines = dbContext.Projects.FirstOrDefault(i => i.Project_ID == projectId).Projects_Specialisation_Lines.Where(x => targetSpecIds.Contains(x.Spec_Id)).ToList();
+
+            dbContext.Projects_Specialisation_Lines.DeleteAllOnSubmit(targetSpecLines);
+            dbContext.SubmitChanges();
         }
     }
 }

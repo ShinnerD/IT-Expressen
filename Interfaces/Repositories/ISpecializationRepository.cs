@@ -12,6 +12,6 @@
         /// <returns>An int representing the generated identifier ID for a specialization in the database.</returns>
         int GetSpecializationID(string specialization);
 
-        void AddSpecializationsToProject(int projectId, List<string> specializations);
+        void AddToProject(int projectId, List<string> specializations);
     }
 }

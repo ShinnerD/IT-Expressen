@@ -32,7 +32,7 @@ namespace DAL.Repository
             dbContext.Projects.InsertOnSubmit(newProject);
             dbContext.SubmitChanges();
 
-            specRepo.AddSpecializationsToProject(newProject.Project_ID, specializations);
+            specRepo.AddToProject(newProject.Project_ID, specializations);
         }
 
         /// <summary>
