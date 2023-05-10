@@ -26,10 +26,17 @@ namespace DAL.Repository
         }
 
         /// <returns>An integer representing the generated ID for a specialization the Database
-        /// that matches the given string.</returns>
+        /// that matches the given string. /DK</returns>
         public int GetSpecializationID(string specialization)
         {
             return dbContext.Specialisations.FirstOrDefault(i => i.Specialisation1 == specialization).Spec_Id;
+        }
+
+
+        /// <returns>A string that represents the Specialization with the provided specialization Id</returns>
+        public string GetSpecializationString(int specId)
+        {
+            return dbContext.Specialisations.FirstOrDefault(i => i.Spec_Id == specId).Specialisation1;
         }
 
         /// <summary>
@@ -61,8 +68,6 @@ namespace DAL.Repository
         /// <summary>
         /// Removes the listed specializations from the project in the database. /MK
         /// </summary>
-        /// <param name="projectId"></param>
-        /// <param name="specializations"></param>
         public void RemoveFromProject(int  projectId, List<string> specializations) 
         {
             var targetSpecIds = dbContext.Specialisations.Where(i => specializations.Contains(i.Specialisation1)).Select(x => x.Spec_Id).ToList();
