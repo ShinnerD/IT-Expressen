@@ -5,11 +5,16 @@ namespace GUI
 {
     public partial class NewProject : Form
     {
-        public NewProject()
+        public int ProjectId { get; set; }
+        public string CurrentUser { get; set; }
+
+        public NewProject(int projectId, string currentUser)
         {
             InitializeComponent();
             SetupSkillsCheckList();
             lblFeedback.Text = string.Empty;
+            ProjectId = projectId;
+            CurrentUser = currentUser;
         }
 
         private void SetupSkillsCheckList()
