@@ -1,4 +1,5 @@
-﻿using Interfaces.Services;
+﻿using Interfaces.Repositories;
+using Interfaces.Services;
 
 namespace Domain.Services
 {
@@ -7,14 +8,32 @@ namespace Domain.Services
     /// </summary>
     public class SpecializationService : ISpecializationService
     {
+        ISpecializationRepository Repository = new DAL.Repository.SpecializationRepository();
+
         /// <returns>Returns a list of strings that represent the current specializations in the Database</returns>
         public List<string> ListDefinedSpecializations()
-        {
-            List<string> result;
-            var repo = new DAL.Repository.SpecializationRepository();
+        {                            
+            return Repository.GetCurrentSpecializationsList();
+        }
 
-            result = repo.GetCurrentSpecializationsList();
-            return result;
+        public int GetIDFromName(string specialization)
+        {
+            return Repository.GetSpecializationID(specialization);
+        }
+
+        public string GetNameFromID(int specId)
+        {
+            return Repository.GetSpecializationString(specId);
+        }
+
+        public void AddToProject(int projectId, List<string> specializations)
+        {
+            Repository.AddToProject(projectId, specializations);
+        }
+
+        public void RemoveFromProject(int projectId, List<string> specializations) 
+        {
+            Repository.RemoveFromProject(projectId, specializations);
         }
     }
 }
