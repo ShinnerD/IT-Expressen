@@ -1,4 +1,5 @@
-﻿using Interfaces.Repositories;
+﻿using Interfaces.Models;
+using Interfaces.Repositories;
 using Interfaces.Services;
 
 namespace Domain.Services
@@ -16,6 +17,11 @@ namespace Domain.Services
         public void CreateProject(string userName, string title, string description, DateTime startDate, DateTime endDate, List<string> specializations)
         {
             projectRepo.Add(userName, title, description, startDate, endDate, specializations);
+        }
+
+        public List<IProjectModel> GetUserProjects(int userId)
+        {
+            return projectRepo.GetUserProjects(userId);
         }
     }
 }
