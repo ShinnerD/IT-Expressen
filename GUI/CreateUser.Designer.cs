@@ -51,8 +51,10 @@
             tb_PhoneNr = new TextBox();
             label11 = new Label();
             bt_CreateUser = new Button();
-            tb_UserType = new TextBox();
-            comboBox1 = new ComboBox();
+            cb_UserType = new ComboBox();
+            clb_Skills = new CheckedListBox();
+            label12 = new Label();
+            label13 = new Label();
             SuspendLayout();
             // 
             // tb_UserName
@@ -68,13 +70,15 @@
             tb_Password.Name = "tb_Password";
             tb_Password.Size = new Size(179, 23);
             tb_Password.TabIndex = 1;
+            tb_Password.UseSystemPasswordChar = true;
             // 
             // tb_RePassword
             // 
-            tb_RePassword.Location = new Point(136, 104);
+            tb_RePassword.Location = new Point(433, 75);
             tb_RePassword.Name = "tb_RePassword";
             tb_RePassword.Size = new Size(179, 23);
             tb_RePassword.TabIndex = 2;
+            tb_RePassword.UseSystemPasswordChar = true;
             // 
             // tb_Email
             // 
@@ -99,28 +103,28 @@
             // 
             // tb_Address
             // 
-            tb_Address.Location = new Point(136, 220);
+            tb_Address.Location = new Point(433, 133);
             tb_Address.Name = "tb_Address";
             tb_Address.Size = new Size(179, 23);
             tb_Address.TabIndex = 6;
             // 
             // tb_City
             // 
-            tb_City.Location = new Point(136, 249);
+            tb_City.Location = new Point(433, 162);
             tb_City.Name = "tb_City";
             tb_City.Size = new Size(179, 23);
             tb_City.TabIndex = 7;
             // 
             // tb_ZipCode
             // 
-            tb_ZipCode.Location = new Point(136, 278);
+            tb_ZipCode.Location = new Point(433, 191);
             tb_ZipCode.Name = "tb_ZipCode";
             tb_ZipCode.Size = new Size(179, 23);
             tb_ZipCode.TabIndex = 8;
             // 
             // tb_Country
             // 
-            tb_Country.Location = new Point(136, 307);
+            tb_Country.Location = new Point(433, 220);
             tb_Country.Name = "tb_Country";
             tb_Country.Size = new Size(179, 23);
             tb_Country.TabIndex = 9;
@@ -164,7 +168,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(24, 220);
+            label5.Location = new Point(321, 133);
             label5.Name = "label5";
             label5.Size = new Size(49, 15);
             label5.TabIndex = 14;
@@ -173,7 +177,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(24, 249);
+            label6.Location = new Point(321, 162);
             label6.Name = "label6";
             label6.Size = new Size(28, 15);
             label6.TabIndex = 15;
@@ -182,7 +186,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(24, 278);
+            label7.Location = new Point(321, 191);
             label7.Name = "label7";
             label7.Size = new Size(55, 15);
             label7.TabIndex = 16;
@@ -191,7 +195,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(24, 306);
+            label8.Location = new Point(321, 219);
             label8.Name = "label8";
             label8.Size = new Size(50, 15);
             label8.TabIndex = 17;
@@ -200,7 +204,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(24, 335);
+            label9.Location = new Point(24, 219);
             label9.Name = "label9";
             label9.Size = new Size(88, 15);
             label9.TabIndex = 18;
@@ -217,7 +221,7 @@
             // 
             // tb_PhoneNr
             // 
-            tb_PhoneNr.Location = new Point(136, 336);
+            tb_PhoneNr.Location = new Point(136, 220);
             tb_PhoneNr.Name = "tb_PhoneNr";
             tb_PhoneNr.Size = new Size(179, 23);
             tb_PhoneNr.TabIndex = 20;
@@ -225,7 +229,7 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(23, 104);
+            label11.Location = new Point(320, 75);
             label11.Name = "label11";
             label11.Size = new Size(105, 15);
             label11.TabIndex = 21;
@@ -233,7 +237,7 @@
             // 
             // bt_CreateUser
             // 
-            bt_CreateUser.Location = new Point(139, 383);
+            bt_CreateUser.Location = new Point(136, 436);
             bt_CreateUser.Name = "bt_CreateUser";
             bt_CreateUser.Size = new Size(75, 23);
             bt_CreateUser.TabIndex = 22;
@@ -241,29 +245,52 @@
             bt_CreateUser.UseVisualStyleBackColor = true;
             bt_CreateUser.Click += bt_CreateUser_Click;
             // 
-            // tb_UserType
+            // cb_UserType
             // 
-            tb_UserType.Location = new Point(421, 67);
-            tb_UserType.Name = "tb_UserType";
-            tb_UserType.Size = new Size(179, 23);
-            tb_UserType.TabIndex = 23;
+            cb_UserType.FormattingEnabled = true;
+            cb_UserType.Items.AddRange(new object[] { "Manager", "Consultant" });
+            cb_UserType.Location = new Point(433, 266);
+            cb_UserType.Name = "cb_UserType";
+            cb_UserType.Size = new Size(179, 23);
+            cb_UserType.TabIndex = 24;
+            cb_UserType.SelectedValueChanged += cb_UserType_SelectedValueChanged;
             // 
-            // comboBox1
+            // clb_Skills
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Manager", "Consultant" });
-            comboBox1.Location = new Point(421, 125);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 24;
+            clb_Skills.FormattingEnabled = true;
+            clb_Skills.Location = new Point(136, 295);
+            clb_Skills.MultiColumn = true;
+            clb_Skills.Name = "clb_Skills";
+            clb_Skills.Size = new Size(476, 130);
+            clb_Skills.TabIndex = 25;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(320, 266);
+            label12.Name = "label12";
+            label12.Size = new Size(92, 15);
+            label12.TabIndex = 26;
+            label12.Text = "Pick profile type";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(24, 295);
+            label13.Name = "label13";
+            label13.Size = new Size(144, 15);
+            label13.TabIndex = 27;
+            label13.Text = "Select your specializations";
             // 
             // CreateUser
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(comboBox1);
-            Controls.Add(tb_UserType);
+            ClientSize = new Size(652, 471);
+            Controls.Add(label13);
+            Controls.Add(label12);
+            Controls.Add(clb_Skills);
+            Controls.Add(cb_UserType);
             Controls.Add(bt_CreateUser);
             Controls.Add(label11);
             Controls.Add(label10);
@@ -318,7 +345,9 @@
         private TextBox tb_PhoneNr;
         private Label label11;
         private Button bt_CreateUser;
-        private TextBox tb_UserType;
-        private ComboBox comboBox1;
+        private ComboBox cb_UserType;
+        private CheckedListBox clb_Skills;
+        private Label label12;
+        private Label label13;
     }
 }

@@ -39,30 +39,27 @@ namespace DAL.Repository
             return result;
         }
 
-        public void AddUser(string UserName, string Password, string UserType, string FirstName, string LastName, string Address, string City, string ZipCode, string Country, string PhoneNumber, string Email, bool ActiveStatus, DateTime CreationDate)
+        public void AddUser(IUserModel userModel)
         {
             IUserModel user = new DAL.Models.UserModel();
 
-            var userModel = new Linq.User()
-            {
-                
-                User_name = UserName,
-                Password = Password,
-                User_Type = UserType,
-                First_Name = FirstName,
-                Last_Name = LastName,
-                Street_Address = Address,
-                City = City,
-                Zip_Code = ZipCode,
-                Country = Country,
-                Phone_Number = PhoneNumber,
-                Email = Email,
-                Active_Status = ActiveStatus,
-                Creation_Date = CreationDate,
-
-            };
+            var linqUserModel = new Linq.User();
             
-            dbcontext.Users.InsertOnSubmit(userModel);
+            linqUserModel.User_name = userModel.UserName;
+            linqUserModel.Password = userModel.Password;
+            linqUserModel.User_Type = userModel.UserType;
+            linqUserModel.First_Name = userModel.FirstName;
+            linqUserModel.Last_Name= userModel.LastName;
+            linqUserModel.Street_Address = userModel.Address;
+            linqUserModel.City = userModel.NameCity;
+            linqUserModel.Zip_Code = userModel.ZipCode;
+            linqUserModel.Country = userModel.Country;
+            linqUserModel.Phone_Number = userModel.PhoneNumber;
+            linqUserModel.Email = userModel.EMail;
+            linqUserModel.Active_Status = userModel.ActiveStatus;
+            linqUserModel.Creation_Date = userModel.CreationDate;
+            
+            dbcontext.Users.InsertOnSubmit(linqUserModel);
             dbcontext.SubmitChanges();
         }
 

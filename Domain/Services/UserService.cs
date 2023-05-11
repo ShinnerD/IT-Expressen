@@ -32,7 +32,7 @@ namespace Domain.Services
             }
             return "";
         }
-        public void AddUser(string UserName, string Password, string UserType, string FirstName, string LastName, string Address, string City, string ZipCode, string Country, string PhoneNumber, string Email, bool ActiveStatus, DateTime CreationDate)
+        public void AddUser(string UserName, string Password, string UserType, string FirstName, string LastName, string Address, string City, string ZipCode, string Country, string PhoneNumber, string Email)
         {
             IUserModel newUser = new DAL.Models.UserModel();
 
@@ -47,10 +47,11 @@ namespace Domain.Services
             newUser.Country = Country;
             newUser.PhoneNumber = PhoneNumber;
             newUser.EMail = Email;
-            newUser.ActiveStatus = ActiveStatus;
-            newUser.CreationDate = CreationDate;
+            newUser.ActiveStatus = true;
+            newUser.CreationDate = DateTime.Now;
 
-            //userRepo.AddUser(newUser);
+
+            userRepo.AddUser(newUser);
         }
     }
 }
