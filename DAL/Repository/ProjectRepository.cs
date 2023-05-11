@@ -35,6 +35,15 @@ namespace DAL.Repository
             specRepo.AddToProject(newProject.Project_ID, specializations);
         }
 
+        public IProjectModel GetProject(int projectId)
+        {
+            var targetProject = dbContext.Projects.FirstOrDefault(i => i.Project_ID == projectId);
+            if (targetProject == null) { return null; }
+            List<Linq.Project> dtoResult = new List<Linq.Project>();
+            dtoResult.Add(targetProject);
+            return TransferAllProjectProperties(dtoResult)[0];
+        }
+
         /// <summary>
         /// Returns a list of IProjectModels related the user specified in the method parameter. /DK
         /// </summary>

@@ -16,5 +16,6 @@
 
         void RemoveFromProject(int projectId, List<string> specializations);
 
+        List<string> GetProjectSpecializations(int projectId);
     }
 }

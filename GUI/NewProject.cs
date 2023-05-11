@@ -5,16 +5,15 @@ namespace GUI
 {
     public partial class NewProject : Form
     {
-        public int ProjectId { get; set; }
         public string CurrentUser { get; set; }
 
-        public NewProject(int projectId, string currentUser)
+        public NewProject(string currentUser)
         {
             InitializeComponent();
             SetupSkillsCheckList();
             lblFeedback.Text = string.Empty;
-            ProjectId = projectId;
             CurrentUser = currentUser;
+            txtBoxUserName.Text = currentUser; // <------- Should be deleted before release along with textbox in designer.  /DK
         }
 
         private void SetupSkillsCheckList()

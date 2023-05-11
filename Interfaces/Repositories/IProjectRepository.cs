@@ -15,5 +15,7 @@ namespace Interfaces.Repositories
 
 
         List<IProjectModel> GetUserProjects(int userId);
+
+        IProjectModel GetProject(int projectId);
     }
 }
