@@ -8,10 +8,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="Services\" />
-	</ItemGroup>
-
-	<ItemGroup>
+	  <ProjectReference Include="..\DAL\DAL.csproj" />
 	  <ProjectReference Include="..\Interfaces\Interfaces.csproj" />
 	</ItemGroup>
 

@@ -16,5 +16,11 @@ namespace GUI
         {
             InitializeComponent();
         }
+
+        private void Admin_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

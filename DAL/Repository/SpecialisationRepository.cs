@@ -1,66 +1,61 @@
 ﻿using DAL.Linq;
-using Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Data.Linq;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-///Writen by Erik
+using Interfaces.Repositories;
 
 namespace DAL.Repository
 {
-    public class SpecialisationRepository
+    /// <summary>
+    /// Repository Class for storing and retrieving data specific to Projects in the Database.
+    /// </summary>
+    public class SpecializationRepository : ISpecializationRepository
     {
-        DataClassesDataContext DataContext = new DataClassesDataContext(DbConnectionString.ConnectionString);
+        private DataClassesDataContext dbContext = new DataClassesDataContext(DbConnectionString.ConnectionString);
 
-
-        public List<SpecialisationModel> GetAllSpecialisation()
+        /// <returns>A list of string representing the currently defined list of specializations in the database.</returns>
+        public List<string> GetCurrentSpecializationsList()
         {
-            List<SpecialisationModel> result = new List<SpecialisationModel>();
+            List<string> list = new List<string>();
 
-            var dbSpecialisations = DataContext.Specialisations;
-            foreach (var dbSpecialisation in dbSpecialisations)
+            var specList = dbContext.Specialisations;
+
+            foreach (var specialization in specList)
             {
-                SpecialisationModel specialisation = new SpecialisationModel();
-
-                specialisation.SpecId = dbSpecialisation.Spec_Id;
-                specialisation.Specialisation = dbSpecialisation.Specialisation1;
-                specialisation.Description = dbSpecialisation.Description;
-
-
-                result.Add(specialisation);
-
-
+                list.Add(specialization.Specialisation1);
             }
-            return result;
 
-
-
-
-
+            return list;
         }
-        public SpecialisationModel GetSpecialisation(int specialisation)
+
+        /// <returns>An integer representing the generated ID for a specialization the Database
+        /// that matches the given string.</returns>
+        public int GetSpecializationID(string specialization)
         {
-            SpecialisationModel result = new SpecialisationModel();
+            return dbContext.Specialisations.FirstOrDefault(i => i.Specialisation1 == specialization).Spec_Id;
+        }
 
-            var dbSpecialisation = DataContext.Specialisations.FirstOrDefault(i => i.Spec_Id == specialisation);
+        /// <summary>
+        /// Adds the specializations given in the parameters to the database and relates them to the project.
+        /// </summary>
+        public void AddSpecializationsToProject(int projectId, List<string> specializations)
+        {
+            if (specializations != null)
+            {
+                List<Linq.Projects_Specialisation_Line> newSpecLineRows = new List<Linq.Projects_Specialisation_Line>();
 
+                foreach (var specialization in specializations)
+                {
+                    var newSpecLine = new Linq.Projects_Specialisation_Line();
 
-            result.SpecId = dbSpecialisation.Spec_Id;
-            result.Specialisation = dbSpecialisation.Specialisation1;
-            result.Description = dbSpecialisation.Description;
+                    newSpecLine.Project = dbContext.Projects.FirstOrDefault(i => i.Project_ID == projectId);
+                    newSpecLine.Project_ID = newSpecLine.Project.Project_ID;
+                    newSpecLine.Specialisation = dbContext.Specialisations.FirstOrDefault(i => i.Specialisation1 == specialization);
+                    newSpecLine.Spec_Id = newSpecLine.Specialisation.Spec_Id;
 
+                    newSpecLineRows.Add(newSpecLine);
+                }
 
-            return result;
-
-
+                dbContext.Projects_Specialisation_Lines.InsertAllOnSubmit(newSpecLineRows);
+                dbContext.SubmitChanges();
+            }
         }
     }
-
-
-
-
-
 }
-
