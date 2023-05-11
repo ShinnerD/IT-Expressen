@@ -8,9 +8,11 @@ namespace DAL.Repository
     /// </summary>
     public class SpecializationRepository : ISpecializationRepository
     {
-        private DataClassesDataContext dbContext = new DataClassesDataContext(DbConnectionString.ConnectionString);
+        private readonly DataClassesDataContext dbContext = new DataClassesDataContext(DbConnectionString.ConnectionString);
 
-        /// <summary>A list of string representing the currently defined list of specializations in the database. /DK</summary>
+        /// <summary>
+        /// A list of string representing specializations defined in the database. /DK
+        /// </summary>
         public List<string> GetCurrentSpecializationsList()
         {
             List<string> list = new List<string>();
@@ -25,26 +27,34 @@ namespace DAL.Repository
             return list;
         }
 
+        /// <summary>
+        /// Returns a List of strings representing all the chosen specializations for a project. /DK
+        /// </summary>
         public List<string> GetProjectSpecializations(int projectId)
         {
             return dbContext.Projects_Specialisation_Lines.Where(i => i.Project_ID == projectId).Select(x => x.Specialisation.Specialisation1).ToList();
         }
 
-        /// <summary>An integer representing the generated ID for a specialization the Database
-        /// that matches the given string. /DK</summary>
+        /// <summary>
+        /// An int representing the generated identifier ID for a specialization in the database. /DK
+        /// </summary>
         public int GetSpecializationID(string specialization)
         {
             return dbContext.Specialisations.FirstOrDefault(i => i.Specialisation1 == specialization).Spec_Id;
         }
 
 
-        /// <summary>A string that represents the Specialization with the provided specialization Id /DK</summary>
+        /// <summary>
+        /// A String representing the specialization with the provided spec Id /DK
+        /// </summary>
         public string GetSpecializationString(int specId)
         {
             return dbContext.Specialisations.FirstOrDefault(i => i.Spec_Id == specId).Specialisation1;
         }
 
-        /// <summary> Adds the specializations given in the parameters to the database and relates them to the project. /DK</summary>
+        /// <summary>
+        /// Adds the given list of string specializations to the project in the database. /DK
+        /// </summary>
         public void AddToProject(int projectId, List<string> specializations)
         {
             if (specializations != null)
@@ -69,7 +79,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Removes the listed specializations from the project in the database. /DK
+        /// Removes the given list of string specializations from the project in the database. /DK
         /// </summary>
         public void RemoveFromProject(int  projectId, List<string> specializations) 
         {

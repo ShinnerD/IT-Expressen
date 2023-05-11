@@ -12,7 +12,7 @@ namespace DAL.Repository
         { }
 
         /// <summary>
-        /// Creates a new Project in the database with the details specified in the parameters. /DK
+        /// Adds a project with all the details required in the parameter of the method to the database. /DK
         /// </summary>
         public void Add(string userName, string title, string description, DateTime startDate, DateTime endDate, List<string> specializations)
         {
@@ -35,6 +35,9 @@ namespace DAL.Repository
             specRepo.AddToProject(newProject.Project_ID, specializations);
         }
 
+        /// <summary>
+        /// Returns an IProjectModel for the project matching the provided Project Id. /DK
+        /// </summary>
         public IProjectModel GetProject(int projectId)
         {
             var targetProject = dbContext.Projects.FirstOrDefault(i => i.Project_ID == projectId);
@@ -45,7 +48,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Returns a list of IProjectModels related the user specified in the method parameter. /DK
+        /// Returns a List of IProjectModels with projects related to the User Id provided. /DK
         /// </summary>
         public List<IProjectModel> GetUserProjects(int userId)
         {
@@ -75,8 +78,6 @@ namespace DAL.Repository
         /// <summary>
         /// Private repository class method. Transfers the properties of database dto objects to ProjectModels. /DK
         /// </summary>
-        /// <param name="dtoProjects">A List of Linq.Project items.</param>
-        /// <returns></returns>
         private List<IProjectModel> TransferAllProjectProperties(List<Linq.Project> dtoProjects)
         {
             List<IProjectModel> result = new List<IProjectModel>();
@@ -104,9 +105,8 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Jonas
+        /// 'Deletes' a project from the database by setting its Status Column to "deleted" in the database. /Jonas
         /// </summary>
-        /// <param name="id"></param>
         public void Delete(int id)
         {
             var project = dbContext.Projects.FirstOrDefault(i => i.Project_ID == id);
@@ -117,6 +117,9 @@ namespace DAL.Repository
             }
         }
 
+        /// <summary>
+        /// Updates an existing project in the database to match the IProjectModel provided in the parameters. /DK
+        /// </summary>
         void IProjectRepository.UpdateProject(IProjectModel project)
         {
             var dbProject = dbContext.Projects.FirstOrDefault(i => i.Project_ID == project.ProjectId);
