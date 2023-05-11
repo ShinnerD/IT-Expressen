@@ -1,5 +1,4 @@
 ﻿using DAL.Linq;
-using Domain.Models;
 using Interfaces.Models;
 using System;
 using System.Collections.Generic;
