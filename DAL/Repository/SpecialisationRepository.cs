@@ -89,5 +89,27 @@ namespace DAL.Repository
             dbContext.Projects_Specialisation_Lines.DeleteAllOnSubmit(targetSpecLines);
             dbContext.SubmitChanges();
         }
+        public void AddSpecializationsToUser(int UserID, List<string> specializations)
+        {
+            if (specializations != null)
+            {
+                List<Linq.Specialisations_Line> newSpecLineRows = new List<Linq.Specialisations_Line>();
+
+                foreach (var specialization in specializations)
+                {
+                    var newSpecLine = new Linq.Specialisations_Line();
+
+                    newSpecLine.User = dbContext.Users.FirstOrDefault(i => i.User_ID == UserID);
+                    newSpecLine.User_Id = newSpecLine.User.User_ID;
+                    newSpecLine.Specialisation = dbContext.Specialisations.FirstOrDefault(i => i.Specialisation1 == specialization);
+                    newSpecLine.Spec_Id = newSpecLine.Specialisation.Spec_Id;
+
+                    newSpecLineRows.Add(newSpecLine);
+                }
+
+                dbContext.Specialisations_Lines.InsertAllOnSubmit(newSpecLineRows);
+                dbContext.SubmitChanges();
+            }
+        }
     }
 }

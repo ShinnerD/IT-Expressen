@@ -35,5 +35,7 @@
         /// Returns a List of strings representing all the chosen specializations for a project. /DK
         /// </summary>
         List<string> GetProjectSpecializations(int projectId);
+        void AddSpecializationsToProject(int projectId, List<string> specializations);
+        void AddSpecializationsToUser(int UserID, List<string> specializations);
     }
 }

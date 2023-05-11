@@ -57,5 +57,10 @@ namespace Domain.Services
         {
             Repository.RemoveFromProject(projectId, specializations);
         }
+        public void AddSpecializationsToUser()
+        {
+
+        }
     }
+
 }
