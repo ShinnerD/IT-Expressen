@@ -37,7 +37,6 @@ namespace GUI
                         tb_PhoneNr.Text,
                         tb_Email.Text
 
-
                         );
                 }
                 else
@@ -45,14 +44,10 @@ namespace GUI
                     MessageBox.Show("Passwords are not the same");
                 }
             }
-
             catch
             {
                 MessageBox.Show("Username is already in use");
             }
-
-
-
         }
 
         private void LoadUserData()
@@ -65,6 +60,7 @@ namespace GUI
         {
             CreatNewUser();
         }
+
         private void SetupSkillsCheckList()
         {
             clb_Skills.Enabled = false;
@@ -90,9 +86,8 @@ namespace GUI
             }
             if (cb_UserType.Text == "Manager")
             {
-                clb_Skills.Enabled=false;
+                clb_Skills.Enabled = false;
             }
-
         }
     }
 }
