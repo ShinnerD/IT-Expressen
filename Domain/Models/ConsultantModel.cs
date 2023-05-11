@@ -37,6 +37,8 @@ namespace Domain.Models
 
         public string Country { get; set; }
 
+        public int LineId { get; set; }
+
         public int ID { get; set; }
 
         public bool ActiveStatus { get; set; }

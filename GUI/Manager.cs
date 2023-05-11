@@ -1,15 +1,6 @@
 ﻿using Domain.Services;
 using Interfaces.Models;
 using Interfaces.Services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace GUI
 {
@@ -26,15 +17,10 @@ namespace GUI
             SetUpTB();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            OpenNewProjectForm();
-        }
-
         private void OpenNewProjectForm()
         {
             this.Hide();
-            Form newProjectForm = new NewProject();
+            Form newProjectForm = new NewProject(Username);
             newProjectForm.ShowDialog();
             this.Show();
         }
@@ -43,7 +29,6 @@ namespace GUI
         {
             IUserService userService = new UserService();
             userModel = userService.GetUser(Username);
-
         }
 
         private void SetUpTB()
@@ -61,8 +46,7 @@ namespace GUI
 
         private void bt_NewProject_Click(object sender, EventArgs e)
         {
-            NewProject newProject = new NewProject();
-            newProject.ShowDialog();
+            OpenNewProjectForm();
         }
 
         private void bt_ViewProjects_Click(object sender, EventArgs e)
@@ -70,6 +54,7 @@ namespace GUI
             int userId = userModel.ID;
             ViewProjects viewProjects = new ViewProjects(userId);
             viewProjects.ShowDialog();
+            this.Show();
         }
     }
 }

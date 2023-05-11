@@ -2,16 +2,39 @@
 {
     /// <summary>
     /// Interface for accessing methods from the SpecializationRepository class.
-    /// Contains methods for retrieving specialization-specific data or adding specializations to a project in the database.
+    /// Contains methods for retrieving specialization-specific data or adding specializations to a project in the database. /DK
     /// </summary>
     public interface ISpecializationRepository
     {
-        /// <returns>A list of string representing specializations defined in the database.</returns>
+        /// <summary>
+        /// A list of string representing specializations defined in the database. /DK
+        /// </summary>
         List<string> GetCurrentSpecializationsList();
 
-        /// <returns>An int representing the generated identifier ID for a specialization in the database.</returns>
+        /// <summary>
+        /// An int representing the generated identifier ID for a specialization in the database. /DK
+        /// </summary>
         int GetSpecializationID(string specialization);
 
+        /// <summary>
+        /// A String representing the specialization with the provided spec Id /DK
+        /// </summary>
+        string GetSpecializationString(int specId);
+
+        /// <summary>
+        /// Adds the given list of string specializations to the project in the database. /DK
+        /// </summary>
+        void AddToProject(int projectId, List<string> specializations);
+
+        /// <summary>
+        /// Removes the given list of string specializations from the project in the database. /DK
+        /// </summary>
+        void RemoveFromProject(int projectId, List<string> specializations);
+
+        /// <summary>
+        /// Returns a List of strings representing all the chosen specializations for a project. /DK
+        /// </summary>
+        List<string> GetProjectSpecializations(int projectId);
         void AddSpecializationsToProject(int projectId, List<string> specializations);
         void AddSpecializationsToUser(int UserID, List<string> specializations);
     }
