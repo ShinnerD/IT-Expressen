@@ -154,7 +154,9 @@ namespace DAL.Linq
 				return this.GetTable<User>();
 			}
 		}
-	}
+
+        public object Consultan { get; internal set; }
+    }
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Consultant_Line")]
 	public partial class Consultant_Line : INotifyPropertyChanging, INotifyPropertyChanged
