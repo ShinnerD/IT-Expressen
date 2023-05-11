@@ -42,7 +42,31 @@ namespace DAL.Repository
 
 
         }
-            public InvoiceModel GetInvoiceID(int invoice)
+
+        public List<InvoiceModel> GetAllInvoiceProjectID(int projectid)
+        {
+            List<InvoiceModel> result = new List<InvoiceModel>();
+
+            var dbInvoices = DataContext.Projects.FirstOrDefault(i => i.Project_ID == projectid).Invoices;
+
+            foreach (var dbInvoiced in dbInvoices)
+            {
+                InvoiceModel Invoice = new InvoiceModel();
+
+                Invoice.InvoiceId = dbInvoiced.Invoice_ID;
+                Invoice.ProjectId = (int)dbInvoiced.Project_ID;
+                Invoice.LineID = (int)dbInvoiced.Line_ID;
+                Invoice.TotalPrice = (int)dbInvoiced.Total_Price;
+                Invoice.InvoiceDate = dbInvoiced.Invoice_Date;
+
+                result.Add(Invoice);
+
+
+            }
+            return result;
+
+        }
+        public InvoiceModel GetInvoiceID(int invoice)
             {
 
             InvoiceModel result = new InvoiceModel();
