@@ -16,6 +16,11 @@ namespace Domain.Services
             return Repository.GetCurrentSpecializationsList();
         }
 
+        public List<string> GetProjectSpecializations(int projectId)
+        {
+            return Repository.GetProjectSpecializations(projectId);
+        }
+
         public int GetIDFromName(string specialization)
         {
             return Repository.GetSpecializationID(specialization);

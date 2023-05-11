@@ -25,6 +25,11 @@ namespace DAL.Repository
             return list;
         }
 
+        public List<string> GetProjectSpecializations(int projectId)
+        {
+            return dbContext.Projects_Specialisation_Lines.Where(i => i.Project_ID == projectId).Select(x => x.Specialisation.Specialisation1).ToList();
+        }
+
         /// <summary>An integer representing the generated ID for a specialization the Database
         /// that matches the given string. /DK</summary>
         public int GetSpecializationID(string specialization)

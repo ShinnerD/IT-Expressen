@@ -20,5 +20,7 @@
 
         /// <summary>Removes the given list of string specializations from the project in the database. /DK</summary>
         void RemoveFromProject(int projectId, List<string> specializations);
+
+        List<string> GetProjectSpecializations(int projectId);
     }
 }

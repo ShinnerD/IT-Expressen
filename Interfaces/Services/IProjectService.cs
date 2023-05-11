@@ -13,5 +13,8 @@ namespace Interfaces.Services
         void CreateProject(string userName, string title, string description, DateTime startDate, DateTime endDate, List<string> specializations);
 
         List<IProjectModel> GetUserProjects(int userId);
+
+        IProjectModel GetProject(int projectId);
+        void UpdateProject(IProjectModel project);
     }
 }

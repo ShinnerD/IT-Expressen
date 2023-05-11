@@ -1,4 +1,5 @@
-﻿using Interfaces.Services;
+﻿using Interfaces.Models;
+using Interfaces.Services;
 
 namespace GUI
 {
@@ -23,6 +24,20 @@ namespace GUI
         private void dgv_Viewproject_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             ProjectsForManager();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ManageSelectedProject();
+        }
+
+        private void ManageSelectedProject()
+        {
+            var selectedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;
+            EditProject editProject = new EditProject(selectedProject.ProjectId);
+            this.Hide();
+            editProject.ShowDialog();
+            this.Show();
         }
     }
 }
