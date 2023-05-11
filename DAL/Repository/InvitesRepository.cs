@@ -5,13 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL.Linq;
 using Interfaces.Models;
-using Domain.Models;
 using System.Reflection;
+using Interfaces.Repositories;
+using DAL.Models;
 ///Writen by Erik
 
 namespace DAL.Repository
 {
-    public class InvitesRepository
+   
+
+    public class InvitesRepository : IInvitesRepository
     {
 
 
@@ -19,14 +22,14 @@ namespace DAL.Repository
 
         public int ProjectId { get; private set; }
 
-        public List<InvitesModel> GetAllInvites()
+        public List<IInvitesModel> GetAllInvites()
         {
-            List<InvitesModel> result = new List<InvitesModel>();
+            List<IInvitesModel> result = new List<IInvitesModel>();
 
             var dbInvites = DataContext.Invites;
             foreach (var dbInvite in dbInvites)
             {
-                InvitesModel Invite = new InvitesModel();
+                IInvitesModel Invite = new InvitesModel();
 
                 Invite.ProjectId = dbInvite.Project_ID;
                 Invite.UserId = dbInvite.User_ID;
@@ -46,15 +49,15 @@ namespace DAL.Repository
 
         }
 
-        public List<InvitesModel> GetAllInviteProjectID(int projectid)
+        public List<IInvitesModel> GetAllInviteProjectID(int projectid)
         {
-            List<InvitesModel> result = new List<InvitesModel>();
+            List<IInvitesModel> result = new List<IInvitesModel>();
 
             var dbInvites = DataContext.Projects.FirstOrDefault(i => i.Project_ID == projectid).Invites;
 
             foreach (var dbInvite in dbInvites)
             {
-                InvitesModel Invite = new InvitesModel();
+                IInvitesModel Invite = new InvitesModel();
 
                 Invite.ProjectId = dbInvite.Project_ID;
                 Invite.UserId = dbInvite.User_ID;
@@ -69,9 +72,9 @@ namespace DAL.Repository
             return result;
 
         }
-            public InvitesModel GetInviteProjectId(int ProjectId)
+        public IInvitesModel GetInviteProjectId(int ProjectId)
         {
-            InvitesModel result = new InvitesModel();
+            IInvitesModel result = new InvitesModel();
 
             var dbInvite = DataContext.Invites.FirstOrDefault(i => i.Project_ID == ProjectId);
 
@@ -85,9 +88,9 @@ namespace DAL.Repository
 
 
         }
-        public InvitesModel GetInviteUserId(int UserId)
+        public IInvitesModel GetInviteUserId(int UserId)
         {
-            InvitesModel result = new InvitesModel();
+            IInvitesModel result = new InvitesModel();
 
             var dbInvite = DataContext.Invites.FirstOrDefault(i => i.User_ID == UserId);
 

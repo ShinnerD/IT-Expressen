@@ -1,31 +1,34 @@
 ﻿using DAL.Linq;
-using Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Interfaces.Repositories;
 using Interfaces.Models;
+using DAL.Models;
 ///Writen by Erik
 
 namespace DAL.Repository
 {
-    public class InvoiceRepository
+    
+
+    public class InvoiceRepository : IInvoiceRepository
     {
 
         DataClassesDataContext DataContext = new DataClassesDataContext(DbConnectionString.ConnectionString);
 
 
 
-        public List<InvoiceModel> GetAllInvoices(InvoiceModel dbInvoice)
+        public List<IInvoiceModel> GetAllInvoices(IInvoiceModel dbInvoice)
         {
-            List<InvoiceModel> result = new List<InvoiceModel>();
+            List<IInvoiceModel> result = new List<IInvoiceModel>();
 
             var dbInvoices = DataContext.Invoices;
             foreach (var dbInvoiced in dbInvoices)
             {
-                InvoiceModel Invoice = new InvoiceModel();
+                IInvoiceModel Invoice = new InvoiceModel();
 
                 Invoice.InvoiceId = dbInvoiced.Invoice_ID;
                 Invoice.ProjectId = (int)dbInvoiced.Project_ID;
@@ -43,15 +46,15 @@ namespace DAL.Repository
 
         }
 
-        public List<InvoiceModel> GetAllInvoiceProjectID(int projectid)
+        public List<IInvoiceModel> GetAllInvoiceProjectID(int projectid)
         {
-            List<InvoiceModel> result = new List<InvoiceModel>();
+            List<IInvoiceModel> result = new List<IInvoiceModel>();
 
             var dbInvoices = DataContext.Projects.FirstOrDefault(i => i.Project_ID == projectid).Invoices;
 
             foreach (var dbInvoiced in dbInvoices)
             {
-                InvoiceModel Invoice = new InvoiceModel();
+                IInvoiceModel Invoice = new InvoiceModel();
 
                 Invoice.InvoiceId = dbInvoiced.Invoice_ID;
                 Invoice.ProjectId = (int)dbInvoiced.Project_ID;
@@ -66,10 +69,10 @@ namespace DAL.Repository
             return result;
 
         }
-        public InvoiceModel GetInvoiceID(int invoice)
-            {
+        public IInvoiceModel GetInvoiceID(int invoice)
+        {
 
-            InvoiceModel result = new InvoiceModel();
+            IInvoiceModel result = new InvoiceModel();
 
             var dbInvoice = DataContext.Invoices.FirstOrDefault(i => i.Invoice_ID == invoice);
 
@@ -81,14 +84,14 @@ namespace DAL.Repository
             result.InvoiceDate = dbInvoice.Invoice_Date;
 
             return result;
-            }
+        }
 
-        public InvoiceModel GetInvoiceProjectID(int invoice)
+        public IInvoiceModel GetInvoiceInvoiceID(int invoice)
         {
 
-            InvoiceModel result = new InvoiceModel();
+            IInvoiceModel result = new InvoiceModel();
 
-            var dbInvoice = DataContext.Invoices.FirstOrDefault(i => i.Project_ID == invoice);
+            var dbInvoice = DataContext.Invoices.FirstOrDefault(i => i.Invoice_ID == invoice);
 
 
             result.InvoiceId = dbInvoice.Invoice_ID;
