@@ -28,5 +28,10 @@ namespace Domain.Services
         {
             return projectRepo.GetProject(projectId);
         }
+
+        void IProjectService.UpdateProject(IProjectModel project)
+        {
+            projectRepo.UpdateProject(project);
+        }
     }
 }

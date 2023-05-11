@@ -1,14 +1,6 @@
 ﻿using Interfaces.Models;
 using Interfaces.Services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace GUI
 {
@@ -55,7 +47,7 @@ namespace GUI
         private void SetStartDate()
         {
             if (Project.ProjectStartDate != null) { dTPstartDate.Value = Project.ProjectStartDate.Value; }
-            else { dTPstartDate.Value = dTPstartDate.MinDate;  }
+            else { dTPstartDate.Value = dTPstartDate.MinDate; }
         }
 
         private void CheckProjectSkills()
@@ -85,6 +77,68 @@ namespace GUI
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnSaveChanges_Click(object sender, EventArgs e)
+        {
+            SaveChanges();
+        }
+
+        private void SaveChanges()
+        {
+            try
+            {
+                IProjectService projectService = new Domain.Services.ProjectService();
+                ISpecializationService specializationService = new Domain.Services.SpecializationService();
+
+                List<string> removedSpecializations = CheckForRemovedSkills();
+                List<string> addedSpecializations = CheckForAddedSkills();
+
+                Project.Title = txtBoxTitle.Text;
+                Project.Description = txtBoxDescription.Text;
+                Project.ProjectStartDate = dTPstartDate.Value;
+                Project.ProjectEndDate = dTPendDate.Value;
+                Project.ProjectModifyDate = DateTime.Now;
+
+                projectService.UpdateProject(Project);
+                specializationService.RemoveFromProject(Project.ProjectId, removedSpecializations);
+                specializationService.AddToProject(Project.ProjectId, addedSpecializations);
+
+                lblFeedback.Text = "Project Changes Saved";
+            }
+            catch (Exception ex)
+            {
+                lblFeedback.Text = ex.Message;
+                lblFeedback.ForeColor = Color.Red;
+            }
+        }
+
+        private List<string> CheckForAddedSkills()
+        {
+            List<string> result = new List<string>();
+
+            foreach (string checkSkill in checkedListSkills.CheckedItems)
+            {
+                if (!ProjectSpecializations.Contains(checkSkill))
+                {
+                    result.Add(checkSkill);
+                }
+            }
+            return result;
+        }
+
+        private List<string> CheckForRemovedSkills()
+        {
+            List<string> result = new List<string>();
+
+            foreach (var specialization in ProjectSpecializations)
+            {
+                if (!checkedListSkills.CheckedItems.Contains(specialization))
+                {
+                    result.Add(specialization);
+                }
+            }
+            return result;
         }
     }
 }

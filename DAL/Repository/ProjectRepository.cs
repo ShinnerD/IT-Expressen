@@ -116,5 +116,21 @@ namespace DAL.Repository
                 dbContext.SubmitChanges();
             }
         }
+
+        void IProjectRepository.UpdateProject(IProjectModel project)
+        {
+            var dbProject = dbContext.Projects.FirstOrDefault(i => i.Project_ID == project.ProjectId);
+
+            if (dbProject != null && project != null) 
+            {
+                dbProject.Title = project.Title;
+                dbProject.Description = project.Description;
+                dbProject.Project_Start_Date = project.ProjectStartDate;
+                dbProject.Project_End_Date = project.ProjectEndDate;
+                dbProject.Project_Modify_Date = project.ProjectModifyDate;
+
+                dbContext.SubmitChanges();
+            }
+        }
     }
 }
