@@ -32,5 +32,26 @@ namespace Domain.Services
             }
             return "";
         }
+        public void AddUser(string UserName, string Password, string UserType, string FirstName, string LastName, string Address, string City, string ZipCode, string Country, string PhoneNumber, string Email)
+        {
+            IUserModel newUser = new DAL.Models.UserModel();
+
+            newUser.UserName = UserName;
+            newUser.Password = Password;
+            newUser.UserType = UserType;
+            newUser.FirstName = FirstName;
+            newUser.LastName = LastName;
+            newUser.Address = Address;
+            newUser.NameCity = City;
+            newUser.ZipCode = ZipCode;
+            newUser.Country = Country;
+            newUser.PhoneNumber = PhoneNumber;
+            newUser.EMail = Email;
+            newUser.ActiveStatus = true;
+            newUser.CreationDate = DateTime.Now;
+
+
+            userRepo.AddUser(newUser);
+        }
     }
 }

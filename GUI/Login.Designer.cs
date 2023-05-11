@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             bt_CreateUser = new Button();
             bt_AdminAccess = new Button();
             bt_ConsultantAccess = new Button();
@@ -41,12 +43,19 @@
             lb_NotAUser = new Label();
             bt_Login = new Button();
             bt_cancel = new Button();
+            lb_connectionTest = new Label();
+            groupBox1 = new GroupBox();
+            pb_ConnectionStatus = new PictureBox();
+            label2 = new Label();
+            img_RedGreen = new ImageList(components);
             ((System.ComponentModel.ISupportInitialize)pic_ProfilePic).BeginInit();
+            groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pb_ConnectionStatus).BeginInit();
             SuspendLayout();
             // 
             // bt_CreateUser
             // 
-            bt_CreateUser.Location = new Point(310, 327);
+            bt_CreateUser.Location = new Point(310, 316);
             bt_CreateUser.Name = "bt_CreateUser";
             bt_CreateUser.Size = new Size(95, 23);
             bt_CreateUser.TabIndex = 0;
@@ -140,7 +149,7 @@
             // 
             // lb_NotAUser
             // 
-            lb_NotAUser.Location = new Point(170, 327);
+            lb_NotAUser.Location = new Point(170, 316);
             lb_NotAUser.Name = "lb_NotAUser";
             lb_NotAUser.Size = new Size(131, 56);
             lb_NotAUser.TabIndex = 10;
@@ -165,11 +174,59 @@
             bt_cancel.Text = "Cancel";
             bt_cancel.UseVisualStyleBackColor = true;
             // 
+            // lb_connectionTest
+            // 
+            lb_connectionTest.Location = new Point(377, 14);
+            lb_connectionTest.Name = "lb_connectionTest";
+            lb_connectionTest.Size = new Size(99, 15);
+            lb_connectionTest.TabIndex = 13;
+            lb_connectionTest.Text = "Please wait....";
+            lb_connectionTest.TextAlign = ContentAlignment.TopRight;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(pb_ConnectionStatus);
+            groupBox1.Controls.Add(label2);
+            groupBox1.Controls.Add(lb_connectionTest);
+            groupBox1.Location = new Point(12, 375);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(529, 35);
+            groupBox1.TabIndex = 15;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Connection Status";
+            // 
+            // pb_ConnectionStatus
+            // 
+            pb_ConnectionStatus.Image = Properties.Resources.Red_Circle;
+            pb_ConnectionStatus.Location = new Point(482, 14);
+            pb_ConnectionStatus.Name = "pb_ConnectionStatus";
+            pb_ConnectionStatus.Size = new Size(18, 15);
+            pb_ConnectionStatus.SizeMode = PictureBoxSizeMode.StretchImage;
+            pb_ConnectionStatus.TabIndex = 16;
+            pb_ConnectionStatus.TabStop = false;
+            // 
+            // label2
+            // 
+            label2.Location = new Point(167, 14);
+            label2.Name = "label2";
+            label2.Size = new Size(204, 18);
+            label2.TabIndex = 14;
+            label2.Text = "Checking connection to databebase";
+            // 
+            // img_RedGreen
+            // 
+            img_RedGreen.ColorDepth = ColorDepth.Depth8Bit;
+            img_RedGreen.ImageStream = (ImageListStreamer)resources.GetObject("img_RedGreen.ImageStream");
+            img_RedGreen.TransparentColor = Color.Transparent;
+            img_RedGreen.Images.SetKeyName(0, "Red.png");
+            img_RedGreen.Images.SetKeyName(1, "green-check-transparent-background-21.png");
+            // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(553, 396);
+            ClientSize = new Size(553, 413);
+            Controls.Add(groupBox1);
             Controls.Add(bt_cancel);
             Controls.Add(bt_Login);
             Controls.Add(lb_NotAUser);
@@ -186,8 +243,9 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Login";
             Text = "Form1";
-            Load += Login_Load_1;
             ((System.ComponentModel.ISupportInitialize)pic_ProfilePic).EndInit();
+            groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pb_ConnectionStatus).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -207,5 +265,10 @@
         private Label lb_NotAUser;
         private Button bt_Login;
         private Button bt_cancel;
+        private Label lb_connectionTest;
+        private GroupBox groupBox1;
+        private PictureBox pb_ConnectionStatus;
+        private Label label2;
+        private ImageList img_RedGreen;
     }
 }

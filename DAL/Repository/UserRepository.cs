@@ -39,6 +39,30 @@ namespace DAL.Repository
             return result;
         }
 
+        public void AddUser(IUserModel userModel)
+        {
+            IUserModel user = new DAL.Models.UserModel();
+
+            var linqUserModel = new Linq.User();
+            
+            linqUserModel.User_name = userModel.UserName;
+            linqUserModel.Password = userModel.Password;
+            linqUserModel.User_Type = userModel.UserType;
+            linqUserModel.First_Name = userModel.FirstName;
+            linqUserModel.Last_Name= userModel.LastName;
+            linqUserModel.Street_Address = userModel.Address;
+            linqUserModel.City = userModel.NameCity;
+            linqUserModel.Zip_Code = userModel.ZipCode;
+            linqUserModel.Country = userModel.Country;
+            linqUserModel.Phone_Number = userModel.PhoneNumber;
+            linqUserModel.Email = userModel.EMail;
+            linqUserModel.Active_Status = userModel.ActiveStatus;
+            linqUserModel.Creation_Date = userModel.CreationDate;
+            
+            dbcontext.Users.InsertOnSubmit(linqUserModel);
+            dbcontext.SubmitChanges();
+        }
+
         public IUserModel GetUser(string username)
         {
             IUserModel user = new DAL.Models.UserModel();
@@ -48,19 +72,20 @@ namespace DAL.Repository
             if (dbUser != null)
             {
                 user.ID = dbUser.User_ID;
-                user.Address = dbUser.Street_Address;
                 user.UserName = dbUser.User_name;
                 user.Password = dbUser.Password;
+                user.UserType = dbUser.User_Type;
                 user.FirstName = dbUser.First_Name;
                 user.LastName = dbUser.Last_Name;
                 user.EMail = dbUser.Email;
+                user.Address = dbUser.Street_Address;
                 user.NameCity = dbUser.City;
                 user.ZipCode = dbUser.Zip_Code;
                 user.PhoneNumber = dbUser.Phone_Number;
                 user.Country = dbUser.Country;
                 user.ActiveStatus = dbUser.Active_Status;
                 user.CreationDate = dbUser.Creation_Date;
-                user.UserType = dbUser.User_Type;
+                
             }
 
             return user;

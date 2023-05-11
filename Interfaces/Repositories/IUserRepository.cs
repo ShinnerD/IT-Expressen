@@ -7,5 +7,7 @@ namespace Interfaces.Repositories
         List<IUserModel> GetAllUsers();
 
         IUserModel GetUser(string username);
+
+        void AddUser(IUserModel userModel);
     }
 }

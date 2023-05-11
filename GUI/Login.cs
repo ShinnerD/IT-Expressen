@@ -1,48 +1,51 @@
-using DAL.Linq;
-using System.Threading.Tasks;
+using Domain.Services;
+using Interfaces.Models;
+using Interfaces.Services;
+using Microsoft.IdentityModel.Tokens;
 
 namespace GUI
 {
     public partial class Login : Form
     {
+        public List<IUserModel> allUsers { get; set; }
+        private IUserService userService = new UserService();
+
         public Login()
         {
             InitializeComponent();
+            LoadUserData();
+            AsyncTask();
         }
-
-        DataClassesDataContext dataClassesDataContext = new DataClassesDataContext(DbConnectionString.ConnectionString);
 
         private void bt_CreateUser_Click(object sender, EventArgs e)
         {
             OpenCreateUserForm();
-
         }
 
         private void bt_AdminAccess_Click(object sender, EventArgs e)
         {
             OpenAdminForm();
-
         }
 
         private void bt_ConsultantAccess_Click(object sender, EventArgs e)
         {
             OpenConsultantForm();
-
         }
 
         private void bt_ManagerAccess_Click(object sender, EventArgs e)
         {
             OpenManagerForm();
         }
+
+        //
         private void OpenAdminForm()
         {
-            var user = (from s in dataClassesDataContext.Users where s.User_name == "admin" select s).First();
             this.Hide();
             Admin Admin = new Admin();
             Admin.ShowDialog();
             this.Show();
-
         }
+
         private void OpenConsultantForm()
         {
             this.Hide();
@@ -50,14 +53,15 @@ namespace GUI
             consultant.ShowDialog();
             this.Show();
         }
+
         private void OpenCreateUserForm()
         {
             this.Hide();
             CreateUser createUser = new CreateUser();
             createUser.ShowDialog();
             this.Show();
-
         }
+
         private void OpenManagerForm()
         {
             this.Hide();
@@ -66,54 +70,64 @@ namespace GUI
             this.Show();
         }
 
-        private void Login_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void bt_Login_Click(object sender, EventArgs e)
         {
             try
             {
-                var user = (from s in dataClassesDataContext.Users where s.User_name == tb_UserName.Text select s).First();
-                if (user.Password == tb_Password.Text && user.User_Type == "manager")
+                var user = userService.GetAllUsers();
+                var targetUser = user.Where(i => i.UserName == tb_UserName.Text).First();
+                if (targetUser.Password == tb_Password.Text && targetUser.UserType == "manager")
                 {
                     this.Hide();
-                    GUI.Manager a = new Manager(user.User_name);
+                    GUI.Manager a = new Manager(targetUser.UserName);
                     a.Show();
                 }
-                if (user.Password == tb_Password.Text && user.User_Type == "consultant")
+                if (targetUser.Password == tb_Password.Text && targetUser.UserType == "consultant")
                 {
                     this.Hide();
                     GUI.Consultant a = new Consultant();
                     a.Show();
                 }
-                if (user.Password == tb_Password.Text && user.User_Type == "admin")
+                if (targetUser.Password == tb_Password.Text && targetUser.UserType == "admin")
                 {
                     this.Hide();
                     GUI.Admin a = new Admin();
                     a.Show();
                 }
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Username or password incorrect");
             }
-
         }
-        //private void TestDBConnection()
-        //{
-        //    Action<object> action = (object obj) =>;
 
-        //    Task t1 = new Task(dataClassesDataContext.DatabaseExists);
-
-        //    t1.Start();
-        //}
-
-        private void Login_Load_1(object sender, EventArgs e)
+        public void AsyncTask()
         {
+            Task t = new Task(WakeUpDB);
+            t.Start();
+        }
 
+        public async void WakeUpDB()
+        {
+            await Task.Delay(3000);
+            var user = userService.GetAllUsers();
+            var anyUser = user.Where(i => i.UserName.IsNullOrEmpty());
+            if (anyUser != null)
+            {
+                lb_connectionTest.Invoke((MethodInvoker)(() => lb_connectionTest.Text = "OK!"));
+                pb_ConnectionStatus.Image = img_RedGreen.Images[1];
+            }
+            if (anyUser == null)
+            {
+                lb_connectionTest.Invoke((MethodInvoker)(() => lb_connectionTest.Text = "No connection!"));
+                pb_ConnectionStatus.Image = img_RedGreen.Images[0];
+            }
+        }
+
+        private void LoadUserData()
+        {
+            var UserService = new Domain.Services.UserService();
+            allUsers = UserService.GetAllUsers();
         }
     }
 }
