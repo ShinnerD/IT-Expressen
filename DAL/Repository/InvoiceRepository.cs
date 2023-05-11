@@ -1,25 +1,15 @@
 ﻿using DAL.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Interfaces.Repositories;
-using Interfaces.Models;
 using DAL.Models;
+using Interfaces.Models;
+using Interfaces.Repositories;
+
 ///Writen by Erik
 
 namespace DAL.Repository
 {
-    
-
     public class InvoiceRepository : IInvoiceRepository
     {
-
-        DataClassesDataContext DataContext = new DataClassesDataContext(DbConnectionString.ConnectionString);
-
-
+        private DataClassesDataContext DataContext = new DataClassesDataContext(DbConnectionString.ConnectionString);
 
         public List<IInvoiceModel> GetAllInvoices(IInvoiceModel dbInvoice)
         {
@@ -36,14 +26,9 @@ namespace DAL.Repository
                 Invoice.TotalPrice = (int)dbInvoiced.Total_Price;
                 Invoice.InvoiceDate = dbInvoiced.Invoice_Date;
 
-
-
-
                 result.Add(Invoice);
             }
             return result;
-
-
         }
 
         public List<IInvoiceModel> GetAllInvoiceProjectID(int projectid)
@@ -63,19 +48,15 @@ namespace DAL.Repository
                 Invoice.InvoiceDate = dbInvoiced.Invoice_Date;
 
                 result.Add(Invoice);
-
-
             }
             return result;
-
         }
+
         public IInvoiceModel GetInvoiceID(int invoice)
         {
-
             IInvoiceModel result = new InvoiceModel();
 
             var dbInvoice = DataContext.Invoices.FirstOrDefault(i => i.Invoice_ID == invoice);
-
 
             result.InvoiceId = dbInvoice.Invoice_ID;
             result.ProjectId = (int)dbInvoice.Project_ID;
@@ -88,11 +69,9 @@ namespace DAL.Repository
 
         public IInvoiceModel GetInvoiceInvoiceID(int invoice)
         {
-
             IInvoiceModel result = new InvoiceModel();
 
             var dbInvoice = DataContext.Invoices.FirstOrDefault(i => i.Invoice_ID == invoice);
-
 
             result.InvoiceId = dbInvoice.Invoice_ID;
             result.ProjectId = (int)dbInvoice.Project_ID;
