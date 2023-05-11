@@ -13,5 +13,6 @@
         int GetSpecializationID(string specialization);
 
         void AddSpecializationsToProject(int projectId, List<string> specializations);
+        void AddSpecializationsToUser(int UserID, List<string> specializations);
     }
 }

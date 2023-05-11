@@ -48,6 +48,7 @@ namespace GUI
 
         private void SetUpTB()
         {
+            tb_userName.Text = userModel.UserName;
             tb_Firstname.Text = userModel.FirstName;
             tb_Lastname.Text = userModel.LastName;
             tb_Email.Text = userModel.EMail;

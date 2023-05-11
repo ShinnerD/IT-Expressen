@@ -129,5 +129,10 @@ namespace GUI
             var UserService = new Domain.Services.UserService();
             allUsers = UserService.GetAllUsers();
         }
+
+        private void bt_cancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

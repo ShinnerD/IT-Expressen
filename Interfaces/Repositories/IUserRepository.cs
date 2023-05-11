@@ -8,6 +8,7 @@ namespace Interfaces.Repositories
 
         IUserModel GetUser(string username);
 
-        void AddUser(IUserModel userModel);
+        void AddUser(IUserModel userModel, List<string> specializtions);
+        void Delete(string delete);
     }
 }

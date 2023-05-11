@@ -16,5 +16,10 @@ namespace Domain.Services
             result = repo.GetCurrentSpecializationsList();
             return result;
         }
+        public void AddSpecializationsToUser()
+        {
+
+        }
     }
+
 }
