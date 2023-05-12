@@ -13,6 +13,10 @@ namespace Domain.Services
         {
             return userRepo.GetAllUsers();
         }
+        //public List<IUserModel> GetUserTypeList(string UserType)
+        //{
+        //    return userRepo.GetUserTypeList(UserType);
+        //}
 
         public IUserModel GetUser(string userName)
         {

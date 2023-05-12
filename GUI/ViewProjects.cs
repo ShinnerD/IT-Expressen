@@ -55,5 +55,18 @@ namespace GUI
 
         
 
+        private void InvitedConsultantSelctedProject()
+        {
+            //var selectedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;
+            InviteConsultants invConSul = new InviteConsultants();
+            this.Hide();
+            invConSul.ShowDialog();
+            this.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            InvitedConsultantSelctedProject();
+        }
     }
 }

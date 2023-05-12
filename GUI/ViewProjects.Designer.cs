@@ -97,5 +97,6 @@
         private Button button1;
         private Button bt_Search;
         private TextBox tb_Search;
+        private Button button2;
     }
 }
