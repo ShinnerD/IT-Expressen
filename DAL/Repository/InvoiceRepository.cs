@@ -86,21 +86,6 @@ namespace DAL.Repository
             return result;
         }
 
-        public IInvoiceModel GetInvoiceInvoiceID(int invoice)
-        {
-
-            IInvoiceModel result = new InvoiceModel();
-
-            var dbInvoice = DataContext.Invoices.FirstOrDefault(i => i.Invoice_ID == invoice);
-
-
-            result.InvoiceId = dbInvoice.Invoice_ID;
-            result.ProjectId = (int)dbInvoice.Project_ID;
-            result.LineID = (int)dbInvoice.Line_ID;
-            result.TotalPrice = (int)dbInvoice.Total_Price;
-            result.InvoiceDate = dbInvoice.Invoice_Date;
-
-            return result;
-        }
+        
     }
 }

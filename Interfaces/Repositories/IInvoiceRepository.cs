@@ -13,6 +13,6 @@ namespace Interfaces.Repositories
         List<IInvoiceModel> GetAllInvoiceProjectID(int projectid);
         List<IInvoiceModel> GetAllInvoices(IInvoiceModel dbInvoice);
         IInvoiceModel GetInvoiceID(int invoice);
-        IInvoiceModel GetInvoiceInvoiceID(int invoice);
+       
     }
 }
