@@ -14,6 +14,7 @@ namespace GUI
             InitializeComponent();
             UserId = userId;
             ProjectsForManager();
+            SearchProjects();
         }
 
         private void ProjectsForManager()
@@ -39,6 +40,21 @@ namespace GUI
             editProject.ShowDialog();
             this.Show();
         }
+
+        private void bt_Search_Click(object sender, EventArgs e)
+        {
+            SearchProjects();
+        }
+
+        private void SearchProjects()
+        {
+            string searchTerm = tb_Search.Text.Trim();
+            List<IProjectModel> projects = projectService.SearchProjects(searchTerm, UserId);
+            dgv_Viewproject.DataSource = projects;
+        }
+
+        
+
         private void InvitedConsultantSelctedProject()
         {
             //var selectedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;

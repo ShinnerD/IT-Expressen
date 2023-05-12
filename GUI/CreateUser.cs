@@ -126,7 +126,7 @@ namespace GUI
             if (user.UserType == "consultant")
             {
                 this.Hide();
-                GUI.Consultant a = new Consultant();
+                GUI.Consultant a = new Consultant(user.UserName);
                 a.Show();
             }
             if (user.UserType == "admin")
