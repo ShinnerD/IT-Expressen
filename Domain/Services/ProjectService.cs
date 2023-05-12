@@ -1,4 +1,8 @@
-﻿using Interfaces.Models;
+﻿using DAL.Linq;
+using DAL.Models;
+using DAL.Repository;
+using Domain.Models;
+using Interfaces.Models;
 using Interfaces.Repositories;
 using Interfaces.Services;
 
@@ -42,5 +46,11 @@ namespace Domain.Services
         {
             projectRepo.UpdateProject(project);
         }
+        public List<IProjectModel> SearchProjects(string searchTerm, int userId)
+        {
+            return projectRepo.SearchProjects(searchTerm, userId);
+        }
+
+        
     }
 }

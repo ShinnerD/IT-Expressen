@@ -134,6 +134,25 @@ namespace DAL.Repository
 
                 dbContext.SubmitChanges();
             }
+
         }
+
+        public List<IProjectModel> SearchProjects(string searchTerm, int userId)
+        {
+            var targetUser = dbContext.Users.FirstOrDefault(i => i.User_ID == userId);
+
+            List<Linq.Project> dtoProjects = new List<Linq.Project>();
+
+            if (targetUser != null)
+            {
+                dtoProjects = dbContext.Projects.Where(i => i.User_ID == userId && i.Title.Contains(searchTerm)).ToList();
+            }
+
+            List<IProjectModel> result = TransferAllProjectProperties(dtoProjects);
+
+            return result;
+        }
+
+
     }
 }

@@ -49,7 +49,7 @@ namespace GUI
         private void OpenConsultantForm()
         {
             this.Hide();
-            Consultant consultant = new Consultant();
+            Consultant consultant = new Consultant("");
             consultant.ShowDialog();
             this.Show();
         }
@@ -85,7 +85,7 @@ namespace GUI
                 if (targetUser.Password == tb_Password.Text && targetUser.UserType == "consultant")
                 {
                     this.Hide();
-                    GUI.Consultant a = new Consultant();
+                    GUI.Consultant a = new Consultant(targetUser.UserName);
                     a.Show();
                 }
                 if (targetUser.Password == tb_Password.Text && targetUser.UserType == "admin")

@@ -26,5 +26,7 @@ namespace Interfaces.Services
         /// Updates the Project in the database. The provided IProjectModel must be an existing project in the database. /DK
         /// </summary>
         void UpdateProject(IProjectModel project);
+
+        List<IProjectModel> SearchProjects(string searchTerm, int userId);
     }
 }
