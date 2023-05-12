@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Interfaces.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,16 @@ namespace GUI
 {
     public partial class ConsultantSearchProjects : Form
     {
-        public ConsultantSearchProjects()
+        public IProjectModel Project { get; set; }
+        public int ProjectId { get; set; }
+        public List<string> ProjectSpecializations { get; set; }
+
+        public ConsultantSearchProjects(int projectId)
         {
             InitializeComponent();
+            ProjectId = projectId;
         }
+
+
     }
 }

@@ -31,7 +31,6 @@
             dgv_ConsultantViewProjects = new DataGridView();
             tb_Search = new TextBox();
             bt_Search = new Button();
-            comboBox1 = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dgv_ConsultantViewProjects).BeginInit();
             SuspendLayout();
             // 
@@ -63,21 +62,11 @@
             bt_Search.UseVisualStyleBackColor = true;
             bt_Search.Click += bt_Search_Click;
             // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(582, 53);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(182, 33);
-            comboBox1.TabIndex = 3;
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
-            // 
             // ConsultantViewProjects
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(comboBox1);
             Controls.Add(bt_Search);
             Controls.Add(tb_Search);
             Controls.Add(dgv_ConsultantViewProjects);
@@ -93,6 +82,5 @@
         private DataGridView dgv_ConsultantViewProjects;
         private TextBox tb_Search;
         private Button bt_Search;
-        private ComboBox comboBox1;
     }
 }

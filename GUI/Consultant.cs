@@ -7,9 +7,7 @@ namespace GUI
     public partial class Consultant : Form
     {
         public string Username { get; set; }
-        public int projectId { get; set; }
         public IUserModel userModel { get; set; }
-        public IProjectModel projectModel { get; set; }
 
         public Consultant(string username)
         {
@@ -17,7 +15,6 @@ namespace GUI
             Username = username;
             GetUser();
             SetUpTB();
-            GetProject();
         }
 
         private void GetUser()
@@ -38,11 +35,6 @@ namespace GUI
             tb_Country.Text = userModel.Country;
         }
 
-        private void GetProject()
-        {
-            IProjectService projectService = new ProjectService();
-            projectModel = projectService.GetProject(projectId);
-        }
         private void bt_ViewProjects_Click(object sender, EventArgs e)
         {
             int userId = userModel.ID;
@@ -50,7 +42,7 @@ namespace GUI
             ConviewProjects.ShowDialog();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void bt_SearchProjects_Click(object sender, EventArgs e)
         {
 
         }

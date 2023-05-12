@@ -46,7 +46,7 @@
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
-            button1 = new Button();
+            bt_SearchProjects = new Button();
             SuspendLayout();
             // 
             // bt_ViewProjects
@@ -196,22 +196,22 @@
             label1.Size = new Size(0, 25);
             label1.TabIndex = 18;
             // 
-            // button1
+            // bt_SearchProjects
             // 
-            button1.Location = new Point(700, 322);
-            button1.Name = "button1";
-            button1.Size = new Size(134, 48);
-            button1.TabIndex = 36;
-            button1.Text = "SearchProjects";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            bt_SearchProjects.Location = new Point(700, 322);
+            bt_SearchProjects.Name = "bt_SearchProjects";
+            bt_SearchProjects.Size = new Size(134, 48);
+            bt_SearchProjects.TabIndex = 36;
+            bt_SearchProjects.Text = "SearchProjects";
+            bt_SearchProjects.UseVisualStyleBackColor = true;
+            bt_SearchProjects.Click += bt_SearchProjects_Click;
             // 
             // Consultant
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(887, 413);
-            Controls.Add(button1);
+            Controls.Add(bt_SearchProjects);
             Controls.Add(bt_ViewProjects);
             Controls.Add(tb_Country);
             Controls.Add(tb_Zipcode);
@@ -257,6 +257,6 @@
         private Label label3;
         private Label label2;
         private Label label1;
-        private Button button1;
+        private Button bt_SearchProjects;
     }
 }
