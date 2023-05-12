@@ -10,7 +10,7 @@ namespace GUI
         private IUserService UserService = new UserService();
         public string UserType { get; set; }
         public int ProjectID { get; set; }
-        public IProjectModel ProjectFFFS { get; set; }
+        public IProjectModel ProjectGet { get; set; }
         public List<string> ProjectSpecializations { get; set; }
 
 
@@ -23,6 +23,14 @@ namespace GUI
             ProjectID = projectID;
             GetProjectInfo();
             LoadProjectData();
+
+        }
+        public InviteConsultants(IProjectModel ProjectsSpecs)
+        {
+
+            InitializeComponent();
+            ProjectGet = ProjectsSpecs;
+
         }
 
         private void LoadConsultantData()
@@ -34,20 +42,19 @@ namespace GUI
             IProjectService projectService = new Domain.Services.ProjectService();
             ISpecializationService specializationService = new Domain.Services.SpecializationService();
 
-            Project = projectService.GetProject(ProjectID);
+            ProjectGet = projectService.GetProject(ProjectID);
             ProjectSpecializations = specializationService.GetProjectSpecializations(ProjectID);
         }
         private void LoadProjectData()
         {
-            
-            lb_ProjectID.Text = ProjectID.ToString();
-            lb_title.Text = ProjectID.
-            lb_UserID.Text = 
-            lb_ProjectStatus.Text = 
-            lb_ProjectStartDate.Text = 
-            lb_ProjectEndDate.Text = 
-            lb_ModifyDate.Text = 
-            lb_Description.Text = 
+            lb_ProjectID.Text = ProjectGet.ProjectId.ToString();
+            lb_title.Text = ProjectGet.Title;
+            lb_UserID.Text = ProjectGet.UserId.ToString();
+            lb_ProjectStatus.Text = ProjectGet.ProjectStatus;
+            lb_ProjectStartDate.Text = ProjectGet.ProjectStartDate.ToString();
+            lb_ProjectEndDate.Text = ProjectGet.ProjectEndDate.ToString();
+            lb_ModifyDate.Text = ProjectGet.ProjectModifyDate.ToString();
+            lb_Description.Text = ProjectGet.Description;
         }
 
 
