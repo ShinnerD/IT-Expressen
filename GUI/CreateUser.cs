@@ -1,5 +1,4 @@
-﻿using Azure.Identity;
-using Domain.Services;
+﻿using Domain.Services;
 using Interfaces.Models;
 using Interfaces.Services;
 
@@ -40,10 +39,8 @@ namespace GUI
                         tb_Email.Text,
                         FindCheckedSkills()
 
-
                         );
                     forwardUserToProfile();
-
                 }
                 else
                 {
@@ -54,10 +51,8 @@ namespace GUI
             {
                 MessageBox.Show("Username is already in use");
             }
-
-
         }
-
+        // 
         private bool NoInputErrors()
         {
             if (tb_Password.Text == tb_RePassword.Text
@@ -108,6 +103,9 @@ namespace GUI
             if (cb_UserType.Text == "manager")
             {
                 clb_Skills.Enabled = false;
+
+                for (int i = 0; i < clb_Skills.Items.Count; i++)
+                    clb_Skills.SetItemChecked(i, false);
             }
         }
 
@@ -138,6 +136,7 @@ namespace GUI
                 a.Show();
             }
         }
+
         private List<string> FindCheckedSkills()
         {
             List<string> result = new List<string>();

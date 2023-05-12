@@ -1,24 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAL.Linq;
-using Interfaces.Models;
-using System.Reflection;
-using Interfaces.Repositories;
+﻿using DAL.Linq;
 using DAL.Models;
+using Interfaces.Models;
+using Interfaces.Repositories;
+
 ///Writen by Erik
 
 namespace DAL.Repository
 {
-   
-
     public class InvitesRepository : IInvitesRepository
     {
-
-
-        DataClassesDataContext DataContext = new DataClassesDataContext(DbConnectionString.ConnectionString);
+        private DataClassesDataContext DataContext = new DataClassesDataContext(DbConnectionString.ConnectionString);
 
         public int ProjectId { get; private set; }
 
@@ -38,15 +29,8 @@ namespace DAL.Repository
                 Invite.AcceptDate = (DateTime)dbInvite.Accept_date;
 
                 result.Add(Invite);
-
-
             }
             return result;
-
-
-
-
-
         }
 
         public List<IInvitesModel> GetAllInviteProjectID(int projectid)
@@ -66,12 +50,10 @@ namespace DAL.Repository
                 Invite.AcceptDate = (DateTime)dbInvite.Accept_date;
 
                 result.Add(Invite);
-
-
             }
             return result;
-
         }
+
         public IInvitesModel GetInviteProjectId(int ProjectId)
         {
             IInvitesModel result = new InvitesModel();
@@ -85,9 +67,8 @@ namespace DAL.Repository
             result.AcceptDate = (DateTime)dbInvite.Accept_date;
 
             return result;
-
-
         }
+
         public IInvitesModel GetInviteUserId(int UserId)
         {
             IInvitesModel result = new InvitesModel();
@@ -101,10 +82,8 @@ namespace DAL.Repository
             result.AcceptDate = (DateTime)dbInvite.Accept_date;
 
             return result;
-
-
         }
+        
+        
     }
 }
-      
-
