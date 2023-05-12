@@ -27,5 +27,10 @@ namespace Interfaces.Repositories
         /// Updates an existing project in the database to match the IProjectModel provided in the parameters. /DK
         /// </summary>
         void UpdateProject(IProjectModel project);
+
+        List<IProjectModel> SearchProjects(string searchTerm, int userId);
+
+        
+        
     }
 }
