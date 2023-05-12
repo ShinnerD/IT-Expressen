@@ -53,12 +53,12 @@ namespace GUI
             dgv_Viewproject.DataSource = projects;
         }
 
-        
+
 
         private void InvitedConsultantSelctedProject()
         {
-            //var selectedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;
-            InviteConsultants invConSul = new InviteConsultants();
+            var selectedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;
+            InviteConsultants invConSul = new InviteConsultants(selectedProject.ProjectId);
             this.Hide();
             invConSul.ShowDialog();
             this.Show();

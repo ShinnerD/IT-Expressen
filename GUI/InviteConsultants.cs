@@ -1,4 +1,6 @@
-﻿using Domain.Services;
+﻿using DAL.Linq;
+using Domain.Services;
+using Interfaces.Models;
 using Interfaces.Services;
 
 namespace GUI
@@ -7,19 +9,48 @@ namespace GUI
     {
         private IUserService UserService = new UserService();
         public string UserType { get; set; }
-        public int projectID { get; set; }
+        public int ProjectID { get; set; }
+        public IProjectModel ProjectFFFS { get; set; }
+        public List<string> ProjectSpecializations { get; set; }
 
-        public InviteConsultants()
+
+
+        public InviteConsultants(int projectID)
         {
             UserType = "consultant";
             InitializeComponent();
             LoadConsultantData();
-            this.projectID = projectID;
+            ProjectID = projectID;
+            GetProjectInfo();
+            LoadProjectData();
         }
 
         private void LoadConsultantData()
         {
-            dgv_ConsultantList.DataSource = UserService.GetUserType(UserType = "consultant");
+            dgv_ConsultantList.DataSource = UserService.FindUsersWithUserType(UserType);
         }
+        private void GetProjectInfo()
+        {
+            IProjectService projectService = new Domain.Services.ProjectService();
+            ISpecializationService specializationService = new Domain.Services.SpecializationService();
+
+            Project = projectService.GetProject(ProjectID);
+            ProjectSpecializations = specializationService.GetProjectSpecializations(ProjectID);
+        }
+        private void LoadProjectData()
+        {
+            
+            lb_ProjectID.Text = ProjectID.ToString();
+            lb_title.Text = ProjectID.
+            lb_UserID.Text = 
+            lb_ProjectStatus.Text = 
+            lb_ProjectStartDate.Text = 
+            lb_ProjectEndDate.Text = 
+            lb_ModifyDate.Text = 
+            lb_Description.Text = 
+        }
+
+
+
     }
 }
