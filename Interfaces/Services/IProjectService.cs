@@ -41,5 +41,7 @@ namespace Interfaces.Services
         /// Retrieves a List of IProjectModels in which each project requires at least one of the specializations specified. /DK
         /// </summary>
         List<IProjectModel> GetProjectsFromAnySpecializations(List<string> specializations);
+
+        List<IProjectModel> SearchProjects(string searchTerm, int userId);
     }
 }

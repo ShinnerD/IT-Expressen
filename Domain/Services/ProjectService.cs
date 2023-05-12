@@ -70,6 +70,7 @@ namespace Domain.Services
         {
             return projectRepo.GetProjectsFromAnySpecializations(specializations);
         }
+
         public List<IProjectModel> SearchProjects(string searchTerm, int userId)
         {
             return projectRepo.SearchProjects(searchTerm, userId);

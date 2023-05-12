@@ -38,7 +38,7 @@ namespace DAL.Repository
         /// <summary>
         /// Updates an existing project in the database to match the IProjectModel provided in the parameters. /DK
         /// </summary>
-        void IProjectRepository.UpdateProject(IProjectModel project)
+        public void UpdateProject(IProjectModel project)
         {
             var dbProject = dbContext.Projects.FirstOrDefault(i => i.Project_ID == project.ProjectId);
 
@@ -161,26 +161,6 @@ namespace DAL.Repository
             }
         }
 
-        /// <summary>
-        /// Updates an existing project in the database to match the IProjectModel provided in the parameters. /DK
-        /// </summary>
-        void IProjectRepository.UpdateProject(IProjectModel project)
-        {
-            var dbProject = dbContext.Projects.FirstOrDefault(i => i.Project_ID == project.ProjectId);
-
-            if (dbProject != null && project != null) 
-            {
-                dbProject.Title = project.Title;
-                dbProject.Description = project.Description;
-                dbProject.Project_Start_Date = project.ProjectStartDate;
-                dbProject.Project_End_Date = project.ProjectEndDate;
-                dbProject.Project_Modify_Date = project.ProjectModifyDate;
-
-                dbContext.SubmitChanges();
-            }
-
-        }
-
         public List<IProjectModel> SearchProjects(string searchTerm, int userId)
         {
             var targetUser = dbContext.Users.FirstOrDefault(i => i.User_ID == userId);
@@ -196,7 +176,5 @@ namespace DAL.Repository
 
             return result;
         }
-
-
     }
 }
