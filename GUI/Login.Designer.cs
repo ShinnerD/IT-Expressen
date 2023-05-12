@@ -173,6 +173,7 @@
             bt_cancel.TabIndex = 12;
             bt_cancel.Text = "Cancel";
             bt_cancel.UseVisualStyleBackColor = true;
+            bt_cancel.Click += bt_cancel_Click;
             // 
             // lb_connectionTest
             // 
@@ -242,7 +243,7 @@
             Controls.Add(bt_CreateUser);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Login";
-            Text = "Form1";
+            Text = "Log in";
             ((System.ComponentModel.ISupportInitialize)pic_ProfilePic).EndInit();
             groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pb_ConnectionStatus).EndInit();

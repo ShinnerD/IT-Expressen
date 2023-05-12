@@ -36,9 +36,6 @@ namespace DAL.Linq
     partial void InsertInvite(Invite instance);
     partial void UpdateInvite(Invite instance);
     partial void DeleteInvite(Invite instance);
-    partial void InsertInvoice(Invoice instance);
-    partial void UpdateInvoice(Invoice instance);
-    partial void DeleteInvoice(Invoice instance);
     partial void InsertProject_Message_Line(Project_Message_Line instance);
     partial void UpdateProject_Message_Line(Project_Message_Line instance);
     partial void DeleteProject_Message_Line(Project_Message_Line instance);
@@ -57,6 +54,9 @@ namespace DAL.Linq
     partial void InsertUser(User instance);
     partial void UpdateUser(User instance);
     partial void DeleteUser(User instance);
+    partial void InsertInvoice(Invoice instance);
+    partial void UpdateInvoice(Invoice instance);
+    partial void DeleteInvoice(Invoice instance);
     #endregion
 		
 		public DataClassesDataContext(string connection) : 
@@ -96,14 +96,6 @@ namespace DAL.Linq
 			get
 			{
 				return this.GetTable<Invite>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Invoice> Invoices
-		{
-			get
-			{
-				return this.GetTable<Invoice>();
 			}
 		}
 		
@@ -152,6 +144,14 @@ namespace DAL.Linq
 			get
 			{
 				return this.GetTable<User>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Invoice> Invoices
+		{
+			get
+			{
+				return this.GetTable<Invoice>();
 			}
 		}
 	}
@@ -664,246 +664,6 @@ namespace DAL.Linq
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Invoice")]
-	public partial class Invoice : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Invoice_ID;
-		
-		private System.Nullable<int> _Project_ID;
-		
-		private System.Nullable<int> _Line_ID;
-		
-		private System.Nullable<int> _Total_Price;
-		
-		private System.Nullable<int> _Invoice_Date;
-		
-		private EntityRef<Consultant_Line> _Consultant_Line;
-		
-		private EntityRef<Project> _Project;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnInvoice_IDChanging(int value);
-    partial void OnInvoice_IDChanged();
-    partial void OnProject_IDChanging(System.Nullable<int> value);
-    partial void OnProject_IDChanged();
-    partial void OnLine_IDChanging(System.Nullable<int> value);
-    partial void OnLine_IDChanged();
-    partial void OnTotal_PriceChanging(System.Nullable<int> value);
-    partial void OnTotal_PriceChanged();
-    partial void OnInvoice_DateChanging(System.Nullable<int> value);
-    partial void OnInvoice_DateChanged();
-    #endregion
-		
-		public Invoice()
-		{
-			this._Consultant_Line = default(EntityRef<Consultant_Line>);
-			this._Project = default(EntityRef<Project>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Invoice_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Invoice_ID
-		{
-			get
-			{
-				return this._Invoice_ID;
-			}
-			set
-			{
-				if ((this._Invoice_ID != value))
-				{
-					this.OnInvoice_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Invoice_ID = value;
-					this.SendPropertyChanged("Invoice_ID");
-					this.OnInvoice_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Project_ID", DbType="Int")]
-		public System.Nullable<int> Project_ID
-		{
-			get
-			{
-				return this._Project_ID;
-			}
-			set
-			{
-				if ((this._Project_ID != value))
-				{
-					if (this._Project.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnProject_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Project_ID = value;
-					this.SendPropertyChanged("Project_ID");
-					this.OnProject_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Line_ID", DbType="Int")]
-		public System.Nullable<int> Line_ID
-		{
-			get
-			{
-				return this._Line_ID;
-			}
-			set
-			{
-				if ((this._Line_ID != value))
-				{
-					if (this._Consultant_Line.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnLine_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Line_ID = value;
-					this.SendPropertyChanged("Line_ID");
-					this.OnLine_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Total_Price", DbType="Int")]
-		public System.Nullable<int> Total_Price
-		{
-			get
-			{
-				return this._Total_Price;
-			}
-			set
-			{
-				if ((this._Total_Price != value))
-				{
-					this.OnTotal_PriceChanging(value);
-					this.SendPropertyChanging();
-					this._Total_Price = value;
-					this.SendPropertyChanged("Total_Price");
-					this.OnTotal_PriceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Invoice_Date", DbType="Int")]
-		public System.Nullable<int> Invoice_Date
-		{
-			get
-			{
-				return this._Invoice_Date;
-			}
-			set
-			{
-				if ((this._Invoice_Date != value))
-				{
-					this.OnInvoice_DateChanging(value);
-					this.SendPropertyChanging();
-					this._Invoice_Date = value;
-					this.SendPropertyChanged("Invoice_Date");
-					this.OnInvoice_DateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Consultant_Line_Invoice", Storage="_Consultant_Line", ThisKey="Line_ID", OtherKey="Line_ID", IsForeignKey=true)]
-		public Consultant_Line Consultant_Line
-		{
-			get
-			{
-				return this._Consultant_Line.Entity;
-			}
-			set
-			{
-				Consultant_Line previousValue = this._Consultant_Line.Entity;
-				if (((previousValue != value) 
-							|| (this._Consultant_Line.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Consultant_Line.Entity = null;
-						previousValue.Invoices.Remove(this);
-					}
-					this._Consultant_Line.Entity = value;
-					if ((value != null))
-					{
-						value.Invoices.Add(this);
-						this._Line_ID = value.Line_ID;
-					}
-					else
-					{
-						this._Line_ID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Consultant_Line");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Project_Invoice", Storage="_Project", ThisKey="Project_ID", OtherKey="Project_ID", IsForeignKey=true)]
-		public Project Project
-		{
-			get
-			{
-				return this._Project.Entity;
-			}
-			set
-			{
-				Project previousValue = this._Project.Entity;
-				if (((previousValue != value) 
-							|| (this._Project.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Project.Entity = null;
-						previousValue.Invoices.Remove(this);
-					}
-					this._Project.Entity = value;
-					if ((value != null))
-					{
-						value.Invoices.Add(this);
-						this._Project_ID = value.Project_ID;
-					}
-					else
-					{
-						this._Project_ID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Project");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Project_Message_Line")]
 	public partial class Project_Message_Line : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1172,11 +932,11 @@ namespace DAL.Linq
 		
 		private EntitySet<Invite> _Invites;
 		
-		private EntitySet<Invoice> _Invoices;
-		
 		private EntitySet<Project_Message_Line> _Project_Message_Lines;
 		
 		private EntitySet<Projects_Specialisation_Line> _Projects_Specialisation_Lines;
+		
+		private EntitySet<Invoice> _Invoices;
 		
 		private EntityRef<User> _User;
 		
@@ -1208,9 +968,9 @@ namespace DAL.Linq
 		{
 			this._Consultant_Lines = new EntitySet<Consultant_Line>(new Action<Consultant_Line>(this.attach_Consultant_Lines), new Action<Consultant_Line>(this.detach_Consultant_Lines));
 			this._Invites = new EntitySet<Invite>(new Action<Invite>(this.attach_Invites), new Action<Invite>(this.detach_Invites));
-			this._Invoices = new EntitySet<Invoice>(new Action<Invoice>(this.attach_Invoices), new Action<Invoice>(this.detach_Invoices));
 			this._Project_Message_Lines = new EntitySet<Project_Message_Line>(new Action<Project_Message_Line>(this.attach_Project_Message_Lines), new Action<Project_Message_Line>(this.detach_Project_Message_Lines));
 			this._Projects_Specialisation_Lines = new EntitySet<Projects_Specialisation_Line>(new Action<Projects_Specialisation_Line>(this.attach_Projects_Specialisation_Lines), new Action<Projects_Specialisation_Line>(this.detach_Projects_Specialisation_Lines));
+			this._Invoices = new EntitySet<Invoice>(new Action<Invoice>(this.attach_Invoices), new Action<Invoice>(this.detach_Invoices));
 			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
@@ -1425,19 +1185,6 @@ namespace DAL.Linq
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Project_Invoice", Storage="_Invoices", ThisKey="Project_ID", OtherKey="Project_ID")]
-		public EntitySet<Invoice> Invoices
-		{
-			get
-			{
-				return this._Invoices;
-			}
-			set
-			{
-				this._Invoices.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Project_Project_Message_Line", Storage="_Project_Message_Lines", ThisKey="Project_ID", OtherKey="Project_ID")]
 		public EntitySet<Project_Message_Line> Project_Message_Lines
 		{
@@ -1461,6 +1208,19 @@ namespace DAL.Linq
 			set
 			{
 				this._Projects_Specialisation_Lines.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Project_Invoice", Storage="_Invoices", ThisKey="Project_ID", OtherKey="Project_ID")]
+		public EntitySet<Invoice> Invoices
+		{
+			get
+			{
+				return this._Invoices;
+			}
+			set
+			{
+				this._Invoices.Assign(value);
 			}
 		}
 		
@@ -1542,18 +1302,6 @@ namespace DAL.Linq
 			entity.Project = null;
 		}
 		
-		private void attach_Invoices(Invoice entity)
-		{
-			this.SendPropertyChanging();
-			entity.Project = this;
-		}
-		
-		private void detach_Invoices(Invoice entity)
-		{
-			this.SendPropertyChanging();
-			entity.Project = null;
-		}
-		
 		private void attach_Project_Message_Lines(Project_Message_Line entity)
 		{
 			this.SendPropertyChanging();
@@ -1573,6 +1321,18 @@ namespace DAL.Linq
 		}
 		
 		private void detach_Projects_Specialisation_Lines(Projects_Specialisation_Line entity)
+		{
+			this.SendPropertyChanging();
+			entity.Project = null;
+		}
+		
+		private void attach_Invoices(Invoice entity)
+		{
+			this.SendPropertyChanging();
+			entity.Project = this;
+		}
+		
+		private void detach_Invoices(Invoice entity)
 		{
 			this.SendPropertyChanging();
 			entity.Project = null;
@@ -2592,6 +2352,246 @@ namespace DAL.Linq
 		{
 			this.SendPropertyChanging();
 			entity.User = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Invoice")]
+	public partial class Invoice : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Invoice_ID;
+		
+		private System.Nullable<int> _Project_ID;
+		
+		private System.Nullable<int> _Line_ID;
+		
+		private System.Nullable<int> _Total_Price;
+		
+		private System.Nullable<System.DateTime> _Invoice_Date;
+		
+		private EntityRef<Consultant_Line> _Consultant_Line;
+		
+		private EntityRef<Project> _Project;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnInvoice_IDChanging(int value);
+    partial void OnInvoice_IDChanged();
+    partial void OnProject_IDChanging(System.Nullable<int> value);
+    partial void OnProject_IDChanged();
+    partial void OnLine_IDChanging(System.Nullable<int> value);
+    partial void OnLine_IDChanged();
+    partial void OnTotal_PriceChanging(System.Nullable<int> value);
+    partial void OnTotal_PriceChanged();
+    partial void OnInvoice_DateChanging(System.Nullable<System.DateTime> value);
+    partial void OnInvoice_DateChanged();
+    #endregion
+		
+		public Invoice()
+		{
+			this._Consultant_Line = default(EntityRef<Consultant_Line>);
+			this._Project = default(EntityRef<Project>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Invoice_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Invoice_ID
+		{
+			get
+			{
+				return this._Invoice_ID;
+			}
+			set
+			{
+				if ((this._Invoice_ID != value))
+				{
+					this.OnInvoice_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Invoice_ID = value;
+					this.SendPropertyChanged("Invoice_ID");
+					this.OnInvoice_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Project_ID", DbType="Int")]
+		public System.Nullable<int> Project_ID
+		{
+			get
+			{
+				return this._Project_ID;
+			}
+			set
+			{
+				if ((this._Project_ID != value))
+				{
+					if (this._Project.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnProject_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Project_ID = value;
+					this.SendPropertyChanged("Project_ID");
+					this.OnProject_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Line_ID", DbType="Int")]
+		public System.Nullable<int> Line_ID
+		{
+			get
+			{
+				return this._Line_ID;
+			}
+			set
+			{
+				if ((this._Line_ID != value))
+				{
+					if (this._Consultant_Line.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnLine_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Line_ID = value;
+					this.SendPropertyChanged("Line_ID");
+					this.OnLine_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Total_Price", DbType="Int")]
+		public System.Nullable<int> Total_Price
+		{
+			get
+			{
+				return this._Total_Price;
+			}
+			set
+			{
+				if ((this._Total_Price != value))
+				{
+					this.OnTotal_PriceChanging(value);
+					this.SendPropertyChanging();
+					this._Total_Price = value;
+					this.SendPropertyChanged("Total_Price");
+					this.OnTotal_PriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Invoice_Date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Invoice_Date
+		{
+			get
+			{
+				return this._Invoice_Date;
+			}
+			set
+			{
+				if ((this._Invoice_Date != value))
+				{
+					this.OnInvoice_DateChanging(value);
+					this.SendPropertyChanging();
+					this._Invoice_Date = value;
+					this.SendPropertyChanged("Invoice_Date");
+					this.OnInvoice_DateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Consultant_Line_Invoice", Storage="_Consultant_Line", ThisKey="Line_ID", OtherKey="Line_ID", IsForeignKey=true)]
+		public Consultant_Line Consultant_Line
+		{
+			get
+			{
+				return this._Consultant_Line.Entity;
+			}
+			set
+			{
+				Consultant_Line previousValue = this._Consultant_Line.Entity;
+				if (((previousValue != value) 
+							|| (this._Consultant_Line.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Consultant_Line.Entity = null;
+						previousValue.Invoices.Remove(this);
+					}
+					this._Consultant_Line.Entity = value;
+					if ((value != null))
+					{
+						value.Invoices.Add(this);
+						this._Line_ID = value.Line_ID;
+					}
+					else
+					{
+						this._Line_ID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Consultant_Line");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Project_Invoice", Storage="_Project", ThisKey="Project_ID", OtherKey="Project_ID", IsForeignKey=true)]
+		public Project Project
+		{
+			get
+			{
+				return this._Project.Entity;
+			}
+			set
+			{
+				Project previousValue = this._Project.Entity;
+				if (((previousValue != value) 
+							|| (this._Project.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Project.Entity = null;
+						previousValue.Invoices.Remove(this);
+					}
+					this._Project.Entity = value;
+					if ((value != null))
+					{
+						value.Invoices.Add(this);
+						this._Project_ID = value.Project_ID;
+					}
+					else
+					{
+						this._Project_ID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Project");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

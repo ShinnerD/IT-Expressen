@@ -57,5 +57,22 @@ namespace Domain.Services
         {
             Repository.RemoveFromProject(projectId, specializations);
         }
+
+        /// <summary>
+        /// Adds the List of string representing specializations to the user with the given User Id to the database. /MS
+        /// </summary>
+        public void AddSpecializationsToUser(int userId, List<string> specializations)
+        {
+            Repository.AddSpecializationsToUser(userId, specializations);
+        }
+
+        /// <summary>
+        /// Removes the given list of string specializations to the user. /DK
+        /// </summary>
+        public void RemoveSpecializationsFromUser(int userId, string specializations)
+        {
+            Repository.RemoveSpecializationsFromUser(userId, specializations);
+        }
     }
+
 }

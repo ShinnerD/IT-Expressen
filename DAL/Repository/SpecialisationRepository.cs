@@ -43,7 +43,6 @@ namespace DAL.Repository
             return dbContext.Specialisations.FirstOrDefault(i => i.Specialisation1 == specialization).Spec_Id;
         }
 
-
         /// <summary>
         /// A String representing the specialization with the provided spec Id /DK
         /// </summary>
@@ -81,12 +80,50 @@ namespace DAL.Repository
         /// <summary>
         /// Removes the given list of string specializations from the project in the database. /DK
         /// </summary>
-        public void RemoveFromProject(int  projectId, List<string> specializations) 
+        public void RemoveFromProject(int projectId, List<string> specializations)
         {
             var targetSpecIds = dbContext.Specialisations.Where(i => specializations.Contains(i.Specialisation1)).Select(x => x.Spec_Id).ToList();
             var targetSpecLines = dbContext.Projects.FirstOrDefault(i => i.Project_ID == projectId).Projects_Specialisation_Lines.Where(x => targetSpecIds.Contains(x.Spec_Id)).ToList();
 
             dbContext.Projects_Specialisation_Lines.DeleteAllOnSubmit(targetSpecLines);
+            dbContext.SubmitChanges();
+        }
+
+        /// <summary>
+        /// Adds the List of string representing specializations to the user with the given User Id to the database. /MS
+        /// </summary>
+        public void AddSpecializationsToUser(int UserID, List<string> specializations)
+        {
+            if (specializations != null)
+            {
+                List<Linq.Specialisations_Line> newSpecLineRows = new List<Linq.Specialisations_Line>();
+
+                foreach (var specialization in specializations)
+                {
+                    var newSpecLine = new Linq.Specialisations_Line();
+
+                    newSpecLine.User = dbContext.Users.FirstOrDefault(i => i.User_ID == UserID);
+                    newSpecLine.User_Id = newSpecLine.User.User_ID;
+                    newSpecLine.Specialisation = dbContext.Specialisations.FirstOrDefault(i => i.Specialisation1 == specialization);
+                    newSpecLine.Spec_Id = newSpecLine.Specialisation.Spec_Id;
+
+                    newSpecLineRows.Add(newSpecLine);
+                }
+
+                dbContext.Specialisations_Lines.InsertAllOnSubmit(newSpecLineRows);
+                dbContext.SubmitChanges();
+            }
+        }
+
+        /// <summary>
+        /// Removes the given list of string specializations to the user. /DK
+        /// </summary>
+        public void RemoveSpecializationsFromUser(int userId, string specializations)
+        {
+            var targetSpecIds = dbContext.Specialisations.Where(i => specializations.Contains(i.Specialisation1)).Select(x => x.Spec_Id).ToList();
+            var targetSpecLines = dbContext.Users.FirstOrDefault(i => i.User_ID == userId).Specialisations_Lines.Where(x => targetSpecIds.Contains(x.Spec_Id)).ToList();
+
+            dbContext.Specialisations_Lines.DeleteAllOnSubmit(targetSpecLines);
             dbContext.SubmitChanges();
         }
     }

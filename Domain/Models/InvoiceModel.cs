@@ -11,7 +11,7 @@ namespace Domain.Models
     /// <summary>
     /// written by Erik. Model too  Specialisation that have atrributes that is relavent too the case and project
     /// </summary>
-    public class Invoice
+    public class InvoiceModel
     {
         public int InvoiceId { get; set; }
         public int ProjectId { get; set; }
