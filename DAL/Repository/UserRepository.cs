@@ -39,7 +39,7 @@ namespace DAL.Repository
             return result;
         }
 
-        public void AddUser(IUserModel userModel, List<string> specializtions)
+        public void AddUser(IUserModel userModel, List<string> specializations)
         {
             IUserModel user = new DAL.Models.UserModel();
             ISpecializationRepository specRepo = new SpecializationRepository();
@@ -64,7 +64,7 @@ namespace DAL.Repository
             dbcontext.Users.InsertOnSubmit(linqUserModel);
             dbcontext.SubmitChanges();
 
-            specRepo.AddSpecializationsToUser(linqUserModel.User_ID, specializtions);
+            specRepo.AddSpecializationsToUser(linqUserModel.User_ID, specializations);
         }
 
         public IUserModel GetUser(string username)

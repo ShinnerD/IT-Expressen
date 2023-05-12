@@ -29,7 +29,7 @@ namespace Domain.Services
         /// <summary>
         /// Returns an int representing the specialization ID matching the specialization in string form provided in the parameters. /DK
         /// </summary>
-        public int GetIDFromName(string specialization)
+        public int GetId(string specialization)
         {
             return Repository.GetSpecializationID(specialization);
         }
@@ -37,7 +37,7 @@ namespace Domain.Services
         /// <summary>
         /// Returns a string representing the specialization which matches the provided ID in the database. /DK
         /// </summary>
-        public string GetNameFromID(int specId)
+        public string GetString(int specId)
         {
             return Repository.GetSpecializationString(specId);
         }
