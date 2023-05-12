@@ -1,4 +1,5 @@
 ﻿using DAL.Linq;
+using DAL.Models;
 using Interfaces.Models;
 using Interfaces.Repositories;
 
@@ -99,5 +100,41 @@ namespace DAL.Repository
         {
             throw new NotImplementedException();
         }
+        public List<IUserModel> TransferAllUserProperties(List<Linq.User> dtoUsers)
+        {
+            List<IUserModel> result = new List<IUserModel> ();
+
+            foreach (var dtoUser in dtoUsers)
+            {
+                IUserModel userModel = new UserModel();
+
+                userModel.ID = dtoUser.User_ID;
+                userModel.UserName = dtoUser.User_name;
+                userModel.Password = dtoUser.Password;
+                userModel.UserType = dtoUser.User_Type;
+                userModel.FirstName = dtoUser.First_Name;
+                userModel.LastName = dtoUser.Last_Name;
+                userModel.EMail = dtoUser.Email;
+                userModel.Address = dtoUser.Street_Address;
+                userModel.NameCity = dtoUser.City;
+                userModel.ZipCode = dtoUser.Zip_Code;
+                userModel.Country = dtoUser.Country;
+                userModel.PhoneNumber = dtoUser.Phone_Number;
+                userModel.ActiveStatus = dtoUser.Active_Status;
+                userModel.CreationDate = dtoUser.Creation_Date;
+
+                result.Add(userModel);
+            }
+            return result;
+        }
+        public List<IUserModel> GetUsersType(string UserType)
+        {
+            var targetType = dbcontext.Users.Where(i => i.User_Type == UserType).ToList();
+
+            List<IUserModel> result = TransferAllUserProperties(targetType);
+
+            return result;
+        }
+        
     }
 }

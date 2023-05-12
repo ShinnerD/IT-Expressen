@@ -30,6 +30,7 @@
         {
             dgv_Viewproject = new DataGridView();
             button1 = new Button();
+            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)dgv_Viewproject).BeginInit();
             SuspendLayout();
             // 
@@ -37,7 +38,7 @@
             // 
             dgv_Viewproject.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_Viewproject.Location = new Point(8, 7);
-            dgv_Viewproject.Margin = new Padding(2, 2, 2, 2);
+            dgv_Viewproject.Margin = new Padding(2);
             dgv_Viewproject.Name = "dgv_Viewproject";
             dgv_Viewproject.RowHeadersWidth = 62;
             dgv_Viewproject.RowTemplate.Height = 33;
@@ -56,14 +57,25 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // button2
+            // 
+            button2.Location = new Point(411, 285);
+            button2.Name = "button2";
+            button2.Size = new Size(75, 23);
+            button2.TabIndex = 2;
+            button2.Text = "button2";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
             // ViewProjects
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(629, 320);
+            Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(dgv_Viewproject);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "ViewProjects";
             Text = "ViewProjects";
             ((System.ComponentModel.ISupportInitialize)dgv_Viewproject).EndInit();
@@ -74,5 +86,6 @@
 
         private DataGridView dgv_Viewproject;
         private Button button1;
+        private Button button2;
     }
 }

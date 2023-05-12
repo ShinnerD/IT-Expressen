@@ -52,7 +52,7 @@ namespace GUI
                 MessageBox.Show("Username is already in use");
             }
         }
-
+        // 
         private bool NoInputErrors()
         {
             if (tb_Password.Text == tb_RePassword.Text

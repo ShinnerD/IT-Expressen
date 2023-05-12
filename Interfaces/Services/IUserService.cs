@@ -6,6 +6,8 @@ namespace Interfaces.Services
     {
         List<IUserModel> GetAllUsers();
 
+        //List<IUserModel> GetUserTypeList(string UserType);
+
         IUserModel GetUser(string userName);
 
         string GetUserType(string userName);

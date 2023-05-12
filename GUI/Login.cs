@@ -37,7 +37,7 @@ namespace GUI
             OpenManagerForm();
         }
 
-        //
+        
         private void OpenAdminForm()
         {
             this.Hide();
@@ -48,8 +48,12 @@ namespace GUI
 
         private void OpenConsultantForm()
         {
+            var user = userService.GetAllUsers();
+            var targetUser = user.Where(i => i.UserName == tb_UserName.Text).First();
             this.Hide();
-            Consultant consultant = new Consultant();
+            targetUser.UserName = "fbeccles0";
+            targetUser.Password = "password";
+            Consultant consultant = new Consultant(/*targetUser.UserName*/);
             consultant.ShowDialog();
             this.Show();
         }
@@ -64,8 +68,12 @@ namespace GUI
 
         private void OpenManagerForm()
         {
+            var user = userService.GetAllUsers();
+            var targetUser = user.Where(i => i.UserName == tb_UserName.Text).First();
             this.Hide();
-            Manager manager = new Manager("");
+            targetUser.UserName = "amusto0";
+            targetUser.Password = "password";
+            Manager manager = new Manager(targetUser.UserName);
             manager.ShowDialog();
             this.Show();
         }
