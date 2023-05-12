@@ -42,5 +42,11 @@ namespace Interfaces.Repositories
         /// Retrieves a List of IProjectModels in which each project requires at least one of the specializations specified. /DK
         /// </summary>
         List<IProjectModel> GetProjectsFromAnySpecializations(List<string> specializations);
+        void UpdateProject(IProjectModel project);
+
+        List<IProjectModel> SearchProjects(string searchTerm, int userId);
+
+        
+        
     }
 }
