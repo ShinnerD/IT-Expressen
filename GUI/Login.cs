@@ -53,7 +53,7 @@ namespace GUI
             this.Hide();
             targetUser.UserName = "fbeccles0";
             targetUser.Password = "password";
-            Consultant consultant = new Consultant(/*targetUser.UserName*/);
+            Consultant consultant = new Consultant(targetUser.UserName);
             consultant.ShowDialog();
             this.Show();
         }
