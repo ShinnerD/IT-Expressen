@@ -38,13 +38,6 @@ namespace GUI
             dgv_ConsultantViewProjects.DataSource = projects;
         }
 
-        private void ()
-        {
-            var selectedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;
-            EditProject editProject = new EditProject(selectedProject.ProjectId);
-            this.Hide();
-            editProject.ShowDialog();
-            this.Show();
-        }
+        
     }
 }
