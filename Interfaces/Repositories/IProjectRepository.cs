@@ -28,6 +28,9 @@ namespace Interfaces.Repositories
         /// </summary>
         void UpdateProject(IProjectModel project);
 
+        /// <summary>
+        /// This method searches for projects based on a search term and a user ID. /JQ
+        /// </summary>
         List<IProjectModel> SearchProjects(string searchTerm, int userId);
 
         
