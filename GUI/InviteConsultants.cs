@@ -1,5 +1,4 @@
-﻿using DAL.Linq;
-using Domain.Services;
+﻿using Domain.Services;
 using Interfaces.Models;
 using Interfaces.Services;
 
@@ -13,8 +12,6 @@ namespace GUI
         public IProjectModel ProjectGet { get; set; }
         public List<string> ProjectSpecializations { get; set; }
 
-
-
         public InviteConsultants(int projectID)
         {
             UserType = "consultant";
@@ -23,20 +20,27 @@ namespace GUI
             ProjectID = projectID;
             GetProjectInfo();
             LoadProjectData();
-
         }
+
         public InviteConsultants(IProjectModel ProjectsSpecs)
         {
-
             InitializeComponent();
             ProjectGet = ProjectsSpecs;
-
         }
 
         private void LoadConsultantData()
         {
             dgv_ConsultantList.DataSource = UserService.FindUsersWithUserType(UserType);
+
+            this.dgv_ConsultantList.Columns["password"].Visible = false;
+            this.dgv_ConsultantList.Columns["Address"].Visible = false;
+            this.dgv_ConsultantList.Columns["CreationDate"].Visible = false;
+            this.dgv_ConsultantList.Columns["ID"].Visible = false;
+            this.dgv_ConsultantList.Columns["UserName"].Visible = false;
+            this.dgv_ConsultantList.Columns["ZipCode"].Visible = false;
+            this.dgv_ConsultantList.Columns["NameCity"].Visible = false;
         }
+
         private void GetProjectInfo()
         {
             IProjectService projectService = new Domain.Services.ProjectService();
@@ -45,19 +49,16 @@ namespace GUI
             ProjectGet = projectService.GetProject(ProjectID);
             ProjectSpecializations = specializationService.GetProjectSpecializations(ProjectID);
         }
+
         private void LoadProjectData()
         {
-            lb_ProjectID.Text = ProjectGet.ProjectId.ToString();
-            lb_title.Text = ProjectGet.Title;
-            lb_UserID.Text = ProjectGet.UserId.ToString();
-            lb_ProjectStatus.Text = ProjectGet.ProjectStatus;
-            lb_ProjectStartDate.Text = ProjectGet.ProjectStartDate.ToString();
-            lb_ProjectEndDate.Text = ProjectGet.ProjectEndDate.ToString();
-            lb_ModifyDate.Text = ProjectGet.ProjectModifyDate.ToString();
-            lb_Description.Text = ProjectGet.Description;
+            tb_ProjectID.Text = ProjectGet.ProjectId.ToString();
+            tb_Title.Text = ProjectGet.Title;
+            tb_UserID.Text = ProjectGet.UserId.ToString();
+            tb_ProjectStatus.Text = ProjectGet.ProjectStatus;
+            tb_ProjectStartDate.Text = ProjectGet.ProjectStartDate.ToString();
+            tb_ProjectEndDate.Text = ProjectGet.ProjectEndDate.ToString();
+            tb_Description.Text = ProjectGet.Description;
         }
-
-
-
     }
 }

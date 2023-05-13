@@ -134,6 +134,7 @@ namespace GUI
 
         private void LoadUserData()
         {
+
             var UserService = new Domain.Services.UserService();
             allUsers = UserService.GetAllUsers();
         }
