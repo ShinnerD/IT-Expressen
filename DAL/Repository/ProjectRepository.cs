@@ -136,7 +136,12 @@ namespace DAL.Repository
             }
 
         }
-
+        /// <summary>
+        /// (JQ)This method searches for projects based on a search term and a user ID. 
+        /// </summary>
+        /// <param name="searchTerm">The search term to use when looking for projects.</param>
+        /// <param name="userId">The ID of the user to which the projects belong.</param>
+        /// <returns>A list of project models that match the search term and belong to the specified user.<</returns>
         public List<IProjectModel> SearchProjects(string searchTerm, int userId)
         {
             var targetUser = dbContext.Users.FirstOrDefault(i => i.User_ID == userId);

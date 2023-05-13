@@ -16,13 +16,17 @@ namespace GUI
             GetUser();
             SetUpTB();
         }
-
+        /// <summary>
+        /// (JQ)This method retrieves and sets the user information using IUserService.
+        /// </summary>
         private void GetUser()
         {
             IUserService userService = new UserService();
             userModel = userService.GetUser(Username);
         }
-
+        /// <summary>
+        /// (JQ)Sets up text boxes to show user information from userModel property.
+        /// </summary>
         private void SetUpTB()
         {
             tb_Firstname.Text = userModel.FirstName;
@@ -34,7 +38,9 @@ namespace GUI
             tb_Zipcode.Text = userModel.ZipCode;
             tb_Country.Text = userModel.Country;
         }
-
+        /// <summary>
+        /// (JQ)Handle button click event for ConsultantViewProjects and passes userId to ConsultantViewProjects form.
+        /// </summary>
         private void bt_ViewProjects_Click(object sender, EventArgs e)
         {
             int userId = userModel.ID;
