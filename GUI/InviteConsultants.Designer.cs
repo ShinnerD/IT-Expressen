@@ -46,11 +46,13 @@
             tb_ProjectEndDate = new TextBox();
             tb_ModifyDate = new TextBox();
             tb_UserID = new TextBox();
+            bt_AddConsultant = new Button();
             ((System.ComponentModel.ISupportInitialize)dgv_ConsultantList).BeginInit();
             SuspendLayout();
             // 
             // dgv_ConsultantList
             // 
+            dgv_ConsultantList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_ConsultantList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_ConsultantList.Location = new Point(12, 312);
             dgv_ConsultantList.Name = "dgv_ConsultantList";
@@ -205,11 +207,22 @@
             tb_UserID.Size = new Size(199, 23);
             tb_UserID.TabIndex = 17;
             // 
+            // bt_AddConsultant
+            // 
+            bt_AddConsultant.Location = new Point(680, 173);
+            bt_AddConsultant.Name = "bt_AddConsultant";
+            bt_AddConsultant.Size = new Size(108, 23);
+            bt_AddConsultant.TabIndex = 18;
+            bt_AddConsultant.Text = "Add Consultant";
+            bt_AddConsultant.UseVisualStyleBackColor = true;
+            bt_AddConsultant.Click += bt_AddConsultant_Click;
+            // 
             // InviteConsultants
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 564);
+            ClientSize = new Size(800, 560);
+            Controls.Add(bt_AddConsultant);
             Controls.Add(tb_UserID);
             Controls.Add(tb_ModifyDate);
             Controls.Add(tb_ProjectEndDate);
@@ -255,5 +268,6 @@
         private TextBox tb_ProjectEndDate;
         private TextBox tb_ModifyDate;
         private TextBox tb_UserID;
+        private Button bt_AddConsultant;
     }
 }

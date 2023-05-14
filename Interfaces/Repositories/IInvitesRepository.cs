@@ -15,5 +15,7 @@ namespace Interfaces.Repositories
         List<IInvitesModel> GetAllInvites();
         IInvitesModel GetInviteProjectId(int ProjectId);
         IInvitesModel GetInviteUserId(int UserId);
+        IInvitesModel GetInviteUserName(string Username);
+        void AddInvite(IInvitesModel inviteModel/*, List<string> specializtions*/);
     }
 }

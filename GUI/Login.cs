@@ -7,37 +7,37 @@ namespace GUI
 {
     public partial class Login : Form
     {
+        //Initializeing og the service/models need for the form /MS
         public List<IUserModel> allUsers { get; set; }
         private IUserService userService = new UserService();
-
+        //Initializes needed methods and data, and start the AsyncTask /MS
         public Login()
         {
             InitializeComponent();
             LoadUserData();
             AsyncTask();
         }
-
+        // Button click event -> see method for results /MS
         private void bt_CreateUser_Click(object sender, EventArgs e)
         {
             OpenCreateUserForm();
         }
-
+        // Button click event -> see method for results /MS
         private void bt_AdminAccess_Click(object sender, EventArgs e)
         {
             OpenAdminForm();
         }
-
+        // Button click event -> see method for results /MS
         private void bt_ConsultantAccess_Click(object sender, EventArgs e)
         {
             OpenConsultantForm();
         }
-
+        // Button click event -> see method for results /MS
         private void bt_ManagerAccess_Click(object sender, EventArgs e)
         {
             OpenManagerForm();
         }
-
-        
+        //Temp method used to bypass the login and connect straigt to an instance of the admin form -> Used only for development purposes will be deleted before final release /MS
         private void OpenAdminForm()
         {
             this.Hide();
@@ -45,7 +45,7 @@ namespace GUI
             Admin.ShowDialog();
             this.Show();
         }
-
+        //Temp method used to bypass the login and connect straigt to an instance of the consultant form, on a specific user -> Used only for development purposes and will be deleted before final release /MS
         private void OpenConsultantForm()
         {
             var user = userService.GetAllUsers();
@@ -57,7 +57,7 @@ namespace GUI
             consultant.ShowDialog();
             this.Show();
         }
-
+        //Method to open form for creating a new user in the system /MS
         private void OpenCreateUserForm()
         {
             this.Hide();
@@ -65,7 +65,7 @@ namespace GUI
             createUser.ShowDialog();
             this.Show();
         }
-
+        //Temp method used to bypass the login and connect straigt to an instance of the manager form, on a specific user -> Used only for development purposes and will be deleted before final release /MS
         private void OpenManagerForm()
         {
             var user = userService.GetAllUsers();
@@ -77,8 +77,13 @@ namespace GUI
             manager.ShowDialog();
             this.Show();
         }
-
+        // Button click event -> see method for results /MS
         private void bt_Login_Click(object sender, EventArgs e)
+        {
+            LoginControl();
+        }
+        //Checks the login information to make sure the user excists, and forwards the user to the correct form, according to UserType /MS
+        private void LoginControl()
         {
             try
             {
@@ -107,8 +112,9 @@ namespace GUI
             {
                 MessageBox.Show("Username or password incorrect");
             }
-        }
 
+        }
+        //Seperate task, thats ment to wake up the Database from standby. /MS
         public void AsyncTask()
         {
             Task t = new Task(WakeUpDB);
@@ -131,14 +137,14 @@ namespace GUI
                 pb_ConnectionStatus.Image = img_RedGreen.Images[0];
             }
         }
-
+        //Loads user data
         private void LoadUserData()
         {
 
             var UserService = new Domain.Services.UserService();
             allUsers = UserService.GetAllUsers();
         }
-
+        // Button click event -> see method for results /MS
         private void bt_cancel_Click(object sender, EventArgs e)
         {
             this.Close();
