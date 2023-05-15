@@ -12,7 +12,7 @@ namespace Interfaces.Models
     /// </summary>
     public interface IInvoiceModel
     {
-        DateTime InvoiceDate { get; set; }
+        DateTime? InvoiceDate { get; set; }
         int InvoiceId { get; set; }
         int LineID { get; set; }
         int ProjectId { get; set; }

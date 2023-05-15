@@ -13,6 +13,10 @@ namespace Domain.Services
         {
             return userRepo.GetAllUsers();
         }
+        //public List<IUserModel> GetUserTypeList(string UserType)
+        //{
+        //    return userRepo.GetUserTypeList(UserType);
+        //}
 
         public IUserModel GetUser(string userName)
         {
@@ -32,7 +36,7 @@ namespace Domain.Services
             }
             return "";
         }
-        public void AddUser(string UserName, string Password, string UserType, string FirstName, string LastName, string Address, string City, string ZipCode, string Country, string PhoneNumber, string Email)
+        public void AddUser(string UserName, string Password, string UserType, string FirstName, string LastName, string Address, string City, string ZipCode, string Country, string PhoneNumber, string Email, List<string> specializtions)
         {
             IUserModel newUser = new DAL.Models.UserModel();
 
@@ -51,7 +55,18 @@ namespace Domain.Services
             newUser.CreationDate = DateTime.Now;
 
 
-            userRepo.AddUser(newUser);
+            userRepo.AddUser(newUser, specializtions);
+        }
+        public List<IUserModel> FindUsersWithUserType(string userType)
+        {
+            var result = GetAllUsers().Where(i => i.UserType == userType).ToList();
+            return result;
+        }
+
+        void IUserService.Delete(string Delete)
+        {
+            userRepo.Delete(Delete);
+            throw new NotImplementedException();
         }
     }
 }

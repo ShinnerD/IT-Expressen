@@ -35,5 +35,15 @@
         /// Returns a List of strings representing all the chosen specializations for a project. /DK
         /// </summary>
         List<string> GetProjectSpecializations(int projectId);
+
+        /// <summary>
+        /// Adds the given list of string specializations to the user specified in the parameters. /MS
+        /// </summary>
+        void AddSpecializationsToUser(int UserID, List<string> specializations);
+
+        /// <summary>
+        /// Removes the given list of string specializations to the user. /DK
+        /// </summary>
+        void RemoveSpecializationsFromUser(int userId, string specializations);
     }
 }

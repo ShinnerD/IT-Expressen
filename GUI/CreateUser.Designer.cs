@@ -55,6 +55,9 @@
             clb_Skills = new CheckedListBox();
             label12 = new Label();
             label13 = new Label();
+            label15 = new Label();
+            label14 = new Label();
+            bt_back = new Button();
             SuspendLayout();
             // 
             // tb_UserName
@@ -132,51 +135,57 @@
             // label1
             // 
             label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label1.Location = new Point(24, 46);
             label1.Name = "label1";
-            label1.Size = new Size(65, 15);
+            label1.Size = new Size(69, 15);
             label1.TabIndex = 10;
             label1.Text = "User Name";
             // 
             // label2
             // 
             label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label2.Location = new Point(24, 75);
             label2.Name = "label2";
-            label2.Size = new Size(57, 15);
+            label2.Size = new Size(59, 15);
             label2.TabIndex = 11;
             label2.Text = "Password";
             // 
             // label3
             // 
             label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label3.Location = new Point(24, 162);
             label3.Name = "label3";
-            label3.Size = new Size(64, 15);
+            label3.Size = new Size(67, 15);
             label3.TabIndex = 12;
             label3.Text = "First Name";
             // 
             // label4
             // 
             label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label4.Location = new Point(24, 191);
             label4.Name = "label4";
-            label4.Size = new Size(63, 15);
+            label4.Size = new Size(65, 15);
             label4.TabIndex = 13;
             label4.Text = "Last Name";
             // 
             // label5
             // 
             label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label5.Location = new Point(321, 133);
             label5.Name = "label5";
-            label5.Size = new Size(49, 15);
+            label5.Size = new Size(51, 15);
             label5.TabIndex = 14;
             label5.Text = "Address";
             // 
             // label6
             // 
             label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label6.Location = new Point(321, 162);
             label6.Name = "label6";
             label6.Size = new Size(28, 15);
@@ -186,6 +195,7 @@
             // label7
             // 
             label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label7.Location = new Point(321, 191);
             label7.Name = "label7";
             label7.Size = new Size(55, 15);
@@ -195,24 +205,27 @@
             // label8
             // 
             label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label8.Location = new Point(321, 219);
             label8.Name = "label8";
-            label8.Size = new Size(50, 15);
+            label8.Size = new Size(51, 15);
             label8.TabIndex = 17;
             label8.Text = "Country";
             // 
             // label9
             // 
             label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label9.Location = new Point(24, 219);
             label9.Name = "label9";
-            label9.Size = new Size(88, 15);
+            label9.Size = new Size(91, 15);
             label9.TabIndex = 18;
             label9.Text = "Phone Number";
             // 
             // label10
             // 
             label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label10.Location = new Point(24, 133);
             label10.Name = "label10";
             label10.Size = new Size(41, 15);
@@ -229,15 +242,16 @@
             // label11
             // 
             label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label11.Location = new Point(320, 75);
             label11.Name = "label11";
-            label11.Size = new Size(105, 15);
+            label11.Size = new Size(112, 15);
             label11.TabIndex = 21;
             label11.Text = "Re-Enter password";
             // 
             // bt_CreateUser
             // 
-            bt_CreateUser.Location = new Point(136, 436);
+            bt_CreateUser.Location = new Point(537, 436);
             bt_CreateUser.Name = "bt_CreateUser";
             bt_CreateUser.Size = new Size(75, 23);
             bt_CreateUser.TabIndex = 22;
@@ -248,7 +262,7 @@
             // cb_UserType
             // 
             cb_UserType.FormattingEnabled = true;
-            cb_UserType.Items.AddRange(new object[] { "Manager", "Consultant" });
+            cb_UserType.Items.AddRange(new object[] { "manager", "consultant" });
             cb_UserType.Location = new Point(433, 266);
             cb_UserType.Name = "cb_UserType";
             cb_UserType.Size = new Size(179, 23);
@@ -267,26 +281,58 @@
             // label12
             // 
             label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label12.Location = new Point(320, 266);
             label12.Name = "label12";
-            label12.Size = new Size(92, 15);
+            label12.Size = new Size(98, 15);
             label12.TabIndex = 26;
             label12.Text = "Pick profile type";
             // 
             // label13
             // 
-            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             label13.Location = new Point(24, 295);
             label13.Name = "label13";
-            label13.Size = new Size(144, 15);
+            label13.Size = new Size(106, 42);
             label13.TabIndex = 27;
-            label13.Text = "Select your specializations";
+            label13.Text = "For consultants only:";
+            // 
+            // label15
+            // 
+            label15.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label15.Location = new Point(24, 331);
+            label15.Name = "label15";
+            label15.Size = new Size(106, 42);
+            label15.TabIndex = 29;
+            label15.Text = "Select your specializations";
+            // 
+            // label14
+            // 
+            label14.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label14.Location = new Point(136, 9);
+            label14.Name = "label14";
+            label14.Size = new Size(349, 25);
+            label14.TabIndex = 30;
+            label14.Text = "Fil out the form to create your profile";
+            // 
+            // bt_back
+            // 
+            bt_back.Location = new Point(136, 436);
+            bt_back.Name = "bt_back";
+            bt_back.Size = new Size(75, 23);
+            bt_back.TabIndex = 31;
+            bt_back.Text = "Cancel";
+            bt_back.UseVisualStyleBackColor = true;
+            bt_back.Click += bt_back_Click;
             // 
             // CreateUser
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(652, 471);
+            Controls.Add(bt_back);
+            Controls.Add(label14);
+            Controls.Add(label15);
             Controls.Add(label13);
             Controls.Add(label12);
             Controls.Add(clb_Skills);
@@ -314,6 +360,7 @@
             Controls.Add(tb_RePassword);
             Controls.Add(tb_Password);
             Controls.Add(tb_UserName);
+            Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             Name = "CreateUser";
             Text = "CreateUser";
             ResumeLayout(false);
@@ -349,5 +396,8 @@
         private CheckedListBox clb_Skills;
         private Label label12;
         private Label label13;
+        private Label label15;
+        private Label label14;
+        private Button bt_back;
     }
 }

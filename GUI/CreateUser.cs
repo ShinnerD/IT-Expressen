@@ -15,13 +15,14 @@ namespace GUI
             LoadUserData();
             SetupSkillsCheckList();
         }
-
+        //Creates a new user according to the parameters defined in the IUserService. 
         public void CreatNewUser()
         {
             try
             {
-                if (tb_Password.Text == tb_RePassword.Text)
+                if (NoInputErrors())
                 {
+                    ISpecializationService UserSpecializationService = new SpecializationService();
                     IUserService userService = new Domain.Services.UserService();
 
                     userService.AddUser(
@@ -35,13 +36,15 @@ namespace GUI
                         tb_ZipCode.Text,
                         tb_Country.Text,
                         tb_PhoneNr.Text,
-                        tb_Email.Text
+                        tb_Email.Text,
+                        FindCheckedSkills()
 
                         );
+                    forwardUserToProfile();
                 }
                 else
                 {
-                    MessageBox.Show("Passwords are not the same");
+                    MessageBox.Show("Please fill out the form and check if both passwords are the same");
                 }
             }
             catch
@@ -49,18 +52,31 @@ namespace GUI
                 MessageBox.Show("Username is already in use");
             }
         }
+        //Makes sure the two passwords are the same and critical textboxes arent left empty //MS
+        private bool NoInputErrors()
+        {
+            if (tb_Password.Text == tb_RePassword.Text
+                && tb_Password.Text != string.Empty
+                && tb_UserName.Text != string.Empty
+                && cb_UserType.Text != string.Empty)
 
+            {
+                return true;
+            }
+            return false;
+        }
+        //Initialize user data //MS
         private void LoadUserData()
         {
             var UserService = new Domain.Services.UserService();
-            allUsers = UserService.GetAllUsers();
+            var OneUsers = UserService.GetUser(tb_UserName.Text);
         }
-
+        // Button click event -> see method for results /MS
         private void bt_CreateUser_Click(object sender, EventArgs e)
         {
             CreatNewUser();
         }
-
+        //Creates the CheckListBox used for specialization according to data from the database  //MS
         private void SetupSkillsCheckList()
         {
             clb_Skills.Enabled = false;
@@ -77,17 +93,59 @@ namespace GUI
                 MessageBox.Show("Failed to retrieve skills from server.");
             }
         }
-
+        //Locks and unlocks the CheckBoxList depending on what user type is selected in the ComboBox. Also removed any checked boxes in the CheckBoxList if manager is selected /MS
         private void cb_UserType_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (cb_UserType.Text == "Consultant")
+            if (cb_UserType.Text == "consultant")
             {
                 clb_Skills.Enabled = true;
             }
-            if (cb_UserType.Text == "Manager")
+            if (cb_UserType.Text == "manager")
             {
                 clb_Skills.Enabled = false;
+
+                for (int i = 0; i < clb_Skills.Items.Count; i++)
+                    clb_Skills.SetItemChecked(i, false);
             }
+        }
+        // Button click event -> Close current form /MS
+        private void bt_back_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        //After the User is created, the user is forwarded the the correct form, defined by their user type //MS
+        private void forwardUserToProfile()
+        {
+            var user = userService.GetUser(tb_UserName.Text);
+            if (user.UserType == "manager")
+            {
+                this.Close();
+                GUI.Manager a = new Manager(user.UserName);
+                a.Show();
+            }
+            if (user.UserType == "consultant")
+            {
+                this.Hide();
+                GUI.Consultant a = new Consultant(user.UserName);
+                a.Show();
+            }
+            if (user.UserType == "admin")
+            {
+                this.Hide();
+                GUI.Admin a = new Admin();
+                a.Show();
+            }
+        }
+        //Adds selected skills to specialization and links to a specefik user /MS
+        private List<string> FindCheckedSkills()
+        {
+            List<string> result = new List<string>();
+
+            foreach (var skill in clb_Skills.CheckedItems)
+            {
+                result.Add(skill.ToString());
+            }
+            return result;
         }
     }
 }

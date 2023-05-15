@@ -26,5 +26,7 @@ namespace Interfaces.Repositories
         /// Returns a List of IInvitesRepository with projects related to UserId provided. 
         /// </summary>
         IInvitesModel GetInviteUserId(int UserId);
+        IInvitesModel GetInviteUserName(string Username);
+        void AddInvite(IInvitesModel inviteModel/*, List<string> specializtions*/);
     }
 }
