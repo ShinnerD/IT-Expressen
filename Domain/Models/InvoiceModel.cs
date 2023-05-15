@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Domain.Models
 {
     /// <summary>
-    /// written by Erik. Model too  Specialisation that have atrributes that is relavent too the case and project
+    /// written by Erik. Model too  Specialisation that have atrributes that is relavent too the case and project. the domain is making a architecture bridge with the DAL and Interface Models.
     /// </summary>
     public class InvoiceModel
     {

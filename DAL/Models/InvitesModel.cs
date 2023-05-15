@@ -12,7 +12,7 @@ namespace DAL.Models
    
 
     /// <summary>
-    /// written by Erik.Model too Invites that have atrributes that is relavent too the case and project
+    /// written by Erik.Model too Invites that have atrributes that is relavent too the case and project. the model that couples with the DAL Repo invites and the Domain Model invites.
     /// </summary>
     public class InvitesModel : IInvitesModel
     //Invites
