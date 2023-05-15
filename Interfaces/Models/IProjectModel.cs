@@ -9,7 +9,7 @@
         string? ProjectStatus { get; set; }
         string Title { get; set; }
         decimal? TotalInvoicePrice { get; set; }
-        int? UserId { get; set; }
+        int UserId { get; set; }
         string? Description { get; set; }
     }
 }

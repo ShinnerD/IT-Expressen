@@ -59,7 +59,7 @@ namespace GUI
                 ProjectGet.ProjectId,
                 (int)dgv_ConsultantList.CurrentRow.Cells[6].Value,
                 DateTime.Now,
-                false,
+                "Pending",
                 DateTime.Now);
         }
         // Button click event -> see method for results /MS

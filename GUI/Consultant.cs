@@ -10,16 +10,18 @@ namespace GUI
     {
         public string Username { get; set; }
         public IUserModel userModelGet { get; set; }
-      
+
         private IInviteService invService = new InviteService();
-        
+        private IUserService userService = new UserService();
+
         private IProjectModel ProjectGet { get; set; }
 
 
         public Consultant(string username)
         {
             InitializeComponent();
-            Username = username;          
+            Username = username;
+            userModelGet = userService.GetUser(username);
             GetUser();
             SetUpTB();
             LoadInvitesToDGV();
@@ -30,6 +32,7 @@ namespace GUI
             ProjectGet = ProjectsSpecs;
 
         }
+
 
         /// <summary>
         /// (JQ)This method retrieves and sets the user information using IUserService.
@@ -68,11 +71,20 @@ namespace GUI
         private void bt_SearchProjects_Click(object sender, EventArgs e)
         {
 
-            
+
         }
         private void LoadInvitesToDGV()
         {
-            dgv_ConsultantsInvites.DataSource = invService.GetInvitedUserName(userModelGet.UserName);
+            dgv_ConsultantsInvites.DataSource = invService.GetInvitedUserIDList(userModelGet.ID);
+        }
+
+        private void bt_seeInviteDetails_Click(object sender, EventArgs e)
+        {
+            var selectedProject = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as IProjectModel;
+            AcceptInviteForm AcpInvForm = new AcceptInviteForm (selectedProject.ProjectId);
+            this.Hide();
+            AcpInvForm.ShowDialog();
+            this.Show();
         }
     }
 }

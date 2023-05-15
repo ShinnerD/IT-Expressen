@@ -12,9 +12,11 @@ namespace Interfaces.Services
 
         IInvitesModel GetInvitedUserID(int id);
 
+        List<IInvitesModel> GetInvitedUserIDList(int id);
+
         IInvitesModel GetInvitedUserName(string UserName);
 
-
-        void AddInvites(int ProjectID, int UserID, DateTime inviteDate, bool InviteStatus, DateTime AcceptDate);
+        
+        void AddInvites(int ProjectID, int UserID, DateTime inviteDate, string InviteStatus, DateTime AcceptDate);
     }
 }

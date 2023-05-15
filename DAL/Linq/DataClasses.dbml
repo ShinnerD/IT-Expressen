@@ -11,17 +11,6 @@
       <Association Name="User_Consultant_Line" Member="User" ThisKey="User_ID" OtherKey="User_ID" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Invites" Member="Invites">
-    <Type Name="Invite">
-      <Column Name="Project_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="User_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Invite_Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="Invite_status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="Accept_date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Association Name="Project_Invite" Member="Project" ThisKey="Project_ID" OtherKey="Project_ID" Type="Project" IsForeignKey="true" />
-      <Association Name="User_Invite" Member="User" ThisKey="User_ID" OtherKey="User_ID" Type="User" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Project_Message_Line" Member="Project_Message_Lines">
     <Type Name="Project_Message_Line">
       <Column Name="Message_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -36,7 +25,7 @@
   <Table Name="dbo.Projects" Member="Projects">
     <Type Name="Project">
       <Column Name="Project_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="User_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="User_ID" Type="System.Int32" DbType="Int" CanBeNull="false" />
       <Column Name="Title" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
       <Column Name="Project_Start_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Project_End_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
@@ -45,10 +34,10 @@
       <Column Name="Project_Status" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
       <Column Name="Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="Project_Consultant_Line" Member="Consultant_Lines" ThisKey="Project_ID" OtherKey="Project_ID" Type="Consultant_Line" />
-      <Association Name="Project_Invite" Member="Invites" ThisKey="Project_ID" OtherKey="Project_ID" Type="Invite" />
       <Association Name="Project_Project_Message_Line" Member="Project_Message_Lines" ThisKey="Project_ID" OtherKey="Project_ID" Type="Project_Message_Line" />
       <Association Name="Project_Projects_Specialisation_Line" Member="Projects_Specialisation_Lines" ThisKey="Project_ID" OtherKey="Project_ID" Type="Projects_Specialisation_Line" />
       <Association Name="Project_Invoice" Member="Invoices" ThisKey="Project_ID" OtherKey="Project_ID" Type="Invoice" />
+      <Association Name="Project_Invite" Member="Invites" ThisKey="Project_ID" OtherKey="Project_ID" Type="Invite" />
       <Association Name="User_Project" Member="User" ThisKey="User_ID" OtherKey="User_ID" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
@@ -94,10 +83,10 @@
       <Column Name="Active_Status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Password" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
       <Association Name="User_Consultant_Line" Member="Consultant_Lines" ThisKey="User_ID" OtherKey="User_ID" Type="Consultant_Line" />
-      <Association Name="User_Invite" Member="Invites" ThisKey="User_ID" OtherKey="User_ID" Type="Invite" />
       <Association Name="User_Project_Message_Line" Member="Project_Message_Lines" ThisKey="User_ID" OtherKey="User_ID" Type="Project_Message_Line" />
       <Association Name="User_Project" Member="Projects" ThisKey="User_ID" OtherKey="User_ID" Type="Project" />
       <Association Name="User_Specialisations_Line" Member="Specialisations_Lines" ThisKey="User_ID" OtherKey="User_Id" Type="Specialisations_Line" />
+      <Association Name="User_Invite" Member="Invites" ThisKey="User_ID" OtherKey="User_ID" Type="Invite" />
     </Type>
   </Table>
   <Table Name="dbo.Invoice" Member="Invoices">
@@ -109,6 +98,17 @@
       <Column Name="Invoice_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="Consultant_Line_Invoice" Member="Consultant_Line" ThisKey="Line_ID" OtherKey="Line_ID" Type="Consultant_Line" IsForeignKey="true" />
       <Association Name="Project_Invoice" Member="Project" ThisKey="Project_ID" OtherKey="Project_ID" Type="Project" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Invites" Member="Invites">
+    <Type Name="Invite">
+      <Column Name="Project_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="User_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Invite_Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Invite_status" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="Accept_date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="Project_Invite" Member="Project" ThisKey="Project_ID" OtherKey="Project_ID" Type="Project" IsForeignKey="true" />
+      <Association Name="User_Invite" Member="User" ThisKey="User_ID" OtherKey="User_ID" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

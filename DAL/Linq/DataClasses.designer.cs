@@ -436,7 +436,7 @@ namespace DAL.Linq
 		
 		private System.Nullable<System.DateTime> _Invite_Date;
 		
-		private System.Nullable<bool> _Invite_status;
+		private string _Invite_status;
 		
 		private System.Nullable<System.DateTime> _Accept_date;
 		
@@ -454,7 +454,7 @@ namespace DAL.Linq
     partial void OnUser_IDChanged();
     partial void OnInvite_DateChanging(System.Nullable<System.DateTime> value);
     partial void OnInvite_DateChanged();
-    partial void OnInvite_statusChanging(System.Nullable<bool> value);
+    partial void OnInvite_statusChanging(string value);
     partial void OnInvite_statusChanged();
     partial void OnAccept_dateChanging(System.Nullable<System.DateTime> value);
     partial void OnAccept_dateChanged();
@@ -535,8 +535,8 @@ namespace DAL.Linq
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Invite_status", DbType="Bit")]
-		public System.Nullable<bool> Invite_status
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Invite_status", DbType="VharChar(25)")]
+		public string Invite_status
 		{
 			get
 			{
@@ -912,7 +912,7 @@ namespace DAL.Linq
 		
 		private int _Project_ID;
 		
-		private System.Nullable<int> _User_ID;
+		private int _User_ID;
 		
 		private string _Title;
 		
@@ -946,7 +946,7 @@ namespace DAL.Linq
     partial void OnCreated();
     partial void OnProject_IDChanging(int value);
     partial void OnProject_IDChanged();
-    partial void OnUser_IDChanging(System.Nullable<int> value);
+    partial void OnUser_IDChanging(int value);
     partial void OnUser_IDChanged();
     partial void OnTitleChanging(string value);
     partial void OnTitleChanged();
@@ -996,7 +996,7 @@ namespace DAL.Linq
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_User_ID", DbType="Int")]
-		public System.Nullable<int> User_ID
+		public int User_ID
 		{
 			get
 			{
@@ -1251,7 +1251,7 @@ namespace DAL.Linq
 					}
 					else
 					{
-						this._User_ID = default(Nullable<int>);
+						this._User_ID = default(int);
 					}
 					this.SendPropertyChanged("User");
 				}

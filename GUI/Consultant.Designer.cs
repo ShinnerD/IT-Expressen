@@ -49,7 +49,11 @@
             bt_SearchProjects = new Button();
             dgv_ConsultantsInvites = new DataGridView();
             label10 = new Label();
+            bt_seeInviteDetails = new Button();
+            groupBox1 = new GroupBox();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)dgv_ConsultantsInvites).BeginInit();
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // bt_ViewProjects
@@ -228,29 +232,52 @@
             // 
             // dgv_ConsultantsInvites
             // 
+            dgv_ConsultantsInvites.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_ConsultantsInvites.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_ConsultantsInvites.Location = new Point(23, 259);
+            dgv_ConsultantsInvites.Dock = DockStyle.Top;
+            dgv_ConsultantsInvites.Location = new Point(3, 19);
             dgv_ConsultantsInvites.Name = "dgv_ConsultantsInvites";
             dgv_ConsultantsInvites.RowTemplate.Height = 25;
-            dgv_ConsultantsInvites.Size = new Size(573, 297);
+            dgv_ConsultantsInvites.Size = new Size(595, 297);
             dgv_ConsultantsInvites.TabIndex = 37;
             // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(23, 241);
+            label10.Location = new Point(174, 166);
             label10.Name = "label10";
             label10.Size = new Size(41, 15);
             label10.TabIndex = 38;
             label10.Text = "Invites";
             // 
+            // bt_seeInviteDetails
+            // 
+            bt_seeInviteDetails.Dock = DockStyle.Left;
+            bt_seeInviteDetails.Location = new Point(3, 316);
+            bt_seeInviteDetails.Name = "bt_seeInviteDetails";
+            bt_seeInviteDetails.Size = new Size(101, 27);
+            bt_seeInviteDetails.TabIndex = 39;
+            bt_seeInviteDetails.Text = "See Details";
+            bt_seeInviteDetails.UseVisualStyleBackColor = true;
+            bt_seeInviteDetails.Click += bt_seeInviteDetails_Click;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(bt_seeInviteDetails);
+            groupBox1.Controls.Add(dgv_ConsultantsInvites);
+            groupBox1.Location = new Point(12, 227);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(601, 346);
+            groupBox1.TabIndex = 40;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Invites";
+            // 
             // Consultant
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(608, 568);
+            ClientSize = new Size(625, 654);
             Controls.Add(label10);
-            Controls.Add(dgv_ConsultantsInvites);
             Controls.Add(bt_SearchProjects);
             Controls.Add(bt_ViewProjects);
             Controls.Add(tb_Country);
@@ -270,9 +297,11 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            Controls.Add(groupBox1);
             Name = "Consultant";
             Text = "Consultant";
             ((System.ComponentModel.ISupportInitialize)dgv_ConsultantsInvites).EndInit();
+            groupBox1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -300,5 +329,8 @@
         private Button bt_SearchProjects;
         private DataGridView dgv_ConsultantsInvites;
         private Label label10;
+        private Button bt_seeInviteDetails;
+        private GroupBox groupBox1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

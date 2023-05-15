@@ -10,7 +10,7 @@ namespace Interfaces.Models
     {
         DateTime AcceptDate { get; set; }
         DateTime InviteDate { get; set; }
-        bool? InviteStatus { get; set; }
+        string? InviteStatus { get; set; }
         int ProjectId { get; set; }
         int UserId { get; set; }
     }

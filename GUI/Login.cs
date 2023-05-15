@@ -120,24 +120,34 @@ namespace GUI
             Task t = new Task(WakeUpDB);
             t.Start();
         }
-
+        //Connects the database, and checks if there is a user in the User table. If this statment is true, there is a connection to the database. If not the status changes to "No connection". 
+        //Delay is just there to make sure, its possiable to see the method fuctions. /MS
         public async void WakeUpDB()
         {
             await Task.Delay(3000);
-            var user = userService.GetAllUsers();
-            var anyUser = user.Where(i => i.UserName.IsNullOrEmpty());
-            if (anyUser != null)
+            try
             {
-                lb_connectionTest.Invoke((MethodInvoker)(() => lb_connectionTest.Text = "OK!"));
-                pb_ConnectionStatus.Image = img_RedGreen.Images[1];
+                var user = userService.GetAllUsers();
+                var anyUser = user.Where(i => i.UserName.IsNullOrEmpty());
+                if (anyUser != null)
+                {
+                    lb_connectionTest.Invoke((MethodInvoker)(() => lb_connectionTest.Text = "OK!"));
+                    pb_ConnectionStatus.Image = img_RedGreen.Images[1];
+                }
+                if (anyUser == null)
+                {
+                    lb_connectionTest.Invoke((MethodInvoker)(() => lb_connectionTest.Text = "No connection!"));
+                    pb_ConnectionStatus.Image = img_RedGreen.Images[0];
+                }
+
             }
-            if (anyUser == null)
+            catch
             {
                 lb_connectionTest.Invoke((MethodInvoker)(() => lb_connectionTest.Text = "No connection!"));
                 pb_ConnectionStatus.Image = img_RedGreen.Images[0];
             }
         }
-        //Loads user data
+        //Loads user data /MS
         private void LoadUserData()
         {
 

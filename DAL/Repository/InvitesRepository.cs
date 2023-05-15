@@ -84,6 +84,29 @@ namespace DAL.Repository
 
             return result;
         }
+        public List<IInvitesModel> GetInviteUserIdList(int UserId)
+        {
+            List<IInvitesModel> result = new List<IInvitesModel>();
+
+            var dbInvites = DataContext.Invites.Where(i => i.User_ID == UserId);
+
+            if (dbInvites == null)
+            {
+                return result;
+            }
+
+            foreach (var dbinvite in dbInvites)
+            {
+                IInvitesModel invite = new InvitesModel();
+                invite.ProjectId = dbinvite.Project_ID;
+                invite.UserId = dbinvite.User_ID;
+                invite.InviteDate = (DateTime) dbinvite.Invite_Date;
+                invite.InviteStatus = dbinvite.Invite_status;
+                
+                result.Add(invite);
+            }
+            return result;
+        }
         //Repo method to link userName with an invite //MS
         public IInvitesModel GetInviteUserName(string Username)
         {
