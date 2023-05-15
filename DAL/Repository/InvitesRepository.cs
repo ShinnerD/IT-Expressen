@@ -2,6 +2,7 @@
 using DAL.Models;
 using Interfaces.Models;
 using Interfaces.Repositories;
+using System.Data.Linq;
 
 ///Writen by Erik
 
@@ -83,7 +84,46 @@ namespace DAL.Repository
 
             return result;
         }
+        //Repo method to link userName with an invite //MS
+        public IInvitesModel GetInviteUserName(string Username)
+        {
+            IInvitesModel result = new InvitesModel();
+
+            var dbInvite = DataContext.Invites.FirstOrDefault(i => i.User.User_name == Username);
+
+            result.ProjectId = dbInvite.Project_ID;
+            result.UserId = dbInvite.User_ID;
+            result.InviteDate = (DateTime)dbInvite.Invite_Date;
+            result.InviteStatus = dbInvite.Invite_status;
+            result.AcceptDate = (DateTime)dbInvite.Accept_date;
+
+            return result;
+        }
+        //Repo method to add invitations to a project, the invited consultants userID is stored /MD
+        public void AddInvite(IInvitesModel inviteModel/*, List<string> specializtions*/)
+        {
+            IInvitesModel invite = new DAL.Models.InvitesModel();
+            //ISpecializationRepository specRepo = new SpecializationRepository();
+
+            var linqInviteModel = new Linq.Invite();
+
+
+            linqInviteModel.Project_ID = inviteModel.ProjectId;
+            linqInviteModel.User_ID = inviteModel.UserId;
+            linqInviteModel.Invite_Date = inviteModel.InviteDate;
+            linqInviteModel.Invite_status = inviteModel.InviteStatus;
+            linqInviteModel.Accept_date = inviteModel.AcceptDate;
+
+
+            DataContext.Invites.InsertOnSubmit(linqInviteModel);
+            DataContext.SubmitChanges();
+
+
+
+            //specRepo.AddSpecializationsToUser(linqInviteModel.User_ID, specializtions);
+        }
         
-        
+
+
     }
 }
