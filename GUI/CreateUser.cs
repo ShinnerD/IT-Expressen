@@ -15,7 +15,7 @@ namespace GUI
             LoadUserData();
             SetupSkillsCheckList();
         }
-
+        //Creates a new user according to the parameters defined in the IUserService. 
         public void CreatNewUser()
         {
             try
@@ -52,7 +52,7 @@ namespace GUI
                 MessageBox.Show("Username is already in use");
             }
         }
-        // 
+        //Makes sure the two passwords are the same and critical textboxes arent left empty //MS
         private bool NoInputErrors()
         {
             if (tb_Password.Text == tb_RePassword.Text
@@ -65,18 +65,18 @@ namespace GUI
             }
             return false;
         }
-
+        //Initialize user data //MS
         private void LoadUserData()
         {
             var UserService = new Domain.Services.UserService();
             var OneUsers = UserService.GetUser(tb_UserName.Text);
         }
-
+        // Button click event -> see method for results /MS
         private void bt_CreateUser_Click(object sender, EventArgs e)
         {
             CreatNewUser();
         }
-
+        //Creates the CheckListBox used for specialization according to data from the database  //MS
         private void SetupSkillsCheckList()
         {
             clb_Skills.Enabled = false;
@@ -93,7 +93,7 @@ namespace GUI
                 MessageBox.Show("Failed to retrieve skills from server.");
             }
         }
-
+        //Locks and unlocks the CheckBoxList depending on what user type is selected in the ComboBox. Also removed any checked boxes in the CheckBoxList if manager is selected /MS
         private void cb_UserType_SelectedValueChanged(object sender, EventArgs e)
         {
             if (cb_UserType.Text == "consultant")
@@ -108,12 +108,12 @@ namespace GUI
                     clb_Skills.SetItemChecked(i, false);
             }
         }
-
+        // Button click event -> Close current form /MS
         private void bt_back_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
+        //After the User is created, the user is forwarded the the correct form, defined by their user type //MS
         private void forwardUserToProfile()
         {
             var user = userService.GetUser(tb_UserName.Text);
@@ -136,7 +136,7 @@ namespace GUI
                 a.Show();
             }
         }
-
+        //Adds selected skills to specialization and links to a specefik user /MS
         private List<string> FindCheckedSkills()
         {
             List<string> result = new List<string>();

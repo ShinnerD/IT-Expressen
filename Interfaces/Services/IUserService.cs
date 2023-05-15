@@ -15,5 +15,6 @@ namespace Interfaces.Services
         bool UsernameExists(string userName);
         void AddUser(string UserName, string Password, string UserType, string FirstName, string LastName, string Address, string City, string ZipCode, string Country, string PhoneNumber, string Email, List<string> Specializations);
         void Delete(string Delete);
+        List<IUserModel> FindUsersWithUserType(string userType);
     }
 }

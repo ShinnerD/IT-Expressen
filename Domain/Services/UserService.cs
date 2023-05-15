@@ -57,6 +57,11 @@ namespace Domain.Services
 
             userRepo.AddUser(newUser, specializtions);
         }
+        public List<IUserModel> FindUsersWithUserType(string userType)
+        {
+            var result = GetAllUsers().Where(i => i.UserType == userType).ToList();
+            return result;
+        }
 
         void IUserService.Delete(string Delete)
         {
