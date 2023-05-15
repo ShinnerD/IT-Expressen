@@ -8,25 +8,34 @@ namespace GUI
     {
         //Initializeing og the service/models need for the form /MS
         public string UserType { get; set; }
+        public int ProjectID { get; set; }
 
         private IUserService UserService = new UserService();
         private IProjectModel ProjectGet { get; set; }
-        public int ProjectID { get; set; }
+        private ISpecializationService SpecializationService = new SpecializationService();
+
         private List<string> ProjectSpecializations { get; set; }
         //Constructor method loaded with project ID. All relevent data is loaded /MS
         public ConsultantAdd(int projectID)
         {
             UserType = "consultant";
-            InitializeComponent();
-            LoadConsultantData();
             ProjectID = projectID;
+            ProjectSpecializations = SpecializationService.GetProjectSpecializations(ProjectID);
+
+            InitializeComponent();
+
+            SetupDataGridView();
             GetProjectInfo();
+
+            SetupProjectRequirementsList();
+            SetupSkillsCheckList();
         }
 
+
         //Loads data to dgv_ConsultantList, rearrange the order and disables certen columns /MS
-        private void LoadConsultantData()
+        private void SetupDataGridView()
         {
-            dgv_ConsultantList.DataSource = UserService.FindUsersWithUserType(UserType);
+            //dgv_ConsultantList.DataSource = UserService.FindUsersWithUserType(UserType);
 
             dgv_ConsultantList.Columns["ID"].DisplayIndex = 0;
             dgv_ConsultantList.Columns["UserName"].DisplayIndex = 1;
@@ -71,6 +80,30 @@ namespace GUI
         private void bt_back_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        //Sets up the selection of skills at the initialization of the window /DK
+        private void SetupSkillsCheckList()
+        {
+            ISpecializationService specService = new Domain.Services.SpecializationService();
+            List<string> items = specService.ListDefinedSpecializations().OrderBy(i => i).ToList();
+
+            foreach (var item in items)
+            {
+                checkedListSkills.Items.Add(item);
+                if (ProjectSpecializations.Contains(item)) checkedListSkills.SetItemChecked(checkedListSkills.Items.Count - 1, true);
+            }
+
+            if (items.Count == 0)
+            {
+                MessageBox.Show("Failed to retrieve skills from server.");
+            }
+        }
+
+        // Sets up the right side list box of specializations chosen for the project that is currently being invited to.
+        private void SetupProjectRequirementsList()
+        {
+            listBoxProjectRequirements.DataSource = ProjectSpecializations;
         }
     }
 }
