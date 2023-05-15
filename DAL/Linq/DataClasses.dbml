@@ -16,7 +16,7 @@
       <Column Name="Project_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="User_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Invite_Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="Invite_status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Invite_status" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
       <Column Name="Accept_date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Association Name="Project_Invite" Member="Project" ThisKey="Project_ID" OtherKey="Project_ID" Type="Project" IsForeignKey="true" />
       <Association Name="User_Invite" Member="User" ThisKey="User_ID" OtherKey="User_ID" Type="User" IsForeignKey="true" />

@@ -41,11 +41,10 @@ namespace DAL.Repository
                 }
                 return result;
             }
-            catch 
+            catch
             {
                 return null;
             }
-
         }
 
         public void AddUser(IUserModel userModel, List<string> specializations)
@@ -54,13 +53,12 @@ namespace DAL.Repository
             ISpecializationRepository specRepo = new SpecializationRepository();
 
             var linqUserModel = new Linq.User();
-            
-            
+
             linqUserModel.User_name = userModel.UserName;
             linqUserModel.Password = userModel.Password;
             linqUserModel.User_Type = userModel.UserType;
             linqUserModel.First_Name = userModel.FirstName;
-            linqUserModel.Last_Name= userModel.LastName;
+            linqUserModel.Last_Name = userModel.LastName;
             linqUserModel.Street_Address = userModel.Address;
             linqUserModel.City = userModel.NameCity;
             linqUserModel.Zip_Code = userModel.ZipCode;
@@ -69,7 +67,7 @@ namespace DAL.Repository
             linqUserModel.Email = userModel.EMail;
             linqUserModel.Active_Status = userModel.ActiveStatus;
             linqUserModel.Creation_Date = userModel.CreationDate;
-            
+
             dbcontext.Users.InsertOnSubmit(linqUserModel);
             dbcontext.SubmitChanges();
 
@@ -98,7 +96,6 @@ namespace DAL.Repository
                 user.Country = dbUser.Country;
                 user.ActiveStatus = dbUser.Active_Status;
                 user.CreationDate = dbUser.Creation_Date;
-                
             }
 
             return user;
@@ -108,9 +105,10 @@ namespace DAL.Repository
         {
             throw new NotImplementedException();
         }
+
         public List<IUserModel> TransferAllUserProperties(List<Linq.User> dtoUsers)
         {
-            List<IUserModel> result = new List<IUserModel> ();
+            List<IUserModel> result = new List<IUserModel>();
 
             foreach (var dtoUser in dtoUsers)
             {
@@ -135,6 +133,7 @@ namespace DAL.Repository
             }
             return result;
         }
+
         public List<IUserModel> GetUsersType(string UserType)
         {
             var targetType = dbcontext.Users.Where(i => i.User_Type == UserType).ToList();
@@ -143,6 +142,34 @@ namespace DAL.Repository
 
             return result;
         }
-        
+
+        /// <summary>
+        /// Returns a list of Users that have any of the specializations provided in the list specified in the parameters. /DK
+        /// </summary>
+        public List<IUserModel> GetUsersWithAnySpecializations(List<string> specializations)
+        {
+            List<int> targetSpecIds = dbcontext.Specialisations.Where(i => specializations.Contains(i.Specialisation1)).Select(i => i.Spec_Id).ToList();
+
+            if (targetSpecIds.Count == 0) return new List<IUserModel>();
+
+            var dtoUsers = dbcontext.Users.Where(u => u.User_Type == "consultant" && u.Specialisations_Lines.Any(x => targetSpecIds.Contains(x.Spec_Id))).ToList();
+
+            return TransferAllUserProperties(dtoUsers);
+        }
+
+        /// <summary>
+        /// Returns a list of Users that have all of the specializations provided in the list specified in the parameters. /DK
+        /// </summary>
+        public List<IUserModel> GetUsersWithAllSpecializations(List<string> specializations)
+        {
+            List<int> targetSpecIds = dbcontext.Specialisations.Where(i => specializations.Contains(i.Specialisation1)).Select(i => i.Spec_Id).ToList();
+
+            if (targetSpecIds.Count == 0) return new List<IUserModel>();
+
+            var dtoUsers = dbcontext.Users.Where(u => u.User_Type == "consultant").ToList();
+            dtoUsers = dtoUsers.Where(u => targetSpecIds.All(i => u.Specialisations_Lines.Select(x => x.Spec_Id).Contains(i))).ToList();
+
+            return TransferAllUserProperties(dtoUsers);
+        }
     }
 }

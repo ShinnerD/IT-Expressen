@@ -23,7 +23,7 @@ namespace Interfaces.Models
             string NameCity { get; set; }
             string Password { get; set; }
             string? PhoneNumber { get; set; }
-            //int Specialization { get; set; }
+            string? Specializations { get; set; }
             string UserName { get; set; }
             string UserType { get; set; }
             string ZipCode { get; set; }

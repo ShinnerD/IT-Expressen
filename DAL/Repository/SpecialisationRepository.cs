@@ -126,5 +126,13 @@ namespace DAL.Repository
             dbContext.Specialisations_Lines.DeleteAllOnSubmit(targetSpecLines);
             dbContext.SubmitChanges();
         }
+
+        /// <summary>
+        /// Returns a list of strings representing the specializations associated with the user specified in the parameters. /DK
+        /// </summary>
+        List<string> ISpecializationRepository.GetUserSpecializations(int userId)
+        {
+            return dbContext.Specialisations_Lines.Where(i => i.User_Id == userId).Select(x => x.Specialisation.Specialisation1).ToList();
+        }
     }
 }

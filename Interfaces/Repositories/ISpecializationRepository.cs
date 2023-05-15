@@ -45,5 +45,10 @@
         /// Removes the given list of string specializations to the user. /DK
         /// </summary>
         void RemoveSpecializationsFromUser(int userId, string specializations);
+
+        /// <summary>
+        /// Returns a list of strings representing the specializations associated with the user specified in the parameters. /DK
+        /// </summary>
+        List<string> GetUserSpecializations(int userId);
     }
 }
