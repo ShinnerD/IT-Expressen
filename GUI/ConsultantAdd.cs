@@ -131,12 +131,7 @@ namespace GUI
                     lblFeedback.Text = "This person already has an invitation to this project.";
                 }
             }
-            inviteService.AddInvites(
-                ProjectGet.ProjectId,
-                (int)dgv_ConsultantList.CurrentRow.Cells[6].Value,
-                DateTime.Now,
-                "Pending",
-                DateTime.Now);
+            
         }
 
         // Button click event -> see method for results /MS
