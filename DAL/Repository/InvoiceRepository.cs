@@ -13,7 +13,7 @@ namespace DAL.Repository
         /// retrieving data from Database and Repository too store data
         /// </summary>
         DataClassesDataContext DataContext = new DataClassesDataContext(DbConnectionString.ConnectionString);
-        private DataClassesDataContext DataContext = new DataClassesDataContext(DbConnectionString.ConnectionString);
+        
 
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace DAL.Repository
             return result;
         }
 
-        }
+        
         /// <summary>
         /// Getting a list off all invoice with a specifik InvoiceID
         /// </summary>
