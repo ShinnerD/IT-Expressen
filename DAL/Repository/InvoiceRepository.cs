@@ -9,8 +9,17 @@ namespace DAL.Repository
 {
     public class InvoiceRepository : IInvoiceRepository
     {
-        private DataClassesDataContext DataContext = new DataClassesDataContext(DbConnectionString.ConnectionString);
+        /// <summary>
+        /// retrieving data from Database and Repository too store data
+        /// </summary>
+        DataClassesDataContext DataContext = new DataClassesDataContext(DbConnectionString.ConnectionString);
+        
 
+
+        /// <summary>
+        /// Getting a list off all Invoice, with the attributes that is in Invoice.
+        /// </summary>
+        /// <returns></returns>
         public List<IInvoiceModel> GetAllInvoices(IInvoiceModel dbInvoice)
         {
             List<IInvoiceModel> result = new List<IInvoiceModel>();
@@ -30,7 +39,11 @@ namespace DAL.Repository
             }
             return result;
         }
-
+        /// <summary>
+        /// Getting a list off all invoice with a specifik ProjectID
+        /// </summary>
+        /// <param name="projectid"></param>
+        /// <returns></returns>
         public List<IInvoiceModel> GetAllInvoiceProjectID(int projectid)
         {
             List<IInvoiceModel> result = new List<IInvoiceModel>();
@@ -52,6 +65,12 @@ namespace DAL.Repository
             return result;
         }
 
+        
+        /// <summary>
+        /// Getting a list off all invoice with a specifik InvoiceID
+        /// </summary>
+        /// <param name="invoice"></param>
+        /// <returns></returns>
         public IInvoiceModel GetInvoiceID(int invoice)
         {
             IInvoiceModel result = new InvoiceModel();
