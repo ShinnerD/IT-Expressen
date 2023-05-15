@@ -65,7 +65,7 @@
         <classShapeMoniker Id="9ee534ba-e3f7-4652-a99c-fa329a5473bd" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 4.1362939453125); (3.125 : 4.5112939453125); (4.41666666666667 : 4.5112939453125 : JumpStart); (4.58333333333333 : 4.5112939453125 : JumpEnd); (5.875 : 4.5112939453125); (5.875 : 17); (6.25 : 17.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 4.1362939453125); (3.125 : 4.5112939453125); (5.875 : 4.5112939453125); (5.875 : 17); (6.25 : 17.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DataClassesDataContext/Specialisation/Specialisation_Projects_Specialisation_Line" />
       <nodes>
         <classShapeMoniker Id="47a0698a-f102-4e4f-a26d-d3e4f43d3b25" />

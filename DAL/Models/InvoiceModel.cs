@@ -2,8 +2,10 @@
 
 namespace DAL.Models
 {
+
+
     /// <summary>
-    /// written by Erik. Model too  Specializations that have attributes that is relevant too the case and project
+    /// written by Erik. Model too  Specialisation that have atrributes that is relavent too the case and project. the model that couples with the DAL Repo Invoice and the Domain Model Invoice.
     /// </summary>
     public class InvoiceModel : IInvoiceModel
     {

@@ -13,9 +13,14 @@ namespace Interfaces.Services
         void CreateProject(string userName, string title, string description, DateTime startDate, DateTime endDate, List<string> specializations);
 
         /// <summary>
-        /// Returns an List of IProjectModels related to the Manager specified in the method parameters. /DK
+        /// Updates the Project in the database. The provided IProjectModel must be an existing project in the database. /DK
         /// </summary>
-        List<IProjectModel> GetUserProjects(int userId);
+        void UpdateProject(IProjectModel project);
+
+        /// <summary>
+        /// Deletes the project specified by setting its status to 'deleted' in the database. Recoverable. /DK
+        /// </summary>
+        void DeleteProject(int projectId);
 
         /// <summary>
         /// Returns an IProjectModel for the Project specified in the method parameters. /DK
@@ -23,9 +28,19 @@ namespace Interfaces.Services
         IProjectModel GetProject(int projectId);
 
         /// <summary>
-        /// Updates the Project in the database. The provided IProjectModel must be an existing project in the database. /DK
+        /// Returns an List of IProjectModels related to the Manager specified in the method parameters. /DK
         /// </summary>
-        void UpdateProject(IProjectModel project);
+        List<IProjectModel> GetUserProjects(int userId);
+
+        /// <summary>
+        /// Retrieves a List of IProjectModels in which each project require ALL of the provided specializations. /DK
+        /// </summary>
+        List<IProjectModel> GetProjectsFromAllSpecializations(List<string> specializations);
+
+        /// <summary>
+        /// Retrieves a List of IProjectModels in which each project requires at least one of the specializations specified. /DK
+        /// </summary>
+        List<IProjectModel> GetProjectsFromAnySpecializations(List<string> specializations);
 
         /// <summary>
         /// This method searches for projects based on a search term and a user ID. /JQ

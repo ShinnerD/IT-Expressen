@@ -68,5 +68,21 @@ namespace Domain.Services
             userRepo.Delete(Delete);
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Returns a list of Users that have any of the specializations provided in the list specified in the parameters. /DK
+        /// </summary>
+        public List<IUserModel> GetUsersWithAnySpecializations(List<string> specializations)
+        {
+            return userRepo.GetUsersWithAnySpecializations(specializations);
+        }
+
+        /// <summary>
+        /// Returns a list of Users that have all of the specializations provided in the list specified in the parameters. /DK
+        /// </summary>
+        public List<IUserModel> GetUsersWithAllSpecializations(List<string> specializations)
+        {
+            return userRepo.GetUsersWithAllSpecializations(specializations);
+        }
     }
 }

@@ -11,9 +11,16 @@ namespace DAL.Repository
     public class InvitesRepository : IInvitesRepository
     {
         private DataClassesDataContext DataContext = new DataClassesDataContext(DbConnectionString.ConnectionString);
+        /// <summary>
+        /// retrieving data from Database and Repository too store data
+        /// </summary>
 
         public int ProjectId { get; private set; }
 
+        /// <summary>
+        /// Getting a list off all invites, with the attributes that is in invites.
+        /// </summary>
+        /// <returns></returns>
         public List<IInvitesModel> GetAllInvites()
         {
             List<IInvitesModel> result = new List<IInvitesModel>();
@@ -33,6 +40,12 @@ namespace DAL.Repository
             }
             return result;
         }
+
+        /// <summary>
+        /// Getting a list off all invites with a specifik ProjectID
+        /// </summary>
+        /// <param name="projectid"></param>
+        /// <returns></returns>
 
         public List<IInvitesModel> GetAllInviteProjectID(int projectid)
         {
@@ -54,6 +67,11 @@ namespace DAL.Repository
             }
             return result;
         }
+        /// <summary>
+        /// Getting a list off a specifik invite with a specifik ProjectID
+        /// </summary>
+        /// <param name="ProjectId"></param>
+        /// <returns></returns>
 
         public IInvitesModel GetInviteProjectId(int ProjectId)
         {
@@ -69,6 +87,11 @@ namespace DAL.Repository
 
             return result;
         }
+        /// <summary>
+        /// Getting a list off a specifik invite with a specifik UserId
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
 
         public IInvitesModel GetInviteUserId(int UserId)
         {

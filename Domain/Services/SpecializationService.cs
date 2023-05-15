@@ -1,4 +1,5 @@
-﻿using Interfaces.Repositories;
+﻿using Interfaces.Models;
+using Interfaces.Repositories;
 using Interfaces.Services;
 
 namespace Domain.Services
@@ -29,7 +30,7 @@ namespace Domain.Services
         /// <summary>
         /// Returns an int representing the specialization ID matching the specialization in string form provided in the parameters. /DK
         /// </summary>
-        public int GetIDFromName(string specialization)
+        public int GetId(string specialization)
         {
             return Repository.GetSpecializationID(specialization);
         }
@@ -37,7 +38,7 @@ namespace Domain.Services
         /// <summary>
         /// Returns a string representing the specialization which matches the provided ID in the database. /DK
         /// </summary>
-        public string GetNameFromID(int specId)
+        public string GetString(int specId)
         {
             return Repository.GetSpecializationString(specId);
         }
@@ -72,6 +73,26 @@ namespace Domain.Services
         public void RemoveSpecializationsFromUser(int userId, string specializations)
         {
             Repository.RemoveSpecializationsFromUser(userId, specializations);
+        }
+
+        /// <summary>
+        /// Returns a list of strings representing the specializations associated with the user specified in the parameters. /DK
+        /// </summary>
+        public List<string> GetUserSpecializations(int userId)
+        {
+            return Repository.GetUserSpecializations(userId).OrderBy(i => i).ToList();
+        }
+
+        /// <summary>
+        /// Fills the IUserModels provided in the method parameters so that their Specializations Property contains
+        /// a single string with the Users specializations. The specializations are comma-separated.
+        /// </summary>
+        public void FillUserSpecializationsProperty(List<IUserModel> users)
+        {
+            foreach (IUserModel user in users)
+            {
+                user.Specializations = string.Join(", ", GetUserSpecializations(user.ID));
+            }
         }
     }
 

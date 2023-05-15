@@ -8,8 +8,17 @@ namespace Interfaces.Repositories
 
         IUserModel GetUser(string username);
 
-        void AddUser(IUserModel userModel, List<string> specializtions);
-        List<IUserModel> GetUsersType(string UserType);
+        void AddUser(IUserModel userModel, List<string> specializations);
         void Delete(string delete);
+
+        /// <summary>
+        /// Returns a list of Users that have any of the specializations provided in the list specified in the parameters. /DK
+        /// </summary>
+        List<IUserModel> GetUsersWithAnySpecializations(List<string> specializations);
+
+        /// <summary>
+        /// Returns a list of Users that have all of the specializations provided in the list specified in the parameters. /DK
+        /// </summary>
+        public List<IUserModel> GetUsersWithAllSpecializations(List<string> specializations);
     }
 }

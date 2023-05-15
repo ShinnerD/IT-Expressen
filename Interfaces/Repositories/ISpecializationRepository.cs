@@ -27,6 +27,16 @@
         void AddToProject(int projectId, List<string> specializations);
 
         /// <summary>
+        /// Removes the given list of string specializations from the project in the database. /DK
+        /// </summary>
+        void RemoveFromProject(int projectId, List<string> specializations);
+
+        /// <summary>
+        /// Returns a List of strings representing all the chosen specializations for a project. /DK
+        /// </summary>
+        List<string> GetProjectSpecializations(int projectId);
+
+        /// <summary>
         /// Adds the given list of string specializations to the user specified in the parameters. /MS
         /// </summary>
         void AddSpecializationsToUser(int UserID, List<string> specializations);
@@ -37,14 +47,8 @@
         void RemoveSpecializationsFromUser(int userId, string specializations);
 
         /// <summary>
-        /// Removes the given list of string specializations from the project in the database. /DK
+        /// Returns a list of strings representing the specializations associated with the user specified in the parameters. /DK
         /// </summary>
-        void RemoveFromProject(int projectId, List<string> specializations);
-
-        /// <summary>
-        /// Returns a List of strings representing all the chosen specializations for a project. /DK
-        /// </summary>
-        List<string> GetProjectSpecializations(int projectId);
-
+        List<string> GetUserSpecializations(int userId);
     }
 }

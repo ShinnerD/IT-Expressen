@@ -20,7 +20,7 @@ namespace Domain.Services
         /// </summary>
         public void CreateProject(string userName, string title, string description, DateTime startDate, DateTime endDate, List<string> specializations)
         {
-            projectRepo.Add(userName, title, description, startDate, endDate, specializations);
+            projectRepo.CreateProject(userName, title, description, startDate, endDate, specializations);
         }
 
         /// <summary>
@@ -46,6 +46,31 @@ namespace Domain.Services
         {
             projectRepo.UpdateProject(project);
         }
+
+        /// <summary>
+        /// Deletes the project specified by setting its status to 'deleted' in the database. Recoverable. /DK
+        /// </summary>
+        void IProjectService.DeleteProject(int projectId)
+        {
+            projectRepo.DeleteProject(projectId);
+        }
+
+        /// <summary>
+        /// Retrieves a List of IProjectModels in which each project require ALL of the provided specializations. /DK
+        /// </summary>
+        List<IProjectModel> IProjectService.GetProjectsFromAllSpecializations(List<string> specializations)
+        {
+            return projectRepo.GetProjectsFromAllSpecializations(specializations);
+        }
+
+        /// <summary>
+        /// Retrieves a List of IProjectModels in which each project requires at least one of the specializations specified. /DK
+        /// </summary>
+        List<IProjectModel> IProjectService.GetProjectsFromAnySpecializations(List<string> specializations)
+        {
+            return projectRepo.GetProjectsFromAnySpecializations(specializations);
+        }
+
         public List<IProjectModel> SearchProjects(string searchTerm, int userId)
         {
             return projectRepo.SearchProjects(searchTerm, userId);
