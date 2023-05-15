@@ -1,6 +1,4 @@
-﻿using DAL.Linq;
-using DAL.Models;
-using Domain.Services;
+﻿using Domain.Services;
 using Interfaces.Models;
 using Interfaces.Services;
 
@@ -12,10 +10,8 @@ namespace GUI
         public IUserModel userModelGet { get; set; }
 
         private IInviteService invService = new InviteService();
+
         private IUserService userService = new UserService();
-
-        private IProjectModel ProjectGet { get; set; }
-
 
         public Consultant(string username)
         {
@@ -26,13 +22,6 @@ namespace GUI
             SetUpTB();
             LoadInvitesToDGV();
         }
-        public Consultant(IProjectModel ProjectsSpecs)
-        {
-            InitializeComponent();
-            ProjectGet = ProjectsSpecs;
-
-        }
-
 
         /// <summary>
         /// (JQ)This method retrieves and sets the user information using IUserService.
@@ -70,9 +59,8 @@ namespace GUI
 
         private void bt_SearchProjects_Click(object sender, EventArgs e)
         {
-
-
         }
+
         private void LoadInvitesToDGV()
         {
             dgv_ConsultantsInvites.DataSource = invService.GetInvitedUserIDList(userModelGet.ID);
@@ -80,10 +68,10 @@ namespace GUI
 
         private void bt_seeInviteDetails_Click(object sender, EventArgs e)
         {
-            var selectedProject = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as IProjectModel;
-            AcceptInviteForm AcpInvForm = new AcceptInviteForm (selectedProject.ProjectId);
+            var selectedProject = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as IInvitesModel;
+            AcceptInviteForm AccInvForm = new AcceptInviteForm(selectedProject.ProjectId);
             this.Hide();
-            AcpInvForm.ShowDialog();
+            AccInvForm.ShowDialog();
             this.Show();
         }
     }

@@ -13,6 +13,7 @@ namespace GUI
         private IProjectModel ProjectGet { get; set; }
         public int ProjectID { get; set; }
         private List<string> ProjectSpecializations { get; set; }
+
         //Constructor method loaded with project ID. All relevent data is loaded /MS
         public ConsultantAdd(int projectID)
         {

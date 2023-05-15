@@ -17,6 +17,7 @@ namespace Interfaces.Repositories
         IInvitesModel GetInviteUserId(int UserId);
         List<IInvitesModel> GetInviteUserIdList(int UserId);
         IInvitesModel GetInviteUserName(string Username);
+        void UpdateInviteStatus(IInvitesModel inviteModel);
 
         void AddInvite(IInvitesModel inviteModel/*, List<string> specializtions*/);
     }

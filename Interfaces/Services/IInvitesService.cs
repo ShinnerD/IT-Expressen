@@ -15,8 +15,8 @@ namespace Interfaces.Services
         List<IInvitesModel> GetInvitedUserIDList(int id);
 
         IInvitesModel GetInvitedUserName(string UserName);
+        void UpdateInviteStatus(IInvitesModel inviteModel);
 
-        
         void AddInvites(int ProjectID, int UserID, DateTime inviteDate, string InviteStatus, DateTime AcceptDate);
     }
 }

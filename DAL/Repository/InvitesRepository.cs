@@ -145,6 +145,24 @@ namespace DAL.Repository
 
             //specRepo.AddSpecializationsToUser(linqInviteModel.User_ID, specializtions);
         }
+        void IInvitesRepository.UpdateInviteStatus (IInvitesModel inviteModel)
+        {
+            
+            var dbInvites = DataContext.Invites.FirstOrDefault(i => i.User_ID == inviteModel.UserId);
+
+            if (dbInvites != null && inviteModel != null) 
+            {
+                dbInvites.Invite_status = inviteModel.InviteStatus;
+                dbInvites.Accept_date = inviteModel.AcceptDate;
+                dbInvites.Invite_status = inviteModel.InviteStatus;
+                dbInvites.Invite_status = inviteModel.InviteStatus;
+                dbInvites.User_ID = inviteModel.UserId;
+
+                DataContext.SubmitChanges();
+            }
+
+            
+        }
         
 
 

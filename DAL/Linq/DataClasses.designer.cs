@@ -535,7 +535,7 @@ namespace DAL.Linq
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Invite_status", DbType="VharChar(25)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Invite_status", DbType="VarChar(25)")]
 		public string Invite_status
 		{
 			get

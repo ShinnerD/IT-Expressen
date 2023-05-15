@@ -238,6 +238,7 @@
             dgv_ConsultantsInvites.Location = new Point(3, 19);
             dgv_ConsultantsInvites.Name = "dgv_ConsultantsInvites";
             dgv_ConsultantsInvites.RowTemplate.Height = 25;
+            dgv_ConsultantsInvites.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv_ConsultantsInvites.Size = new Size(595, 297);
             dgv_ConsultantsInvites.TabIndex = 37;
             // 

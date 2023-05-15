@@ -8,12 +8,14 @@ namespace GUI
     {
         //Initializeing og the service/models need for the form /MS
         private IUserService UserService = new UserService();
-        public string UserType { get; set; }
-        public int ProjectID { get; set; }
+
+        private string UserType { get; set; }
+        private int ProjectID { get; set; }
         private IProjectModel ProjectGet { get; set; }
         private List<string> ProjectSpecializations { get; set; }
 
         private IInviteService invService = new InviteService();
+
         //Constructor method loaded with project ID. All relevent data is loaded /MS
         public InviteConsultants(int projectID)
         {
@@ -24,12 +26,14 @@ namespace GUI
             LoadProjectData();
             invitedConsultants();
         }
+
         //Constructor method loaded with project model. All relevent data is loaded /MS
         public InviteConsultants(IProjectModel ProjectsSpecs)
         {
             InitializeComponent();
             ProjectGet = ProjectsSpecs;
         }
+
         //Gets data on projects and specializations /MS
         private void GetProjectInfo()
         {
@@ -39,6 +43,7 @@ namespace GUI
             ProjectGet = projectService.GetProject(ProjectID);
             ProjectSpecializations = specializationService.GetProjectSpecializations(ProjectID);
         }
+
         //Loads the data transfered into textboxes, so the user can see the information about the given project //MS
         private void LoadProjectData()
         {
@@ -50,11 +55,13 @@ namespace GUI
             tb_ProjectEndDate.Text = ProjectGet.ProjectEndDate.ToString();
             tb_Description.Text = ProjectGet.Description;
         }
+
         // Button click event -> see method for results /MS
         private void bt_AddConsultant_Click(object sender, EventArgs e)
         {
             OpenConsutantAdd();
         }
+
         //Opens new form and forwards the project ID /MS
         private void OpenConsutantAdd()
         {
@@ -65,6 +72,7 @@ namespace GUI
             invConSul.ShowDialog();
             this.Show();
         }
+
         //Datagridview to see all consultants that has been invited to the project //MS
         private void invitedConsultants()
         {
