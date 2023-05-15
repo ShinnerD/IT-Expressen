@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Interfaces.Models
 {
+    /// <summary>
+    /// written by Erik. Model too  Specialisation that have atrributes that is relavent too the case and project. the model that couples with the Interface Repo inites and the Domain Model invites.
+    /// </summary>
     public interface IInvitesModel
     {
         DateTime AcceptDate { get; set; }
