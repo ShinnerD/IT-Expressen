@@ -32,7 +32,7 @@ namespace Domain.Services
         {
             return InvRespo.GetInviteUserName(UserName);
         }
-        public void AddInvites(int ProjectID, int UserID, DateTime inviteDate, bool InviteStatus, DateTime AcceptDate)
+        public void AddInvites(int ProjectID, int UserID, DateTime inviteDate, string InviteStatus, DateTime AcceptDate)
         {
             IInvitesModel newInvite = new DAL.Models.InvitesModel();
 

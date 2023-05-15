@@ -15,6 +15,6 @@ namespace Interfaces.Services
         IInvitesModel GetInvitedUserName(string UserName);
 
 
-        void AddInvites(int ProjectID, int UserID, DateTime inviteDate, bool InviteStatus, DateTime AcceptDate);
+        void AddInvites(int ProjectID, int UserID, DateTime inviteDate, string InviteStatus, DateTime AcceptDate);
     }
 }

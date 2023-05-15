@@ -35,9 +35,13 @@
             bt_back = new Button();
             checkedListSkills = new CheckedListBox();
             grpBoxSpecFilter = new GroupBox();
+            lblSearchParamAnyAll = new Label();
+            radioBtnAll = new RadioButton();
+            radioBtnAny = new RadioButton();
             grpBoxProjectRequirements = new GroupBox();
             listBoxProjectRequirements = new ListBox();
             grpBoxSearchResult = new GroupBox();
+            lblFeedback = new Label();
             ((System.ComponentModel.ISupportInitialize)dgv_ConsultantList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)userServiceBindingSource).BeginInit();
             grpBoxSpecFilter.SuspendLayout();
@@ -92,9 +96,14 @@
             checkedListSkills.Name = "checkedListSkills";
             checkedListSkills.Size = new Size(428, 114);
             checkedListSkills.TabIndex = 27;
+            checkedListSkills.MouseUp += checkedListSkills_MouseUp;
             // 
             // grpBoxSpecFilter
             // 
+            grpBoxSpecFilter.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            grpBoxSpecFilter.Controls.Add(lblSearchParamAnyAll);
+            grpBoxSpecFilter.Controls.Add(radioBtnAll);
+            grpBoxSpecFilter.Controls.Add(radioBtnAny);
             grpBoxSpecFilter.Controls.Add(checkedListSkills);
             grpBoxSpecFilter.Location = new Point(12, 8);
             grpBoxSpecFilter.Name = "grpBoxSpecFilter";
@@ -102,6 +111,40 @@
             grpBoxSpecFilter.TabIndex = 29;
             grpBoxSpecFilter.TabStop = false;
             grpBoxSpecFilter.Text = "Specialization Search Filter";
+            // 
+            // lblSearchParamAnyAll
+            // 
+            lblSearchParamAnyAll.AutoSize = true;
+            lblSearchParamAnyAll.Location = new Point(326, 87);
+            lblSearchParamAnyAll.Name = "lblSearchParamAnyAll";
+            lblSearchParamAnyAll.Size = new Size(81, 15);
+            lblSearchParamAnyAll.TabIndex = 30;
+            lblSearchParamAnyAll.Text = "Should Match";
+            // 
+            // radioBtnAll
+            // 
+            radioBtnAll.AutoSize = true;
+            radioBtnAll.Location = new Point(378, 105);
+            radioBtnAll.Name = "radioBtnAll";
+            radioBtnAll.Size = new Size(39, 19);
+            radioBtnAll.TabIndex = 29;
+            radioBtnAll.TabStop = true;
+            radioBtnAll.Text = "All";
+            radioBtnAll.UseVisualStyleBackColor = true;
+            radioBtnAll.CheckedChanged += radioBtnAny_CheckedChanged;
+            // 
+            // radioBtnAny
+            // 
+            radioBtnAny.AutoSize = true;
+            radioBtnAny.Checked = true;
+            radioBtnAny.Location = new Point(326, 105);
+            radioBtnAny.Name = "radioBtnAny";
+            radioBtnAny.Size = new Size(46, 19);
+            radioBtnAny.TabIndex = 28;
+            radioBtnAny.TabStop = true;
+            radioBtnAny.Text = "Any";
+            radioBtnAny.UseVisualStyleBackColor = true;
+            radioBtnAny.CheckedChanged += radioBtnAny_CheckedChanged;
             // 
             // grpBoxProjectRequirements
             // 
@@ -116,16 +159,16 @@
             // 
             // listBoxProjectRequirements
             // 
+            listBoxProjectRequirements.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             listBoxProjectRequirements.BackColor = SystemColors.Control;
             listBoxProjectRequirements.BorderStyle = BorderStyle.None;
-            listBoxProjectRequirements.Dock = DockStyle.Fill;
             listBoxProjectRequirements.FormattingEnabled = true;
             listBoxProjectRequirements.ItemHeight = 15;
-            listBoxProjectRequirements.Location = new Point(3, 19);
+            listBoxProjectRequirements.Location = new Point(20, 19);
             listBoxProjectRequirements.MultiColumn = true;
             listBoxProjectRequirements.Name = "listBoxProjectRequirements";
             listBoxProjectRequirements.SelectionMode = SelectionMode.None;
-            listBoxProjectRequirements.Size = new Size(331, 114);
+            listBoxProjectRequirements.Size = new Size(314, 105);
             listBoxProjectRequirements.TabIndex = 0;
             // 
             // grpBoxSearchResult
@@ -139,11 +182,22 @@
             grpBoxSearchResult.TabStop = false;
             grpBoxSearchResult.Text = "Matching Consultants";
             // 
+            // lblFeedback
+            // 
+            lblFeedback.AutoSize = true;
+            lblFeedback.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblFeedback.Location = new Point(143, 476);
+            lblFeedback.Name = "lblFeedback";
+            lblFeedback.Size = new Size(140, 21);
+            lblFeedback.TabIndex = 32;
+            lblFeedback.Text = "Feedback message";
+            // 
             // ConsultantAdd
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 518);
+            Controls.Add(lblFeedback);
             Controls.Add(grpBoxSearchResult);
             Controls.Add(grpBoxProjectRequirements);
             Controls.Add(grpBoxSpecFilter);
@@ -155,9 +209,11 @@
             ((System.ComponentModel.ISupportInitialize)dgv_ConsultantList).EndInit();
             ((System.ComponentModel.ISupportInitialize)userServiceBindingSource).EndInit();
             grpBoxSpecFilter.ResumeLayout(false);
+            grpBoxSpecFilter.PerformLayout();
             grpBoxProjectRequirements.ResumeLayout(false);
             grpBoxSearchResult.ResumeLayout(false);
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -171,5 +227,9 @@
         private GroupBox grpBoxProjectRequirements;
         private ListBox listBoxProjectRequirements;
         private GroupBox grpBoxSearchResult;
+        private RadioButton radioBtnAny;
+        private RadioButton radioBtnAll;
+        private Label lblSearchParamAnyAll;
+        private Label lblFeedback;
     }
 }

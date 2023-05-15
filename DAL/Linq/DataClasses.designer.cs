@@ -436,7 +436,7 @@ namespace DAL.Linq
 		
 		private System.Nullable<System.DateTime> _Invite_Date;
 		
-		private System.Nullable<bool> _Invite_status;
+		private string _Invite_status;
 		
 		private System.Nullable<System.DateTime> _Accept_date;
 		
@@ -454,7 +454,7 @@ namespace DAL.Linq
     partial void OnUser_IDChanged();
     partial void OnInvite_DateChanging(System.Nullable<System.DateTime> value);
     partial void OnInvite_DateChanged();
-    partial void OnInvite_statusChanging(System.Nullable<bool> value);
+    partial void OnInvite_statusChanging(string value);
     partial void OnInvite_statusChanged();
     partial void OnAccept_dateChanging(System.Nullable<System.DateTime> value);
     partial void OnAccept_dateChanged();
@@ -535,8 +535,8 @@ namespace DAL.Linq
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Invite_status", DbType="Bit")]
-		public System.Nullable<bool> Invite_status
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Invite_status", DbType="VarChar(25)")]
+		public string Invite_status
 		{
 			get
 			{
