@@ -1,4 +1,5 @@
-﻿using Domain.Services;
+﻿using DAL.Models;
+using Domain.Services;
 using Interfaces.Models;
 using Interfaces.Services;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
@@ -10,11 +11,15 @@ namespace GUI
         public string Username { get; set; }
         public IUserModel userModelGet { get; set; }
 
+        private IInvitesModel invitesModelGet { get; set; }
+
         private IInviteService invService = new InviteService();
 
-        private IUserService userService = new UserService();
+        private IUserService userServiceGet = new UserService();
 
         private List<IInvitesModel> invites;
+
+        private IProjectModel ProjectGet { get; set; }
 
         public Consultant(string username)
         {
@@ -39,6 +44,7 @@ namespace GUI
         /// </summary>
         private void SetUpTB()
         {
+            grpBoxProfileInfo.Text = userModelGet.UserName;
             tb_Firstname.Text = userModelGet.FirstName;
             tb_Lastname.Text = userModelGet.LastName;
             tb_Email.Text = userModelGet.EMail;
@@ -47,6 +53,63 @@ namespace GUI
             tb_Address.Text = userModelGet.Address;
             tb_Zipcode.Text = userModelGet.ZipCode;
             tb_Country.Text = userModelGet.Country;
+            lblUserCreationDate.Text = "You've been a user for " + (DateTime.Now - userModelGet.CreationDate).GetValueOrDefault().Days.ToString() + " days";
+        }
+        private void ChangeEditProfileState()
+        {
+            if (bt_EditTest.Text == "Edit Profile")
+            {
+                UnlockProfileForEditing(grpBoxProfileInfo, true);
+                bt_EditTest.Text = "Save Changes";
+                bt_EditCanceltest.Enabled = true;
+                bt_EditCanceltest.Visible = true;
+            }
+            else
+            {
+                UpdateUserModel();
+                IUserService userService = new UserService();
+                userService.UpdateUser(userModelGet);
+                UnlockProfileForEditing(grpBoxProfileInfo, false);
+                bt_EditCanceltest.Enabled = false;
+                bt_EditCanceltest.Visible = false;
+                bt_EditTest.Text = "Edit Profile";
+            }
+        }
+        private void UpdateUserModel()
+        {
+            userModelGet.FirstName = tb_Firstname.Text;
+            userModelGet.LastName = tb_Lastname.Text;
+            userModelGet.EMail = tb_Email.Text;
+            userModelGet.PhoneNumber = tb_Phonenumber.Text;
+            userModelGet.Address = tb_Address.Text;
+            userModelGet.NameCity = tb_City.Text;
+            userModelGet.ZipCode = tb_Zipcode.Text;
+            userModelGet.Country = tb_Country.Text;
+        }
+        private void UnlockProfileForEditing(Control control, bool unlock)
+        {
+            if (control is TextBox)
+            {
+                control.Enabled = unlock;
+                control.TabStop = unlock;
+                if (unlock)
+                {
+                    control.BackColor = SystemColors.Window;
+                }
+                else
+                {
+                    control.BackColor = SystemColors.ControlLight;
+                }
+            }
+            if (control.HasChildren)
+            {
+                // Recursively call this method for all controls inside the control passed in the parameter.
+                // Ex. all controls inside another group box.
+                foreach (Control childControl in control.Controls)
+                {
+                    UnlockProfileForEditing(childControl, unlock);
+                }
+            }
         }
 
         /// <summary>
@@ -65,6 +128,23 @@ namespace GUI
         //Clears and loads the Datagridview //MS
         private void LoadInvitesToDGV()
         {
+            userServiceGet = new UserService();
+
+            dgv_ConsultantsInvites.AutoGenerateColumns = false;
+            dgv_ConsultantsInvites.StandardTab = true;
+
+            dgv_ConsultantsInvites.Columns.Add("InviteStatus", "Invite Status");
+            dgv_ConsultantsInvites.Columns["InviteStatus"].DataPropertyName = "InviteStatus";
+
+            dgv_ConsultantsInvites.Columns.Add("InviteDate", "Invitation Date");
+            dgv_ConsultantsInvites.Columns["InviteDate"].DataPropertyName = "InviteDate";
+
+            dgv_ConsultantsInvites.Columns.Add("ProjectId", "Project ID");
+            dgv_ConsultantsInvites.Columns["ProjectId"].DataPropertyName = "ProjectId";
+
+            dgv_ConsultantsInvites.Columns.Add("UserId", "User Name");
+            dgv_ConsultantsInvites.Columns["UserId"].DataPropertyName = userServiceGet.GetUser(userModelGet.UserName).ID.ToString();
+
             IInviteService inviteService = new InviteService();
             invites = inviteService.GetInvitedUserIDList(userModelGet.ID);
             dgv_ConsultantsInvites.DataSource = null;
@@ -82,5 +162,23 @@ namespace GUI
 
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_EditTest_Click(object sender, EventArgs e)
+        {
+            ChangeEditProfileState();
+        }
+
+        private void bt_EditCancelTest_Click(object sender, EventArgs e)
+        {
+                        bt_EditCanceltest.Enabled = false;
+            bt_EditCanceltest.Visible = false;
+            bt_EditTest.Text = "Edit Profile";
+            UnlockProfileForEditing(grpBoxProfileInfo, false);
+            SetUpTB();
+        }
     }
 }
