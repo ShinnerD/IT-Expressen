@@ -35,8 +35,8 @@
             groupBox1 = new GroupBox();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             grpBoxProfileInfo = new GroupBox();
-            bt_EditTest = new Button();
-            bt_EditCancelTest = new Button();
+            bt_Edit = new Button();
+            bt_EditCancel = new Button();
             lblUserCreationDate = new Label();
             bt_EditProfileTest = new Button();
             label2 = new Label();
@@ -118,8 +118,8 @@
             // 
             // grpBoxProfileInfo
             // 
-            grpBoxProfileInfo.Controls.Add(bt_EditTest);
-            grpBoxProfileInfo.Controls.Add(bt_EditCancelTest);
+            grpBoxProfileInfo.Controls.Add(bt_Edit);
+            grpBoxProfileInfo.Controls.Add(bt_EditCancel);
             grpBoxProfileInfo.Controls.Add(lblUserCreationDate);
             grpBoxProfileInfo.Controls.Add(bt_EditProfileTest);
             grpBoxProfileInfo.Controls.Add(label2);
@@ -147,33 +147,33 @@
             grpBoxProfileInfo.TabStop = false;
             grpBoxProfileInfo.Text = "User Name";
             // 
-            // bt_EditTest
+            // bt_Edit
             // 
-            bt_EditTest.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            bt_EditTest.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            bt_EditTest.Location = new Point(514, 126);
-            bt_EditTest.Margin = new Padding(2);
-            bt_EditTest.Name = "bt_EditTest";
-            bt_EditTest.Size = new Size(100, 25);
-            bt_EditTest.TabIndex = 102;
-            bt_EditTest.Text = "Edit Profile";
-            bt_EditTest.UseVisualStyleBackColor = true;
-            bt_EditTest.Click += bt_EditTest_Click;
+            bt_Edit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            bt_Edit.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            bt_Edit.Location = new Point(514, 126);
+            bt_Edit.Margin = new Padding(2);
+            bt_Edit.Name = "bt_Edit";
+            bt_Edit.Size = new Size(100, 25);
+            bt_Edit.TabIndex = 102;
+            bt_Edit.Text = "Edit Profile";
+            bt_Edit.UseVisualStyleBackColor = true;
+            bt_Edit.Click += bt_Edit_Click;
             // 
-            // bt_EditCancelTest
+            // bt_EditCancel
             // 
-            bt_EditCancelTest.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            bt_EditCancelTest.Enabled = false;
-            bt_EditCancelTest.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            bt_EditCancelTest.Location = new Point(410, 126);
-            bt_EditCancelTest.Margin = new Padding(2);
-            bt_EditCancelTest.Name = "bt_EditCancelTest";
-            bt_EditCancelTest.Size = new Size(100, 25);
-            bt_EditCancelTest.TabIndex = 101;
-            bt_EditCancelTest.Text = "Cancel";
-            bt_EditCancelTest.UseVisualStyleBackColor = true;
-            bt_EditCancelTest.Visible = false;
-            bt_EditCancelTest.Click += bt_EditCancelTest_Click;
+            bt_EditCancel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            bt_EditCancel.Enabled = false;
+            bt_EditCancel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            bt_EditCancel.Location = new Point(410, 126);
+            bt_EditCancel.Margin = new Padding(2);
+            bt_EditCancel.Name = "bt_EditCancel";
+            bt_EditCancel.Size = new Size(100, 25);
+            bt_EditCancel.TabIndex = 101;
+            bt_EditCancel.Text = "Cancel";
+            bt_EditCancel.UseVisualStyleBackColor = true;
+            bt_EditCancel.Visible = false;
+            bt_EditCancel.Click += bt_EditCancel_Click;
             // 
             // lblUserCreationDate
             // 
@@ -439,7 +439,7 @@
         private Label label5;
         private Label label4;
         private Label label6;
-        private Button bt_EditCancelTest;
-        private Button bt_EditTest;
+        private Button bt_EditCancel;
+        private Button bt_Edit;
     }
 }

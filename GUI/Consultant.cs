@@ -57,12 +57,12 @@ namespace GUI
         }
         private void ChangeEditProfileState()
         {
-            if (bt_EditTest.Text == "Edit Profile")
+            if (bt_Edit.Text == "Edit Profile")
             {
                 UnlockProfileForEditing(grpBoxProfileInfo, true);
-                bt_EditTest.Text = "Save Changes";
-                bt_EditCanceltest.Enabled = true;
-                bt_EditCanceltest.Visible = true;
+                bt_Edit.Text = "Save Changes";
+                bt_EditCancel.Enabled = true;
+                bt_EditCancel.Visible = true;
             }
             else
             {
@@ -70,9 +70,9 @@ namespace GUI
                 IUserService userService = new UserService();
                 userService.UpdateUser(userModelGet);
                 UnlockProfileForEditing(grpBoxProfileInfo, false);
-                bt_EditCanceltest.Enabled = false;
-                bt_EditCanceltest.Visible = false;
-                bt_EditTest.Text = "Edit Profile";
+                bt_EditCancel.Enabled = false;
+                bt_EditCancel.Visible = false;
+                bt_Edit.Text = "Edit Profile";
             }
         }
         private void UpdateUserModel()
@@ -161,24 +161,23 @@ namespace GUI
             LoadInvitesToDGV();
 
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void EditCancel()
         {
-
+            bt_EditCancel.Enabled = false;
+            bt_EditCancel.Visible = false;
+            bt_Edit.Text = "Edit Profile";
+            UnlockProfileForEditing(grpBoxProfileInfo, false);
+            SetUpTB();
         }
 
-        private void bt_EditTest_Click(object sender, EventArgs e)
+        private void bt_Edit_Click(object sender, EventArgs e)
         {
             ChangeEditProfileState();
         }
 
-        private void bt_EditCancelTest_Click(object sender, EventArgs e)
+        private void bt_EditCancel_Click(object sender, EventArgs e)
         {
-                        bt_EditCanceltest.Enabled = false;
-            bt_EditCanceltest.Visible = false;
-            bt_EditTest.Text = "Edit Profile";
-            UnlockProfileForEditing(grpBoxProfileInfo, false);
-            SetUpTB();
+            EditCancel();
         }
     }
 }
