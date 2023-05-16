@@ -103,8 +103,6 @@ namespace GUI
         //    this.Show();
         //}
 
-
-
         /// <summary>
         /// Opens the Form for editing a project. /DK
         /// </summary>
@@ -153,6 +151,90 @@ namespace GUI
         private void bt_FindConsultants_Click(object sender, EventArgs e)
         {
             InvitedConsultantSelectedProject();
+        }
+
+        private void bt_EditProfile_Click(object sender, EventArgs e)
+        {
+            ChangeEditProfileState();
+        }
+
+        /// <summary>
+        /// Changes the Edit Profile button to either activate or deactivate the controls, so the user
+        /// can edit their profile info. Calls a save on the data if the user wants to save changes.
+        /// </summary>
+        private void ChangeEditProfileState()
+        {
+            if (bt_EditProfile.Text == "Edit Profile")
+            {
+                UnlockProfileForEditing(grpBoxProfileInfo, true);
+                bt_EditProfile.Text = "Save Changes";
+                bt_EditProfileCancel.Enabled = true;
+                bt_EditProfileCancel.Visible = true;
+            }
+            else
+            {
+                UpdateUserModel();
+                IUserService userService = new UserService();
+                userService.UpdateUser(userModel);
+                UnlockProfileForEditing(grpBoxProfileInfo, false);
+                bt_EditProfileCancel.Enabled = false;
+                bt_EditProfileCancel.Visible = false;
+                bt_EditProfile.Text = "Edit Profile";
+            }
+        }
+
+
+        /// <summary>
+        /// Updates the pagewide userModel with the new information in the textboxes /DK
+        /// </summary>
+        private void UpdateUserModel()
+        {
+            userModel.FirstName = tb_Firstname.Text;
+            userModel.LastName = tb_Lastname.Text;
+            userModel.EMail = tb_Email.Text;
+            userModel.PhoneNumber = tb_Phonenumber.Text;
+            userModel.Address = tb_Address.Text;
+            userModel.NameCity = tb_City.Text;
+            userModel.ZipCode = tb_Zipcode.Text;
+            userModel.Country = tb_Country.Text;
+        }
+
+        /// <summary>
+        /// Unlocks the textboxes in the user profile section of the form and changes the edit button to reflect the ability
+        /// to save the changes you make to your profile. /DK
+        /// </summary>
+        private void UnlockProfileForEditing(Control control, bool unlock)
+        {
+            if (control is TextBox)
+            {
+                control.Enabled = unlock;
+                if (unlock)
+                {
+                    control.BackColor = SystemColors.Window;
+                }
+                else
+                {
+                    control.BackColor = SystemColors.ControlLight;
+                }
+            }
+            if (control.HasChildren)
+            {
+                // Recursively call this method for all controls inside the control passed in the parameter.
+                // Ex. all controls inside another group box.
+                foreach (Control childControl in control.Controls)
+                {
+                    UnlockProfileForEditing(childControl, unlock);
+                }
+            }
+        }
+
+        private void bt_EditProfileCancel_Click(object sender, EventArgs e)
+        {
+            bt_EditProfileCancel.Enabled = false;
+            bt_EditProfileCancel.Visible = false;
+            bt_EditProfile.Text = "Edit Profile";
+            UnlockProfileForEditing(grpBoxProfileInfo, false);
+            SetUpTB();
         }
     }
 }

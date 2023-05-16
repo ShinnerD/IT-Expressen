@@ -26,5 +26,11 @@ namespace Interfaces.Services
         /// Returns a list of Users that have all of the specializations provided in the list specified in the parameters. /DK
         /// </summary>
         public List<IUserModel> GetUsersWithAllSpecializations(List<string> specializations);
+
+        /// <summary>
+        /// Updates a user in the database with any changes that might be in the IUserModel provided in the parameter.
+        /// The Provided IUserModel must be a valid user from the database. /DK
+        /// </summary>
+        void UpdateUser(IUserModel user);
     }
 }

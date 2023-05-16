@@ -84,5 +84,14 @@ namespace Domain.Services
         {
             return userRepo.GetUsersWithAllSpecializations(specializations);
         }
+
+        /// <summary>
+        /// Updates a user in the database with any changes that might be in the IUserModel provided in the parameter.
+        /// The Provided IUserModel must be a valid user from the database. /DK
+        /// </summary>
+        public void UpdateUser(IUserModel user)
+        {
+            userRepo.UpdateUser(user);
+        }
     }
 }

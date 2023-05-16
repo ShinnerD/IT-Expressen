@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
@@ -53,6 +53,7 @@
             groupBox2 = new GroupBox();
             bt_EditProject = new Button();
             dgv_Viewproject = new DataGridView();
+            bt_EditProfileCancel = new Button();
             grpBoxProfileInfo.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_Viewproject).BeginInit();
@@ -150,101 +151,109 @@
             // 
             tb_Firstname.BackColor = SystemColors.ControlLight;
             tb_Firstname.BorderStyle = BorderStyle.None;
+            tb_Firstname.Enabled = false;
             tb_Firstname.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             tb_Firstname.Location = new Point(71, 22);
             tb_Firstname.Margin = new Padding(2);
             tb_Firstname.Name = "tb_Firstname";
-            tb_Firstname.ReadOnly = true;
             tb_Firstname.Size = new Size(225, 16);
-            tb_Firstname.TabIndex = 9;
+            tb_Firstname.TabIndex = 1;
+            tb_Firstname.TabStop = false;
             // 
             // tb_Email
             // 
             tb_Email.BackColor = SystemColors.ControlLight;
             tb_Email.BorderStyle = BorderStyle.None;
+            tb_Email.Enabled = false;
             tb_Email.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             tb_Email.Location = new Point(71, 74);
             tb_Email.Margin = new Padding(2);
             tb_Email.Name = "tb_Email";
-            tb_Email.ReadOnly = true;
             tb_Email.Size = new Size(225, 16);
-            tb_Email.TabIndex = 10;
+            tb_Email.TabIndex = 3;
+            tb_Email.TabStop = false;
             // 
             // tb_Phonenumber
             // 
             tb_Phonenumber.BackColor = SystemColors.ControlLight;
             tb_Phonenumber.BorderStyle = BorderStyle.None;
+            tb_Phonenumber.Enabled = false;
             tb_Phonenumber.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             tb_Phonenumber.Location = new Point(71, 101);
             tb_Phonenumber.Margin = new Padding(2);
             tb_Phonenumber.Name = "tb_Phonenumber";
-            tb_Phonenumber.ReadOnly = true;
             tb_Phonenumber.Size = new Size(225, 16);
-            tb_Phonenumber.TabIndex = 11;
+            tb_Phonenumber.TabIndex = 4;
+            tb_Phonenumber.TabStop = false;
             // 
             // tb_Lastname
             // 
             tb_Lastname.BackColor = SystemColors.ControlLight;
             tb_Lastname.BorderStyle = BorderStyle.None;
+            tb_Lastname.Enabled = false;
             tb_Lastname.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             tb_Lastname.Location = new Point(71, 48);
             tb_Lastname.Margin = new Padding(2);
             tb_Lastname.Name = "tb_Lastname";
-            tb_Lastname.ReadOnly = true;
             tb_Lastname.Size = new Size(225, 16);
-            tb_Lastname.TabIndex = 12;
+            tb_Lastname.TabIndex = 2;
+            tb_Lastname.TabStop = false;
             // 
             // tb_Address
             // 
             tb_Address.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             tb_Address.BackColor = SystemColors.ControlLight;
             tb_Address.BorderStyle = BorderStyle.None;
+            tb_Address.Enabled = false;
             tb_Address.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             tb_Address.Location = new Point(360, 22);
             tb_Address.Margin = new Padding(2);
             tb_Address.Name = "tb_Address";
-            tb_Address.ReadOnly = true;
             tb_Address.Size = new Size(328, 16);
-            tb_Address.TabIndex = 13;
+            tb_Address.TabIndex = 5;
+            tb_Address.TabStop = false;
             // 
             // tb_City
             // 
             tb_City.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             tb_City.BackColor = SystemColors.ControlLight;
             tb_City.BorderStyle = BorderStyle.None;
+            tb_City.Enabled = false;
             tb_City.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             tb_City.Location = new Point(360, 49);
             tb_City.Margin = new Padding(2);
             tb_City.Name = "tb_City";
-            tb_City.ReadOnly = true;
             tb_City.Size = new Size(328, 16);
-            tb_City.TabIndex = 14;
+            tb_City.TabIndex = 6;
+            tb_City.TabStop = false;
             // 
             // tb_Zipcode
             // 
             tb_Zipcode.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             tb_Zipcode.BackColor = SystemColors.ControlLight;
             tb_Zipcode.BorderStyle = BorderStyle.None;
+            tb_Zipcode.Enabled = false;
             tb_Zipcode.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             tb_Zipcode.Location = new Point(360, 74);
             tb_Zipcode.Margin = new Padding(2);
             tb_Zipcode.Name = "tb_Zipcode";
-            tb_Zipcode.ReadOnly = true;
             tb_Zipcode.Size = new Size(328, 16);
-            tb_Zipcode.TabIndex = 15;
+            tb_Zipcode.TabIndex = 7;
+            tb_Zipcode.TabStop = false;
             // 
             // tb_Country
             // 
             tb_Country.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             tb_Country.BackColor = SystemColors.ControlLight;
             tb_Country.BorderStyle = BorderStyle.None;
+            tb_Country.Enabled = false;
             tb_Country.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             tb_Country.Location = new Point(360, 101);
             tb_Country.Margin = new Padding(2);
             tb_Country.Name = "tb_Country";
-            tb_Country.ReadOnly = true;
             tb_Country.Size = new Size(328, 16);
-            tb_Country.TabIndex = 16;
+            tb_Country.TabIndex = 8;
+            tb_Country.TabStop = false;
             // 
             // bt_FindConsultants
             // 
@@ -254,7 +263,7 @@
             bt_FindConsultants.Margin = new Padding(2);
             bt_FindConsultants.Name = "bt_FindConsultants";
             bt_FindConsultants.Size = new Size(110, 25);
-            bt_FindConsultants.TabIndex = 17;
+            bt_FindConsultants.TabIndex = 11;
             bt_FindConsultants.Text = "Find Consultants";
             bt_FindConsultants.UseVisualStyleBackColor = true;
             bt_FindConsultants.Click += bt_FindConsultants_Click;
@@ -267,13 +276,14 @@
             bt_NewProject.Margin = new Padding(2);
             bt_NewProject.Name = "bt_NewProject";
             bt_NewProject.Size = new Size(110, 25);
-            bt_NewProject.TabIndex = 18;
+            bt_NewProject.TabIndex = 12;
             bt_NewProject.Text = "Start New Project";
             bt_NewProject.UseVisualStyleBackColor = true;
             bt_NewProject.Click += bt_NewProject_Click;
             // 
             // grpBoxProfileInfo
             // 
+            grpBoxProfileInfo.Controls.Add(bt_EditProfileCancel);
             grpBoxProfileInfo.Controls.Add(lblUserCreationDate);
             grpBoxProfileInfo.Controls.Add(bt_EditProfile);
             grpBoxProfileInfo.Controls.Add(label2);
@@ -308,7 +318,7 @@
             lblUserCreationDate.Location = new Point(219, 129);
             lblUserCreationDate.Name = "lblUserCreationDate";
             lblUserCreationDate.Size = new Size(186, 17);
-            lblUserCreationDate.TabIndex = 23;
+            lblUserCreationDate.TabIndex = 100;
             lblUserCreationDate.Text = "You've been a user for 154 days";
             // 
             // bt_EditProfile
@@ -319,9 +329,10 @@
             bt_EditProfile.Margin = new Padding(2);
             bt_EditProfile.Name = "bt_EditProfile";
             bt_EditProfile.Size = new Size(100, 25);
-            bt_EditProfile.TabIndex = 22;
+            bt_EditProfile.TabIndex = 9;
             bt_EditProfile.Text = "Edit Profile";
             bt_EditProfile.UseVisualStyleBackColor = true;
+            bt_EditProfile.Click += bt_EditProfile_Click;
             // 
             // groupBox2
             // 
@@ -346,7 +357,7 @@
             bt_EditProject.Margin = new Padding(2);
             bt_EditProject.Name = "bt_EditProject";
             bt_EditProject.Size = new Size(100, 25);
-            bt_EditProject.TabIndex = 23;
+            bt_EditProject.TabIndex = 13;
             bt_EditProject.Text = "Edit Project";
             bt_EditProject.UseVisualStyleBackColor = true;
             bt_EditProject.Click += bt_EditProject_Click;
@@ -358,14 +369,14 @@
             dgv_Viewproject.AllowUserToResizeRows = false;
             dgv_Viewproject.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgv_Viewproject.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            dgv_Viewproject.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dgv_Viewproject.DefaultCellStyle = dataGridViewCellStyle2;
             dgv_Viewproject.Location = new Point(3, 21);
             dgv_Viewproject.Margin = new Padding(2);
             dgv_Viewproject.MultiSelect = false;
@@ -376,7 +387,22 @@
             dgv_Viewproject.RowTemplate.Height = 33;
             dgv_Viewproject.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv_Viewproject.Size = new Size(693, 209);
-            dgv_Viewproject.TabIndex = 1;
+            dgv_Viewproject.TabIndex = 10;
+            // 
+            // bt_EditProfileCancel
+            // 
+            bt_EditProfileCancel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            bt_EditProfileCancel.Enabled = false;
+            bt_EditProfileCancel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            bt_EditProfileCancel.Location = new Point(484, 126);
+            bt_EditProfileCancel.Margin = new Padding(2);
+            bt_EditProfileCancel.Name = "bt_EditProfileCancel";
+            bt_EditProfileCancel.Size = new Size(100, 25);
+            bt_EditProfileCancel.TabIndex = 9;
+            bt_EditProfileCancel.Text = "Cancel";
+            bt_EditProfileCancel.UseVisualStyleBackColor = true;
+            bt_EditProfileCancel.Visible = false;
+            bt_EditProfileCancel.Click += bt_EditProfileCancel_Click;
             // 
             // Manager
             // 
@@ -419,5 +445,6 @@
         private Label lblUserCreationDate;
         private DataGridView dgv_Viewproject;
         private Button bt_EditProject;
+        private Button bt_EditProfileCancel;
     }
 }
