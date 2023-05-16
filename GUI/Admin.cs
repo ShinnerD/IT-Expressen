@@ -2,7 +2,6 @@
 using Interfaces.Models;
 using Interfaces.Services;
 using System.Data;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace GUI
 {
@@ -16,6 +15,8 @@ namespace GUI
 
         private List<IUserModel> usersSearchResults;
         private List<IProjectModel> projectsSearchResults;
+
+        private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
         public Admin(string username)
         {
@@ -97,6 +98,9 @@ namespace GUI
 
             dgv_UserSearchResults.Columns.Add("ZipCode", "Zip Code");
             dgv_UserSearchResults.Columns["ZipCode"].DataPropertyName = "ZipCode";
+
+            dgv_UserSearchResults.Columns.Add("PhoneNumber", "Phone");
+            dgv_UserSearchResults.Columns["PhoneNumber"].DataPropertyName = "PhoneNumber";
 
             dgv_UserSearchResults.Columns.Add("CreationDate", "Date of Creation");
             dgv_UserSearchResults.Columns["CreationDate"].DataPropertyName = "CreationDate";
@@ -195,28 +199,36 @@ namespace GUI
         /// <summary>
         /// Searches and Filters Users based on text in search field and selected Radio Buttons. /DK
         /// </summary>
-        private void PerformUserSearch()
+        private void PerformUserSearch(string userName = "")
         {
+            IUserService _ = new UserService();
             string searchString = txtBox_UserSearchParams.Text;
             dgv_UserSearchResults.DataSource = null;
 
             if (radio_AllUsers.Checked)
             {
-                usersSearchResults = userService.GetAllUsers().ToList();
+                usersSearchResults = _.GetAllUsers().ToList();
             }
             if (radio_Consultants.Checked)
             {
-                usersSearchResults = userService.GetAllUsers().Where(i => i.UserType.ToLower() == "consultant").ToList();
+                usersSearchResults = _.GetAllUsers().Where(i => i.UserType.ToLower() == "consultant").ToList();
             }
             if (radio_Managers.Checked)
             {
-                usersSearchResults = userService.GetAllUsers().Where(i => i.UserType.ToLower() == "manager").ToList();
+                usersSearchResults = _.GetAllUsers().Where(i => i.UserType.ToLower() == "manager").ToList();
             }
 
             usersSearchResults = usersSearchResults.Where(x => x.UserName.ToLower().Contains(searchString.ToLower()) || x.FullName.ToLower().Contains(searchString.ToLower()))
                     .OrderBy(o => o.UserName).ToList();
 
             dgv_UserSearchResults.DataSource = usersSearchResults;
+
+            if (userName != "")
+            {
+                int index = usersSearchResults.FindIndex(i => i.UserName == userName);
+                dgv_UserSearchResults.Rows[index].Selected = true;
+                dgv_UserSearchResults.FirstDisplayedScrollingRowIndex = index;
+            }
         }
 
         /// <summary>
@@ -262,6 +274,50 @@ namespace GUI
             }
         }
 
+        /// <summary>
+        /// Opens the relevant Form that is selected from searched Users to View their profile and Edit.
+        /// </summary>
+        private void OpenUserProfile(string userName, string userType)
+        {
+            if (userType == "manager")
+            {
+                Manager manager = new Manager(userName);
+                manager.ShowDialog();
+                PerformUserSearch(userName);
+            }
+            if (userType == "consultant")
+            {
+                Consultant consultant = new Consultant(userName);
+                consultant.ShowDialog();
+                PerformUserSearch(userName);
+            }
+            if (userType == "admin")
+            {
+                FeedBackMessage(lbl_FeedbackUserTab, "Admin's can't edit other Admins.", Color.Red, 5000);
+            }
+        }
+
+        /// <summary>
+        /// Async Task that turns on the visibility of the label provided in the parameters,
+        /// shows the given message in the given color, for the given time. /DK
+        /// </summary>
+        private async Task FeedBackMessage(Label label, string message, Color color, int milliseconds)
+        {
+            label.Text = message;
+            label.ForeColor = color;
+            label.Visible = true;
+            _cancellationTokenSource.Cancel();
+            _cancellationTokenSource = new CancellationTokenSource();
+            try
+            {
+                await Task.Delay(milliseconds, _cancellationTokenSource.Token);
+                label.Text = string.Empty;
+                label.ForeColor = Color.Black;
+                label.Visible = false;
+            }
+            catch (TaskCanceledException) { }
+        }
+
         private void bt_EditProfileCancel_Click(object sender, EventArgs e)
         {
             bt_EditProfileCancel.Enabled = false;
@@ -293,6 +349,14 @@ namespace GUI
                 PerformProjectSearch();
                 e.Handled = true;
                 e.SuppressKeyPress = true;
+            }
+        }
+
+        private void btn_EditUser_Click(object sender, EventArgs e)
+        {
+            if (dgv_UserSearchResults.SelectedRows.Count != 0)
+            {
+                OpenUserProfile(dgv_UserSearchResults.SelectedRows[0].Cells["UserName"].Value.ToString(), dgv_UserSearchResults.SelectedRows[0].Cells["UserType"].Value.ToString().ToLower());
             }
         }
     }

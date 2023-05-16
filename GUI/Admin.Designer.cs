@@ -72,6 +72,7 @@
             radio_Pending = new RadioButton();
             btn_SearchProjects = new Button();
             txtBox_ProjectSearchParams = new TextBox();
+            lbl_FeedbackUserTab = new Label();
             grpBoxProfileInfo.SuspendLayout();
             tabControl.SuspendLayout();
             tabPage_Users.SuspendLayout();
@@ -360,6 +361,7 @@
             // tabPage_Users
             // 
             tabPage_Users.BackColor = SystemColors.Control;
+            tabPage_Users.Controls.Add(lbl_FeedbackUserTab);
             tabPage_Users.Controls.Add(btn_NewUser);
             tabPage_Users.Controls.Add(btn_DeleteUser);
             tabPage_Users.Controls.Add(btn_EditUser);
@@ -407,6 +409,7 @@
             btn_EditUser.TabIndex = 31;
             btn_EditUser.Text = "Edit";
             btn_EditUser.UseVisualStyleBackColor = true;
+            btn_EditUser.Click += btn_EditUser_Click;
             // 
             // dgv_UserSearchResults
             // 
@@ -643,6 +646,17 @@
             txtBox_ProjectSearchParams.TabIndex = 0;
             txtBox_ProjectSearchParams.KeyDown += txtBox_ProjectSearchParams_KeyDown;
             // 
+            // lbl_FeedbackUserTab
+            // 
+            lbl_FeedbackUserTab.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            lbl_FeedbackUserTab.AutoSize = true;
+            lbl_FeedbackUserTab.Location = new Point(166, 382);
+            lbl_FeedbackUserTab.Name = "lbl_FeedbackUserTab";
+            lbl_FeedbackUserTab.Size = new Size(137, 15);
+            lbl_FeedbackUserTab.TabIndex = 34;
+            lbl_FeedbackUserTab.Text = "FeedBack Label Message";
+            lbl_FeedbackUserTab.Visible = false;
+            // 
             // Admin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -657,6 +671,7 @@
             grpBoxProfileInfo.PerformLayout();
             tabControl.ResumeLayout(false);
             tabPage_Users.ResumeLayout(false);
+            tabPage_Users.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_UserSearchResults).EndInit();
             grpBoxUserSearchFilter.ResumeLayout(false);
             grpBoxUserSearchFilter.PerformLayout();
@@ -713,5 +728,6 @@
         private Button btn_NewProject;
         private Button btn_EditProject;
         private Button btn_DeleteProject;
+        private Label lbl_FeedbackUserTab;
     }
 }
