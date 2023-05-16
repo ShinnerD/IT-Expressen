@@ -28,11 +28,19 @@ namespace Domain.Services
         {
             return InvRespo.GetInviteUserId(id);
         }
+        public List<IInvitesModel> GetInvitedUserIDList(int id)
+        {
+            return InvRespo.GetInviteUserIdList(id);
+        }
         public IInvitesModel GetInvitedUserName(string UserName)
         {
             return InvRespo.GetInviteUserName(UserName);
         }
-        public void AddInvites(int ProjectID, int UserID, DateTime inviteDate, string InviteStatus, DateTime AcceptDate)
+        public void UpdateInviteStatus(IInvitesModel inviteModel, int projectID)
+        {
+            InvRespo.UpdateInviteStatus(inviteModel, projectID);
+        }
+        public void AddInvites(int ProjectID, int UserID, DateTime inviteDate, string InviteStatus)
         {
             IInvitesModel newInvite = new DAL.Models.InvitesModel();
 
@@ -40,7 +48,6 @@ namespace Domain.Services
             newInvite.UserId = UserID;
             newInvite.InviteDate = DateTime.Now;
             newInvite.InviteStatus = InviteStatus;
-            newInvite.AcceptDate = AcceptDate;
 
             InvRespo.AddInvite(newInvite);
 

@@ -100,7 +100,32 @@ namespace DAL.Repository
 
             return user;
         }
+        public IUserModel GetUserFromID(int ID)
+        {
+            IUserModel user = new DAL.Models.UserModel();
 
+            var dbUser = dbcontext.Users.FirstOrDefault(i => i.User_ID == ID);
+
+            if (dbUser != null)
+            {
+                user.ID = dbUser.User_ID;
+                user.UserName = dbUser.User_name;
+                user.Password = dbUser.Password;
+                user.UserType = dbUser.User_Type;
+                user.FirstName = dbUser.First_Name;
+                user.LastName = dbUser.Last_Name;
+                user.EMail = dbUser.Email;
+                user.Address = dbUser.Street_Address;
+                user.NameCity = dbUser.City;
+                user.ZipCode = dbUser.Zip_Code;
+                user.PhoneNumber = dbUser.Phone_Number;
+                user.Country = dbUser.Country;
+                user.ActiveStatus = dbUser.Active_Status;
+                user.CreationDate = dbUser.Creation_Date;
+            }
+
+            return user;
+        }
         void IUserRepository.Delete(string delete)
         {
             throw new NotImplementedException();

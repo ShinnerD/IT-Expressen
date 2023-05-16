@@ -1,8 +1,7 @@
-﻿using DAL.Linq;
-using DAL.Models;
-using Domain.Services;
+﻿using Domain.Services;
 using Interfaces.Models;
 using Interfaces.Services;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace GUI
 {
@@ -10,25 +9,20 @@ namespace GUI
     {
         public string Username { get; set; }
         public IUserModel userModelGet { get; set; }
-      
-        private IInviteService invService = new InviteService();
-        
-        private IProjectModel ProjectGet { get; set; }
 
+        private IInviteService invService = new InviteService();
+
+        private IUserService userService = new UserService();
+
+        private List<IInvitesModel> invites;
 
         public Consultant(string username)
         {
             InitializeComponent();
-            Username = username;          
+            Username = username;
             GetUser();
             SetUpTB();
             LoadInvitesToDGV();
-        }
-        public Consultant(IProjectModel ProjectsSpecs)
-        {
-            InitializeComponent();
-            ProjectGet = ProjectsSpecs;
-
         }
 
         /// <summary>
@@ -67,12 +61,26 @@ namespace GUI
 
         private void bt_SearchProjects_Click(object sender, EventArgs e)
         {
-
-            
         }
+        //Clears and loads the Datagridview //MS
         private void LoadInvitesToDGV()
         {
-            dgv_ConsultantsInvites.DataSource = invService.GetInvitedUserName(userModelGet.UserName);
+            IInviteService inviteService = new InviteService();
+            invites = inviteService.GetInvitedUserIDList(userModelGet.ID);
+            dgv_ConsultantsInvites.DataSource = null;
+            dgv_ConsultantsInvites.DataSource = invites;
         }
+        //Opens the form to accept the selected invitation, then refreshes the datagridview /MS
+        private void bt_seeInviteDetails_Click(object sender, EventArgs e)
+        {
+            var selectedProject = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as IInvitesModel;
+            AcceptInviteForm AccInvForm = new AcceptInviteForm(selectedProject.ProjectId);
+            this.Hide();
+            AccInvForm.ShowDialog();
+            this.Show();
+            LoadInvitesToDGV();
+
+        }
+
     }
 }
