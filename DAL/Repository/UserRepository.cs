@@ -169,6 +169,29 @@ namespace DAL.Repository
         }
 
         /// <summary>
+        /// Updates a user in the database with any changes that might be in the IUserModel provided in the parameter.
+        /// The Provided IUserModel must be a valid user from the database. /DK
+        /// </summary>
+        public void UpdateUser(IUserModel user)
+        {
+            var dbUser = dbcontext.Users.FirstOrDefault(i => i.User_ID == user.ID);
+
+            if (dbUser != null) 
+            {
+                dbUser.First_Name = user.FirstName;
+                dbUser.Last_Name = user.LastName;
+                dbUser.Email = user.EMail;
+                dbUser.Street_Address = user.Address;
+                dbUser.City = user.NameCity;
+                dbUser.Zip_Code = user.ZipCode;
+                dbUser.Country = user.Country;
+                dbUser.Phone_Number = user.PhoneNumber;
+
+                dbcontext.SubmitChanges();
+            }
+        }
+
+        /// <summary>
         /// Returns a list of Users that have any of the specializations provided in the list specified in the parameters. /DK
         /// </summary>
         public List<IUserModel> GetUsersWithAnySpecializations(List<string> specializations)

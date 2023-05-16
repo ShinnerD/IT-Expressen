@@ -53,7 +53,7 @@ namespace GUI
 
             SpecService.FillUserSpecializationsProperty(SearchResults);
 
-            dgv_ConsultantList.DataSource = SearchResults;
+            dgv_ConsultantList.DataSource = SearchResults.OrderBy(i => i.FullName).ToList();
         }
 
         /// <summary>
@@ -80,10 +80,10 @@ namespace GUI
             dgv_ConsultantList.Columns["UserId"].DataPropertyName = "ID";
             dgv_ConsultantList.Columns["UserId"].Visible = false;
 
-            dgv_ConsultantList.Columns.Add("UserName", "Consultant");
-            dgv_ConsultantList.Columns["UserName"].DataPropertyName = "UserName";
-            dgv_ConsultantList.Columns["UserName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgv_ConsultantList.Columns["UserName"].FillWeight = 100;
+            dgv_ConsultantList.Columns.Add("FullName", "Consultant");
+            dgv_ConsultantList.Columns["FullName"].DataPropertyName = "FullName";
+            dgv_ConsultantList.Columns["FullName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgv_ConsultantList.Columns["FullName"].FillWeight = 100;
 
             dgv_ConsultantList.Columns.Add("Country", "Country");
             dgv_ConsultantList.Columns["Country"].DataPropertyName = "Country";
@@ -120,7 +120,7 @@ namespace GUI
                     "Pending");
 
                 lblFeedback.ForeColor = System.Drawing.Color.Green;
-                lblFeedback.Text = "Invite Sent to " + (string)dgv_ConsultantList.CurrentRow.Cells["UserName"].Value;
+                lblFeedback.Text = "Invite Sent to " + (string)dgv_ConsultantList.CurrentRow.Cells["FullName"].Value;
             }
             catch (Exception e)
             {
