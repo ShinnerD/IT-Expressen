@@ -46,9 +46,6 @@
             lb_Description = new Label();
             bt_AcceptInv = new Button();
             bt_decline = new Button();
-            cb_Status = new ComboBox();
-            lb_test = new Label();
-            tb_acceptDate = new TextBox();
             SuspendLayout();
             // 
             // tb_UserID
@@ -210,38 +207,11 @@
             bt_decline.UseVisualStyleBackColor = true;
             bt_decline.Click += bt_decline_Click;
             // 
-            // cb_Status
-            // 
-            cb_Status.FormattingEnabled = true;
-            cb_Status.Location = new Point(589, 224);
-            cb_Status.Name = "cb_Status";
-            cb_Status.Size = new Size(121, 23);
-            cb_Status.TabIndex = 36;
-            // 
-            // lb_test
-            // 
-            lb_test.AutoSize = true;
-            lb_test.Location = new Point(117, 15);
-            lb_test.Name = "lb_test";
-            lb_test.Size = new Size(38, 15);
-            lb_test.TabIndex = 37;
-            lb_test.Text = "label1";
-            // 
-            // tb_acceptDate
-            // 
-            tb_acceptDate.Location = new Point(327, 248);
-            tb_acceptDate.Name = "tb_acceptDate";
-            tb_acceptDate.Size = new Size(199, 23);
-            tb_acceptDate.TabIndex = 38;
-            // 
             // AcceptInviteForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 417);
-            Controls.Add(tb_acceptDate);
-            Controls.Add(lb_test);
-            Controls.Add(cb_Status);
             Controls.Add(bt_decline);
             Controls.Add(bt_AcceptInv);
             Controls.Add(tb_Description);
@@ -286,8 +256,5 @@
         private Label lb_Description;
         private Button bt_AcceptInv;
         private Button bt_decline;
-        private ComboBox cb_Status;
-        private Label lb_test;
-        private TextBox tb_acceptDate;
     }
 }

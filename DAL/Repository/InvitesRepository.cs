@@ -125,6 +125,7 @@ namespace DAL.Repository
                 invite.UserId = dbinvite.User_ID;
                 invite.InviteDate = (DateTime)dbinvite.Invite_Date;
                 invite.InviteStatus = dbinvite.Invite_status;
+                invite.AcceptDate = (DateTime)dbinvite.Accept_date;
 
                 result.Add(invite);
             }

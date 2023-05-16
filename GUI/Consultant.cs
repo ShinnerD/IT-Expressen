@@ -1,6 +1,7 @@
 ﻿using Domain.Services;
 using Interfaces.Models;
 using Interfaces.Services;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace GUI
 {
@@ -12,6 +13,8 @@ namespace GUI
         private IInviteService invService = new InviteService();
 
         private IUserService userService = new UserService();
+
+        private List<IInvitesModel> invites;
 
         public Consultant(string username)
         {
@@ -59,12 +62,15 @@ namespace GUI
         private void bt_SearchProjects_Click(object sender, EventArgs e)
         {
         }
-
+        //Clears and loads the Datagridview //MS
         private void LoadInvitesToDGV()
         {
-            dgv_ConsultantsInvites.DataSource = invService.GetInvitedUserIDList(userModelGet.ID);
+            IInviteService inviteService = new InviteService();
+            invites = inviteService.GetInvitedUserIDList(userModelGet.ID);
+            dgv_ConsultantsInvites.DataSource = null;
+            dgv_ConsultantsInvites.DataSource = invites;
         }
-
+        //Opens the form to accept the selected invitation, then refreshes the datagridview /MS
         private void bt_seeInviteDetails_Click(object sender, EventArgs e)
         {
             var selectedProject = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as IInvitesModel;
@@ -72,6 +78,9 @@ namespace GUI
             this.Hide();
             AccInvForm.ShowDialog();
             this.Show();
+            LoadInvitesToDGV();
+
         }
+
     }
 }

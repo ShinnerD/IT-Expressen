@@ -40,7 +40,7 @@ namespace Domain.Services
         {
             InvRespo.UpdateInviteStatus(inviteModel, projectID);
         }
-        public void AddInvites(int ProjectID, int UserID, DateTime inviteDate, string InviteStatus, DateTime AcceptDate)
+        public void AddInvites(int ProjectID, int UserID, DateTime inviteDate, string InviteStatus)
         {
             IInvitesModel newInvite = new DAL.Models.InvitesModel();
 
@@ -48,7 +48,6 @@ namespace Domain.Services
             newInvite.UserId = UserID;
             newInvite.InviteDate = DateTime.Now;
             newInvite.InviteStatus = InviteStatus;
-            newInvite.AcceptDate = AcceptDate;
 
             InvRespo.AddInvite(newInvite);
 
