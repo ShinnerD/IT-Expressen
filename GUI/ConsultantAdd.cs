@@ -71,7 +71,7 @@ namespace GUI
             return result;
         }
 
-        //Loads dgv_ConsultantList, rearrange the order and disables certen columns /MS
+        //Loads dgv_ConsultantList, rearrange the order and disables certain columns /MS
         private void SetupDataGridView()
         {
             dgv_ConsultantList.AutoGenerateColumns = false;
@@ -117,8 +117,7 @@ namespace GUI
                     ProjectGet.ProjectId,
                     (int)dgv_ConsultantList.CurrentRow.Cells["UserId"].Value,
                     DateTime.Now,
-                    "Pending",
-                    DateTime.Now);
+                    "Pending");
 
                 lblFeedback.ForeColor = System.Drawing.Color.Green;
                 lblFeedback.Text = "Invite Sent to " + (string)dgv_ConsultantList.CurrentRow.Cells["FullName"].Value;
@@ -129,8 +128,9 @@ namespace GUI
                 {
                     lblFeedback.ForeColor = Color.Red;
                     lblFeedback.Text = "This person already has an invitation to this project.";
-                }
+                }              
             }
+            
         }
 
         // Button click event -> see method for results /MS

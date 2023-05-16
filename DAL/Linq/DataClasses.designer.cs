@@ -912,7 +912,7 @@ namespace DAL.Linq
 		
 		private int _Project_ID;
 		
-		private System.Nullable<int> _User_ID;
+		private int _User_ID;
 		
 		private string _Title;
 		
@@ -946,7 +946,7 @@ namespace DAL.Linq
     partial void OnCreated();
     partial void OnProject_IDChanging(int value);
     partial void OnProject_IDChanged();
-    partial void OnUser_IDChanging(System.Nullable<int> value);
+    partial void OnUser_IDChanging(int value);
     partial void OnUser_IDChanged();
     partial void OnTitleChanging(string value);
     partial void OnTitleChanged();
@@ -996,7 +996,7 @@ namespace DAL.Linq
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_User_ID", DbType="Int")]
-		public System.Nullable<int> User_ID
+		public int User_ID
 		{
 			get
 			{
@@ -1251,7 +1251,7 @@ namespace DAL.Linq
 					}
 					else
 					{
-						this._User_ID = default(Nullable<int>);
+						this._User_ID = default(int);
 					}
 					this.SendPropertyChanged("User");
 				}

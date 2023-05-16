@@ -7,6 +7,7 @@ namespace Interfaces.Repositories
         List<IUserModel> GetAllUsers();
 
         IUserModel GetUser(string username);
+        IUserModel GetUserFromID(int ID);
 
         void AddUser(IUserModel userModel, List<string> specializations);
         void Delete(string delete);

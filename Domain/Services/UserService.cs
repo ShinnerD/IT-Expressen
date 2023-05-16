@@ -17,7 +17,10 @@ namespace Domain.Services
         //{
         //    return userRepo.GetUserTypeList(UserType);
         //}
-
+        public IUserModel GetUserFromID(int ID)
+        {
+            return userRepo.GetUserFromID(ID);
+        }
         public IUserModel GetUser(string userName)
         {
             return userRepo.GetUser(userName);

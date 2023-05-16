@@ -48,6 +48,7 @@
             pb_ConnectionStatus = new PictureBox();
             label2 = new Label();
             img_RedGreen = new ImageList(components);
+            sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
             ((System.ComponentModel.ISupportInitialize)pic_ProfilePic).BeginInit();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pb_ConnectionStatus).BeginInit();
@@ -222,6 +223,11 @@
             img_RedGreen.Images.SetKeyName(0, "Red.png");
             img_RedGreen.Images.SetKeyName(1, "green-check-transparent-background-21.png");
             // 
+            // sqlCommand1
+            // 
+            sqlCommand1.CommandTimeout = 30;
+            sqlCommand1.EnableOptimizedParameterBinding = false;
+            // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -271,5 +277,6 @@
         private PictureBox pb_ConnectionStatus;
         private Label label2;
         private ImageList img_RedGreen;
+        private Microsoft.Data.SqlClient.SqlCommand sqlCommand1;
     }
 }

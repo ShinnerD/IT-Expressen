@@ -9,6 +9,7 @@ namespace Interfaces.Services
         //List<IUserModel> GetUserTypeList(string UserType);
 
         IUserModel GetUser(string userName);
+        IUserModel GetUserFromID(int ID);
 
         string GetUserType(string userName);
 
