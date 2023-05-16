@@ -61,25 +61,25 @@
             btn_SearchUsers = new Button();
             txtBox_UserSearchParams = new TextBox();
             tabPage_Projects = new TabPage();
+            btn_NewProject = new Button();
+            btn_EditProject = new Button();
+            btn_DeleteProject = new Button();
+            dgv_ProjectSearchResults = new DataGridView();
             groupBox1 = new GroupBox();
+            radio_Ended = new RadioButton();
             radio_InProgress = new RadioButton();
-            radio_Pending = new RadioButton();
             radio_AllProjects = new RadioButton();
+            radio_Pending = new RadioButton();
             btn_SearchProjects = new Button();
             txtBox_ProjectSearchParams = new TextBox();
-            radio_Ended = new RadioButton();
-            dgv_ProjectSearchResults = new DataGridView();
-            btn_DeleteProject = new Button();
-            btn_EditProject = new Button();
-            btn_NewProject = new Button();
             grpBoxProfileInfo.SuspendLayout();
             tabControl.SuspendLayout();
             tabPage_Users.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_UserSearchResults).BeginInit();
             grpBoxUserSearchFilter.SuspendLayout();
             tabPage_Projects.SuspendLayout();
-            groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_ProjectSearchResults).BeginInit();
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // grpBoxProfileInfo
@@ -125,6 +125,7 @@
             bt_EditProfileCancel.Text = "Cancel";
             bt_EditProfileCancel.UseVisualStyleBackColor = true;
             bt_EditProfileCancel.Visible = false;
+            bt_EditProfileCancel.Click += bt_EditProfileCancel_Click;
             // 
             // lblUserCreationDate
             // 
@@ -158,6 +159,7 @@
             bt_EditProfile.TabIndex = 9;
             bt_EditProfile.Text = "Edit Profile";
             bt_EditProfile.UseVisualStyleBackColor = true;
+            bt_EditProfile.Click += bt_EditProfile_Click;
             // 
             // tb_Firstname
             // 
@@ -366,7 +368,7 @@
             tabPage_Users.Location = new Point(4, 24);
             tabPage_Users.Name = "tabPage_Users";
             tabPage_Users.Padding = new Padding(3);
-            tabPage_Users.Size = new Size(731, 395);
+            tabPage_Users.Size = new Size(745, 408);
             tabPage_Users.TabIndex = 0;
             tabPage_Users.Text = "Users";
             // 
@@ -374,7 +376,7 @@
             // 
             btn_NewUser.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btn_NewUser.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_NewUser.Location = new Point(9, 364);
+            btn_NewUser.Location = new Point(9, 377);
             btn_NewUser.Margin = new Padding(2);
             btn_NewUser.Name = "btn_NewUser";
             btn_NewUser.Size = new Size(107, 25);
@@ -386,7 +388,7 @@
             // 
             btn_DeleteUser.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btn_DeleteUser.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_DeleteUser.Location = new Point(628, 364);
+            btn_DeleteUser.Location = new Point(642, 377);
             btn_DeleteUser.Margin = new Padding(2);
             btn_DeleteUser.Name = "btn_DeleteUser";
             btn_DeleteUser.Size = new Size(100, 25);
@@ -398,7 +400,7 @@
             // 
             btn_EditUser.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btn_EditUser.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_EditUser.Location = new Point(460, 364);
+            btn_EditUser.Location = new Point(474, 377);
             btn_EditUser.Margin = new Padding(2);
             btn_EditUser.Name = "btn_EditUser";
             btn_EditUser.Size = new Size(100, 25);
@@ -419,8 +421,9 @@
             dgv_UserSearchResults.RowHeadersVisible = false;
             dgv_UserSearchResults.RowTemplate.Height = 25;
             dgv_UserSearchResults.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv_UserSearchResults.Size = new Size(731, 293);
+            dgv_UserSearchResults.Size = new Size(745, 306);
             dgv_UserSearchResults.TabIndex = 1;
+            dgv_UserSearchResults.DataBindingComplete += dgv_UserSearchResults_DataBindingComplete;
             // 
             // grpBoxUserSearchFilter
             // 
@@ -432,7 +435,7 @@
             grpBoxUserSearchFilter.Dock = DockStyle.Top;
             grpBoxUserSearchFilter.Location = new Point(3, 3);
             grpBoxUserSearchFilter.Name = "grpBoxUserSearchFilter";
-            grpBoxUserSearchFilter.Size = new Size(725, 63);
+            grpBoxUserSearchFilter.Size = new Size(739, 63);
             grpBoxUserSearchFilter.TabIndex = 30;
             grpBoxUserSearchFilter.TabStop = false;
             grpBoxUserSearchFilter.Text = "Search Filter";
@@ -481,6 +484,7 @@
             btn_SearchUsers.TabIndex = 10;
             btn_SearchUsers.Text = "Search";
             btn_SearchUsers.UseVisualStyleBackColor = true;
+            btn_SearchUsers.Click += btn_SearchUsers_Click;
             // 
             // txtBox_UserSearchParams
             // 
@@ -504,6 +508,58 @@
             tabPage_Projects.TabIndex = 1;
             tabPage_Projects.Text = "Projects";
             // 
+            // btn_NewProject
+            // 
+            btn_NewProject.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btn_NewProject.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_NewProject.Location = new Point(9, 376);
+            btn_NewProject.Margin = new Padding(2);
+            btn_NewProject.Name = "btn_NewProject";
+            btn_NewProject.Size = new Size(107, 25);
+            btn_NewProject.TabIndex = 35;
+            btn_NewProject.Text = "Invoice Details";
+            btn_NewProject.UseVisualStyleBackColor = true;
+            // 
+            // btn_EditProject
+            // 
+            btn_EditProject.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btn_EditProject.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_EditProject.Location = new Point(486, 376);
+            btn_EditProject.Margin = new Padding(2);
+            btn_EditProject.Name = "btn_EditProject";
+            btn_EditProject.Size = new Size(100, 25);
+            btn_EditProject.TabIndex = 34;
+            btn_EditProject.Text = "Edit";
+            btn_EditProject.UseVisualStyleBackColor = true;
+            // 
+            // btn_DeleteProject
+            // 
+            btn_DeleteProject.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btn_DeleteProject.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_DeleteProject.Location = new Point(638, 376);
+            btn_DeleteProject.Margin = new Padding(2);
+            btn_DeleteProject.Name = "btn_DeleteProject";
+            btn_DeleteProject.Size = new Size(100, 25);
+            btn_DeleteProject.TabIndex = 33;
+            btn_DeleteProject.Text = "Delete";
+            btn_DeleteProject.UseVisualStyleBackColor = true;
+            // 
+            // dgv_ProjectSearchResults
+            // 
+            dgv_ProjectSearchResults.AllowUserToAddRows = false;
+            dgv_ProjectSearchResults.AllowUserToDeleteRows = false;
+            dgv_ProjectSearchResults.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgv_ProjectSearchResults.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv_ProjectSearchResults.Location = new Point(0, 63);
+            dgv_ProjectSearchResults.MultiSelect = false;
+            dgv_ProjectSearchResults.Name = "dgv_ProjectSearchResults";
+            dgv_ProjectSearchResults.ReadOnly = true;
+            dgv_ProjectSearchResults.RowHeadersVisible = false;
+            dgv_ProjectSearchResults.RowTemplate.Height = 25;
+            dgv_ProjectSearchResults.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv_ProjectSearchResults.Size = new Size(745, 306);
+            dgv_ProjectSearchResults.TabIndex = 32;
+            // 
             // groupBox1
             // 
             groupBox1.Controls.Add(radio_Ended);
@@ -520,6 +576,17 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Search Filter";
             // 
+            // radio_Ended
+            // 
+            radio_Ended.AutoSize = true;
+            radio_Ended.Location = new Point(633, 24);
+            radio_Ended.Name = "radio_Ended";
+            radio_Ended.Size = new Size(58, 19);
+            radio_Ended.TabIndex = 35;
+            radio_Ended.TabStop = true;
+            radio_Ended.Text = "Ended";
+            radio_Ended.UseVisualStyleBackColor = true;
+            // 
             // radio_InProgress
             // 
             radio_InProgress.AutoSize = true;
@@ -530,17 +597,6 @@
             radio_InProgress.TabStop = true;
             radio_InProgress.Text = "In Progress";
             radio_InProgress.UseVisualStyleBackColor = true;
-            // 
-            // radio_Pending
-            // 
-            radio_Pending.AutoSize = true;
-            radio_Pending.Location = new Point(558, 24);
-            radio_Pending.Name = "radio_Pending";
-            radio_Pending.Size = new Size(69, 19);
-            radio_Pending.TabIndex = 32;
-            radio_Pending.TabStop = true;
-            radio_Pending.Text = "Pending";
-            radio_Pending.UseVisualStyleBackColor = true;
             // 
             // radio_AllProjects
             // 
@@ -553,6 +609,17 @@
             radio_AllProjects.TabStop = true;
             radio_AllProjects.Text = "All";
             radio_AllProjects.UseVisualStyleBackColor = true;
+            // 
+            // radio_Pending
+            // 
+            radio_Pending.AutoSize = true;
+            radio_Pending.Location = new Point(558, 24);
+            radio_Pending.Name = "radio_Pending";
+            radio_Pending.Size = new Size(69, 19);
+            radio_Pending.TabIndex = 32;
+            radio_Pending.TabStop = true;
+            radio_Pending.Text = "Pending";
+            radio_Pending.UseVisualStyleBackColor = true;
             // 
             // btn_SearchProjects
             // 
@@ -572,69 +639,6 @@
             txtBox_ProjectSearchParams.Size = new Size(283, 23);
             txtBox_ProjectSearchParams.TabIndex = 0;
             // 
-            // radio_Ended
-            // 
-            radio_Ended.AutoSize = true;
-            radio_Ended.Location = new Point(633, 24);
-            radio_Ended.Name = "radio_Ended";
-            radio_Ended.Size = new Size(58, 19);
-            radio_Ended.TabIndex = 35;
-            radio_Ended.TabStop = true;
-            radio_Ended.Text = "Ended";
-            radio_Ended.UseVisualStyleBackColor = true;
-            // 
-            // dgv_ProjectSearchResults
-            // 
-            dgv_ProjectSearchResults.AllowUserToAddRows = false;
-            dgv_ProjectSearchResults.AllowUserToDeleteRows = false;
-            dgv_ProjectSearchResults.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dgv_ProjectSearchResults.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_ProjectSearchResults.Location = new Point(0, 63);
-            dgv_ProjectSearchResults.MultiSelect = false;
-            dgv_ProjectSearchResults.Name = "dgv_ProjectSearchResults";
-            dgv_ProjectSearchResults.ReadOnly = true;
-            dgv_ProjectSearchResults.RowHeadersVisible = false;
-            dgv_ProjectSearchResults.RowTemplate.Height = 25;
-            dgv_ProjectSearchResults.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv_ProjectSearchResults.Size = new Size(745, 306);
-            dgv_ProjectSearchResults.TabIndex = 32;
-            // 
-            // btn_DeleteProject
-            // 
-            btn_DeleteProject.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btn_DeleteProject.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_DeleteProject.Location = new Point(638, 376);
-            btn_DeleteProject.Margin = new Padding(2);
-            btn_DeleteProject.Name = "btn_DeleteProject";
-            btn_DeleteProject.Size = new Size(100, 25);
-            btn_DeleteProject.TabIndex = 33;
-            btn_DeleteProject.Text = "Delete";
-            btn_DeleteProject.UseVisualStyleBackColor = true;
-            // 
-            // btn_EditProject
-            // 
-            btn_EditProject.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btn_EditProject.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_EditProject.Location = new Point(486, 376);
-            btn_EditProject.Margin = new Padding(2);
-            btn_EditProject.Name = "btn_EditProject";
-            btn_EditProject.Size = new Size(100, 25);
-            btn_EditProject.TabIndex = 34;
-            btn_EditProject.Text = "Edit";
-            btn_EditProject.UseVisualStyleBackColor = true;
-            // 
-            // btn_NewProject
-            // 
-            btn_NewProject.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btn_NewProject.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_NewProject.Location = new Point(9, 376);
-            btn_NewProject.Margin = new Padding(2);
-            btn_NewProject.Name = "btn_NewProject";
-            btn_NewProject.Size = new Size(107, 25);
-            btn_NewProject.TabIndex = 35;
-            btn_NewProject.Text = "New User";
-            btn_NewProject.UseVisualStyleBackColor = true;
-            // 
             // Admin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -645,7 +649,6 @@
             MinimumSize = new Size(755, 625);
             Name = "Admin";
             Text = "Admin";
-            Load += Admin_Load;
             grpBoxProfileInfo.ResumeLayout(false);
             grpBoxProfileInfo.PerformLayout();
             tabControl.ResumeLayout(false);
@@ -654,9 +657,9 @@
             grpBoxUserSearchFilter.ResumeLayout(false);
             grpBoxUserSearchFilter.PerformLayout();
             tabPage_Projects.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgv_ProjectSearchResults).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgv_ProjectSearchResults).EndInit();
             ResumeLayout(false);
         }
 
