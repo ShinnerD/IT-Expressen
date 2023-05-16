@@ -1,9 +1,11 @@
-﻿using Interfaces.Models;
+﻿using DAL.Repository;
+using Interfaces.Models;
 
 namespace DAL.Models
 {
     public class ProjectModel : IProjectModel
     {
+        public string ManagerFullName { get { return new UserRepository().GetUserFromID(UserId).FullName; } }
         public int ProjectId { get; set; }
         public int UserId { get; set; }
         public string Title { get; set; }

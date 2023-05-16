@@ -112,7 +112,9 @@ namespace DAL.Repository
         {
             List<int> targetSpecIds = dbContext.Specialisations.Where(i => specializations.Contains(i.Specialisation1)).Select(i => i.Spec_Id).ToList();
 
-            var dtoProjects = dbContext.Projects.Where(i => targetSpecIds.Any(v => i.Projects_Specialisation_Lines.Select(x => x.Spec_Id).Contains(v))).ToList();
+            if (targetSpecIds.Count == 0) return new List<IProjectModel>();
+
+            var dtoProjects = dbContext.Projects.Where(i => i.Projects_Specialisation_Lines.Count == 0 ||  i.Projects_Specialisation_Lines.Any(x => targetSpecIds.Contains(x.Spec_Id))).ToList();
 
             List<IProjectModel> result = TransferAllProjectProperties(dtoProjects);
 

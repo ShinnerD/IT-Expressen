@@ -412,6 +412,7 @@
             // 
             dgv_UserSearchResults.AllowUserToAddRows = false;
             dgv_UserSearchResults.AllowUserToDeleteRows = false;
+            dgv_UserSearchResults.AllowUserToResizeRows = false;
             dgv_UserSearchResults.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgv_UserSearchResults.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_UserSearchResults.Location = new Point(0, 63);
@@ -559,6 +560,7 @@
             dgv_ProjectSearchResults.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv_ProjectSearchResults.Size = new Size(745, 306);
             dgv_ProjectSearchResults.TabIndex = 32;
+            dgv_ProjectSearchResults.DataBindingComplete += dgv_UserSearchResults_DataBindingComplete;
             // 
             // groupBox1
             // 
@@ -631,6 +633,7 @@
             btn_SearchProjects.TabIndex = 10;
             btn_SearchProjects.Text = "Search";
             btn_SearchProjects.UseVisualStyleBackColor = true;
+            btn_SearchProjects.Click += btn_SearchProjects_Click;
             // 
             // txtBox_ProjectSearchParams
             // 
@@ -638,6 +641,7 @@
             txtBox_ProjectSearchParams.Name = "txtBox_ProjectSearchParams";
             txtBox_ProjectSearchParams.Size = new Size(283, 23);
             txtBox_ProjectSearchParams.TabIndex = 0;
+            txtBox_ProjectSearchParams.KeyDown += txtBox_ProjectSearchParams_KeyDown;
             // 
             // Admin
             // 

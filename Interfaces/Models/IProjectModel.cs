@@ -2,6 +2,7 @@
 {
     public interface IProjectModel
     {
+        string ManagerFullName { get; }
         DateTime? ProjectEndDate { get; set; }
         int ProjectId { get; set; }
         DateTime? ProjectModifyDate { get; set; }
