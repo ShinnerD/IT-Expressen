@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
@@ -48,12 +48,12 @@
             bt_FindConsultants = new Button();
             bt_NewProject = new Button();
             grpBoxProfileInfo = new GroupBox();
+            bt_EditProfileCancel = new Button();
             lblUserCreationDate = new Label();
             bt_EditProfile = new Button();
             groupBox2 = new GroupBox();
             bt_EditProject = new Button();
             dgv_Viewproject = new DataGridView();
-            bt_EditProfileCancel = new Button();
             grpBoxProfileInfo.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_Viewproject).BeginInit();
@@ -311,6 +311,21 @@
             grpBoxProfileInfo.TabStop = false;
             grpBoxProfileInfo.Text = "User Name";
             // 
+            // bt_EditProfileCancel
+            // 
+            bt_EditProfileCancel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            bt_EditProfileCancel.Enabled = false;
+            bt_EditProfileCancel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            bt_EditProfileCancel.Location = new Point(484, 126);
+            bt_EditProfileCancel.Margin = new Padding(2);
+            bt_EditProfileCancel.Name = "bt_EditProfileCancel";
+            bt_EditProfileCancel.Size = new Size(100, 25);
+            bt_EditProfileCancel.TabIndex = 9;
+            bt_EditProfileCancel.Text = "Cancel";
+            bt_EditProfileCancel.UseVisualStyleBackColor = true;
+            bt_EditProfileCancel.Visible = false;
+            bt_EditProfileCancel.Click += bt_EditProfileCancel_Click;
+            // 
             // lblUserCreationDate
             // 
             lblUserCreationDate.AutoSize = true;
@@ -347,7 +362,7 @@
             groupBox2.Size = new Size(699, 275);
             groupBox2.TabIndex = 22;
             groupBox2.TabStop = false;
-            groupBox2.Text = "Current Projects";
+            groupBox2.Text = "Projects";
             // 
             // bt_EditProject
             // 
@@ -369,14 +384,14 @@
             dgv_Viewproject.AllowUserToResizeRows = false;
             dgv_Viewproject.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgv_Viewproject.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dgv_Viewproject.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dgv_Viewproject.DefaultCellStyle = dataGridViewCellStyle1;
             dgv_Viewproject.Location = new Point(3, 21);
             dgv_Viewproject.Margin = new Padding(2);
             dgv_Viewproject.MultiSelect = false;
@@ -388,21 +403,6 @@
             dgv_Viewproject.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv_Viewproject.Size = new Size(693, 209);
             dgv_Viewproject.TabIndex = 10;
-            // 
-            // bt_EditProfileCancel
-            // 
-            bt_EditProfileCancel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            bt_EditProfileCancel.Enabled = false;
-            bt_EditProfileCancel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            bt_EditProfileCancel.Location = new Point(484, 126);
-            bt_EditProfileCancel.Margin = new Padding(2);
-            bt_EditProfileCancel.Name = "bt_EditProfileCancel";
-            bt_EditProfileCancel.Size = new Size(100, 25);
-            bt_EditProfileCancel.TabIndex = 9;
-            bt_EditProfileCancel.Text = "Cancel";
-            bt_EditProfileCancel.UseVisualStyleBackColor = true;
-            bt_EditProfileCancel.Visible = false;
-            bt_EditProfileCancel.Click += bt_EditProfileCancel_Click;
             // 
             // Manager
             // 
