@@ -25,6 +25,7 @@ namespace GUI
         private void SetUpProjects()
         {
             dgv_Viewproject.AutoGenerateColumns = false;
+            dgv_Viewproject.StandardTab = true;
 
             dgv_Viewproject.Columns.Add("Title", "Project Name");
             dgv_Viewproject.Columns["Title"].DataPropertyName = "Title";
@@ -208,6 +209,7 @@ namespace GUI
             if (control is TextBox)
             {
                 control.Enabled = unlock;
+                control.TabStop = unlock;
                 if (unlock)
                 {
                     control.BackColor = SystemColors.Window;
