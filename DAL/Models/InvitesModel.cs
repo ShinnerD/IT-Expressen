@@ -1,4 +1,5 @@
-﻿using Interfaces.Models;
+﻿using DAL.Repository;
+using Interfaces.Models;
 
 namespace DAL.Models
 {
@@ -12,5 +13,6 @@ namespace DAL.Models
         public DateTime InviteDate { get; set; }
         public string? InviteStatus { get; set; }
         public DateTime AcceptDate { get; set; }
+        public string UserName { get {return new UserRepository().GetUserFromID(this.UserId).UserName; } }
     }
 }

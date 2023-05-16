@@ -136,14 +136,14 @@ namespace GUI
             dgv_ConsultantsInvites.Columns.Add("InviteStatus", "Invite Status");
             dgv_ConsultantsInvites.Columns["InviteStatus"].DataPropertyName = "InviteStatus";
 
+            dgv_ConsultantsInvites.Columns.Add("AcceptDate", "Accept Date");
+            dgv_ConsultantsInvites.Columns["AcceptDate"].DataPropertyName = "AcceptDate";
+
             dgv_ConsultantsInvites.Columns.Add("InviteDate", "Invitation Date");
             dgv_ConsultantsInvites.Columns["InviteDate"].DataPropertyName = "InviteDate";
 
             dgv_ConsultantsInvites.Columns.Add("ProjectId", "Project ID");
             dgv_ConsultantsInvites.Columns["ProjectId"].DataPropertyName = "ProjectId";
-
-            dgv_ConsultantsInvites.Columns.Add("UserId", "User Name");
-            dgv_ConsultantsInvites.Columns["UserId"].DataPropertyName = userServiceGet.GetUser(userModelGet.UserName).ID.ToString();
 
             IInviteService inviteService = new InviteService();
             invites = inviteService.GetInvitedUserIDList(userModelGet.ID);
