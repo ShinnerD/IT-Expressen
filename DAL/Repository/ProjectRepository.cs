@@ -126,6 +126,7 @@ namespace DAL.Repository
         /// </summary>
         private List<IProjectModel> TransferAllProjectProperties(List<Linq.Project> dtoProjects)
         {
+            IUserRepository userRepo = new UserRepository();
             List<IProjectModel> result = new List<IProjectModel>();
 
             foreach (var dtoProject in dtoProjects)
@@ -143,6 +144,8 @@ namespace DAL.Repository
                     projectModel.ProjectModifyDate = dtoProject.Project_Modify_Date;
                     projectModel.TotalInvoicePrice = dtoProject.Total_Invoice_Price;
                     projectModel.ProjectStatus = dtoProject.Project_Status;
+                    projectModel.ManagerFullName = userRepo.GetUserFromID(dtoProject.User_ID).FullName;
+                    projectModel.ManagerUserName = userRepo.GetUserFromID(dtoProject.User_ID).UserName;
 
                     result.Add(projectModel);
                 }

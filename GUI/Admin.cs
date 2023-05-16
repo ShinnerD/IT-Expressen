@@ -37,7 +37,6 @@ namespace GUI
         private void SetUpProjectDataGridView()
         {
             dgv_ProjectSearchResults.AutoGenerateColumns = false;
-            dgv_UserSearchResults.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
 
             dgv_ProjectSearchResults.Columns.Add("ProjectId", "ID");
             dgv_ProjectSearchResults.Columns["ProjectId"].DataPropertyName = "ProjectId";
@@ -71,7 +70,6 @@ namespace GUI
         private void SetUpUserDataGridView()
         {
             dgv_UserSearchResults.AutoGenerateColumns = false;
-            dgv_UserSearchResults.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 
             dgv_UserSearchResults.Columns.Add("UserId", "ID");
             dgv_UserSearchResults.Columns["UserId"].DataPropertyName = "ID";
