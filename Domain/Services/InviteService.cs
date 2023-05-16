@@ -36,9 +36,9 @@ namespace Domain.Services
         {
             return InvRespo.GetInviteUserName(UserName);
         }
-        void IInviteService.UpdateInviteStatus(IInvitesModel inviteModel)
+        public void UpdateInviteStatus(IInvitesModel inviteModel, int projectID)
         {
-            InvRespo.UpdateInviteStatus(inviteModel);
+            InvRespo.UpdateInviteStatus(inviteModel, projectID);
         }
         public void AddInvites(int ProjectID, int UserID, DateTime inviteDate, string InviteStatus, DateTime AcceptDate)
         {

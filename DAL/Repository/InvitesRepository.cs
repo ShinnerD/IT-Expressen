@@ -2,7 +2,6 @@
 using DAL.Models;
 using Interfaces.Models;
 using Interfaces.Repositories;
-using System.Data.Linq;
 
 ///Writen by Erik
 
@@ -14,8 +13,6 @@ namespace DAL.Repository
         /// <summary>
         /// retrieving data from Database and Repository too store data
         /// </summary>
-
-        public int ProjectId { get; private set; }
 
         /// <summary>
         /// Getting a list off all invites, with the attributes that is in invites.
@@ -67,6 +64,7 @@ namespace DAL.Repository
             }
             return result;
         }
+
         /// <summary>
         /// Getting a list off a specifik invite with a specifik ProjectID
         /// </summary>
@@ -87,6 +85,7 @@ namespace DAL.Repository
 
             return result;
         }
+
         /// <summary>
         /// Getting a list off a specifik invite with a specifik UserId
         /// </summary>
@@ -107,6 +106,7 @@ namespace DAL.Repository
 
             return result;
         }
+
         public List<IInvitesModel> GetInviteUserIdList(int UserId)
         {
             List<IInvitesModel> result = new List<IInvitesModel>();
@@ -123,13 +123,14 @@ namespace DAL.Repository
                 IInvitesModel invite = new InvitesModel();
                 invite.ProjectId = dbinvite.Project_ID;
                 invite.UserId = dbinvite.User_ID;
-                invite.InviteDate = (DateTime) dbinvite.Invite_Date;
+                invite.InviteDate = (DateTime)dbinvite.Invite_Date;
                 invite.InviteStatus = dbinvite.Invite_status;
-                
+
                 result.Add(invite);
             }
             return result;
         }
+
         //Repo method to link userName with an invite //MS
         public IInvitesModel GetInviteUserName(string Username)
         {
@@ -145,6 +146,7 @@ namespace DAL.Repository
 
             return result;
         }
+
         //Repo method to add invitations to a project, the invited consultants userID is stored /MD
         public void AddInvite(IInvitesModel inviteModel/*, List<string> specializtions*/)
         {
@@ -153,27 +155,23 @@ namespace DAL.Repository
 
             var linqInviteModel = new Linq.Invite();
 
-
             linqInviteModel.Project_ID = inviteModel.ProjectId;
             linqInviteModel.User_ID = inviteModel.UserId;
             linqInviteModel.Invite_Date = inviteModel.InviteDate;
             linqInviteModel.Invite_status = inviteModel.InviteStatus;
             linqInviteModel.Accept_date = inviteModel.AcceptDate;
 
-
             DataContext.Invites.InsertOnSubmit(linqInviteModel);
             DataContext.SubmitChanges();
 
-
-
             //specRepo.AddSpecializationsToUser(linqInviteModel.User_ID, specializtions);
         }
-        void IInvitesRepository.UpdateInviteStatus (IInvitesModel inviteModel)
-        {
-            
-            var dbInvites = DataContext.Invites.FirstOrDefault(i => i.User_ID == inviteModel.UserId);
 
-            if (dbInvites != null && inviteModel != null) 
+        public void UpdateInviteStatus(IInvitesModel inviteModel, int ProjectID)
+        {
+            var dbInvites = DataContext.Invites.FirstOrDefault(i => i.User_ID == inviteModel.UserId && i.Project_ID == ProjectID);
+
+            if (dbInvites != null && inviteModel != null)
             {
                 dbInvites.Invite_status = inviteModel.InviteStatus;
                 dbInvites.Accept_date = inviteModel.AcceptDate;
@@ -183,11 +181,6 @@ namespace DAL.Repository
 
                 DataContext.SubmitChanges();
             }
-
-            
         }
-        
-
-
     }
 }

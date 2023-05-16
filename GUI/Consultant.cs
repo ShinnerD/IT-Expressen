@@ -17,7 +17,6 @@ namespace GUI
         {
             InitializeComponent();
             Username = username;
-            userModelGet = userService.GetUser(username);
             GetUser();
             SetUpTB();
             LoadInvitesToDGV();

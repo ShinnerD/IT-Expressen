@@ -71,7 +71,7 @@ namespace GUI
             return result;
         }
 
-        //Loads dgv_ConsultantList, rearrange the order and disables certen columns /MS
+        //Loads dgv_ConsultantList, rearrange the order and disables certain columns /MS
         private void SetupDataGridView()
         {
             dgv_ConsultantList.AutoGenerateColumns = false;

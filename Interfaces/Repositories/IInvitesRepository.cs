@@ -9,7 +9,6 @@ namespace Interfaces.Repositories
 {
     public interface IInvitesRepository
     {
-        int ProjectId { get; }
         /// <summary>
         /// Returns a List of IInvitesRepository with projects related to AllProjectID provided. 
         /// </summary>
@@ -28,7 +27,7 @@ namespace Interfaces.Repositories
         IInvitesModel GetInviteUserId(int UserId);
         List<IInvitesModel> GetInviteUserIdList(int UserId);
         IInvitesModel GetInviteUserName(string Username);
-        void UpdateInviteStatus(IInvitesModel inviteModel);
+        void UpdateInviteStatus(IInvitesModel inviteModel, int ProjectID);
 
         void AddInvite(IInvitesModel inviteModel/*, List<string> specializtions*/);
     }

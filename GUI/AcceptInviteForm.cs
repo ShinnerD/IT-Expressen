@@ -1,7 +1,6 @@
-﻿using Interfaces.Models;
+﻿using Domain.Services;
+using Interfaces.Models;
 using Interfaces.Services;
-using Domain.Services;
-using DAL.Linq;
 
 namespace GUI
 {
@@ -10,8 +9,6 @@ namespace GUI
         private int ProjectID { get; set; }
 
         private IProjectModel ProjectGet { get; set; }
-
-        private IUserService UserService = new UserService();
 
         private IInviteService InvService = new InviteService();
 
@@ -39,9 +36,7 @@ namespace GUI
 
             ProjectGet = projectService.GetProject(ProjectID);
             Invite = inviteService.GetInvitedProjectId(ProjectID);
-
         }
-
 
         //Loads the data transfered into textboxes, so the user can see the information about the given project //MS
         private void LoadProjectData()
@@ -53,42 +48,39 @@ namespace GUI
             tb_ProjectStartDate.Text = ProjectGet.ProjectStartDate.ToString();
             tb_ProjectEndDate.Text = ProjectGet.ProjectEndDate.ToString();
             tb_Description.Text = ProjectGet.Description;
-
         }
-
 
         private void button1_Click(object sender, EventArgs e)
         {
             Accept();
         }
+
         private void Accept()
         {
-            lb_test.Text = "Accepted";
-
             IInviteService inviteService = new Domain.Services.InviteService();
 
-            Invite.InviteStatus = lb_test.Text;
-            Invite.InviteDate = DateTime.Now;
+            Invite.InviteStatus = "Accepted";
+            Invite.AcceptDate = DateTime.Now;
 
-
-            inviteService.UpdateInviteStatus(Invite);
+            inviteService.UpdateInviteStatus(Invite, ProjectID);
+            this.Close();
         }
 
         private void bt_decline_Click(object sender, EventArgs e)
         {
             Declined();
-
+            
         }
+
         private void Declined()
         {
-            lb_test.Text = "Declined";
-
             IInviteService inviteService = new Domain.Services.InviteService();
 
-            Invite.InviteStatus = lb_test.Text;
-            Invite.InviteDate = DateTime.Now;
+            Invite.InviteStatus = "Declined";
+            Invite.AcceptDate = DateTime.Now;
 
-            inviteService.UpdateInviteStatus(Invite);
+            inviteService.UpdateInviteStatus(Invite, ProjectID);
+            this.Close();
         }
     }
 }
