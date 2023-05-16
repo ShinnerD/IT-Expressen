@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Interfaces.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,7 @@ namespace Interfaces.Models
         string? InviteStatus { get; set; }
         int ProjectId { get; set; }
         int UserId { get; set; }
+        string UserName { get; }
     }
 
 }
