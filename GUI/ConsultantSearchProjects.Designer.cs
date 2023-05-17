@@ -74,6 +74,16 @@
             btnSearch.UseVisualStyleBackColor = true;
             btnSearch.Click += btnSearch_Click;
             // 
+            // btnSearch
+            // 
+            btnSearch.Location = new Point(476, 333);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(103, 47);
+            btnSearch.TabIndex = 28;
+            btnSearch.Text = "SearchProject";
+            btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
+            // 
             // ConsultantSearchProjects
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
