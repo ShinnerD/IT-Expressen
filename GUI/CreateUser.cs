@@ -132,7 +132,7 @@ namespace GUI
             if (user.UserType == "admin")
             {
                 this.Hide();
-                GUI.Admin a = new Admin();
+                GUI.Admin a = new Admin(user.UserName);
                 a.Show();
             }
         }

@@ -68,6 +68,11 @@ namespace GUI
                 result.Add(specialization);
             }
 
+            if (result.Count <= 0) 
+            {
+                result.AddRange(checkedListSkills.Items.Cast<string>());
+            }
+
             return result;
         }
 

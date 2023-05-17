@@ -1,4 +1,5 @@
-﻿using Interfaces.Models;
+﻿using DAL.Repository;
+using Interfaces.Models;
 
 namespace DAL.Models
 {
@@ -6,7 +7,9 @@ namespace DAL.Models
     {
         public int ProjectId { get; set; }
         public int UserId { get; set; }
-        public string Title { get; set; }
+        public string? Title { get; set; }
+        public string? ManagerUserName { get; set; }
+        public string? ManagerFullName { get; set; }
         public DateTime? ProjectStartDate { get; set; }
         public DateTime? ProjectEndDate { get; set; }
         public DateTime? ProjectModifyDate { get; set; }

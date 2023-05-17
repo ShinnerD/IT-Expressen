@@ -27,6 +27,7 @@ namespace GUI
             Username = username;
             GetUser();
             SetUpTB();
+            DataGridInitialSetup();
             LoadInvitesToDGV();
         }
 
@@ -128,8 +129,14 @@ namespace GUI
         //Clears and loads the Datagridview //MS
         private void LoadInvitesToDGV()
         {
-            userServiceGet = new UserService();
+            IInviteService inviteService = new InviteService();
+            invites = inviteService.GetInvitedUserIDList(userModelGet.ID);
+            dgv_ConsultantsInvites.DataSource = null;
+            dgv_ConsultantsInvites.DataSource = invites;
+        }
 
+        private void DataGridInitialSetup()
+        {
             dgv_ConsultantsInvites.AutoGenerateColumns = false;
             dgv_ConsultantsInvites.StandardTab = true;
 
@@ -144,12 +151,8 @@ namespace GUI
 
             dgv_ConsultantsInvites.Columns.Add("ProjectId", "Project ID");
             dgv_ConsultantsInvites.Columns["ProjectId"].DataPropertyName = "ProjectId";
-
-            IInviteService inviteService = new InviteService();
-            invites = inviteService.GetInvitedUserIDList(userModelGet.ID);
-            dgv_ConsultantsInvites.DataSource = null;
-            dgv_ConsultantsInvites.DataSource = invites;
         }
+
         //Opens the form to accept the selected invitation, then refreshes the datagridview /MS
         private void bt_seeInviteDetails_Click(object sender, EventArgs e)
         {
