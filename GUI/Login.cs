@@ -41,7 +41,7 @@ namespace GUI
         private void OpenAdminForm()
         {
             this.Hide();
-            Admin Admin = new Admin();
+            Admin Admin = new Admin("admin");
             Admin.ShowDialog();
             this.Show();
         }
@@ -104,7 +104,7 @@ namespace GUI
                 if (targetUser.Password == tb_Password.Text && targetUser.UserType == "admin")
                 {
                     this.Hide();
-                    GUI.Admin a = new Admin();
+                    GUI.Admin a = new Admin(targetUser.UserName);
                     a.Show();
                 }
             }
