@@ -28,45 +28,50 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dataGridView1 = new DataGridView();
-            comboBox1 = new ComboBox();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            dgv_Searchproject = new DataGridView();
+            checkedListSkills = new CheckedListBox();
+            ((System.ComponentModel.ISupportInitialize)dgv_Searchproject).BeginInit();
             SuspendLayout();
             // 
-            // dataGridView1
+            // dgv_Searchproject
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(51, 110);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.RowTemplate.Height = 33;
-            dataGridView1.Size = new Size(654, 345);
-            dataGridView1.TabIndex = 0;
+            dgv_Searchproject.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv_Searchproject.Location = new Point(30, 185);
+            dgv_Searchproject.Margin = new Padding(2);
+            dgv_Searchproject.Name = "dgv_Searchproject";
+            dgv_Searchproject.RowHeadersWidth = 62;
+            dgv_Searchproject.RowTemplate.Height = 33;
+            dgv_Searchproject.Size = new Size(458, 207);
+            dgv_Searchproject.TabIndex = 0;
+            dgv_Searchproject.CellContentClick += dgv_Searchproject_CellContentClick;
             // 
-            // comboBox1
+            // checkedListSkills
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(239, 47);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(182, 33);
-            comboBox1.TabIndex = 1;
+            checkedListSkills.FormattingEnabled = true;
+            checkedListSkills.Location = new Point(30, 33);
+            checkedListSkills.MultiColumn = true;
+            checkedListSkills.Name = "checkedListSkills";
+            checkedListSkills.Size = new Size(615, 130);
+            checkedListSkills.TabIndex = 27;
+            checkedListSkills.SelectedIndexChanged += checkedListSkills_SelectedIndexChanged;
             // 
             // ConsultantSearchProjects
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(comboBox1);
-            Controls.Add(dataGridView1);
+            ClientSize = new Size(739, 503);
+            Controls.Add(checkedListSkills);
+            Controls.Add(dgv_Searchproject);
+            Margin = new Padding(2);
             Name = "ConsultantSearchProjects";
             Text = "ConsultantSearchProjects";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgv_Searchproject).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private DataGridView dataGridView1;
-        private ComboBox comboBox1;
+        private DataGridView dgv_Searchproject;
+        private CheckedListBox checkedListSkills;
     }
 }
