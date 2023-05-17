@@ -43,7 +43,6 @@
             dgv_Searchproject.RowTemplate.Height = 33;
             dgv_Searchproject.Size = new Size(458, 207);
             dgv_Searchproject.TabIndex = 0;
-            dgv_Searchproject.CellContentClick += dgv_Searchproject_CellContentClick;
             // 
             // checkedListSkills
             // 
@@ -53,7 +52,6 @@
             checkedListSkills.Name = "checkedListSkills";
             checkedListSkills.Size = new Size(615, 130);
             checkedListSkills.TabIndex = 27;
-            checkedListSkills.SelectedIndexChanged += checkedListSkills_SelectedIndexChanged;
             // 
             // ConsultantSearchProjects
             // 
