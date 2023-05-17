@@ -30,46 +30,34 @@
         {
             dgv_Searchproject = new DataGridView();
             checkedListSkills = new CheckedListBox();
-            btnSearch = new Button();
             ((System.ComponentModel.ISupportInitialize)dgv_Searchproject).BeginInit();
             SuspendLayout();
             // 
             // dgv_Searchproject
             // 
             dgv_Searchproject.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_Searchproject.Location = new Point(27, 11);
+            dgv_Searchproject.Location = new Point(30, 185);
             dgv_Searchproject.Margin = new Padding(2);
             dgv_Searchproject.Name = "dgv_Searchproject";
             dgv_Searchproject.RowHeadersWidth = 62;
             dgv_Searchproject.RowTemplate.Height = 33;
-            dgv_Searchproject.Size = new Size(427, 284);
+            dgv_Searchproject.Size = new Size(458, 207);
             dgv_Searchproject.TabIndex = 0;
             // 
             // checkedListSkills
             // 
             checkedListSkills.FormattingEnabled = true;
-            checkedListSkills.Location = new Point(27, 333);
+            checkedListSkills.Location = new Point(30, 33);
             checkedListSkills.MultiColumn = true;
             checkedListSkills.Name = "checkedListSkills";
-            checkedListSkills.Size = new Size(427, 184);
+            checkedListSkills.Size = new Size(615, 130);
             checkedListSkills.TabIndex = 27;
-            // 
-            // btnSearch
-            // 
-            btnSearch.Location = new Point(476, 333);
-            btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(103, 47);
-            btnSearch.TabIndex = 28;
-            btnSearch.Text = "SearchProject";
-            btnSearch.UseVisualStyleBackColor = true;
-            btnSearch.Click += btnSearch_Click;
             // 
             // ConsultantSearchProjects
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(611, 573);
-            Controls.Add(btnSearch);
+            ClientSize = new Size(739, 503);
             Controls.Add(checkedListSkills);
             Controls.Add(dgv_Searchproject);
             Margin = new Padding(2);
@@ -83,6 +71,5 @@
 
         private DataGridView dgv_Searchproject;
         private CheckedListBox checkedListSkills;
-        private Button btnSearch;
     }
 }

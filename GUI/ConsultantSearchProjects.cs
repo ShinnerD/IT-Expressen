@@ -6,46 +6,28 @@ namespace GUI
 {
     public partial class ConsultantSearchProjects : Form
     {
-        private IProjectService projectService = new ProjectService();
-        private IUserService userService = new UserService();
-        private List<IProjectModel> projectsSearchResults;
-
-        public List<string> ConsultantSpecializations { get; set; }
-        private List<IProjectModel> SearchResults { get; set; }
-        public IUserModel Consultant { get; private set; }
+        private IProjectService projectService = new Domain.Services.ProjectService();
+        private IUserService userService = new Domain.Services.UserService();
+        public int ProjectId { get; set; }
         public int UserId { get; set; }
+        public IUserModel Consultant { get; private set; }
+        public List<string> ConsultantSpecializations { get; set; }
+
+        private List<IProjectModel> SearchResults { get; set; }
 
         public ConsultantSearchProjects(int userId)
         {
             InitializeComponent();
-            SetUpUserDataGridView();
             SetupSkillsCheckList();
             UserId = userId;
             GetProjectInfo();
             SetupPageElements();
-            SetupsDataGridview();
         }
 
-        private void SetUpUserDataGridView()
+
+        private void dgv_Searchproject_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            ISpecializationService specService = new SpecializationService();
-            dgv_Searchproject.AutoGenerateColumns = false;
 
-            dgv_Searchproject.Columns.Add("ProjectId", "ID");
-            dgv_Searchproject.Columns["ProjectId"].DataPropertyName = "ProjectId";
-
-            dgv_Searchproject.Columns.Add("ManagerUserName", "ManagerUserName");
-            dgv_Searchproject.Columns["ManagerUserName"].DataPropertyName = "ManagerUsername";
-
-            dgv_Searchproject.Columns.Add("Title", "Title");
-            dgv_Searchproject.Columns["Title"].DataPropertyName = "Title";
-
-            dgv_Searchproject.Columns.Add("ProjectStatus", "Status");
-            dgv_Searchproject.Columns["ProjectStatus"].DataPropertyName = "ProjectStatus";
-
-            List<string> allSpecializations = specService.ListDefinedSpecializations();
-            projectsSearchResults = projectService.GetProjectsFromAnySpecializations(allSpecializations).OrderBy(i => i.Title).ToList();
-            dgv_Searchproject.DataSource = projectsSearchResults;
         }
 
         private void GetProjectInfo()
@@ -80,7 +62,7 @@ namespace GUI
 
         private void SetupSkillsCheckList()
         {
-            ISpecializationService specService = new SpecializationService();
+            ISpecializationService specService = new Domain.Services.SpecializationService();
             List<string> items = specService.ListDefinedSpecializations().OrderBy(i => i).ToList();
 
             foreach (var item in items)
@@ -94,30 +76,8 @@ namespace GUI
             }
         }
 
-        private void SetupsDataGridview()
+        private void checkedListSkills_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ISpecializationService specService = new SpecializationService();
-            List<string> allSpecializations = specService.ListDefinedSpecializations();
-
-            // Filter projects based on selected skills
-            List<string> selectedSkills = new List<string>();
-
-            foreach (var item in checkedListSkills.CheckedItems)
-            {
-                if (item is string skill)
-                {
-                    selectedSkills.Add(skill);
-                }
-            }
-
-            SearchResults = projectService.GetProjectsFromAnySpecializations(selectedSkills);
-
-            dgv_Searchproject.DataSource = SearchResults;
-        }
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            SetupsDataGridview();
         }
     }
 }
