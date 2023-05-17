@@ -69,6 +69,7 @@
             label2.Size = new Size(62, 15);
             label2.TabIndex = 1;
             label2.Text = "Firstname:";
+            label2.Click += label2_Click;
             // 
             // label3
             // 
@@ -80,6 +81,7 @@
             label3.Size = new Size(39, 15);
             label3.TabIndex = 2;
             label3.Text = "Email:";
+            label3.Click += label3_Click;
             // 
             // label4
             // 
@@ -91,6 +93,7 @@
             label4.Size = new Size(44, 15);
             label4.TabIndex = 3;
             label4.Text = "Phone:";
+            label4.Click += label4_Click;
             // 
             // label5
             // 
@@ -102,6 +105,7 @@
             label5.Size = new Size(31, 15);
             label5.TabIndex = 4;
             label5.Text = "City:";
+            label5.Click += label5_Click;
             // 
             // label6
             // 
@@ -113,6 +117,7 @@
             label6.Size = new Size(52, 15);
             label6.TabIndex = 5;
             label6.Text = "Address:";
+            label6.Click += label6_Click;
             // 
             // label7
             // 
@@ -124,6 +129,7 @@
             label7.Size = new Size(61, 15);
             label7.TabIndex = 6;
             label7.Text = "Lastname:";
+            label7.Click += label7_Click;
             // 
             // label8
             // 
@@ -135,6 +141,7 @@
             label8.Size = new Size(53, 15);
             label8.TabIndex = 7;
             label8.Text = "Zipcode:";
+            label8.Click += label8_Click;
             // 
             // label9
             // 
@@ -146,6 +153,7 @@
             label9.Size = new Size(53, 15);
             label9.TabIndex = 8;
             label9.Text = "Country:";
+            label9.Click += label9_Click;
             // 
             // tb_Firstname
             // 
@@ -159,6 +167,7 @@
             tb_Firstname.Size = new Size(225, 16);
             tb_Firstname.TabIndex = 1;
             tb_Firstname.TabStop = false;
+            tb_Firstname.TextChanged += tb_Firstname_TextChanged;
             // 
             // tb_Email
             // 
@@ -172,6 +181,7 @@
             tb_Email.Size = new Size(225, 16);
             tb_Email.TabIndex = 3;
             tb_Email.TabStop = false;
+            tb_Email.TextChanged += tb_Email_TextChanged;
             // 
             // tb_Phonenumber
             // 
@@ -185,6 +195,7 @@
             tb_Phonenumber.Size = new Size(225, 16);
             tb_Phonenumber.TabIndex = 4;
             tb_Phonenumber.TabStop = false;
+            tb_Phonenumber.TextChanged += tb_Phonenumber_TextChanged;
             // 
             // tb_Lastname
             // 
@@ -198,6 +209,7 @@
             tb_Lastname.Size = new Size(225, 16);
             tb_Lastname.TabIndex = 2;
             tb_Lastname.TabStop = false;
+            tb_Lastname.TextChanged += tb_Lastname_TextChanged;
             // 
             // tb_Address
             // 
@@ -212,6 +224,7 @@
             tb_Address.Size = new Size(328, 16);
             tb_Address.TabIndex = 5;
             tb_Address.TabStop = false;
+            tb_Address.TextChanged += tb_Address_TextChanged;
             // 
             // tb_City
             // 
@@ -226,6 +239,7 @@
             tb_City.Size = new Size(328, 16);
             tb_City.TabIndex = 6;
             tb_City.TabStop = false;
+            tb_City.TextChanged += tb_City_TextChanged;
             // 
             // tb_Zipcode
             // 
@@ -240,6 +254,7 @@
             tb_Zipcode.Size = new Size(328, 16);
             tb_Zipcode.TabIndex = 7;
             tb_Zipcode.TabStop = false;
+            tb_Zipcode.TextChanged += tb_Zipcode_TextChanged;
             // 
             // tb_Country
             // 
@@ -254,6 +269,7 @@
             tb_Country.Size = new Size(328, 16);
             tb_Country.TabIndex = 8;
             tb_Country.TabStop = false;
+            tb_Country.TextChanged += tb_Country_TextChanged;
             // 
             // bt_FindConsultants
             // 
@@ -310,6 +326,7 @@
             grpBoxProfileInfo.TabIndex = 21;
             grpBoxProfileInfo.TabStop = false;
             grpBoxProfileInfo.Text = "User Name";
+            grpBoxProfileInfo.Enter += grpBoxProfileInfo_Enter;
             // 
             // bt_EditProfileCancel
             // 
@@ -335,6 +352,7 @@
             lblUserCreationDate.Size = new Size(186, 17);
             lblUserCreationDate.TabIndex = 100;
             lblUserCreationDate.Text = "You've been a user for 154 days";
+            lblUserCreationDate.Click += lblUserCreationDate_Click;
             // 
             // bt_EditProfile
             // 
