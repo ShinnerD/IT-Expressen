@@ -2,7 +2,6 @@
 using Domain.Services;
 using Interfaces.Models;
 using Interfaces.Services;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace GUI
 {
@@ -119,13 +118,17 @@ namespace GUI
         private void bt_ViewProjects_Click(object sender, EventArgs e)
         {
             int userId = userModelGet.ID;
-            ConsultantViewProjects ConviewProjects = new ConsultantViewProjects(userId);
-            ConviewProjects.ShowDialog();
+            ConsultantViewProjects viewProjectsForm = new ConsultantViewProjects(userId);
+            viewProjectsForm.ShowDialog();
         }
 
         private void bt_SearchProjects_Click(object sender, EventArgs e)
         {
+            int userId = userModelGet.ID;
+            ConsultantSearchProjects viewProjectsForm = new ConsultantSearchProjects(userId);
+            viewProjectsForm.ShowDialog();
         }
+
         //Clears and loads the Datagridview //MS
         private void LoadInvitesToDGV()
         {
