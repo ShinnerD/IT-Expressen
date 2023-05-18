@@ -1,3 +1,4 @@
+using DAL;
 using Domain.Services;
 using Interfaces.Models;
 using Interfaces.Services;
@@ -13,7 +14,7 @@ namespace GUI
         //Initializes needed methods and data, and start the AsyncTask /MS
         public Login(IDomainServiceManager domainServiceManager)
         {
-            ServiceManager = domainServiceManager;
+            ServiceManager = domainServiceManager ?? throw new ArgumentNullException(nameof(domainServiceManager));
             userService = ServiceManager.UserService;
             InitializeComponent();
             AsyncTask();
@@ -54,7 +55,7 @@ namespace GUI
             this.Hide();
             targetUser.UserName = "fbeccles0";
             targetUser.Password = "password";
-            Consultant consultant = new Consultant(targetUser.UserName);
+            Consultant consultant = new Consultant(ServiceManager, targetUser.UserName);
             consultant.ShowDialog();
             this.Show();
         }
@@ -62,7 +63,7 @@ namespace GUI
         private void OpenCreateUserForm()
         {
             this.Hide();
-            CreateUser createUser = new CreateUser();
+            CreateUser createUser = new CreateUser(ServiceManager);
             createUser.ShowDialog();
             this.Show();
         }
@@ -74,7 +75,7 @@ namespace GUI
             this.Hide();
             targetUser.UserName = "amusto0";
             targetUser.Password = "password";
-            Manager manager = new Manager(targetUser.UserName);
+            Manager manager = new Manager(ServiceManager, targetUser.UserName);
             manager.ShowDialog();
             this.Show();
         }
@@ -93,13 +94,13 @@ namespace GUI
                 if (targetUser.Password == tb_Password.Text && targetUser.UserType == "manager")
                 {
                     this.Hide();
-                    GUI.Manager a = new Manager(targetUser.UserName);
+                    GUI.Manager a = new Manager(ServiceManager, targetUser.UserName);
                     a.Show();
                 }
                 if (targetUser.Password == tb_Password.Text && targetUser.UserType == "consultant")
                 {
                     this.Hide();
-                    GUI.Consultant a = new Consultant(targetUser.UserName);
+                    GUI.Consultant a = new Consultant(ServiceManager, targetUser.UserName);
                     a.Show();
                 }
                 if (targetUser.Password == tb_Password.Text && targetUser.UserType == "admin")

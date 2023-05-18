@@ -7,21 +7,24 @@ namespace GUI
 {
     public partial class Consultant : Form
     {
-        public string Username { get; set; }
-        public IUserModel userModelGet { get; set; }
+        private IInviteService invService;
+        private IUserService userServiceGet;
+        private readonly IDomainServiceManager ServiceManager;
 
-        private IInvitesModel invitesModelGet { get; set; }
-
-        private IInviteService invService = new InviteService();
-
-        private IUserService userServiceGet = new UserService();
+        private string Username;
+        public IUserModel userModelGet;
 
         private List<IInvitesModel> invites;
+        private IInvitesModel invitesModelGet;
 
-        private IProjectModel ProjectGet { get; set; }
+        private IProjectModel ProjectGet;
 
-        public Consultant(string username)
+        public Consultant(IDomainServiceManager domainServiceManager, string username)
         {
+            ServiceManager = domainServiceManager ?? throw new ArgumentNullException(nameof(domainServiceManager));
+            invService = domainServiceManager.InviteService;
+            userServiceGet = domainServiceManager.UserService;
+
             InitializeComponent();
             Username = username;
             GetUser();
@@ -35,8 +38,7 @@ namespace GUI
         /// </summary>
         private void GetUser()
         {
-            IUserService userService = new UserService();
-            userModelGet = userService.GetUser(Username);
+            userModelGet = userServiceGet.GetUser(Username);
         }
 
         /// <summary>
@@ -67,7 +69,7 @@ namespace GUI
             else
             {
                 UpdateUserModel();
-                IUserService userService = new UserService();
+                IUserService userService = userServiceGet;
                 userService.UpdateUser(userModelGet);
                 UnlockProfileForEditing(grpBoxProfileInfo, false);
                 bt_EditCancel.Enabled = false;
@@ -118,21 +120,21 @@ namespace GUI
         private void bt_ViewProjects_Click(object sender, EventArgs e)
         {
             int userId = userModelGet.ID;
-            ConsultantViewProjects viewProjectsForm = new ConsultantViewProjects(userId);
+            ConsultantViewProjects viewProjectsForm = new ConsultantViewProjects(ServiceManager, userId);
             viewProjectsForm.ShowDialog();
         }
 
         private void bt_SearchProjects_Click(object sender, EventArgs e)
         {
             int userId = userModelGet.ID;
-            ConsultantSearchProjects viewProjectsForm = new ConsultantSearchProjects(userId);
+            ConsultantSearchProjects viewProjectsForm = new ConsultantSearchProjects(ServiceManager, userId);
             viewProjectsForm.ShowDialog();
         }
 
         //Clears and loads the Datagridview //MS
         private void LoadInvitesToDGV()
         {
-            IInviteService inviteService = new InviteService();
+            IInviteService inviteService = invService;
             invites = inviteService.GetInvitedUserIDList(userModelGet.ID);
             dgv_ConsultantsInvites.DataSource = null;
             dgv_ConsultantsInvites.DataSource = invites;
@@ -160,7 +162,7 @@ namespace GUI
         private void bt_seeInviteDetails_Click(object sender, EventArgs e)
         {
             var selectedProject = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as IInvitesModel;
-            AcceptInviteForm AccInvForm = new AcceptInviteForm(selectedProject.ProjectId);
+            AcceptInviteForm AccInvForm = new AcceptInviteForm(ServiceManager, selectedProject.ProjectId);
             this.Hide();
             AccInvForm.ShowDialog();
             this.Show();

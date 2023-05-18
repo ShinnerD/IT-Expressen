@@ -6,13 +6,13 @@ namespace GUI
 {
     public partial class Manager : Form
     {
-        private string Username { get; set; }
-        private IUserModel userModel { get; set; }
+        private string Username;
+        private IUserModel userModel;
         private readonly IDomainServiceManager ServiceManager;
 
         public Manager(IDomainServiceManager serviceManager, string username)
         {
-            ServiceManager = serviceManager;
+            ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
             InitializeComponent();
             Username = username;
             GetUser();
@@ -54,7 +54,7 @@ namespace GUI
         private void OpenNewProjectForm()
         {
             this.Hide();
-            Form newProjectForm = new NewProject(Username);
+            Form newProjectForm = new NewProject(ServiceManager, Username);
             newProjectForm.ShowDialog();
             this.Show();
         }
@@ -112,7 +112,7 @@ namespace GUI
             var selectedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;
             if (selectedProject != null)
             {
-                EditProject editProject = new EditProject(selectedProject.ProjectId);
+                EditProject editProject = new EditProject(ServiceManager, selectedProject.ProjectId);
                 this.Hide();
                 editProject.ShowDialog();
                 this.Show();
@@ -137,7 +137,7 @@ namespace GUI
             var selectedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;
             if (selectedProject != null)
             {
-                InviteConsultants invConSul = new InviteConsultants(selectedProject.ProjectId);
+                InviteConsultants invConSul = new InviteConsultants(ServiceManager, selectedProject.ProjectId);
                 this.Hide();
                 invConSul.ShowDialog();
                 this.Show();

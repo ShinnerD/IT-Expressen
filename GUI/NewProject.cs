@@ -6,11 +6,16 @@ namespace GUI
     public partial class NewProject : Form
     {
         public string CurrentUser { get; set; }
+        private readonly IDomainServiceManager ServiceManager;
 
-        public NewProject(string currentUser)
+
+        public NewProject(IDomainServiceManager serviceManager, string currentUser)
         {
+            ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
+
             InitializeComponent();
             SetupSkillsCheckList();
+
             lblFeedback.Text = string.Empty;
             CurrentUser = currentUser;
             txtBoxUserName.Text = currentUser; // <------- Should be deleted before release along with textbox in designer.  /DK
@@ -18,7 +23,7 @@ namespace GUI
 
         private void SetupSkillsCheckList()
         {
-            ISpecializationService specService = new Domain.Services.SpecializationService();
+            ISpecializationService specService = ServiceManager.SpecializationService;
             List<string> items = specService.ListDefinedSpecializations().OrderBy(i => i).ToList();
 
             foreach (var item in items)
@@ -42,7 +47,7 @@ namespace GUI
         {
             if (NoInputErrors())
             {
-                IProjectService projectService = new Domain.Services.ProjectService();
+                IProjectService projectService = ServiceManager.ProjectService;
 
                 List<string> reqSkills = FindCheckedSkills();
 

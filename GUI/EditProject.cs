@@ -6,12 +6,15 @@ namespace GUI
 {
     public partial class EditProject : Form
     {
+        private readonly IDomainServiceManager ServiceManager;
         public IProjectModel Project { get; set; }
         public int ProjectId { get; set; }
         public List<string> ProjectSpecializations { get; set; }
 
-        public EditProject(int projectId)
+        public EditProject(IDomainServiceManager serviceManager, int projectId)
         {
+            ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
+
             InitializeComponent();
             SetupSkillsCheckList();
             ProjectId = projectId;
@@ -21,8 +24,8 @@ namespace GUI
 
         private void GetProjectInfo()
         {
-            IProjectService projectService = new Domain.Services.ProjectService();
-            ISpecializationService specializationService = new Domain.Services.SpecializationService();
+            IProjectService projectService = ServiceManager.ProjectService;
+            ISpecializationService specializationService = ServiceManager.SpecializationService;
 
             Project = projectService.GetProject(ProjectId);
             ProjectSpecializations = specializationService.GetProjectSpecializations(ProjectId);
@@ -60,7 +63,7 @@ namespace GUI
 
         private void SetupSkillsCheckList()
         {
-            ISpecializationService specService = new Domain.Services.SpecializationService();
+            ISpecializationService specService = ServiceManager.SpecializationService;
             List<string> items = specService.ListDefinedSpecializations().OrderBy(i => i).ToList();
 
             foreach (var item in items)
@@ -88,8 +91,8 @@ namespace GUI
         {
             try
             {
-                IProjectService projectService = new Domain.Services.ProjectService();
-                ISpecializationService specializationService = new Domain.Services.SpecializationService();
+                IProjectService projectService = ServiceManager.ProjectService;
+                ISpecializationService specializationService = ServiceManager.SpecializationService;
 
                 List<string> removedSpecializations = CheckForRemovedSkills();
                 List<string> addedSpecializations = CheckForAddedSkills();

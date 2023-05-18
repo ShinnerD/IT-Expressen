@@ -9,6 +9,8 @@ namespace GUI
     {
         private IUserModel adminUser;
 
+        private readonly IDomainServiceManager ServiceManager;
+
         private IUserService userService;
         private IProjectService projectService;
         private ISpecializationService specializationService;
@@ -20,6 +22,8 @@ namespace GUI
 
         public Admin(IDomainServiceManager serviceManager, string username)
         {
+            ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
+
             userService = serviceManager.UserService;
             projectService = serviceManager.ProjectService;
             specializationService = serviceManager.SpecializationService;
@@ -187,7 +191,6 @@ namespace GUI
             else
             {
                 UpdateUserModel();
-                IUserService userService = new UserService();
                 userService.UpdateUser(adminUser);
                 UnlockProfileForEditing(grpBoxProfileInfo, false);
                 bt_EditProfileCancel.Enabled = false;
@@ -201,7 +204,7 @@ namespace GUI
         /// </summary>
         private void PerformUserSearch(string userName = "")
         {
-            IUserService _ = new UserService();
+            IUserService _ = userService;
             string searchString = txtBox_UserSearchParams.Text;
             dgv_UserSearchResults.DataSource = null;
 
@@ -281,13 +284,13 @@ namespace GUI
         {
             if (userType == "manager")
             {
-                Manager manager = new Manager(userName);
+                Manager manager = new Manager(ServiceManager, userName);
                 manager.ShowDialog();
                 PerformUserSearch(userName);
             }
             if (userType == "consultant")
             {
-                Consultant consultant = new Consultant(userName);
+                Consultant consultant = new Consultant(ServiceManager, userName);
                 consultant.ShowDialog();
                 PerformUserSearch(userName);
             }

@@ -12,18 +12,25 @@ namespace GUI
         private List<IUserModel> SearchResults { get; set; }
         private IProjectModel ProjectGet { get; set; }
 
-        private IUserService UserService = new UserService();
-        private ISpecializationService SpecService = new SpecializationService();
+
+        private readonly IDomainServiceManager ServiceManager;
+        private IUserService userService;
+        private ISpecializationService SpecService;
 
         private List<string> ProjectSpecializations { get; set; }
 
         //Constructor method loaded with project ID. All relevent data is loaded /MS
-        public ConsultantAdd(int projectID)
+        public ConsultantAdd(IDomainServiceManager serviceManager, int projectID)
         {
+            ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
+            userService = ServiceManager.UserService;
+            SpecService = ServiceManager.SpecializationService;
+
             ProjectID = projectID;
             ProjectSpecializations = SpecService.GetProjectSpecializations(ProjectID);
 
             InitializeComponent();
+            
             lblFeedback.Text = "";
 
             GetProjectInfo();
@@ -44,11 +51,11 @@ namespace GUI
 
             if (!radioBtnAll.Checked)
             {
-                SearchResults = UserService.GetUsersWithAnySpecializations(searchParams);
+                SearchResults = userService.GetUsersWithAnySpecializations(searchParams);
             }
             else
             {
-                SearchResults = UserService.GetUsersWithAllSpecializations(searchParams);
+                SearchResults = userService.GetUsersWithAllSpecializations(searchParams);
             }
 
             SpecService.FillUserSpecializationsProperty(SearchResults);
@@ -104,8 +111,8 @@ namespace GUI
         //Gets data on projects and specializations /MS
         private void GetProjectInfo()
         {
-            IProjectService projectService = new Domain.Services.ProjectService();
-            ISpecializationService specializationService = new Domain.Services.SpecializationService();
+            IProjectService projectService = ServiceManager.ProjectService;
+            ISpecializationService specializationService = SpecService;
 
             ProjectGet = projectService.GetProject(ProjectID);
             ProjectSpecializations = specializationService.GetProjectSpecializations(ProjectID);
@@ -116,7 +123,7 @@ namespace GUI
         {
             try
             {
-                IInviteService inviteService = new Domain.Services.InviteService();
+                IInviteService inviteService = ServiceManager.InviteService;
 
                 inviteService.AddInvites(
                     ProjectGet.ProjectId,
@@ -153,7 +160,7 @@ namespace GUI
         //Sets up the selection of skills at the initialization of the window /DK
         private void SetupSkillsCheckList()
         {
-            ISpecializationService specService = new Domain.Services.SpecializationService();
+            ISpecializationService specService = SpecService;
             List<string> items = specService.ListDefinedSpecializations().OrderBy(i => i).ToList();
 
             foreach (var item in items)

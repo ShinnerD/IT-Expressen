@@ -6,11 +6,15 @@ namespace GUI
 {
     public partial class CreateUser : Form
     {
+        private readonly IDomainServiceManager ServiceManager;
         private List<IUserModel> allUsers { get; set; }
-        private IUserService userService = new UserService();
+        private IUserService userService;
 
-        public CreateUser()
+        public CreateUser(IDomainServiceManager serviceManager)
         {
+            ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
+            userService = ServiceManager.UserService;
+
             InitializeComponent();
             LoadUserData();
             SetupSkillsCheckList();
@@ -22,9 +26,6 @@ namespace GUI
             {
                 if (NoInputErrors())
                 {
-                    ISpecializationService UserSpecializationService = new SpecializationService();
-                    IUserService userService = new Domain.Services.UserService();
-
                     userService.AddUser(
                         tb_UserName.Text,
                         tb_Password.Text,
@@ -68,7 +69,7 @@ namespace GUI
         //Initialize user data //MS
         private void LoadUserData()
         {
-            var UserService = new Domain.Services.UserService();
+            var UserService = ServiceManager.UserService;
             var OneUsers = UserService.GetUser(tb_UserName.Text);
         }
         // Button click event -> see method for results /MS
@@ -80,7 +81,7 @@ namespace GUI
         private void SetupSkillsCheckList()
         {
             clb_Skills.Enabled = false;
-            ISpecializationService specService = new Domain.Services.SpecializationService();
+            ISpecializationService specService = ServiceManager.SpecializationService;
             List<string> items = specService.ListDefinedSpecializations().OrderBy(i => i).ToList();
 
             foreach (var item in items)
@@ -120,19 +121,19 @@ namespace GUI
             if (user.UserType == "manager")
             {
                 this.Close();
-                GUI.Manager a = new Manager(user.UserName);
+                GUI.Manager a = new Manager(ServiceManager, user.UserName);
                 a.Show();
             }
             if (user.UserType == "consultant")
             {
                 this.Hide();
-                GUI.Consultant a = new Consultant(user.UserName);
+                GUI.Consultant a = new Consultant(ServiceManager, user.UserName);
                 a.Show();
             }
             if (user.UserType == "admin")
             {
                 this.Hide();
-                GUI.Admin a = new Admin(user.UserName);
+                GUI.Admin a = new Admin(ServiceManager, user.UserName);
                 a.Show();
             }
         }

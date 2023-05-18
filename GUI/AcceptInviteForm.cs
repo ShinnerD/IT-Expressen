@@ -9,17 +9,24 @@ namespace GUI
         private int ProjectID { get; set; }
 
         private IProjectModel ProjectGet { get; set; }
-
-        private IInviteService InvService = new InviteService();
-
         private IInvitesModel Invite { get; set; }
 
-        private IUserService UserServiceGet { get; set; }
 
-        public AcceptInviteForm(int projectID)
+        private readonly IDomainServiceManager ServiceManager;
+        private IInviteService InvService;
+        private IUserService UserServiceGet;
+
+
+
+        public AcceptInviteForm(IDomainServiceManager serviceManager, int projectID)
         {
-            InitializeComponent();
+            ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
+
+            InvService = ServiceManager.InviteService;
+            UserServiceGet = ServiceManager.UserService;
             ProjectID = projectID;
+
+            InitializeComponent();
             GetProjectInfo();
             LoadProjectData();
             StartDateCheck();
@@ -34,8 +41,8 @@ namespace GUI
 
         private void GetProjectInfo()
         {
-            IProjectService projectService = new ProjectService();
-            IInviteService inviteService = new InviteService();
+            IProjectService projectService = ServiceManager.ProjectService;
+            IInviteService inviteService = ServiceManager.InviteService;
 
             ProjectGet = projectService.GetProject(ProjectID);
             Invite = inviteService.GetInvitedProjectId(ProjectID);
@@ -44,7 +51,7 @@ namespace GUI
         //Loads the data transfered into textboxes, so the user can see the information about the given project //MS
         private void LoadProjectData()
         {
-            UserServiceGet = new UserService();
+            UserServiceGet = ServiceManager.UserService;
 
             tb_ProjectID.Text = ProjectGet.ProjectId.ToString();
             tb_Title.Text = ProjectGet.Title;
@@ -73,7 +80,7 @@ namespace GUI
 
         private void Accept()
         {
-            IInviteService inviteService = new Domain.Services.InviteService();
+            IInviteService inviteService = ServiceManager.InviteService;
 
             Invite.InviteStatus = "Accepted";
             Invite.AcceptDate = DateTime.Now;
@@ -90,7 +97,7 @@ namespace GUI
 
         private void Declined()
         {
-            IInviteService inviteService = new Domain.Services.InviteService();
+            IInviteService inviteService = ServiceManager.InviteService;
 
             Invite.InviteStatus = "Declined";
             Invite.AcceptDate = DateTime.Now;

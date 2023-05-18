@@ -5,15 +5,20 @@ namespace GUI
 {
     public partial class ViewProjects : Form
     {
+        private readonly IDomainServiceManager ServiceManager;
+
         // Initialize the project service
-        private IProjectService projectService = new Domain.Services.ProjectService();
+        private IProjectService projectService;
 
         // Store the current user ID
         public int UserId { get; set; }
 
         // Constructor method
-        public ViewProjects(int userId)
+        public ViewProjects(IDomainServiceManager serviceManager, int userId)
         {
+            ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
+            projectService = ServiceManager.ProjectService;
+
             InitializeComponent();
             UserId = userId;
             ProjectsForManager();
@@ -44,7 +49,7 @@ namespace GUI
         private void ManageSelectedProject()
         {
             var selectedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;
-            EditProject editProject = new EditProject(selectedProject.ProjectId);
+            EditProject editProject = new EditProject(ServiceManager, selectedProject.ProjectId);
             this.Hide();
             editProject.ShowDialog();
             this.Show();
@@ -71,7 +76,7 @@ namespace GUI
         private void InvitedConsultantSelctedProject()
         {
             var selectedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;
-            InviteConsultants invConSul = new InviteConsultants(selectedProject.ProjectId);
+            InviteConsultants invConSul = new InviteConsultants(ServiceManager, selectedProject.ProjectId);
             this.Hide();
             invConSul.ShowDialog();
             this.Show();
