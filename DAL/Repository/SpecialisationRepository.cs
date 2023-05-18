@@ -20,16 +20,7 @@ namespace DAL.Repository
         /// </summary>
         public List<string> GetCurrentSpecializationsList()
         {
-            List<string> list = new List<string>();
-
-            var specList = dbContext.Specialisations;
-
-            foreach (var specialization in specList)
-            {
-                list.Add(specialization.Specialisation1);
-            }
-
-            return list;
+            return dbContext.Specialisations.Select(i => i.Specialisation1).ToList();
         }
 
         /// <summary>

@@ -23,7 +23,7 @@ namespace Domain.Services
         /// </summary>
         public List<string> ListDefinedSpecializations()
         {                            
-            return specRepo.GetCurrentSpecializationsList();
+            return specRepo.GetCurrentSpecializationsList().OrderBy(i => i).ToList();
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Domain.Services
         /// </summary>
         public List<string> GetProjectSpecializations(int projectId)
         {
-            return specRepo.GetProjectSpecializations(projectId);
+            return specRepo.GetProjectSpecializations(projectId).OrderBy(i => i).ToList();
         }
 
         /// <summary>
