@@ -29,8 +29,10 @@
         private void InitializeComponent()
         {
             grpBoxProfileInfo = new GroupBox();
+            label1 = new Label();
+            rtb_Description = new RichTextBox();
             bt_EditProfileCancel = new Button();
-            lblUserCreationDate = new Label();
+            lb_DaysTilEnd = new Label();
             bt_EditProfile = new Button();
             label2 = new Label();
             tb_ProjectID = new TextBox();
@@ -48,14 +50,21 @@
             label5 = new Label();
             label4 = new Label();
             label6 = new Label();
-            lb_test = new Label();
+            rtb_Message = new RichTextBox();
+            rtb_newMessage = new RichTextBox();
+            bt_send = new Button();
+            lb_TextCounter = new Label();
+            dgv_InvolvedUsers = new DataGridView();
             grpBoxProfileInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgv_InvolvedUsers).BeginInit();
             SuspendLayout();
             // 
             // grpBoxProfileInfo
             // 
+            grpBoxProfileInfo.Controls.Add(label1);
+            grpBoxProfileInfo.Controls.Add(rtb_Description);
             grpBoxProfileInfo.Controls.Add(bt_EditProfileCancel);
-            grpBoxProfileInfo.Controls.Add(lblUserCreationDate);
+            grpBoxProfileInfo.Controls.Add(lb_DaysTilEnd);
             grpBoxProfileInfo.Controls.Add(bt_EditProfile);
             grpBoxProfileInfo.Controls.Add(label2);
             grpBoxProfileInfo.Controls.Add(tb_ProjectID);
@@ -77,17 +86,38 @@
             grpBoxProfileInfo.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             grpBoxProfileInfo.Location = new Point(0, 0);
             grpBoxProfileInfo.Name = "grpBoxProfileInfo";
-            grpBoxProfileInfo.Size = new Size(699, 157);
+            grpBoxProfileInfo.Size = new Size(887, 157);
             grpBoxProfileInfo.TabIndex = 23;
             grpBoxProfileInfo.TabStop = false;
             grpBoxProfileInfo.Text = "User Name";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(693, 22);
+            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(70, 15);
+            label1.TabIndex = 102;
+            label1.Text = "Description:";
+            // 
+            // rtb_Description
+            // 
+            rtb_Description.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            rtb_Description.Location = new Point(693, 48);
+            rtb_Description.Name = "rtb_Description";
+            rtb_Description.ReadOnly = true;
+            rtb_Description.Size = new Size(182, 98);
+            rtb_Description.TabIndex = 101;
+            rtb_Description.Text = "";
             // 
             // bt_EditProfileCancel
             // 
             bt_EditProfileCancel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             bt_EditProfileCancel.Enabled = false;
             bt_EditProfileCancel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            bt_EditProfileCancel.Location = new Point(983, 126);
+            bt_EditProfileCancel.Location = new Point(1167, 126);
             bt_EditProfileCancel.Margin = new Padding(2);
             bt_EditProfileCancel.Name = "bt_EditProfileCancel";
             bt_EditProfileCancel.Size = new Size(100, 25);
@@ -96,21 +126,21 @@
             bt_EditProfileCancel.UseVisualStyleBackColor = true;
             bt_EditProfileCancel.Visible = false;
             // 
-            // lblUserCreationDate
+            // lb_DaysTilEnd
             // 
-            lblUserCreationDate.AutoSize = true;
-            lblUserCreationDate.Font = new Font("Segoe UI", 9.75F, FontStyle.Italic, GraphicsUnit.Point);
-            lblUserCreationDate.Location = new Point(219, 129);
-            lblUserCreationDate.Name = "lblUserCreationDate";
-            lblUserCreationDate.Size = new Size(186, 17);
-            lblUserCreationDate.TabIndex = 100;
-            lblUserCreationDate.Text = "You've been a user for 154 days";
+            lb_DaysTilEnd.AutoSize = true;
+            lb_DaysTilEnd.Font = new Font("Segoe UI", 9.75F, FontStyle.Italic, GraphicsUnit.Point);
+            lb_DaysTilEnd.Location = new Point(219, 129);
+            lb_DaysTilEnd.Name = "lb_DaysTilEnd";
+            lb_DaysTilEnd.Size = new Size(186, 17);
+            lb_DaysTilEnd.TabIndex = 100;
+            lb_DaysTilEnd.Text = "You've been a user for 154 days";
             // 
             // bt_EditProfile
             // 
             bt_EditProfile.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             bt_EditProfile.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            bt_EditProfile.Location = new Point(1087, 126);
+            bt_EditProfile.Location = new Point(1271, 126);
             bt_EditProfile.Margin = new Padding(2);
             bt_EditProfile.Name = "bt_EditProfile";
             bt_EditProfile.Size = new Size(100, 25);
@@ -162,7 +192,7 @@
             tb_Country.Location = new Point(431, 101);
             tb_Country.Margin = new Padding(2);
             tb_Country.Name = "tb_Country";
-            tb_Country.Size = new Size(263, 16);
+            tb_Country.Size = new Size(251, 16);
             tb_Country.TabIndex = 8;
             tb_Country.TabStop = false;
             // 
@@ -192,7 +222,6 @@
             // 
             // tb_ProjectModifiedDate
             // 
-            tb_ProjectModifiedDate.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             tb_ProjectModifiedDate.BackColor = SystemColors.ControlLight;
             tb_ProjectModifiedDate.BorderStyle = BorderStyle.None;
             tb_ProjectModifiedDate.Enabled = false;
@@ -200,7 +229,7 @@
             tb_ProjectModifiedDate.Location = new Point(431, 74);
             tb_ProjectModifiedDate.Margin = new Padding(2);
             tb_ProjectModifiedDate.Name = "tb_ProjectModifiedDate";
-            tb_ProjectModifiedDate.Size = new Size(263, 16);
+            tb_ProjectModifiedDate.Size = new Size(251, 16);
             tb_ProjectModifiedDate.TabIndex = 7;
             tb_ProjectModifiedDate.TabStop = false;
             // 
@@ -228,7 +257,6 @@
             // 
             // tb_ProjectEndDate
             // 
-            tb_ProjectEndDate.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             tb_ProjectEndDate.BackColor = SystemColors.ControlLight;
             tb_ProjectEndDate.BorderStyle = BorderStyle.None;
             tb_ProjectEndDate.Enabled = false;
@@ -236,7 +264,7 @@
             tb_ProjectEndDate.Location = new Point(431, 48);
             tb_ProjectEndDate.Margin = new Padding(2);
             tb_ProjectEndDate.Name = "tb_ProjectEndDate";
-            tb_ProjectEndDate.Size = new Size(263, 16);
+            tb_ProjectEndDate.Size = new Size(251, 16);
             tb_ProjectEndDate.TabIndex = 6;
             tb_ProjectEndDate.TabStop = false;
             // 
@@ -255,7 +283,6 @@
             // 
             // tb_ProjectStartDate
             // 
-            tb_ProjectStartDate.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             tb_ProjectStartDate.BackColor = SystemColors.ControlLight;
             tb_ProjectStartDate.BorderStyle = BorderStyle.None;
             tb_ProjectStartDate.Enabled = false;
@@ -263,7 +290,7 @@
             tb_ProjectStartDate.Location = new Point(431, 22);
             tb_ProjectStartDate.Margin = new Padding(2);
             tb_ProjectStartDate.Name = "tb_ProjectStartDate";
-            tb_ProjectStartDate.Size = new Size(263, 16);
+            tb_ProjectStartDate.Size = new Size(251, 16);
             tb_ProjectStartDate.TabIndex = 5;
             tb_ProjectStartDate.TabStop = false;
             // 
@@ -313,26 +340,72 @@
             label6.TabIndex = 5;
             label6.Text = "Project Start Date:";
             // 
-            // lb_test
+            // rtb_Message
             // 
-            lb_test.AutoSize = true;
-            lb_test.Location = new Point(169, 279);
-            lb_test.Name = "lb_test";
-            lb_test.Size = new Size(38, 15);
-            lb_test.TabIndex = 24;
-            lb_test.Text = "label1";
+            rtb_Message.Location = new Point(26, 181);
+            rtb_Message.Name = "rtb_Message";
+            rtb_Message.ReadOnly = true;
+            rtb_Message.Size = new Size(661, 207);
+            rtb_Message.TabIndex = 24;
+            rtb_Message.Text = "";
+            // 
+            // rtb_newMessage
+            // 
+            rtb_newMessage.Location = new Point(26, 394);
+            rtb_newMessage.Name = "rtb_newMessage";
+            rtb_newMessage.Size = new Size(661, 96);
+            rtb_newMessage.TabIndex = 25;
+            rtb_newMessage.Text = "";
+            rtb_newMessage.TextChanged += rtb_newMessage_TextChanged;
+            // 
+            // bt_send
+            // 
+            bt_send.Location = new Point(612, 504);
+            bt_send.Name = "bt_send";
+            bt_send.Size = new Size(75, 23);
+            bt_send.TabIndex = 26;
+            bt_send.Text = "Send";
+            bt_send.UseVisualStyleBackColor = true;
+            bt_send.Click += bt_send_Click;
+            // 
+            // lb_TextCounter
+            // 
+            lb_TextCounter.AutoSize = true;
+            lb_TextCounter.BackColor = SystemColors.Window;
+            lb_TextCounter.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lb_TextCounter.Location = new Point(611, 471);
+            lb_TextCounter.Name = "lb_TextCounter";
+            lb_TextCounter.Size = new Size(40, 15);
+            lb_TextCounter.TabIndex = 27;
+            lb_TextCounter.Text = "0/255";
+            // 
+            // dgv_InvolvedUsers
+            // 
+            dgv_InvolvedUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv_InvolvedUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv_InvolvedUsers.Location = new Point(693, 181);
+            dgv_InvolvedUsers.Name = "dgv_InvolvedUsers";
+            dgv_InvolvedUsers.RowHeadersVisible = false;
+            dgv_InvolvedUsers.RowTemplate.Height = 25;
+            dgv_InvolvedUsers.Size = new Size(182, 346);
+            dgv_InvolvedUsers.TabIndex = 28;
             // 
             // ManageProject
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(699, 539);
-            Controls.Add(lb_test);
+            ClientSize = new Size(887, 539);
+            Controls.Add(dgv_InvolvedUsers);
+            Controls.Add(lb_TextCounter);
+            Controls.Add(bt_send);
+            Controls.Add(rtb_newMessage);
+            Controls.Add(rtb_Message);
             Controls.Add(grpBoxProfileInfo);
             Name = "ManageProject";
             Text = "ManageProject";
             grpBoxProfileInfo.ResumeLayout(false);
             grpBoxProfileInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgv_InvolvedUsers).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -341,7 +414,7 @@
 
         private GroupBox grpBoxProfileInfo;
         private Button bt_EditProfileCancel;
-        private Label lblUserCreationDate;
+        private Label lb_DaysTilEnd;
         private Button bt_EditProfile;
         private Label label2;
         private TextBox tb_ProjectID;
@@ -359,6 +432,12 @@
         private Label label5;
         private Label label4;
         private Label label6;
-        private Label lb_test;
+        private RichTextBox rtb_Message;
+        private RichTextBox rtb_newMessage;
+        private Button bt_send;
+        private Label lb_TextCounter;
+        private DataGridView dgv_InvolvedUsers;
+        private RichTextBox rtb_Description;
+        private Label label1;
     }
 }
