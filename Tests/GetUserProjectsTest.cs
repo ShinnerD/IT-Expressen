@@ -1,4 +1,5 @@
 ﻿using Domain.Services;
+using Interfaces.Services;
 
 namespace Tests
 {
@@ -13,8 +14,9 @@ namespace Tests
         public void GetUserProjects_ReturnsProjects()
         {
             // Arrange
+            IDomainServiceManager serviceManager = new DomainServiceManager();
+            var projectService = serviceManager.ProjectService;
             int userId = 1002;
-            var projectService = new ProjectService();
 
             // Act
             var projects = projectService.GetUserProjects(userId);

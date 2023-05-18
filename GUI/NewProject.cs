@@ -41,22 +41,23 @@ namespace GUI
         private void btnCreateProject_Click(object sender, EventArgs e)
         {
             SaveNewProject();
-            lblFeedback.Text = "New Project Saved!";
         }
 
         private void SaveNewProject()
         {
-            if (NoInputErrors())
+            try
             {
                 IProjectService projectService = ServiceManager.ProjectService;
 
                 List<string> reqSkills = FindCheckedSkills();
 
                 projectService.CreateProject(CurrentUser.ID, txtBoxTitle.Text, txtBoxDescription.Text, dTPstartDate.Value, dTPendDate.Value, reqSkills);
+
+                lblFeedback.Text = "New Project Saved!";
             }
-            else
+            catch (Exception e)
             {
-                lblFeedback.Text = "Please fill out all fields";
+                lblFeedback.Text = e.Message;
             }
         }
 
@@ -71,16 +72,16 @@ namespace GUI
             return result;
         }
 
-        private bool NoInputErrors()
-        {
-            if (txtBoxTitle.Text != string.Empty
-                && txtBoxDescription.Text != string.Empty
-                && txtBoxUserName.Text != string.Empty
-                && dTPendDate.Value > DateTime.Now)
-            {
-                return true;
-            }
-            return false;
-        }
+        //private bool NoInputErrors()
+        //{
+        //    if (txtBoxTitle.Text != string.Empty
+        //        && txtBoxDescription.Text != string.Empty
+        //        && txtBoxUserName.Text != string.Empty
+        //        && dTPendDate.Value > DateTime.Now)
+        //    {
+        //        return true;
+        //    }
+        //    return false;
+        //}
     }
 }

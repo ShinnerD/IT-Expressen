@@ -38,8 +38,36 @@ namespace Domain.Services
             newProject.TotalInvoicePrice = 0;
 
             SetProjectStatus(newProject);
+            CheckValuesForNewProject(newProject);
 
             _projectRepo.CreateProject(newProject, specializations);
+        }
+
+        /// <summary>
+        /// Private Service Method. Checks that attributes of the new project comply with business rules, or throws exception.
+        /// </summary>
+        private void CheckValuesForNewProject(IProjectModel newProject)
+        {
+            if (string.IsNullOrWhiteSpace(newProject.Title))
+            {
+                throw new ArgumentException("Project title can't be empty.");
+            }
+            if (string.IsNullOrWhiteSpace(newProject.Description))
+            {
+                throw new ArgumentException("Project description can't be empty.");
+            }
+            if (newProject.ProjectStartDate == default(DateTime) || newProject.ProjectEndDate == default(DateTime))
+            {
+                throw new ArgumentException("Project must have a start and end date.");
+            }
+            if (newProject.ProjectEndDate < DateTime.Now)
+            {
+                throw new ArgumentException("Project end date cannot be before the current date.");
+            }
+            if (newProject.ProjectStartDate > newProject.ProjectEndDate)
+            {
+                throw new ArgumentException("Project start date cannot be after end date.");
+            }
         }
 
         /// <summary>
@@ -47,18 +75,6 @@ namespace Domain.Services
         /// </summary>
         private void SetProjectStatus(IProjectModel project)
         {
-            if (project.ProjectStartDate == null || project.ProjectEndDate == null)
-            {
-                throw new ArgumentException("Project must have a Start and End date when being created.", nameof(project));
-            }
-            if (project.ProjectEndDate < DateTime.Now)
-            {
-                throw new ArgumentException("Project End Date cannot be before the current date, when submitting a new project.", nameof(project));
-            }
-            if (project.ProjectStartDate > project.ProjectEndDate)
-            {
-                throw new ArgumentException("Project Start Date cannot be after Project End Date, when submitting a new project.", nameof(project));
-            }
             if (project.ProjectStartDate > DateTime.Now)
             {
                 project.ProjectStatus = "Pending";
