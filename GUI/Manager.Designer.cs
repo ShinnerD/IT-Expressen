@@ -52,6 +52,7 @@
             lblUserCreationDate = new Label();
             bt_EditProfile = new Button();
             groupBox2 = new GroupBox();
+            bt_manageProject = new Button();
             bt_EditProject = new Button();
             dgv_Viewproject = new DataGridView();
             grpBoxProfileInfo.SuspendLayout();
@@ -275,7 +276,7 @@
             // 
             bt_FindConsultants.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             bt_FindConsultants.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            bt_FindConsultants.Location = new Point(6, 235);
+            bt_FindConsultants.Location = new Point(6, 342);
             bt_FindConsultants.Margin = new Padding(2);
             bt_FindConsultants.Name = "bt_FindConsultants";
             bt_FindConsultants.Size = new Size(110, 25);
@@ -288,7 +289,7 @@
             // 
             bt_NewProject.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             bt_NewProject.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            bt_NewProject.Location = new Point(360, 235);
+            bt_NewProject.Location = new Point(360, 342);
             bt_NewProject.Margin = new Padding(2);
             bt_NewProject.Name = "bt_NewProject";
             bt_NewProject.Size = new Size(110, 25);
@@ -369,6 +370,7 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(bt_manageProject);
             groupBox2.Controls.Add(bt_EditProject);
             groupBox2.Controls.Add(dgv_Viewproject);
             groupBox2.Controls.Add(bt_NewProject);
@@ -377,16 +379,26 @@
             groupBox2.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             groupBox2.Location = new Point(0, 157);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(699, 275);
+            groupBox2.Size = new Size(699, 382);
             groupBox2.TabIndex = 22;
             groupBox2.TabStop = false;
             groupBox2.Text = "Projects";
+            // 
+            // bt_manageProject
+            // 
+            bt_manageProject.Location = new Point(6, 30);
+            bt_manageProject.Name = "bt_manageProject";
+            bt_manageProject.Size = new Size(143, 23);
+            bt_manageProject.TabIndex = 14;
+            bt_manageProject.Text = "Manage Project";
+            bt_manageProject.UseVisualStyleBackColor = true;
+            bt_manageProject.Click += bt_manageProject_Click;
             // 
             // bt_EditProject
             // 
             bt_EditProject.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             bt_EditProject.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            bt_EditProject.Location = new Point(588, 235);
+            bt_EditProject.Location = new Point(588, 342);
             bt_EditProject.Margin = new Padding(2);
             bt_EditProject.Name = "bt_EditProject";
             bt_EditProject.Size = new Size(100, 25);
@@ -410,7 +422,7 @@
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
             dgv_Viewproject.DefaultCellStyle = dataGridViewCellStyle1;
-            dgv_Viewproject.Location = new Point(3, 21);
+            dgv_Viewproject.Location = new Point(3, 58);
             dgv_Viewproject.Margin = new Padding(2);
             dgv_Viewproject.MultiSelect = false;
             dgv_Viewproject.Name = "dgv_Viewproject";
@@ -419,14 +431,14 @@
             dgv_Viewproject.RowHeadersWidth = 62;
             dgv_Viewproject.RowTemplate.Height = 33;
             dgv_Viewproject.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv_Viewproject.Size = new Size(693, 209);
+            dgv_Viewproject.Size = new Size(693, 279);
             dgv_Viewproject.TabIndex = 10;
             // 
             // Manager
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(699, 432);
+            ClientSize = new Size(699, 539);
             Controls.Add(groupBox2);
             Controls.Add(grpBoxProfileInfo);
             Name = "Manager";
@@ -464,5 +476,6 @@
         private DataGridView dgv_Viewproject;
         private Button bt_EditProject;
         private Button bt_EditProfileCancel;
+        private Button bt_manageProject;
     }
 }
