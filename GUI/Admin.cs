@@ -18,11 +18,11 @@ namespace GUI
 
         private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
-        public Admin(string username)
+        public Admin(IDomainServiceManager serviceManager, string username)
         {
-            userService = new UserService();
-            projectService = new ProjectService();
-            specializationService = new SpecializationService();
+            userService = serviceManager.UserService;
+            projectService = serviceManager.ProjectService;
+            specializationService = serviceManager.SpecializationService;
 
             adminUser = userService.GetUser(username);
 

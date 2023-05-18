@@ -13,6 +13,6 @@ namespace DAL.Models
         public DateTime InviteDate { get; set; }
         public string? InviteStatus { get; set; }
         public DateTime AcceptDate { get; set; }
-        public string UserName { get {return new UserRepository().GetUserFromID(this.UserId).UserName; } }
+        public string UserName { get {return new UserRepository(DAL.DataContextManager.Instance).GetUserFromID(this.UserId).UserName; } }
     }
 }

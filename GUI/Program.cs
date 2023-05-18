@@ -1,3 +1,7 @@
+using Domain.Services;
+using Interfaces.Services;
+using System.ServiceProcess;
+
 namespace GUI
 {
     internal static class Program
@@ -11,7 +15,10 @@ namespace GUI
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Login());
+
+            IDomainServiceManager ServiceManager = new DomainServiceManager();
+
+            Application.Run(new Login(ServiceManager));
         }
     }
 }

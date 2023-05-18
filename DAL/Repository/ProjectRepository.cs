@@ -1,4 +1,5 @@
-﻿using DAL.Models;
+﻿using DAL.Linq;
+using DAL.Models;
 using Interfaces.Models;
 using Interfaces.Repositories;
 
@@ -6,18 +7,22 @@ namespace DAL.Repository
 {
     public class ProjectRepository : IProjectRepository
     {
-        private readonly Linq.DataClassesDataContext dbContext = new Linq.DataClassesDataContext(Linq.DbConnectionString.ConnectionString);
+        private readonly ISpecializationRepository specRepo;
+        private readonly IUserRepository userRepo;
+        private readonly DataClassesDataContext dbContext;
 
-        public ProjectRepository()
-        { }
+        public ProjectRepository(IDataContextManager dataContextManager)
+        {
+            dbContext = dataContextManager.GetContext() as DataClassesDataContext ?? throw new ArgumentNullException(nameof(dataContextManager));
+            specRepo = new SpecializationRepository(dataContextManager);
+            userRepo = new UserRepository(dataContextManager);
+        }
 
         /// <summary>
         /// Adds a project with all the details required in the parameter of the method to the database. /DK
         /// </summary>
         public void CreateProject(string userName, string title, string description, DateTime startDate, DateTime endDate, List<string> specializations)
         {
-            ISpecializationRepository specRepo = new SpecializationRepository();
-
             var newProject = new Linq.Project();
             var user = dbContext.Users.FirstOrDefault(i => i.User_name == userName);
 
@@ -126,7 +131,6 @@ namespace DAL.Repository
         /// </summary>
         private List<IProjectModel> TransferAllProjectProperties(List<Linq.Project> dtoProjects)
         {
-            IUserRepository userRepo = new UserRepository();
             List<IProjectModel> result = new List<IProjectModel>();
 
             foreach (var dtoProject in dtoProjects)

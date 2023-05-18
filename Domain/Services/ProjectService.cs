@@ -1,7 +1,4 @@
-﻿using DAL.Linq;
-using DAL.Models;
-using DAL.Repository;
-using Domain.Models;
+﻿using DAL.Repository;
 using Interfaces.Models;
 using Interfaces.Repositories;
 using Interfaces.Services;
@@ -13,14 +10,23 @@ namespace Domain.Services
     /// </summary>
     public class ProjectService : IProjectService
     {
-        private readonly IProjectRepository projectRepo = new DAL.Repository.ProjectRepository();
+        private readonly IProjectRepository _projectRepo;
+        private readonly IDataContextManager _dataContextManager;
+        private readonly IDomainServiceManager _domainServiceManager;
+
+        public ProjectService(IDomainServiceManager serviceManager, IDataContextManager dataContextManager)
+        {
+            _dataContextManager = dataContextManager;
+            _domainServiceManager = serviceManager;
+            _projectRepo = new ProjectRepository(_dataContextManager);
+        }
 
         /// <summary>
         /// Creates a new Project in the Database related to the given user. /DK
         /// </summary>
         public void CreateProject(string userName, string title, string description, DateTime startDate, DateTime endDate, List<string> specializations)
         {
-            projectRepo.CreateProject(userName, title, description, startDate, endDate, specializations);
+            _projectRepo.CreateProject(userName, title, description, startDate, endDate, specializations);
         }
 
         /// <summary>
@@ -28,7 +34,7 @@ namespace Domain.Services
         /// </summary>
         public List<IProjectModel> GetUserProjects(int userId)
         {
-            return projectRepo.GetUserProjects(userId);
+            return _projectRepo.GetUserProjects(userId);
         }
 
         /// <summary>
@@ -36,7 +42,7 @@ namespace Domain.Services
         /// </summary>
         public IProjectModel GetProject(int projectId)
         {
-            return projectRepo.GetProject(projectId);
+            return _projectRepo.GetProject(projectId);
         }
 
         /// <summary>
@@ -44,7 +50,7 @@ namespace Domain.Services
         /// </summary>
         void IProjectService.UpdateProject(IProjectModel project)
         {
-            projectRepo.UpdateProject(project);
+            _projectRepo.UpdateProject(project);
         }
 
         /// <summary>
@@ -52,7 +58,7 @@ namespace Domain.Services
         /// </summary>
         void IProjectService.DeleteProject(int projectId)
         {
-            projectRepo.DeleteProject(projectId);
+            _projectRepo.DeleteProject(projectId);
         }
 
         /// <summary>
@@ -60,7 +66,7 @@ namespace Domain.Services
         /// </summary>
         List<IProjectModel> IProjectService.GetProjectsFromAllSpecializations(List<string> specializations)
         {
-            return projectRepo.GetProjectsFromAllSpecializations(specializations);
+            return _projectRepo.GetProjectsFromAllSpecializations(specializations);
         }
 
         /// <summary>
@@ -68,14 +74,12 @@ namespace Domain.Services
         /// </summary>
         List<IProjectModel> IProjectService.GetProjectsFromAnySpecializations(List<string> specializations)
         {
-            return projectRepo.GetProjectsFromAnySpecializations(specializations);
+            return _projectRepo.GetProjectsFromAnySpecializations(specializations);
         }
 
         public List<IProjectModel> SearchProjects(string searchTerm, int userId)
         {
-            return projectRepo.SearchProjects(searchTerm, userId);
+            return _projectRepo.SearchProjects(searchTerm, userId);
         }
-
-        
     }
 }

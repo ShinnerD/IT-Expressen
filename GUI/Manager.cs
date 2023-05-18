@@ -6,11 +6,13 @@ namespace GUI
 {
     public partial class Manager : Form
     {
-        public string Username { get; set; }
-        public IUserModel userModel { get; set; }
+        private string Username { get; set; }
+        private IUserModel userModel { get; set; }
+        private readonly IDomainServiceManager ServiceManager;
 
-        public Manager(string username)
+        public Manager(IDomainServiceManager serviceManager, string username)
         {
+            ServiceManager = serviceManager;
             InitializeComponent();
             Username = username;
             GetUser();
@@ -43,9 +45,7 @@ namespace GUI
             dgv_Viewproject.Columns.Add("Invoiced", "Invoiced");
             dgv_Viewproject.Columns["Invoiced"].DataPropertyName = "TotalInvoicePrice";
 
-            IProjectService projectService = new ProjectService();
-
-            dgv_Viewproject.DataSource = projectService.GetUserProjects(userModel.ID).OrderBy(i => i.Title).ToList();
+            dgv_Viewproject.DataSource = ServiceManager.ProjectService.GetUserProjects(userModel.ID).OrderBy(i => i.Title).ToList();
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace GUI
         /// </summary>
         private void GetUser()
         {
-            IUserService userService = new UserService();
+            IUserService userService = ServiceManager.UserService;
             userModel = userService.GetUser(Username);
         }
 
@@ -175,7 +175,7 @@ namespace GUI
             else
             {
                 UpdateUserModel();
-                IUserService userService = new UserService();
+                IUserService userService = ServiceManager.UserService;
                 userService.UpdateUser(userModel);
                 UnlockProfileForEditing(grpBoxProfileInfo, false);
                 bt_EditProfileCancel.Enabled = false;

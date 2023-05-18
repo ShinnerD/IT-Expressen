@@ -7,38 +7,45 @@ namespace Domain.Services
 {
     public class InviteService : IInviteService
     {
-        private IInvitesRepository InvRespo = new InvitesRepository();
+        private readonly IInvitesRepository InvRepo;
+        private readonly IDomainServiceManager DomainServiceManager;
+
+        public InviteService(IDomainServiceManager domainServiceManager, IDataContextManager dataContextManager)
+        {
+            DomainServiceManager = domainServiceManager;
+            InvRepo = new InvitesRepository(dataContextManager);
+        }
 
         public List<IInvitesModel> GetAllInvites()
         {
-            return InvRespo.GetAllInvites();
+            return InvRepo.GetAllInvites();
         }
 
         public List<IInvitesModel> GetAllInvitedProjectID(int ProjectID)
         {
-            return InvRespo.GetAllInviteProjectID(ProjectID);
+            return InvRepo.GetAllInviteProjectID(ProjectID);
         }
 
         public IInvitesModel GetInvitedProjectId(int ProjectID)
         {
-            return InvRespo.GetInviteProjectId(ProjectID);
+            return InvRepo.GetInviteProjectId(ProjectID);
         }
 
         public IInvitesModel GetInvitedUserID(int id)
         {
-            return InvRespo.GetInviteUserId(id);
+            return InvRepo.GetInviteUserId(id);
         }
         public List<IInvitesModel> GetInvitedUserIDList(int id)
         {
-            return InvRespo.GetInviteUserIdList(id);
+            return InvRepo.GetInviteUserIdList(id);
         }
         public IInvitesModel GetInvitedUserName(string UserName)
         {
-            return InvRespo.GetInviteUserName(UserName);
+            return InvRepo.GetInviteUserName(UserName);
         }
         public void UpdateInviteStatus(IInvitesModel inviteModel, int projectID)
         {
-            InvRespo.UpdateInviteStatus(inviteModel, projectID);
+            InvRepo.UpdateInviteStatus(inviteModel, projectID);
         }
         public void AddInvites(int ProjectID, int UserID, DateTime inviteDate, string InviteStatus)
         {
@@ -49,7 +56,7 @@ namespace Domain.Services
             newInvite.InviteDate = DateTime.Now;
             newInvite.InviteStatus = InviteStatus;
 
-            InvRespo.AddInvite(newInvite);
+            InvRepo.AddInvite(newInvite);
 
         }
     }

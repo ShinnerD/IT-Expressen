@@ -1,4 +1,5 @@
-﻿using Interfaces.Models;
+﻿using DAL.Repository;
+using Interfaces.Models;
 using Interfaces.Repositories;
 using Interfaces.Services;
 
@@ -9,14 +10,19 @@ namespace Domain.Services
     /// </summary>
     public class SpecializationService : ISpecializationService
     {
-        private readonly ISpecializationRepository Repository = new DAL.Repository.SpecializationRepository();
+        private readonly ISpecializationRepository specRepo;
+        private readonly IDomainServiceManager serviceManager;
 
+        public SpecializationService(IDomainServiceManager domainServiceManager, IDataContextManager dataContextManager) { 
+            serviceManager = domainServiceManager;
+            specRepo = new SpecializationRepository(dataContextManager);
+        }
         /// <summary>
         /// List of strings representing the current Specializations/Skills in the Database. /DK
         /// </summary>
         public List<string> ListDefinedSpecializations()
         {                            
-            return Repository.GetCurrentSpecializationsList();
+            return specRepo.GetCurrentSpecializationsList();
         }
 
         /// <summary>
@@ -24,7 +30,7 @@ namespace Domain.Services
         /// </summary>
         public List<string> GetProjectSpecializations(int projectId)
         {
-            return Repository.GetProjectSpecializations(projectId);
+            return specRepo.GetProjectSpecializations(projectId);
         }
 
         /// <summary>
@@ -32,7 +38,7 @@ namespace Domain.Services
         /// </summary>
         public int GetId(string specialization)
         {
-            return Repository.GetSpecializationID(specialization);
+            return specRepo.GetSpecializationID(specialization);
         }
 
         /// <summary>
@@ -40,7 +46,7 @@ namespace Domain.Services
         /// </summary>
         public string GetString(int specId)
         {
-            return Repository.GetSpecializationString(specId);
+            return specRepo.GetSpecializationString(specId);
         }
 
         /// <summary>
@@ -48,7 +54,7 @@ namespace Domain.Services
         /// </summary>
         public void AddToProject(int projectId, List<string> specializations)
         {
-            Repository.AddToProject(projectId, specializations);
+            specRepo.AddToProject(projectId, specializations);
         }
 
         /// <summary>
@@ -56,7 +62,7 @@ namespace Domain.Services
         /// </summary>
         public void RemoveFromProject(int projectId, List<string> specializations) 
         {
-            Repository.RemoveFromProject(projectId, specializations);
+            specRepo.RemoveFromProject(projectId, specializations);
         }
 
         /// <summary>
@@ -64,7 +70,7 @@ namespace Domain.Services
         /// </summary>
         public void AddSpecializationsToUser(int userId, List<string> specializations)
         {
-            Repository.AddSpecializationsToUser(userId, specializations);
+            specRepo.AddSpecializationsToUser(userId, specializations);
         }
 
         /// <summary>
@@ -72,7 +78,7 @@ namespace Domain.Services
         /// </summary>
         public void RemoveSpecializationsFromUser(int userId, string specializations)
         {
-            Repository.RemoveSpecializationsFromUser(userId, specializations);
+            specRepo.RemoveSpecializationsFromUser(userId, specializations);
         }
 
         /// <summary>
@@ -80,7 +86,7 @@ namespace Domain.Services
         /// </summary>
         public List<string> GetUserSpecializations(int userId)
         {
-            return Repository.GetUserSpecializations(userId).OrderBy(i => i).ToList();
+            return specRepo.GetUserSpecializations(userId).OrderBy(i => i).ToList();
         }
 
         /// <summary>

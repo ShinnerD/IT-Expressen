@@ -7,7 +7,14 @@ namespace Domain.Services
 {
     public class UserService : IUserService
     {
-        private IUserRepository userRepo = new UserRepository();
+        private readonly IUserRepository userRepo;
+        private readonly IDomainServiceManager _domainServiceManager;
+
+        public UserService(IDomainServiceManager domainServiceManager, IDataContextManager dataContextManager) 
+        {
+            _domainServiceManager = domainServiceManager;
+            userRepo = new UserRepository(dataContextManager);
+            }
 
         public List<IUserModel> GetAllUsers()
         {

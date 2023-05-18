@@ -8,13 +8,14 @@ namespace GUI
     public partial class Login : Form
     {
         //Initializeing og the service/models need for the form /MS
-        public List<IUserModel> allUsers { get; set; }
-        private IUserService userService = new UserService();
+        private readonly IDomainServiceManager ServiceManager;
+        private IUserService userService;
         //Initializes needed methods and data, and start the AsyncTask /MS
-        public Login()
+        public Login(IDomainServiceManager domainServiceManager)
         {
+            ServiceManager = domainServiceManager;
+            userService = ServiceManager.UserService;
             InitializeComponent();
-            LoadUserData();
             AsyncTask();
         }
         // Button click event -> see method for results /MS
@@ -41,7 +42,7 @@ namespace GUI
         private void OpenAdminForm()
         {
             this.Hide();
-            Admin Admin = new Admin("admin");
+            Admin Admin = new Admin(ServiceManager, "admin");
             Admin.ShowDialog();
             this.Show();
         }
@@ -104,7 +105,7 @@ namespace GUI
                 if (targetUser.Password == tb_Password.Text && targetUser.UserType == "admin")
                 {
                     this.Hide();
-                    GUI.Admin a = new Admin(targetUser.UserName);
+                    GUI.Admin a = new Admin(ServiceManager, targetUser.UserName);
                     a.Show();
                 }
             }
@@ -146,13 +147,6 @@ namespace GUI
                 lb_connectionTest.Invoke((MethodInvoker)(() => lb_connectionTest.Text = "No connection!"));
                 pb_ConnectionStatus.Image = img_RedGreen.Images[0];
             }
-        }
-        //Loads user data /MS
-        private void LoadUserData()
-        {
-
-            var UserService = new Domain.Services.UserService();
-            allUsers = UserService.GetAllUsers();
         }
         // Button click event -> see method for results /MS
         private void bt_cancel_Click(object sender, EventArgs e)

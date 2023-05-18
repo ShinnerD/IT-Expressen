@@ -8,7 +8,12 @@ namespace DAL.Repository
     /// </summary>
     public class SpecializationRepository : ISpecializationRepository
     {
-        private readonly DataClassesDataContext dbContext = new DataClassesDataContext(DbConnectionString.ConnectionString);
+        private readonly DataClassesDataContext dbContext;
+
+        public SpecializationRepository(IDataContextManager dataContextManager)
+        {
+            dbContext = dataContextManager.GetContext() as DataClassesDataContext ?? throw new ArgumentNullException(nameof(dataContextManager));
+        }
 
         /// <summary>
         /// A list of string representing specializations defined in the database. /DK

@@ -2,12 +2,20 @@
 using DAL.Models;
 using Interfaces.Models;
 using Interfaces.Repositories;
+using System.Data.Linq;
 
 namespace DAL.Repository
 {
     public class UserRepository : IUserRepository
     {
-        private DataClassesDataContext dbcontext = new DataClassesDataContext(DbConnectionString.ConnectionString);
+        private readonly ISpecializationRepository specRepo;
+        private readonly DataClassesDataContext dbcontext;
+
+        public UserRepository(IDataContextManager dataContextManager)
+        {
+            dbcontext = dataContextManager.GetContext() as DataClassesDataContext ?? throw new ArgumentNullException(nameof(dataContextManager));
+            specRepo = new SpecializationRepository(dataContextManager);
+        }
 
         public List<IUserModel> GetAllUsers()
         {
@@ -49,9 +57,6 @@ namespace DAL.Repository
 
         public void AddUser(IUserModel userModel, List<string> specializations)
         {
-            IUserModel user = new DAL.Models.UserModel();
-            ISpecializationRepository specRepo = new SpecializationRepository();
-
             var linqUserModel = new Linq.User();
 
             linqUserModel.User_name = userModel.UserName;

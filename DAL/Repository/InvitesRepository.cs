@@ -9,7 +9,12 @@ namespace DAL.Repository
 {
     public class InvitesRepository : IInvitesRepository
     {
-        private DataClassesDataContext DataContext = new DataClassesDataContext(DbConnectionString.ConnectionString);
+        private readonly DataClassesDataContext DataContext;
+
+        public InvitesRepository(IDataContextManager dataContextManager)
+        {
+            DataContext = dataContextManager.GetContext() as DataClassesDataContext ?? throw new ArgumentNullException(nameof(dataContextManager));
+        }
         /// <summary>
         /// retrieving data from Database and Repository too store data
         /// </summary>
