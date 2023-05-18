@@ -238,6 +238,21 @@ namespace GUI
             UnlockProfileForEditing(grpBoxProfileInfo, false);
             SetUpTB();
         }
+        private void ManageProject()
+        {
+            var selectedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;
+            if (selectedProject != null)
+            {
+                ManageProject ManProject = new GUI.ManageProject(selectedProject.ProjectId);
+                this.Hide();
+                ManProject.ShowDialog();
+                this.Show();
+            }
+        }
+        private void bt_manageProject_Click(object sender, EventArgs e)
+        {
+            ManageProject();
+        }
 
         private void label3_Click(object sender, EventArgs e)
         {
@@ -311,5 +326,7 @@ namespace GUI
         private void label2_Click(object sender, EventArgs e)
         {
         }
+
+
     }
 }
