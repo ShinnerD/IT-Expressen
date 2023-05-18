@@ -1,14 +1,8 @@
-﻿using Interfaces.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Interfaces.Models
+﻿namespace Interfaces.Models
 {
     /// <summary>
-    /// written by Erik. Model too  Specialisation that have atrributes that is relavent too the case and project. the model that couples with the Interface Repo inites and the Domain Model invites.
+    /// written by Erik. Model too  Specialization that have attributes that is relevant too the case and project.
+    /// The model that couples with the Interface Repo invites and the Domain Model invites.
     /// </summary>
     public interface IInvitesModel
     {
@@ -17,7 +11,10 @@ namespace Interfaces.Models
         string? InviteStatus { get; set; }
         int ProjectId { get; set; }
         int UserId { get; set; }
-        string UserName { get; }
-    }
 
+        string? InvitedUserName { get; set; }
+        string? InvitedUserSpecializations { get; set; }
+        string? ProjectTitle { get; set; }
+        string? ManagerName { get; set; }
+    }
 }

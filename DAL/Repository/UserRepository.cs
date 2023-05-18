@@ -2,7 +2,6 @@
 using DAL.Models;
 using Interfaces.Models;
 using Interfaces.Repositories;
-using System.Data.Linq;
 
 namespace DAL.Repository
 {
@@ -19,40 +18,32 @@ namespace DAL.Repository
 
         public List<IUserModel> GetAllUsers()
         {
-            try
+            var AlldtoUsers = dbcontext.Users;
+
+            List<IUserModel> result = new List<IUserModel>();
+
+            foreach (var dto in AlldtoUsers)
             {
-                var AlldtoUsers = dbcontext.Users;
+                var user = new DAL.Models.UserModel();
 
-                List<IUserModel> result = new List<IUserModel>();
+                user.ID = dto.User_ID;
+                user.Address = dto.Street_Address;
+                user.UserName = dto.User_name;
+                user.Password = dto.Password;
+                user.FirstName = dto.First_Name;
+                user.LastName = dto.Last_Name;
+                user.EMail = dto.Email;
+                user.NameCity = dto.City;
+                user.ZipCode = dto.Zip_Code;
+                user.PhoneNumber = dto.Phone_Number;
+                user.Country = dto.Country;
+                user.ActiveStatus = (bool?)dto.Active_Status;
+                user.CreationDate = (DateTime?)dto.Creation_Date;
+                user.UserType = dto.User_Type;
 
-                foreach (var dto in AlldtoUsers)
-                {
-                    var user = new DAL.Models.UserModel();
-
-                    user.ID = dto.User_ID;
-                    user.Address = dto.Street_Address;
-                    user.UserName = dto.User_name;
-                    user.Password = dto.Password;
-                    user.FirstName = dto.First_Name;
-                    user.LastName = dto.Last_Name;
-                    user.EMail = dto.Email;
-                    user.NameCity = dto.City;
-                    user.ZipCode = dto.Zip_Code;
-                    user.PhoneNumber = dto.Phone_Number;
-                    user.Country = dto.Country;
-                    user.ActiveStatus = (bool?)dto.Active_Status;
-                    user.CreationDate = (DateTime?)dto.Creation_Date;
-                    user.UserType = dto.User_Type;
-                    //user.Specialization = dto.Specialisations_Lines.First(i => i.User_Id == user.ID).Spec_Id;
-
-                    result.Add(user);
-                }
-                return result;
+                result.Add(user);
             }
-            catch
-            {
-                return null;
-            }
+            return result;
         }
 
         public void AddUser(IUserModel userModel, List<string> specializations)
@@ -76,14 +67,17 @@ namespace DAL.Repository
             dbcontext.Users.InsertOnSubmit(linqUserModel);
             dbcontext.SubmitChanges();
 
-            specRepo.AddSpecializationsToUser(linqUserModel.User_ID, specializations);
+            if (specializations.Count > 0)
+            {
+                specRepo.AddSpecializationsToUser(linqUserModel.User_ID, specializations);
+            }
         }
 
         public IUserModel GetUser(string username)
         {
             IUserModel user = new DAL.Models.UserModel();
 
-            var dbUser = dbcontext.Users.FirstOrDefault(i => i.User_name == username);
+            var dbUser = dbcontext.Users.First(i => i.User_name == username);
 
             if (dbUser != null)
             {
@@ -105,11 +99,12 @@ namespace DAL.Repository
 
             return user;
         }
+
         public IUserModel GetUserFromID(int ID)
         {
             IUserModel user = new DAL.Models.UserModel();
 
-            var dbUser = dbcontext.Users.FirstOrDefault(i => i.User_ID == ID);
+            var dbUser = dbcontext.Users.First(i => i.User_ID == ID);
 
             if (dbUser != null)
             {
@@ -131,6 +126,7 @@ namespace DAL.Repository
 
             return user;
         }
+
         void IUserRepository.Delete(string delete)
         {
             throw new NotImplementedException();
@@ -181,7 +177,7 @@ namespace DAL.Repository
         {
             var dbUser = dbcontext.Users.FirstOrDefault(i => i.User_ID == user.ID);
 
-            if (dbUser != null) 
+            if (dbUser != null)
             {
                 dbUser.First_Name = user.FirstName;
                 dbUser.Last_Name = user.LastName;

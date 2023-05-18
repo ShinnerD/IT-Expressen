@@ -74,7 +74,7 @@ namespace Domain.Services
         /// </summary>
         public List<IProjectModel> GetUserProjects(int userId)
         {
-            return AssignManagerDetails(_projectRepo.GetUserProjects(userId));
+            return AssignDomainDetails(_projectRepo.GetUserProjects(userId));
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace Domain.Services
         public IProjectModel GetProject(int projectId)
         {
             var result = _projectRepo.GetProject(projectId);
-            AssignManagerDetails(result);
+            AssignDomainDetails(result);
             return result;
         }
 
@@ -108,7 +108,7 @@ namespace Domain.Services
         /// </summary>
         List<IProjectModel> IProjectService.GetProjectsFromAllSpecializations(List<string> specializations)
         {
-            return AssignManagerDetails(_projectRepo.GetProjectsFromAllSpecializations(specializations));
+            return AssignDomainDetails(_projectRepo.GetProjectsFromAllSpecializations(specializations));
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace Domain.Services
         /// </summary>
         List<IProjectModel> IProjectService.GetProjectsFromAnySpecializations(List<string> specializations)
         {
-            return AssignManagerDetails(_projectRepo.GetProjectsFromAnySpecializations(specializations));
+            return AssignDomainDetails(_projectRepo.GetProjectsFromAnySpecializations(specializations));
         }
 
         /// <summary>
@@ -124,17 +124,17 @@ namespace Domain.Services
         /// </summary>
         public List<IProjectModel> SearchProjects(string searchTerm, int userId)
         {
-            return AssignManagerDetails(_projectRepo.SearchProjects(searchTerm, userId));
+            return AssignDomainDetails(_projectRepo.SearchProjects(searchTerm, userId));
         }
 
         /// <summary>
         /// Private service method. Assigns manager details to the IProjectModels. (Full Name and User Name) /DK
         /// </summary>
-        private List<IProjectModel> AssignManagerDetails(List<IProjectModel> projectList)
+        private List<IProjectModel> AssignDomainDetails(List<IProjectModel> projectList)
         {
             foreach (var project in projectList)
             {
-                AssignManagerDetails(project);
+                AssignDomainDetails(project);
             }
             return projectList;
         }
@@ -142,7 +142,7 @@ namespace Domain.Services
         /// <summary>
         /// Private void service method. Assigns manager details to the IProjectModel. (Full Name and User Name) /DK
         /// </summary>
-        private void AssignManagerDetails(IProjectModel project)
+        private void AssignDomainDetails(IProjectModel project)
         {
             var manager = _domainServiceManager.UserService.GetUserFromID(project.UserId);
             project.ManagerFullName = manager.FullName;

@@ -122,7 +122,7 @@ namespace DAL.Repository
         public void RemoveSpecializationsFromUser(int userId, string specializations)
         {
             var targetSpecIds = dbContext.Specialisations.Where(i => specializations.Contains(i.Specialisation1)).Select(x => x.Spec_Id).ToList();
-            var targetSpecLines = dbContext.Users.FirstOrDefault(i => i.User_ID == userId).Specialisations_Lines.Where(x => targetSpecIds.Contains(x.Spec_Id)).ToList();
+            var targetSpecLines = dbContext.Users.First(i => i.User_ID == userId).Specialisations_Lines.Where(x => targetSpecIds.Contains(x.Spec_Id)).ToList();
 
             dbContext.Specialisations_Lines.DeleteAllOnSubmit(targetSpecLines);
             dbContext.SubmitChanges();
