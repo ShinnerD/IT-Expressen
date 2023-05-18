@@ -9,6 +9,6 @@ namespace Interfaces.Models
         int UserID { get; set; }
         string Message { get; set; }
         DateTime MessageDate { get; set; }
-        string UserName { get; }
+        string? UserName { get; set; }
     }
 }

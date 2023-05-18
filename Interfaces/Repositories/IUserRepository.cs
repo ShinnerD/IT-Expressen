@@ -4,12 +4,34 @@ namespace Interfaces.Repositories
 {
     public interface IUserRepository
     {
+        /// <summary>
+        /// Gets a list of all users in the users table on the database.
+        /// </summary>
         List<IUserModel> GetAllUsers();
 
-        IUserModel GetUser(string username);
+        /// <summary>
+        /// Gets a list of all users of a certain type from the database.
+        /// </summary>
+        List<IUserModel> GetUsersType(string UserType);
+
+        /// <summary>
+        /// Retrieves a single users details from the database with a matching username.
+        /// </summary>
+        IUserModel GetUserFromUsername(string username);
+
+        /// <summary>
+        /// Retrieves a single users details from the database with a matching user Id.
+        /// </summary>
         IUserModel GetUserFromID(int ID);
 
+        /// <summary>
+        /// Adds a user to the database. Provide an empty list of specializations if none are chosen.
+        /// </summary>
         void AddUser(IUserModel userModel, List<string> specializations);
+
+        /// <summary>
+        /// Deletes a user in the database.
+        /// </summary>
         void Delete(string delete);
 
         /// <summary>

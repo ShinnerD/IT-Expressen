@@ -8,14 +8,12 @@ namespace DAL.Repository
     public class ProjectRepository : IProjectRepository
     {
         private readonly ISpecializationRepository specRepo;
-        private readonly IUserRepository userRepo;
         private readonly DataClassesDataContext dbContext;
 
         public ProjectRepository(IDataContextManager dataContextManager)
         {
             dbContext = dataContextManager.GetContext() as DataClassesDataContext ?? throw new ArgumentNullException(nameof(dataContextManager));
             specRepo = new SpecializationRepository(dataContextManager);
-            userRepo = new UserRepository(dataContextManager);
         }
 
         /// <summary>

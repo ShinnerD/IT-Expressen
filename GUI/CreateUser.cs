@@ -70,7 +70,7 @@ namespace GUI
         private void LoadUserData()
         {
             var UserService = ServiceManager.UserService;
-            var OneUsers = UserService.GetUser(tb_UserName.Text);
+            var OneUsers = UserService.GetUserFromUsername(tb_UserName.Text);
         }
         // Button click event -> see method for results /MS
         private void bt_CreateUser_Click(object sender, EventArgs e)
@@ -117,7 +117,7 @@ namespace GUI
         //After the User is created, the user is forwarded the the correct form, defined by their user type //MS
         private void forwardUserToProfile()
         {
-            var user = userService.GetUser(tb_UserName.Text);
+            var user = userService.GetUserFromUsername(tb_UserName.Text);
             if (user.UserType == "manager")
             {
                 this.Close();

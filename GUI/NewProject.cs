@@ -18,7 +18,7 @@ namespace GUI
             SetupSkillsCheckList();
 
             lblFeedback.Text = string.Empty;
-            CurrentUser = ServiceManager.UserService.GetUser(currentUser);
+            CurrentUser = ServiceManager.UserService.GetUserFromUsername(currentUser);
             txtBoxUserName.Text = currentUser; // <------- Should be deleted before release along with textbox in designer.  /DK
         }
 

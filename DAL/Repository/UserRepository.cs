@@ -8,17 +8,20 @@ namespace DAL.Repository
     public class UserRepository : IUserRepository
     {
         private readonly ISpecializationRepository specRepo;
-        private readonly DataClassesDataContext dbcontext;
+        private readonly DataClassesDataContext dbContext;
 
         public UserRepository(IDataContextManager dataContextManager)
         {
-            dbcontext = dataContextManager.GetContext() as DataClassesDataContext ?? throw new ArgumentNullException(nameof(dataContextManager));
+            dbContext = dataContextManager.GetContext() as DataClassesDataContext ?? throw new ArgumentNullException(nameof(dataContextManager));
             specRepo = new SpecializationRepository(dataContextManager);
         }
 
+        /// <summary>
+        /// Gets a list of all users in the users table on the database.
+        /// </summary>
         public List<IUserModel> GetAllUsers()
         {
-            var AlldtoUsers = dbcontext.Users;
+            var AlldtoUsers = dbContext.Users;
 
             List<IUserModel> result = new List<IUserModel>();
 
@@ -46,6 +49,21 @@ namespace DAL.Repository
             return result;
         }
 
+        /// <summary>
+        /// Gets a list of all users of a certain type from the database.
+        /// </summary>
+        public List<IUserModel> GetUsersType(string UserType)
+        {
+            var targetType = dbContext.Users.Where(i => i.User_Type == UserType).ToList();
+
+            List<IUserModel> result = TransferAllUserProperties(targetType);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Adds a user to the database. Provide an empty list of specializations if none are chosen.
+        /// </summary>
         public void AddUser(IUserModel userModel, List<string> specializations)
         {
             var linqUserModel = new Linq.User();
@@ -64,8 +82,8 @@ namespace DAL.Repository
             linqUserModel.Active_Status = userModel.ActiveStatus;
             linqUserModel.Creation_Date = userModel.CreationDate;
 
-            dbcontext.Users.InsertOnSubmit(linqUserModel);
-            dbcontext.SubmitChanges();
+            dbContext.Users.InsertOnSubmit(linqUserModel);
+            dbContext.SubmitChanges();
 
             if (specializations.Count > 0)
             {
@@ -73,11 +91,14 @@ namespace DAL.Repository
             }
         }
 
-        public IUserModel GetUser(string username)
+        /// <summary>
+        /// Retrieves a single users details from the database with a matching username.
+        /// </summary>
+        public IUserModel GetUserFromUsername(string username)
         {
             IUserModel user = new DAL.Models.UserModel();
 
-            var dbUser = dbcontext.Users.First(i => i.User_name == username);
+            var dbUser = dbContext.Users.First(i => i.User_name == username);
 
             if (dbUser != null)
             {
@@ -96,15 +117,17 @@ namespace DAL.Repository
                 user.ActiveStatus = dbUser.Active_Status;
                 user.CreationDate = dbUser.Creation_Date;
             }
-
             return user;
         }
 
+        /// <summary>
+        /// Retrieves a single users details from the database with a matching user Id.
+        /// </summary>
         public IUserModel GetUserFromID(int ID)
         {
             IUserModel user = new DAL.Models.UserModel();
 
-            var dbUser = dbcontext.Users.First(i => i.User_ID == ID);
+            var dbUser = dbContext.Users.First(i => i.User_ID == ID);
 
             if (dbUser != null)
             {
@@ -127,12 +150,18 @@ namespace DAL.Repository
             return user;
         }
 
-        void IUserRepository.Delete(string delete)
+        /// <summary>
+        /// Deletes a user in the database.
+        /// </summary>
+        public void Delete(string delete)
         {
             throw new NotImplementedException();
         }
 
-        public List<IUserModel> TransferAllUserProperties(List<Linq.User> dtoUsers)
+        /// <summary>
+        /// Private repository method for transferring properties from dto-linq-objects to domain models.
+        /// </summary>
+        private List<IUserModel> TransferAllUserProperties(List<Linq.User> dtoUsers)
         {
             List<IUserModel> result = new List<IUserModel>();
 
@@ -160,22 +189,13 @@ namespace DAL.Repository
             return result;
         }
 
-        public List<IUserModel> GetUsersType(string UserType)
-        {
-            var targetType = dbcontext.Users.Where(i => i.User_Type == UserType).ToList();
-
-            List<IUserModel> result = TransferAllUserProperties(targetType);
-
-            return result;
-        }
-
         /// <summary>
         /// Updates a user in the database with any changes that might be in the IUserModel provided in the parameter.
         /// The Provided IUserModel must be a valid user from the database. /DK
         /// </summary>
         public void UpdateUser(IUserModel user)
         {
-            var dbUser = dbcontext.Users.FirstOrDefault(i => i.User_ID == user.ID);
+            var dbUser = dbContext.Users.FirstOrDefault(i => i.User_ID == user.ID);
 
             if (dbUser != null)
             {
@@ -188,7 +208,7 @@ namespace DAL.Repository
                 dbUser.Country = user.Country;
                 dbUser.Phone_Number = user.PhoneNumber;
 
-                dbcontext.SubmitChanges();
+                dbContext.SubmitChanges();
             }
         }
 
@@ -197,11 +217,11 @@ namespace DAL.Repository
         /// </summary>
         public List<IUserModel> GetUsersWithAnySpecializations(List<string> specializations)
         {
-            List<int> targetSpecIds = dbcontext.Specialisations.Where(i => specializations.Contains(i.Specialisation1)).Select(i => i.Spec_Id).ToList();
+            List<int> targetSpecIds = dbContext.Specialisations.Where(i => specializations.Contains(i.Specialisation1)).Select(i => i.Spec_Id).ToList();
 
             if (targetSpecIds.Count == 0) return new List<IUserModel>();
 
-            var dtoUsers = dbcontext.Users.Where(u => u.User_Type == "consultant" && u.Specialisations_Lines.Any(x => targetSpecIds.Contains(x.Spec_Id))).ToList();
+            var dtoUsers = dbContext.Users.Where(u => u.User_Type == "consultant" && u.Specialisations_Lines.Any(x => targetSpecIds.Contains(x.Spec_Id))).ToList();
 
             return TransferAllUserProperties(dtoUsers);
         }
@@ -211,11 +231,11 @@ namespace DAL.Repository
         /// </summary>
         public List<IUserModel> GetUsersWithAllSpecializations(List<string> specializations)
         {
-            List<int> targetSpecIds = dbcontext.Specialisations.Where(i => specializations.Contains(i.Specialisation1)).Select(i => i.Spec_Id).ToList();
+            List<int> targetSpecIds = dbContext.Specialisations.Where(i => specializations.Contains(i.Specialisation1)).Select(i => i.Spec_Id).ToList();
 
             if (targetSpecIds.Count == 0) return new List<IUserModel>();
 
-            var dtoUsers = dbcontext.Users.Where(u => u.User_Type == "consultant").ToList();
+            var dtoUsers = dbContext.Users.Where(u => u.User_Type == "consultant").ToList();
             dtoUsers = dtoUsers.Where(u => targetSpecIds.All(i => u.Specialisations_Lines.Select(x => x.Spec_Id).Contains(i))).ToList();
 
             return TransferAllUserProperties(dtoUsers);

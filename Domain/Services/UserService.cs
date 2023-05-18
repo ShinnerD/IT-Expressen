@@ -1,52 +1,73 @@
 ﻿using DAL.Repository;
 using Interfaces.Models;
-using Interfaces.Services;
 using Interfaces.Repositories;
+using Interfaces.Services;
 
 namespace Domain.Services
 {
+
+
     public class UserService : IUserService
     {
         private readonly IUserRepository userRepo;
         private readonly IDomainServiceManager _domainServiceManager;
 
-        public UserService(IDomainServiceManager domainServiceManager, IDataContextManager dataContextManager) 
+        public UserService(IDomainServiceManager domainServiceManager, IDataContextManager dataContextManager)
         {
             _domainServiceManager = domainServiceManager;
             userRepo = new UserRepository(dataContextManager);
-            }
+        }
 
+        /// <summary>
+        /// Gets a list of all users from the database.
+        /// </summary>
         public List<IUserModel> GetAllUsers()
         {
             return userRepo.GetAllUsers();
         }
-        //public List<IUserModel> GetUserTypeList(string UserType)
-        //{
-        //    return userRepo.GetUserTypeList(UserType);
-        //}
+
+        /// <summary>
+        /// Retrieves a user from the database according to his user Id.
+        /// </summary>
         public IUserModel GetUserFromID(int ID)
         {
             return userRepo.GetUserFromID(ID);
         }
-        public IUserModel GetUser(string userName)
+
+        /// <summary>
+        /// Retrieves a user from the database according to his username.
+        /// </summary>
+        public IUserModel GetUserFromUsername(string userName)
         {
-            return userRepo.GetUser(userName);
+            return userRepo.GetUserFromUsername(userName);
         }
 
+        /// <summary>
+        /// Returns a boolean based on the existence of a user with the specified username in the database.
+        /// </summary>
         public bool UsernameExists(string userName)
         {
             return GetAllUsers().Exists(i => i.UserName == userName);
         }
 
+        /// <summary>
+        /// Returns a string with the specified user's user type. (Admin, Consultant, Manager)
+        /// Returns an empty string if no user is found.
+        /// </summary>
         public string GetUserType(string userName)
         {
             if (UsernameExists(userName))
             {
-                return userRepo.GetUser(userName).UserType;
+                return userRepo.GetUserFromUsername(userName).UserType;
             }
             return "";
         }
-        public void AddUser(string UserName, string Password, string UserType, string FirstName, string LastName, string Address, string City, string ZipCode, string Country, string PhoneNumber, string Email, List<string> specializtions)
+
+        /// <summary>
+        /// Adds a user to the database.
+        /// If the user needs no specializations chosen at creation provide an empty list.
+        /// </summary>
+        public void AddUser(string UserName, string Password, string UserType, string FirstName, string LastName, string Address, string City, string ZipCode, string Country, string PhoneNumber, string Email, List<string> specializations)
         {
             IUserModel newUser = new DAL.Models.UserModel();
 
@@ -64,19 +85,24 @@ namespace Domain.Services
             newUser.ActiveStatus = true;
             newUser.CreationDate = DateTime.Now;
 
-
-            userRepo.AddUser(newUser, specializtions);
+            userRepo.AddUser(newUser, specializations);
         }
+
+        /// <summary>
+        /// Returns a list of users that have a user type which matches the one specified in the parameters.
+        /// </summary>
         public List<IUserModel> FindUsersWithUserType(string userType)
         {
             var result = GetAllUsers().Where(i => i.UserType == userType).ToList();
             return result;
         }
 
-        void IUserService.Delete(string Delete)
+        /// <summary>
+        /// Deletes a user from the database.
+        /// </summary>
+        public void Delete(string Delete)
         {
             userRepo.Delete(Delete);
-            throw new NotImplementedException();
         }
 
         /// <summary>

@@ -38,7 +38,7 @@ namespace GUI
         /// </summary>
         private void GetUser()
         {
-            userModelGet = userServiceGet.GetUser(Username);
+            userModelGet = userServiceGet.GetUserFromUsername(Username);
         }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace GUI
         private void LoadInvitesToDGV()
         {
             IInviteService inviteService = invService;
-            invites = inviteService.GetInvitedUserIDList(userModelGet.ID);
+            invites = inviteService.GetInvitesFromUserId(userModelGet.ID);
             dgv_ConsultantsInvites.DataSource = null;
             dgv_ConsultantsInvites.DataSource = invites;
         }
@@ -162,7 +162,7 @@ namespace GUI
         private void bt_seeInviteDetails_Click(object sender, EventArgs e)
         {
             var selectedProject = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as IInvitesModel;
-            AcceptInviteForm AccInvForm = new AcceptInviteForm(ServiceManager, selectedProject.ProjectId);
+            AcceptInviteForm AccInvForm = new AcceptInviteForm(ServiceManager, selectedProject);
             this.Hide();
             AccInvForm.ShowDialog();
             this.Show();

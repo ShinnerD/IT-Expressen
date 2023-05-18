@@ -41,6 +41,14 @@ namespace DAL.Repository
         }
 
         /// <summary>
+        /// Returns a list of strings representing the specializations associated with the user specified in the parameters. /DK
+        /// </summary>
+        public List<string> GetUserSpecializations(int userId)
+        {
+            return dbContext.Specialisations_Lines.Where(i => i.User_Id == userId).Select(x => x.Specialisation.Specialisation1).ToList();
+        }
+
+        /// <summary>
         /// An int representing the generated identifier ID for a specialization in the database. /DK
         /// </summary>
         public int GetSpecializationID(string specialization)
@@ -126,14 +134,6 @@ namespace DAL.Repository
 
             dbContext.Specialisations_Lines.DeleteAllOnSubmit(targetSpecLines);
             dbContext.SubmitChanges();
-        }
-
-        /// <summary>
-        /// Returns a list of strings representing the specializations associated with the user specified in the parameters. /DK
-        /// </summary>
-        public List<string> GetUserSpecializations(int userId)
-        {
-            return dbContext.Specialisations_Lines.Where(i => i.User_Id == userId).Select(x => x.Specialisation.Specialisation1).ToList();
         }
     }
 }

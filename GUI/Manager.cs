@@ -65,7 +65,7 @@ namespace GUI
         private void GetUser()
         {
             IUserService userService = ServiceManager.UserService;
-            userModel = userService.GetUser(Username);
+            userModel = userService.GetUserFromUsername(Username);
         }
 
         /// <summary>
@@ -243,7 +243,7 @@ namespace GUI
             var selectedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;
             if (selectedProject != null)
             {
-                ManageProject ManProject = new GUI.ManageProject(selectedProject.ProjectId);
+                ManageProject ManProject = new GUI.ManageProject(ServiceManager, selectedProject.ProjectId);
                 this.Hide();
                 ManProject.ShowDialog();
                 this.Show();
@@ -253,80 +253,5 @@ namespace GUI
         {
             ManageProject();
         }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void tb_Firstname_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void tb_Email_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void tb_Phonenumber_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void tb_Lastname_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void tb_Address_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void tb_City_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void tb_Zipcode_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void tb_Country_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void grpBoxProfileInfo_Enter(object sender, EventArgs e)
-        {
-        }
-
-        private void lblUserCreationDate_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-        }
-
-
     }
 }

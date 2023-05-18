@@ -28,7 +28,7 @@ namespace GUI
             projectService = serviceManager.ProjectService;
             specializationService = serviceManager.SpecializationService;
 
-            adminUser = userService.GetUser(username);
+            adminUser = userService.GetUserFromUsername(username);
 
             InitializeComponent();
             SetUpTB();

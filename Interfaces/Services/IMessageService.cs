@@ -1,19 +1,22 @@
 ﻿using Interfaces.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Interfaces.Services
 {
     public interface IMessageService
     {
+        /// <summary>
+        /// Adds a message to the database.
+        /// </summary>
         void AddMessage(int projectID, int userID, string message, DateTime messageDate);
-        List<IMessageModel> GetAllMessageProjectID(int projectID);
-        IMessageModel MessageFromProjctID(int projctID);
-        List<IMessageModel> GetAllMessageFromProjectID(int projctID);
 
+        /// <summary>
+        /// Returns a list of all messages related to the specified project.
+        /// </summary>
+        List<IMessageModel> GetAllMessageFromProjectID(int projectID);
 
+        /// <summary>
+        /// Returns a list of all messages related to the specified User.
+        /// </summary>
+        List<IMessageModel> GetAllMessageFromUserID(int userId);
     }
 }

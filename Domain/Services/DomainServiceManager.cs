@@ -10,6 +10,7 @@ namespace Domain.Services
         readonly IProjectService ProjectService;
         readonly IInviteService InviteService;
         readonly ISpecializationService SpecializationService;
+        readonly IMessageService MessageService;
 
         public DomainServiceManager()
         {
@@ -19,6 +20,7 @@ namespace Domain.Services
             ProjectService = new ProjectService(this, dataContext);
             InviteService = new InviteService(this, dataContext);
             SpecializationService = new SpecializationService(this, dataContext);
+            MessageService = new MessageService(this, dataContext);
         }
 
         IUserService IDomainServiceManager.UserService => UserService;
@@ -28,5 +30,7 @@ namespace Domain.Services
         IInviteService IDomainServiceManager.InviteService => InviteService;
 
         ISpecializationService IDomainServiceManager.SpecializationService => SpecializationService;
+
+       IMessageService IDomainServiceManager.MessageService => MessageService;
     }
 }

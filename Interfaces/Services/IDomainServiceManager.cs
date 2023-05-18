@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Interfaces.Services
+﻿namespace Interfaces.Services
 {
     public interface IDomainServiceManager
     {
-        IUserService UserService {get;}
+        IUserService UserService { get; }
         IProjectService ProjectService { get; }
         IInviteService InviteService { get; }
-        ISpecializationService SpecializationService { get; } 
+        ISpecializationService SpecializationService { get; }
+        IMessageService MessageService { get; }
     }
 }
