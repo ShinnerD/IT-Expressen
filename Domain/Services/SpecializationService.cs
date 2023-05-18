@@ -17,6 +17,7 @@ namespace Domain.Services
             serviceManager = domainServiceManager;
             specRepo = new SpecializationRepository(dataContextManager);
         }
+
         /// <summary>
         /// List of strings representing the current Specializations/Skills in the Database. /DK
         /// </summary>

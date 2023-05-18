@@ -21,23 +21,23 @@ namespace DAL.Repository
         /// <summary>
         /// Adds a project with all the details required in the parameter of the method to the database. /DK
         /// </summary>
-        public void CreateProject(string userName, string title, string description, DateTime startDate, DateTime endDate, List<string> specializations)
+        public void CreateProject(IProjectModel newProject, List<string> specializations)
         {
-            var newProject = new Linq.Project();
-            var user = dbContext.Users.FirstOrDefault(i => i.User_name == userName);
+            var dtoProject = new Linq.Project();
 
-            newProject.User = user;
-            newProject.User_ID = user.User_ID;
-            newProject.Title = title;
-            newProject.Description = description;
-            newProject.Project_Start_Date = startDate;
-            newProject.Project_End_Date = endDate;
-            newProject.Project_Status = "active";
+            dtoProject.User_ID = newProject.UserId;
+            dtoProject.Title = newProject.Title;
+            dtoProject.Description = newProject.Description;
+            dtoProject.Project_Start_Date = newProject.ProjectStartDate;
+            dtoProject.Project_End_Date = newProject.ProjectEndDate;
+            dtoProject.Project_Modify_Date = newProject.ProjectModifyDate;
+            dtoProject.Project_Status = newProject.ProjectStatus;
+            dtoProject.Total_Invoice_Price = newProject.TotalInvoicePrice;
 
-            dbContext.Projects.InsertOnSubmit(newProject);
+            dbContext.Projects.InsertOnSubmit(dtoProject);
             dbContext.SubmitChanges();
 
-            specRepo.AddToProject(newProject.Project_ID, specializations);
+            specRepo.AddToProject(dtoProject.Project_ID, specializations);
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace DAL.Repository
         /// </summary>
         public void UpdateProject(IProjectModel project)
         {
-            var dbProject = dbContext.Projects.FirstOrDefault(i => i.Project_ID == project.ProjectId);
+            var dbProject = dbContext.Projects.First(i => i.Project_ID == project.ProjectId);
 
             if (dbProject != null && project != null)
             {
@@ -64,7 +64,7 @@ namespace DAL.Repository
         /// </summary>
         public void DeleteProject(int projectId)
         {
-            var project = dbContext.Projects.FirstOrDefault(i => i.Project_ID == projectId);
+            var project = dbContext.Projects.First(i => i.Project_ID == projectId);
             if (project != null)
             {
                 project.Project_Status = "deleted";
@@ -77,10 +77,10 @@ namespace DAL.Repository
         /// </summary>
         public IProjectModel GetProject(int projectId)
         {
-            var targetProject = dbContext.Projects.FirstOrDefault(i => i.Project_ID == projectId);
-            if (targetProject == null) { return null; }
-            List<Linq.Project> dtoResult = new List<Linq.Project>();
-            dtoResult.Add(targetProject);
+            var targetProject = dbContext.Projects.First(i => i.Project_ID == projectId);
+
+            List<Linq.Project> dtoResult = new List<Linq.Project> { targetProject };
+
             return TransferAllProjectProperties(dtoResult)[0];
         }
 
@@ -89,7 +89,7 @@ namespace DAL.Repository
         /// </summary>
         public List<IProjectModel> GetUserProjects(int userId)
         {
-            var targetUser = dbContext.Users.FirstOrDefault(i => i.User_ID == userId);
+            var targetUser = dbContext.Users.First(i => i.User_ID == userId);
 
             List<IProjectModel> result = TransferAllProjectProperties(targetUser.Projects.ToList());
 
@@ -119,7 +119,7 @@ namespace DAL.Repository
 
             if (targetSpecIds.Count == 0) return new List<IProjectModel>();
 
-            var dtoProjects = dbContext.Projects.Where(i => i.Projects_Specialisation_Lines.Count == 0 ||  i.Projects_Specialisation_Lines.Any(x => targetSpecIds.Contains(x.Spec_Id))).ToList();
+            var dtoProjects = dbContext.Projects.Where(i => i.Projects_Specialisation_Lines.Count == 0 || i.Projects_Specialisation_Lines.Any(x => targetSpecIds.Contains(x.Spec_Id))).ToList();
 
             List<IProjectModel> result = TransferAllProjectProperties(dtoProjects);
 
@@ -148,8 +148,6 @@ namespace DAL.Repository
                     projectModel.ProjectModifyDate = dtoProject.Project_Modify_Date;
                     projectModel.TotalInvoicePrice = dtoProject.Total_Invoice_Price;
                     projectModel.ProjectStatus = dtoProject.Project_Status;
-                    projectModel.ManagerFullName = userRepo.GetUserFromID(dtoProject.User_ID).FullName;
-                    projectModel.ManagerUserName = userRepo.GetUserFromID(dtoProject.User_ID).UserName;
 
                     result.Add(projectModel);
                 }
@@ -162,15 +160,14 @@ namespace DAL.Repository
         /// </summary>
         public void Delete(int id)
         {
-            var project = dbContext.Projects.FirstOrDefault(i => i.Project_ID == id);
-            if (project != null)
-            {
-                project.Project_Status = "deleted";
-                dbContext.SubmitChanges();
-            }
+            var project = dbContext.Projects.First(i => i.Project_ID == id);
+
+            project.Project_Status = "deleted";
+            dbContext.SubmitChanges();
         }
+
         /// <summary>
-        /// (JQ)This method searches for projects based on a search term and a user ID. 
+        /// (JQ)This method searches for projects based on a search term and a user ID.
         /// </summary>
         /// <param name="searchTerm">The search term to use when looking for projects.</param>
         /// <param name="userId">The ID of the user to which the projects belong.</param>

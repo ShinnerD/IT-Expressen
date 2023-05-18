@@ -42,7 +42,7 @@
         void AddSpecializationsToUser(int UserID, List<string> specializations);
 
         /// <summary>
-        /// Removes the given list of string specializations to the user. /DK
+        /// Removes the given list of string specializations from the user. /DK
         /// </summary>
         void RemoveSpecializationsFromUser(int userId, string specializations);
 

@@ -1,11 +1,12 @@
-﻿using Interfaces.Services;
+﻿using Interfaces.Models;
+using Interfaces.Services;
 using System.Data;
 
 namespace GUI
 {
     public partial class NewProject : Form
     {
-        public string CurrentUser { get; set; }
+        public IUserModel CurrentUser { get; set; }
         private readonly IDomainServiceManager ServiceManager;
 
 
@@ -17,7 +18,7 @@ namespace GUI
             SetupSkillsCheckList();
 
             lblFeedback.Text = string.Empty;
-            CurrentUser = currentUser;
+            CurrentUser = ServiceManager.UserService.GetUser(currentUser);
             txtBoxUserName.Text = currentUser; // <------- Should be deleted before release along with textbox in designer.  /DK
         }
 
@@ -51,7 +52,7 @@ namespace GUI
 
                 List<string> reqSkills = FindCheckedSkills();
 
-                projectService.CreateProject(txtBoxUserName.Text, txtBoxTitle.Text, txtBoxDescription.Text, dTPstartDate.Value, dTPendDate.Value, reqSkills);
+                projectService.CreateProject(CurrentUser.ID, txtBoxTitle.Text, txtBoxDescription.Text, dTPstartDate.Value, dTPendDate.Value, reqSkills);
             }
             else
             {
