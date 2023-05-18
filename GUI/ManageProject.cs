@@ -120,7 +120,8 @@ namespace GUI
             dgv_InvolvedUsers.Columns.Add("InviteStatus", "Invite Status");
             dgv_InvolvedUsers.Columns["InviteStatus"].DataPropertyName = "InviteStatus";
 
-            dgv_InvolvedUsers.DataSource = invService.GetAllInvitedProjectID(ProjectGet.ProjectId);
+
+            dgv_InvolvedUsers.DataSource = invService.GetAllInvitedProjectID(ProjectGet.ProjectId).Where(i => i.InviteStatus.ToLower() != "declined").ToList(); ;
         }
     }
 }
