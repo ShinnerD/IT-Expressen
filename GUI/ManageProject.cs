@@ -11,7 +11,6 @@ namespace GUI
         private IProjectModel ProjectGet { get; set; }
 
         private IInvitesModel Invite { get; set; }
-        private IUserService UserServiceGet { get; set; }
 
         public ManageProject(int projectId)
         {

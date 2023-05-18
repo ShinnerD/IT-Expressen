@@ -48,6 +48,7 @@
             label5 = new Label();
             label4 = new Label();
             label6 = new Label();
+            lb_test = new Label();
             grpBoxProfileInfo.SuspendLayout();
             SuspendLayout();
             // 
@@ -312,17 +313,28 @@
             label6.TabIndex = 5;
             label6.Text = "Project Start Date:";
             // 
+            // lb_test
+            // 
+            lb_test.AutoSize = true;
+            lb_test.Location = new Point(169, 279);
+            lb_test.Name = "lb_test";
+            lb_test.Size = new Size(38, 15);
+            lb_test.TabIndex = 24;
+            lb_test.Text = "label1";
+            // 
             // ManageProject
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(699, 539);
+            Controls.Add(lb_test);
             Controls.Add(grpBoxProfileInfo);
             Name = "ManageProject";
             Text = "ManageProject";
             grpBoxProfileInfo.ResumeLayout(false);
             grpBoxProfileInfo.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -347,5 +359,6 @@
         private Label label5;
         private Label label4;
         private Label label6;
+        private Label lb_test;
     }
 }
