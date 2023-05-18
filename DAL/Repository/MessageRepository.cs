@@ -21,7 +21,7 @@ namespace DAL.Repository
         {
             List<IMessageModel> result = new List<IMessageModel>();
 
-            var dbMessages = dbContext.Projects.First(i => i.Project_ID == projectID).Project_Message_Lines;
+            var dbMessages = dbContext.Project_Message_Lines.Where(i => i.Project_ID == projectID);
 
             foreach (var dbMessage in dbMessages)
             {
@@ -69,7 +69,6 @@ namespace DAL.Repository
         {
             var linqMessageModel = new Linq.Project_Message_Line();
 
-            linqMessageModel.Message_ID = messageModel.MessageID;
             linqMessageModel.Project_ID = messageModel.ProjectID;
             linqMessageModel.User_ID = messageModel.UserID;
             linqMessageModel.Message = messageModel.Message;
