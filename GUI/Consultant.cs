@@ -161,13 +161,15 @@ namespace GUI
         //Opens the form to accept the selected invitation, then refreshes the datagridview /MS
         private void bt_seeInviteDetails_Click(object sender, EventArgs e)
         {
+            if (dgv_ConsultantsInvites.SelectedRows.Count > 0)
+            {
             var selectedProject = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as IInvitesModel;
             AcceptInviteForm AccInvForm = new AcceptInviteForm(ServiceManager, selectedProject);
             this.Hide();
             AccInvForm.ShowDialog();
             this.Show();
             LoadInvitesToDGV();
-
+            }
         }
         private void EditCancel()
         {

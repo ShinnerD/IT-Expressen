@@ -42,22 +42,36 @@ namespace GUI
         //Temp method used to bypass the login and connect straigt to an instance of the admin form -> Used only for development purposes will be deleted before final release /MS
         private void OpenAdminForm()
         {
-            this.Hide();
-            Admin Admin = new Admin(ServiceManager, "admin");
-            Admin.ShowDialog();
-            this.Show();
+            try
+            {
+                this.Hide();
+                Admin Admin = new Admin(ServiceManager, "admin");
+                Admin.ShowDialog();
+                this.Show();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error");
+            }
         }
         //Temp method used to bypass the login and connect straigt to an instance of the consultant form, on a specific user -> Used only for development purposes and will be deleted before final release /MS
         private void OpenConsultantForm()
         {
-            var user = userService.GetAllUsers();
-            var targetUser = user.Where(i => i.UserName == tb_UserName.Text).First();
-            this.Hide();
-            targetUser.UserName = "fbeccles0";
-            targetUser.Password = "password";
-            Consultant consultant = new Consultant(ServiceManager, targetUser.UserName);
-            consultant.ShowDialog();
-            this.Show();
+            try
+            {
+                var user = userService.GetAllUsers();
+                var targetUser = user.Where(i => i.UserName == tb_UserName.Text).First();
+                this.Hide();
+                targetUser.UserName = "fbeccles0";
+                targetUser.Password = "password";
+                Consultant consultant = new Consultant(ServiceManager, targetUser.UserName);
+                consultant.ShowDialog();
+                this.Show();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error");
+            }
         }
         //Method to open form for creating a new user in the system /MS
         private void OpenCreateUserForm()

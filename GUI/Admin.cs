@@ -222,20 +222,20 @@ namespace GUI
                 usersSearchResults = _.GetAllUsers().Where(i => i.UserType.ToLower() == "manager").ToList();
             }
 
-            usersSearchResults = usersSearchResults.Where(x => x.UserName.ToLower().Contains(searchString.ToLower()) || x.FullName.ToLower().Contains(searchString.ToLower()))
+            usersSearchResults = usersSearchResults.Where(x => x.UserName.ToLower().Contains(searchString.ToLower())
+                    || x.FullName.ToLower().Contains(searchString.ToLower()))
                     .OrderBy(o => o.UserName).ToList();
 
             dgv_UserSearchResults.DataSource = usersSearchResults;
 
-            if ()
-            {
-
-            }
-            if (userName != "")
+            if (!string.IsNullOrWhiteSpace(userName))
             {
                 int index = usersSearchResults.FindIndex(i => i.UserName == userName);
-                dgv_UserSearchResults.Rows[index].Selected = true;
-                dgv_UserSearchResults.FirstDisplayedScrollingRowIndex = index;
+                if (index >= 0)
+                {
+                    dgv_UserSearchResults.Rows[index].Selected = true;
+                    dgv_UserSearchResults.FirstDisplayedScrollingRowIndex = index;
+                }
             }
         }
 
