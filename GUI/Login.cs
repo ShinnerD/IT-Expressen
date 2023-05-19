@@ -1,3 +1,4 @@
+using DAL;
 using Domain.Services;
 using Interfaces.Models;
 using Interfaces.Services;
@@ -8,13 +9,14 @@ namespace GUI
     public partial class Login : Form
     {
         //Initializeing og the service/models need for the form /MS
-        public List<IUserModel> allUsers { get; set; }
-        private IUserService userService = new UserService();
+        private readonly IDomainServiceManager ServiceManager;
+        private IUserService userService;
         //Initializes needed methods and data, and start the AsyncTask /MS
-        public Login()
+        public Login(IDomainServiceManager domainServiceManager)
         {
+            ServiceManager = domainServiceManager ?? throw new ArgumentNullException(nameof(domainServiceManager));
+            userService = ServiceManager.UserService;
             InitializeComponent();
-            LoadUserData();
             AsyncTask();
         }
         // Button click event -> see method for results /MS
@@ -41,7 +43,7 @@ namespace GUI
         private void OpenAdminForm()
         {
             this.Hide();
-            Admin Admin = new Admin("admin");
+            Admin Admin = new Admin(ServiceManager, "admin");
             Admin.ShowDialog();
             this.Show();
         }
@@ -53,7 +55,7 @@ namespace GUI
             this.Hide();
             targetUser.UserName = "fbeccles0";
             targetUser.Password = "password";
-            Consultant consultant = new Consultant(targetUser.UserName);
+            Consultant consultant = new Consultant(ServiceManager, targetUser.UserName);
             consultant.ShowDialog();
             this.Show();
         }
@@ -61,21 +63,28 @@ namespace GUI
         private void OpenCreateUserForm()
         {
             this.Hide();
-            CreateUser createUser = new CreateUser();
+            CreateUser createUser = new CreateUser(ServiceManager);
             createUser.ShowDialog();
             this.Show();
         }
         //Temp method used to bypass the login and connect straigt to an instance of the manager form, on a specific user -> Used only for development purposes and will be deleted before final release /MS
         private void OpenManagerForm()
         {
-            var user = userService.GetAllUsers();
-            var targetUser = user.Where(i => i.UserName == tb_UserName.Text).First();
-            this.Hide();
-            targetUser.UserName = "amusto0";
-            targetUser.Password = "password";
-            Manager manager = new Manager(targetUser.UserName);
-            manager.ShowDialog();
-            this.Show();
+            try
+            {
+                var user = userService.GetAllUsers();
+                var targetUser = user.Where(i => i.UserName == tb_UserName.Text).First();
+                this.Hide();
+                targetUser.UserName = "amusto0";
+                targetUser.Password = "password";
+                Manager manager = new Manager(ServiceManager, targetUser.UserName);
+                manager.ShowDialog();
+                this.Show();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
         // Button click event -> see method for results /MS
         private void bt_Login_Click(object sender, EventArgs e)
@@ -92,19 +101,19 @@ namespace GUI
                 if (targetUser.Password == tb_Password.Text && targetUser.UserType == "manager")
                 {
                     this.Hide();
-                    GUI.Manager a = new Manager(targetUser.UserName);
+                    GUI.Manager a = new Manager(ServiceManager, targetUser.UserName);
                     a.Show();
                 }
                 if (targetUser.Password == tb_Password.Text && targetUser.UserType == "consultant")
                 {
                     this.Hide();
-                    GUI.Consultant a = new Consultant(targetUser.UserName);
+                    GUI.Consultant a = new Consultant(ServiceManager, targetUser.UserName);
                     a.Show();
                 }
                 if (targetUser.Password == tb_Password.Text && targetUser.UserType == "admin")
                 {
                     this.Hide();
-                    GUI.Admin a = new Admin(targetUser.UserName);
+                    GUI.Admin a = new Admin(ServiceManager, targetUser.UserName);
                     a.Show();
                 }
             }
@@ -146,13 +155,6 @@ namespace GUI
                 lb_connectionTest.Invoke((MethodInvoker)(() => lb_connectionTest.Text = "No connection!"));
                 pb_ConnectionStatus.Image = img_RedGreen.Images[0];
             }
-        }
-        //Loads user data /MS
-        private void LoadUserData()
-        {
-
-            var UserService = new Domain.Services.UserService();
-            allUsers = UserService.GetAllUsers();
         }
         // Button click event -> see method for results /MS
         private void bt_cancel_Click(object sender, EventArgs e)

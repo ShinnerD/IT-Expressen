@@ -7,7 +7,6 @@ namespace Interfaces.Services
     /// </summary>
     public interface ISpecializationService
     {
-
         /// <summary>
         /// List of strings representing the current Specializations/Skills in the Database. /DK
         /// </summary>

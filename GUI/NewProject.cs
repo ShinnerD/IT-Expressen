@@ -1,56 +1,58 @@
-﻿using Interfaces.Services;
+﻿using Interfaces.Models;
+using Interfaces.Services;
 using System.Data;
 
 namespace GUI
 {
     public partial class NewProject : Form
     {
-        public string CurrentUser { get; set; }
+        public IUserModel CurrentUser { get; set; }
+        private readonly IDomainServiceManager ServiceManager;
 
-        public NewProject(string currentUser)
+
+        public NewProject(IDomainServiceManager serviceManager, string currentUser)
         {
+            ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
+
             InitializeComponent();
             SetupSkillsCheckList();
+
             lblFeedback.Text = string.Empty;
-            CurrentUser = currentUser;
+            CurrentUser = ServiceManager.UserService.GetUserFromUsername(currentUser);
             txtBoxUserName.Text = currentUser; // <------- Should be deleted before release along with textbox in designer.  /DK
         }
 
         private void SetupSkillsCheckList()
         {
-            ISpecializationService specService = new Domain.Services.SpecializationService();
-            List<string> items = specService.ListDefinedSpecializations().OrderBy(i => i).ToList();
+            ISpecializationService specService = ServiceManager.SpecializationService;
+            List<string> items = specService.ListDefinedSpecializations();
 
             foreach (var item in items)
             {
                 checkedListSkills.Items.Add(item);
-            }
-
-            if (items.Count == 0)
-            {
-                MessageBox.Show("Failed to retrieve skills from server.");
             }
         }
 
         private void btnCreateProject_Click(object sender, EventArgs e)
         {
             SaveNewProject();
-            lblFeedback.Text = "New Project Saved!";
         }
 
         private void SaveNewProject()
         {
-            if (NoInputErrors())
+            try
             {
-                IProjectService projectService = new Domain.Services.ProjectService();
+                IProjectService projectService = ServiceManager.ProjectService;
 
                 List<string> reqSkills = FindCheckedSkills();
 
-                projectService.CreateProject(txtBoxUserName.Text, txtBoxTitle.Text, txtBoxDescription.Text, dTPstartDate.Value, dTPendDate.Value, reqSkills);
+                projectService.CreateProject(CurrentUser.ID, txtBoxTitle.Text, txtBoxDescription.Text, dTPstartDate.Value, dTPendDate.Value, reqSkills);
+
+                lblFeedback.Text = "New Project Saved!";
             }
-            else
+            catch (Exception e)
             {
-                lblFeedback.Text = "Please fill out all fields";
+                lblFeedback.Text = e.Message;
             }
         }
 
@@ -65,16 +67,16 @@ namespace GUI
             return result;
         }
 
-        private bool NoInputErrors()
-        {
-            if (txtBoxTitle.Text != string.Empty
-                && txtBoxDescription.Text != string.Empty
-                && txtBoxUserName.Text != string.Empty
-                && dTPendDate.Value > DateTime.Now)
-            {
-                return true;
-            }
-            return false;
-        }
+        //private bool NoInputErrors()
+        //{
+        //    if (txtBoxTitle.Text != string.Empty
+        //        && txtBoxDescription.Text != string.Empty
+        //        && txtBoxUserName.Text != string.Empty
+        //        && dTPendDate.Value > DateTime.Now)
+        //    {
+        //        return true;
+        //    }
+        //    return false;
+        //}
     }
 }

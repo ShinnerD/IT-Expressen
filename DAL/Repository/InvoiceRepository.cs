@@ -12,15 +12,17 @@ namespace DAL.Repository
         /// <summary>
         /// retrieving data from Database and Repository too store data
         /// </summary>
-        DataClassesDataContext DataContext = new DataClassesDataContext(DbConnectionString.ConnectionString);
-        
+        private readonly DataClassesDataContext DataContext;
 
+        public InvoiceRepository(IDataContextManager dataContext)
+        {
+            DataContext = dataContext.GetContext() as DataClassesDataContext ?? throw new ArgumentNullException(nameof(dataContext));
+        }
 
         /// <summary>
         /// Getting a list off all Invoice, with the attributes that is in Invoice.
         /// </summary>
-        /// <returns></returns>
-        public List<IInvoiceModel> GetAllInvoices(IInvoiceModel dbInvoice)
+        public List<IInvoiceModel> GetAllInvoices()
         {
             List<IInvoiceModel> result = new List<IInvoiceModel>();
 
@@ -39,16 +41,15 @@ namespace DAL.Repository
             }
             return result;
         }
+
         /// <summary>
-        /// Getting a list off all invoice with a specifik ProjectID
+        /// Getting a list off all invoices with a specific ProjectID
         /// </summary>
-        /// <param name="projectid"></param>
-        /// <returns></returns>
-        public List<IInvoiceModel> GetAllInvoiceProjectID(int projectid)
+        public List<IInvoiceModel> GetAllInvoiceProjectID(int projectId)
         {
             List<IInvoiceModel> result = new List<IInvoiceModel>();
 
-            var dbInvoices = DataContext.Projects.FirstOrDefault(i => i.Project_ID == projectid).Invoices;
+            var dbInvoices = DataContext.Projects.First(i => i.Project_ID == projectId).Invoices;
 
             foreach (var dbInvoiced in dbInvoices)
             {
@@ -65,32 +66,14 @@ namespace DAL.Repository
             return result;
         }
 
-        
         /// <summary>
-        /// Getting a list off all invoice with a specifik InvoiceID
+        /// Getting a specific invoice according to invoice Id.
         /// </summary>
-        /// <param name="invoice"></param>
-        /// <returns></returns>
-        public IInvoiceModel GetInvoiceID(int invoice)
+        public IInvoiceModel GetInvoiceID(int invoiceId)
         {
             IInvoiceModel result = new InvoiceModel();
 
-            var dbInvoice = DataContext.Invoices.FirstOrDefault(i => i.Invoice_ID == invoice);
-
-            result.InvoiceId = dbInvoice.Invoice_ID;
-            result.ProjectId = (int)dbInvoice.Project_ID;
-            result.LineID = (int)dbInvoice.Line_ID;
-            result.TotalPrice = (int)dbInvoice.Total_Price;
-            result.InvoiceDate = dbInvoice.Invoice_Date;
-
-            return result;
-        }
-
-        public IInvoiceModel GetInvoiceInvoiceID(int invoice)
-        {
-            IInvoiceModel result = new InvoiceModel();
-
-            var dbInvoice = DataContext.Invoices.FirstOrDefault(i => i.Invoice_ID == invoice);
+            var dbInvoice = DataContext.Invoices.FirstOrDefault(i => i.Invoice_ID == invoiceId);
 
             result.InvoiceId = dbInvoice.Invoice_ID;
             result.ProjectId = (int)dbInvoice.Project_ID;

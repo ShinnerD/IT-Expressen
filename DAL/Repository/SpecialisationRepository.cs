@@ -8,23 +8,19 @@ namespace DAL.Repository
     /// </summary>
     public class SpecializationRepository : ISpecializationRepository
     {
-        private readonly DataClassesDataContext dbContext = new DataClassesDataContext(DbConnectionString.ConnectionString);
+        private readonly DataClassesDataContext dbContext;
+
+        public SpecializationRepository(IDataContextManager dataContextManager)
+        {
+            dbContext = dataContextManager.GetContext() as DataClassesDataContext ?? throw new ArgumentNullException(nameof(dataContextManager));
+        }
 
         /// <summary>
         /// A list of string representing specializations defined in the database. /DK
         /// </summary>
         public List<string> GetCurrentSpecializationsList()
         {
-            List<string> list = new List<string>();
-
-            var specList = dbContext.Specialisations;
-
-            foreach (var specialization in specList)
-            {
-                list.Add(specialization.Specialisation1);
-            }
-
-            return list;
+            return dbContext.Specialisations.Select(i => i.Specialisation1).ToList();
         }
 
         /// <summary>
@@ -36,11 +32,19 @@ namespace DAL.Repository
         }
 
         /// <summary>
+        /// Returns a list of strings representing the specializations associated with the user specified in the parameters. /DK
+        /// </summary>
+        public List<string> GetUserSpecializations(int userId)
+        {
+            return dbContext.Specialisations_Lines.Where(i => i.User_Id == userId).Select(x => x.Specialisation.Specialisation1).ToList();
+        }
+
+        /// <summary>
         /// An int representing the generated identifier ID for a specialization in the database. /DK
         /// </summary>
         public int GetSpecializationID(string specialization)
         {
-            return dbContext.Specialisations.FirstOrDefault(i => i.Specialisation1 == specialization).Spec_Id;
+            return dbContext.Specialisations.First(i => i.Specialisation1 == specialization).Spec_Id;
         }
 
         /// <summary>
@@ -48,7 +52,7 @@ namespace DAL.Repository
         /// </summary>
         public string GetSpecializationString(int specId)
         {
-            return dbContext.Specialisations.FirstOrDefault(i => i.Spec_Id == specId).Specialisation1;
+            return dbContext.Specialisations.First(i => i.Spec_Id == specId).Specialisation1;
         }
 
         /// <summary>
@@ -64,10 +68,8 @@ namespace DAL.Repository
                 {
                     var newSpecLine = new Linq.Projects_Specialisation_Line();
 
-                    newSpecLine.Project = dbContext.Projects.FirstOrDefault(i => i.Project_ID == projectId);
-                    newSpecLine.Project_ID = newSpecLine.Project.Project_ID;
-                    newSpecLine.Specialisation = dbContext.Specialisations.FirstOrDefault(i => i.Specialisation1 == specialization);
-                    newSpecLine.Spec_Id = newSpecLine.Specialisation.Spec_Id;
+                    newSpecLine.Project_ID = projectId;
+                    newSpecLine.Spec_Id = GetSpecializationID(specialization);
 
                     newSpecLineRows.Add(newSpecLine);
                 }
@@ -83,7 +85,7 @@ namespace DAL.Repository
         public void RemoveFromProject(int projectId, List<string> specializations)
         {
             var targetSpecIds = dbContext.Specialisations.Where(i => specializations.Contains(i.Specialisation1)).Select(x => x.Spec_Id).ToList();
-            var targetSpecLines = dbContext.Projects.FirstOrDefault(i => i.Project_ID == projectId).Projects_Specialisation_Lines.Where(x => targetSpecIds.Contains(x.Spec_Id)).ToList();
+            var targetSpecLines = dbContext.Projects.First(i => i.Project_ID == projectId).Projects_Specialisation_Lines.Where(x => targetSpecIds.Contains(x.Spec_Id)).ToList();
 
             dbContext.Projects_Specialisation_Lines.DeleteAllOnSubmit(targetSpecLines);
             dbContext.SubmitChanges();
@@ -102,10 +104,8 @@ namespace DAL.Repository
                 {
                     var newSpecLine = new Linq.Specialisations_Line();
 
-                    newSpecLine.User = dbContext.Users.FirstOrDefault(i => i.User_ID == UserID);
-                    newSpecLine.User_Id = newSpecLine.User.User_ID;
-                    newSpecLine.Specialisation = dbContext.Specialisations.FirstOrDefault(i => i.Specialisation1 == specialization);
-                    newSpecLine.Spec_Id = newSpecLine.Specialisation.Spec_Id;
+                    newSpecLine.User_Id = UserID;
+                    newSpecLine.Spec_Id = GetSpecializationID(specialization);
 
                     newSpecLineRows.Add(newSpecLine);
                 }
@@ -121,18 +121,10 @@ namespace DAL.Repository
         public void RemoveSpecializationsFromUser(int userId, string specializations)
         {
             var targetSpecIds = dbContext.Specialisations.Where(i => specializations.Contains(i.Specialisation1)).Select(x => x.Spec_Id).ToList();
-            var targetSpecLines = dbContext.Users.FirstOrDefault(i => i.User_ID == userId).Specialisations_Lines.Where(x => targetSpecIds.Contains(x.Spec_Id)).ToList();
+            var targetSpecLines = dbContext.Users.First(i => i.User_ID == userId).Specialisations_Lines.Where(x => targetSpecIds.Contains(x.Spec_Id)).ToList();
 
             dbContext.Specialisations_Lines.DeleteAllOnSubmit(targetSpecLines);
             dbContext.SubmitChanges();
-        }
-
-        /// <summary>
-        /// Returns a list of strings representing the specializations associated with the user specified in the parameters. /DK
-        /// </summary>
-        List<string> ISpecializationRepository.GetUserSpecializations(int userId)
-        {
-            return dbContext.Specialisations_Lines.Where(i => i.User_Id == userId).Select(x => x.Specialisation.Specialisation1).ToList();
         }
     }
 }

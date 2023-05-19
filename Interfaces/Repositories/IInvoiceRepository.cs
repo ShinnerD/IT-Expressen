@@ -1,30 +1,24 @@
 ﻿using Interfaces.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-///Written by Erik
 
+///Written by Erik
 
 namespace Interfaces.Repositories
 {
     public interface IInvoiceRepository
     {
+        /// <summary>
+        /// Returns a List of IInvoices related to the ProjectID provided.
+        /// </summary>
+        List<IInvoiceModel> GetAllInvoiceProjectID(int projectId);
 
         /// <summary>
-        /// Returns a List of IInvoiceRepository with projects related to the ProjectID provided. 
+        /// Getting a list off all Invoice, with the attributes that is in Invoice.
         /// </summary>
-        List<IInvoiceModel> GetAllInvoiceProjectID(int projectid);
-        /// <summary>
-        /// Returns a List of IInvoiceRepository with projects related to the Allinvoice provided. 
-        /// </summary>
-        List<IInvoiceModel> GetAllInvoices(IInvoiceModel dbInvoice);
+        List<IInvoiceModel> GetAllInvoices();
 
         /// <summary>
-        /// Returns a List of IInvoiceRepository with projects related to the InvoiceID provided. 
+        /// Getting a specific invoice according to invoice Id.
         /// </summary>
-        IInvoiceModel GetInvoiceID(int invoice);
-       
+        IInvoiceModel GetInvoiceID(int invoiceId);
     }
 }

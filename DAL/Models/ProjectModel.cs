@@ -7,7 +7,7 @@ namespace DAL.Models
     {
         public int ProjectId { get; set; }
         public int UserId { get; set; }
-        public string? Title { get; set; }
+        public string Title { get; set; }
         public string? ManagerUserName { get; set; }
         public string? ManagerFullName { get; set; }
         public DateTime? ProjectStartDate { get; set; }

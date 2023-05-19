@@ -1,16 +1,25 @@
-﻿using Domain.Services;
-using Interfaces.Models;
+﻿using Interfaces.Models;
 using Interfaces.Services;
 
 namespace GUI
 {
     public partial class Manager : Form
     {
-        public string Username { get; set; }
-        public IUserModel userModel { get; set; }
+        private string Username;
+        private IUserModel userModel;
 
-        public Manager(string username)
+        private readonly IDomainServiceManager ServiceManager;
+        private IProjectService projectService;
+
+        private List<IProjectModel> ProjectList;
+        private IProjectModel SelectedProject;
+
+        private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+
+        public Manager(IDomainServiceManager serviceManager, string username)
         {
+            ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
+            projectService = ServiceManager.ProjectService;
             InitializeComponent();
             Username = username;
             GetUser();
@@ -24,39 +33,37 @@ namespace GUI
         /// </summary>
         private void SetUpProjects()
         {
-            dgv_Viewproject.AutoGenerateColumns = false;
-            dgv_Viewproject.StandardTab = true;
+            try
+            {
+                ProjectList = projectService.GetUserProjects(userModel.ID).ToList();
+            }
+            catch (Exception)
+            {
+                FeedBackMessage(lbl_ViewProjectsFeedBack, "Unable to retrieve projects.", Color.Red);
+            }
+            finally
+            {
+                dgv_Viewproject.AutoGenerateColumns = false;
+                dgv_Viewproject.StandardTab = true;
 
-            dgv_Viewproject.Columns.Add("Title", "Project Name");
-            dgv_Viewproject.Columns["Title"].DataPropertyName = "Title";
-            dgv_Viewproject.Columns["Title"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dgv_Viewproject.Columns.Add("Title", "Project Name");
+                dgv_Viewproject.Columns["Title"].DataPropertyName = "Title";
+                dgv_Viewproject.Columns["Title"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-            dgv_Viewproject.Columns.Add("Status", "Status");
-            dgv_Viewproject.Columns["Status"].DataPropertyName = "ProjectStatus";
+                dgv_Viewproject.Columns.Add("Status", "Status");
+                dgv_Viewproject.Columns["Status"].DataPropertyName = "ProjectStatus";
 
-            dgv_Viewproject.Columns.Add("Start", "Start");
-            dgv_Viewproject.Columns["Start"].DataPropertyName = "ProjectStartDate";
+                dgv_Viewproject.Columns.Add("Start", "Start");
+                dgv_Viewproject.Columns["Start"].DataPropertyName = "ProjectStartDate";
 
-            dgv_Viewproject.Columns.Add("End", "End");
-            dgv_Viewproject.Columns["End"].DataPropertyName = "ProjectEndDate";
+                dgv_Viewproject.Columns.Add("End", "End");
+                dgv_Viewproject.Columns["End"].DataPropertyName = "ProjectEndDate";
 
-            dgv_Viewproject.Columns.Add("Invoiced", "Invoiced");
-            dgv_Viewproject.Columns["Invoiced"].DataPropertyName = "TotalInvoicePrice";
+                dgv_Viewproject.Columns.Add("Invoiced", "Invoiced");
+                dgv_Viewproject.Columns["Invoiced"].DataPropertyName = "TotalInvoicePrice";
 
-            IProjectService projectService = new ProjectService();
-
-            dgv_Viewproject.DataSource = projectService.GetUserProjects(userModel.ID).OrderBy(i => i.Title).ToList();
-        }
-
-        /// <summary>
-        /// (JQ)This method opens the NewProject form.
-        /// </summary>
-        private void OpenNewProjectForm()
-        {
-            this.Hide();
-            Form newProjectForm = new NewProject(Username);
-            newProjectForm.ShowDialog();
-            this.Show();
+                dgv_Viewproject.DataSource = ProjectList;
+            }
         }
 
         /// <summary>
@@ -64,8 +71,8 @@ namespace GUI
         /// </summary>
         private void GetUser()
         {
-            IUserService userService = new UserService();
-            userModel = userService.GetUser(Username);
+            IUserService userService = ServiceManager.UserService;
+            userModel = userService.GetUserFromUsername(Username);
         }
 
         /// <summary>
@@ -86,47 +93,41 @@ namespace GUI
         }
 
         /// <summary>
-        /// (JQ)Handle button click event for OpenNewProjectForm.
-        /// </summary>
-        private void bt_NewProject_Click(object sender, EventArgs e)
-        {
-            OpenNewProjectForm();
-        }
-
-        /// <summary>
-        /// (JQ)Handle button click event for ViewProjects and passes userId to ViewProjects form.
-        /// </summary>
-        //private void bt_ViewProjects_Click(object sender, EventArgs e)
-        //{
-        //    int userId = userModel.ID;
-        //    ViewProjects viewProjects = new ViewProjects(userId);
-        //    viewProjects.ShowDialog();
-        //    this.Show();
-        //}
-
-        /// <summary>
-        /// Opens the Form for editing a project. /DK
+        /// Changes the Form into editing the currently selected project from the projects list. /DK
         /// </summary>
         private void ManageSelectedProject()
         {
-            var selectedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;
-            if (selectedProject != null)
+            if (SelectedProject != null)
             {
-                EditProject editProject = new EditProject(selectedProject.ProjectId);
-                this.Hide();
-                editProject.ShowDialog();
-                this.Show();
+                EditProjectDetails(SelectedProject);
             }
         }
 
         /// <summary>
-        /// (JQ)Performs a search for projects matching the given search term and displays them in the DataGridView.
+        /// Sets the form to Edit Selected Project "mode." /DK
         /// </summary>
-        private void SearchProjects()
+        /// <param name="selectedProject"></param>
+        private void EditProjectDetails(IProjectModel selectedProject)
         {
-            // string searchTerm = tb_Search.Text.Trim();
-            // List<IProjectModel> projects = projectService.SearchProjects(searchTerm, UserId);
-            // dgv_Viewproject.DataSource = projects;
+            ViewProjectsGrpBox.Visible = false;
+            NewProjectGrpBox.Visible = true;
+            btn_NewProjectSave.Text = "Update Project";
+            txtBox_ProjectTitle.Text = selectedProject.Title;
+            txtBox_ProjectDescription.Text = selectedProject.Description;
+            dtp_NewProjectStartDate.Value = selectedProject.ProjectStartDate ?? DateTime.MinValue;
+            dtp_NewProjectEndDate.Value = selectedProject.ProjectEndDate ?? DateTime.MinValue;
+            CheckProjectSkills();
+        }
+
+        /// <summary>
+        /// Checks off the correct skills in the specializations list.
+        /// </summary>
+        private void CheckProjectSkills()
+        {
+            foreach (var specialization in ServiceManager.SpecializationService.GetProjectSpecializations(SelectedProject.ProjectId))
+            {
+                checkedListSkills.SetItemChecked(checkedListSkills.FindStringExact(specialization), true);
+            }
         }
 
         /// <summary>
@@ -137,26 +138,11 @@ namespace GUI
             var selectedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;
             if (selectedProject != null)
             {
-                InviteConsultants invConSul = new InviteConsultants(selectedProject.ProjectId);
+                InviteConsultants invConSul = new InviteConsultants(ServiceManager, selectedProject.ProjectId);
                 this.Hide();
                 invConSul.ShowDialog();
                 this.Show();
             }
-        }
-
-        private void bt_EditProject_Click(object sender, EventArgs e)
-        {
-            ManageSelectedProject();
-        }
-
-        private void bt_FindConsultants_Click(object sender, EventArgs e)
-        {
-            InvitedConsultantSelectedProject();
-        }
-
-        private void bt_EditProfile_Click(object sender, EventArgs e)
-        {
-            ChangeEditProfileState();
         }
 
         /// <summary>
@@ -175,7 +161,7 @@ namespace GUI
             else
             {
                 UpdateUserModel();
-                IUserService userService = new UserService();
+                IUserService userService = ServiceManager.UserService;
                 userService.UpdateUser(userModel);
                 UnlockProfileForEditing(grpBoxProfileInfo, false);
                 bt_EditProfileCancel.Enabled = false;
@@ -184,9 +170,8 @@ namespace GUI
             }
         }
 
-
         /// <summary>
-        /// Updates the pagewide userModel with the new information in the textboxes /DK
+        /// Updates the page-wide userModel with the new information in the textboxes /DK
         /// </summary>
         private void UpdateUserModel()
         {
@@ -230,6 +215,160 @@ namespace GUI
             }
         }
 
+        /// <summary>
+        /// Opens a form for managing the selected project.
+        /// </summary>
+        private void ManageProject()
+        {
+            var selectedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;
+            if (selectedProject != null)
+            {
+                ManageProject ManProject = new GUI.ManageProject(ServiceManager, selectedProject.ProjectId);
+                this.Hide();
+                ManProject.ShowDialog();
+                this.Show();
+            }
+        }
+
+        /// <summary>
+        /// Adds the database specializations to the checklist.
+        /// </summary>
+        private void SetupSkillsCheckList()
+        {
+            checkedListSkills.Items.Clear();
+
+            List<string> items = ServiceManager.SpecializationService.ListDefinedSpecializations();
+
+            foreach (var item in items)
+            {
+                checkedListSkills.Items.Add(item);
+            }
+        }
+
+        /// <summary>
+        /// Async Task that turns on the visibility of the label provided in the parameters,
+        /// shows the given message in the given color, for the given time. /DK
+        /// </summary>
+        private async Task FeedBackMessage(Label label, string message, Color? color = null, int milliseconds = 5000)
+        {
+            label.Text = message;
+            label.ForeColor = color ?? Color.Black;
+            label.Visible = true;
+            _cancellationTokenSource.Cancel();
+            _cancellationTokenSource = new CancellationTokenSource();
+
+            await Task.Delay(milliseconds, _cancellationTokenSource.Token);
+            label.Text = string.Empty;
+            label.ForeColor = Color.Black;
+            label.Visible = false;
+        }
+
+        /// <summary>
+        /// Goes to the ViewProjectsGroupBox
+        /// </summary>
+        private void BackToViewProjects()
+        {
+            txtBox_ProjectTitle.Clear();
+            txtBox_ProjectDescription.Clear();
+            dtp_NewProjectEndDate.Value = DateTime.Now;
+            dtp_NewProjectStartDate.Value = DateTime.Now;
+            checkedListSkills.ClearSelected();
+            NewProjectGrpBox.Visible = false;
+            ViewProjectsGrpBox.Visible = true;
+            dgv_Viewproject.DataSource = null;
+            ProjectList = null;
+            ProjectList = projectService.GetUserProjects(userModel.ID).ToList();
+            dgv_Viewproject.DataSource = ProjectList;
+        }
+
+        /// <summary>
+        /// Updates the information on the current project and tries to save them in the database.
+        /// </summary>
+        private void UpdateProject()
+        {
+            try
+            {
+                List<string> reqSkills = FindCheckedSkills();
+
+                SelectedProject.Title = txtBox_ProjectTitle.Text;
+                SelectedProject.Description = txtBox_ProjectDescription.Text;
+                SelectedProject.ProjectStartDate = dtp_NewProjectStartDate.Value;
+                SelectedProject.ProjectEndDate = dtp_NewProjectEndDate.Value;
+
+                projectService.UpdateProject(SelectedProject, reqSkills);
+
+                BackToViewProjects();
+            }
+            catch (Exception e)
+            {
+                FeedBackMessage(lbl_FeedBackNewProject, e.Message, Color.Red);
+            }
+        }
+
+        /// <summary>
+        /// Returns a list of strings with the checked items in the check list.
+        /// </summary>
+        private List<string> FindCheckedSkills()
+        {
+            List<string> result = new List<string>();
+
+            foreach (var skill in checkedListSkills.CheckedItems)
+            {
+                result.Add(skill.ToString());
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Saves a new Project to the database
+        /// </summary>
+        private void SaveNewProject()
+        {
+            try
+            {
+                List<string> reqSkills = FindCheckedSkills();
+
+                projectService.CreateProject(userModel.ID, txtBox_ProjectTitle.Text, txtBox_ProjectDescription.Text, dtp_NewProjectStartDate.Value, dtp_NewProjectEndDate.Value, reqSkills);
+
+                BackToViewProjects();
+            }
+            catch (Exception e)
+            {
+                FeedBackMessage(lbl_FeedBackNewProject, e.Message, Color.Red);
+            }
+        }
+
+        private void bt_manageProject_Click(object sender, EventArgs e)
+        {
+            ManageProject();
+        }
+
+        private void btn_NewProjectBack_Click(object sender, EventArgs e)
+        {
+            BackToViewProjects();
+        }
+
+        private void btn_NewProject_Click(object sender, EventArgs e)
+        {
+            ViewProjectsGrpBox.Visible = false;
+            NewProjectGrpBox.Visible = true;
+            btn_NewProjectSave.Text = "Save Project";
+            NewProjectGrpBox.Text = "New Project";
+        }
+
+        private void NewProjectGrpBox_VisibleChanged(object sender, EventArgs e)
+        {
+            SetupSkillsCheckList();
+        }
+
+        private void dgv_Viewproject_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgv_Viewproject.SelectedRows.Count > 0)
+            {
+                SelectedProject = (IProjectModel)dgv_Viewproject.SelectedRows[0].DataBoundItem;
+            }
+        }
+
         private void bt_EditProfileCancel_Click(object sender, EventArgs e)
         {
             bt_EditProfileCancel.Enabled = false;
@@ -238,95 +377,33 @@ namespace GUI
             UnlockProfileForEditing(grpBoxProfileInfo, false);
             SetUpTB();
         }
-        private void ManageProject()
+
+        private void btn_NewProjectSave_Click(object sender, EventArgs e)
         {
-            var selectedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;
-            if (selectedProject != null)
+            if (btn_NewProjectSave.Text == "Save Project")
             {
-                ManageProject ManProject = new GUI.ManageProject(selectedProject.ProjectId);
-                this.Hide();
-                ManProject.ShowDialog();
-                this.Show();
+                SaveNewProject();
+            }
+            else
+            {
+                UpdateProject();
             }
         }
-        private void bt_manageProject_Click(object sender, EventArgs e)
+
+        private void bt_EditProject_Click(object sender, EventArgs e)
         {
-            ManageProject();
+            NewProjectGrpBox.Text = "Update Project";
+            ManageSelectedProject();
         }
 
-        private void label3_Click(object sender, EventArgs e)
+        private void bt_FindConsultants_Click(object sender, EventArgs e)
         {
-
+            InvitedConsultantSelectedProject();
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        private void bt_EditProfile_Click(object sender, EventArgs e)
         {
+            ChangeEditProfileState();
         }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void tb_Firstname_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void tb_Email_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void tb_Phonenumber_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void tb_Lastname_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void tb_Address_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void tb_City_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void tb_Zipcode_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void tb_Country_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void grpBoxProfileInfo_Enter(object sender, EventArgs e)
-        {
-        }
-
-        private void lblUserCreationDate_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-        }
-
-
     }
 }

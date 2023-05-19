@@ -10,12 +10,12 @@ namespace Interfaces.Services
         /// <summary>
         /// Creates a new Project in the Database related to the given user. /DK
         /// </summary>
-        void CreateProject(string userName, string title, string description, DateTime startDate, DateTime endDate, List<string> specializations);
+        void CreateProject(int userId, string title, string description, DateTime startDate, DateTime endDate, List<string> specializations);
 
         /// <summary>
         /// Updates the Project in the database. The provided IProjectModel must be an existing project in the database. /DK
         /// </summary>
-        void UpdateProject(IProjectModel project);
+        void UpdateProject(IProjectModel project, List<string> specializations);
 
         /// <summary>
         /// Deletes the project specified by setting its status to 'deleted' in the database. Recoverable. /DK

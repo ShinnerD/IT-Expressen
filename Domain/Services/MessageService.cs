@@ -7,13 +7,34 @@ namespace Domain.Services
 {
     public class MessageService : IMessageService
     {
-        private IMessageRepository MessageRepository = new MessageRepository();
+        private readonly IDomainServiceManager ServiceManager;
+        private readonly IMessageRepository MessageRepository;
 
-        public List<IMessageModel> GetAllMessageProjectID(int projectID)
+        public MessageService(IDomainServiceManager serviceManager, IDataContextManager dataContextManager)
         {
-            return MessageRepository.GetAllMessageProjectID(projectID);
+            ServiceManager = serviceManager;
+            MessageRepository = new MessageRepository(dataContextManager);
         }
 
+        /// <summary>
+        /// Returns a list of all messages related to the specified project.
+        /// </summary>
+        public List<IMessageModel> GetAllMessageFromProjectID(int projectID)
+        {
+            return AssignDomainProperties(MessageRepository.GetAllMessageFromProjectID(projectID));
+        }
+
+        /// <summary>
+        /// Returns a list of all messages related to the specified User.
+        /// </summary>
+        public List<IMessageModel> GetAllMessageFromUserID(int userId)
+        {
+            return AssignDomainProperties(MessageRepository.GetAllMessageFromUserId(userId));
+        }
+
+        /// <summary>
+        /// Adds a message to the database.
+        /// </summary>
         public void AddMessage(int projectID, int userID, string message, DateTime messageDate)
         {
             IMessageModel newMessage = new DAL.Models.MessageModel();
@@ -25,13 +46,28 @@ namespace Domain.Services
 
             MessageRepository.AddMessage(newMessage);
         }
-        public IMessageModel MessageFromProjctID(int projctID)
+
+        /// <summary>
+        /// Private Service Class Method that assigns additional properties for the IMessageModel
+        /// that needs to the fetched in other repositories.
+        /// </summary>
+        private List<IMessageModel> AssignDomainProperties(List<IMessageModel> messageList)
         {
-            return MessageRepository.MessageFromProjectID(projctID);
+            foreach (var message in messageList)
+            {
+                AssignDomainProperties(message);
+            }
+            return messageList;
         }
-        public List<IMessageModel> GetAllMessageFromProjectID(int projctID)
+
+        /// <summary>
+        /// Private Service Class Method that assigns additional properties for the IMessageModel
+        /// that needs to the fetched in other repositories.
+        /// </summary>
+        private void AssignDomainProperties(IMessageModel message)
         {
-            return MessageRepository.GetAllMessageFromProjectID(projctID).OrderByDescending(i => i.MessageDate).ToList();
+            var user = ServiceManager.UserService.GetUserFromID(message.UserID);
+            message.UserName = user.UserName;
         }
     }
 }

@@ -7,21 +7,22 @@ namespace GUI
     public partial class InviteConsultants : Form
     {
         //Initializeing og the service/models need for the form /MS
-        private IUserService UserService = new UserService();
+        private readonly IDomainServiceManager ServiceManager;
 
-        private string UserType { get; set; }
         private int ProjectID { get; set; }
         private IProjectModel ProjectGet { get; set; }
-        private List<string> ProjectSpecializations { get; set; }
 
-        private IInviteService invService = new InviteService();
+        private IInviteService invService;
 
         //Constructor method loaded with project ID. All relevent data is loaded /MS
-        public InviteConsultants(int projectID)
+        public InviteConsultants(IDomainServiceManager serviceManager, int projectID)
         {
-            UserType = "consultant";
-            InitializeComponent();
+            ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
+            invService = ServiceManager.InviteService;
+
             ProjectID = projectID;
+
+            InitializeComponent();
             GetProjectInfo();
             LoadProjectData();
             invitedConsultants();
@@ -37,11 +38,10 @@ namespace GUI
         //Gets data on projects and specializations /MS
         private void GetProjectInfo()
         {
-            IProjectService projectService = new Domain.Services.ProjectService();
-            ISpecializationService specializationService = new Domain.Services.SpecializationService();
+            IProjectService projectService = ServiceManager.ProjectService;
+            ISpecializationService specializationService = ServiceManager.SpecializationService;
 
             ProjectGet = projectService.GetProject(ProjectID);
-            ProjectSpecializations = specializationService.GetProjectSpecializations(ProjectID);
         }
 
         //Loads the data transfered into textboxes, so the user can see the information about the given project //MS
@@ -65,9 +65,7 @@ namespace GUI
         //Opens new form and forwards the project ID /MS
         private void OpenConsutantAdd()
         {
-            var selectedProject = ProjectGet as IProjectModel;
-            InviteConsultants ConsulAdd = new InviteConsultants(selectedProject.ProjectId);
-            ConsultantAdd invConSul = new ConsultantAdd(ProjectGet.ProjectId);
+            ConsultantAdd invConSul = new ConsultantAdd(ServiceManager, ProjectGet.ProjectId);
             this.Hide();
             invConSul.ShowDialog();
             this.Show();

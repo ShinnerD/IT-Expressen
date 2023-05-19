@@ -11,7 +11,7 @@ namespace Interfaces.Repositories
         /// <summary>
         /// Adds a project with all the details required in the parameter of the method to the database. /DK
         /// </summary>
-        void CreateProject(string userName, string title, string description, DateTime startDate, DateTime endDate, List<string> specializations);
+        void CreateProject(IProjectModel newProject, List<string> specializations);
 
         /// <summary>
         /// Updates an existing project in the database to match the IProjectModel provided in the parameters. /DK

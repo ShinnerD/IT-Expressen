@@ -9,15 +9,16 @@ namespace DAL.Repository
 {
     public class InvitesRepository : IInvitesRepository
     {
-        private DataClassesDataContext DataContext = new DataClassesDataContext(DbConnectionString.ConnectionString);
-        /// <summary>
-        /// retrieving data from Database and Repository too store data
-        /// </summary>
+        private readonly DataClassesDataContext DataContext;
+
+        public InvitesRepository(IDataContextManager dataContextManager)
+        {
+            DataContext = dataContextManager.GetContext() as DataClassesDataContext ?? throw new ArgumentNullException(nameof(dataContextManager));
+        }
 
         /// <summary>
         /// Getting a list off all invites, with the attributes that is in invites.
         /// </summary>
-        /// <returns></returns>
         public List<IInvitesModel> GetAllInvites()
         {
             List<IInvitesModel> result = new List<IInvitesModel>();
@@ -39,16 +40,13 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Getting a list off all invites with a specifik ProjectID
+        /// Getting a list off all invites with a specific ProjectID
         /// </summary>
-        /// <param name="projectid"></param>
-        /// <returns></returns>
-
         public List<IInvitesModel> GetAllInviteProjectID(int projectid)
         {
             List<IInvitesModel> result = new List<IInvitesModel>();
 
-            var dbInvites = DataContext.Projects.FirstOrDefault(i => i.Project_ID == projectid).Invites;
+            var dbInvites = DataContext.Projects.First(i => i.Project_ID == projectid).Invites;
 
             foreach (var dbInvite in dbInvites)
             {
@@ -66,16 +64,13 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Getting a list off a specifik invite with a specifik ProjectID
+        /// Getting the first invite from the database with a specific ProjectID
         /// </summary>
-        /// <param name="ProjectId"></param>
-        /// <returns></returns>
-
         public IInvitesModel GetInviteProjectId(int ProjectId)
         {
             IInvitesModel result = new InvitesModel();
 
-            var dbInvite = DataContext.Invites.FirstOrDefault(i => i.Project_ID == ProjectId);
+            var dbInvite = DataContext.Invites.First(i => i.Project_ID == ProjectId);
 
             result.ProjectId = dbInvite.Project_ID;
             result.UserId = dbInvite.User_ID;
@@ -87,16 +82,13 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Getting a list off a specifik invite with a specifik UserId
+        /// Getting the first invite in the database with a specific UserId
         /// </summary>
-        /// <param name="UserId"></param>
-        /// <returns></returns>
-
         public IInvitesModel GetInviteUserId(int UserId)
         {
             IInvitesModel result = new InvitesModel();
 
-            var dbInvite = DataContext.Invites.FirstOrDefault(i => i.User_ID == UserId);
+            var dbInvite = DataContext.Invites.First(i => i.User_ID == UserId);
 
             result.ProjectId = dbInvite.Project_ID;
             result.UserId = dbInvite.User_ID;
@@ -107,20 +99,19 @@ namespace DAL.Repository
             return result;
         }
 
-        public List<IInvitesModel> GetInviteUserIdList(int UserId)
+        /// <summary>
+        /// Getting a list off all invites with a specific UserId
+        /// </summary>
+        public List<IInvitesModel> GetAllInviteUserId(int UserId)
         {
             List<IInvitesModel> result = new List<IInvitesModel>();
 
             var dbInvites = DataContext.Invites.Where(i => i.User_ID == UserId);
 
-            if (dbInvites == null)
-            {
-                return result;
-            }
-
             foreach (var dbinvite in dbInvites)
             {
                 IInvitesModel invite = new InvitesModel();
+
                 invite.ProjectId = dbinvite.Project_ID;
                 invite.UserId = dbinvite.User_ID;
                 invite.InviteDate = (DateTime)dbinvite.Invite_Date;
@@ -132,7 +123,9 @@ namespace DAL.Repository
             return result;
         }
 
-        //Repo method to link userName with an invite //MS
+        /// <summary>
+        /// Repo method to link userName with an invite //MS
+        /// </summary>
         public IInvitesModel GetInviteUserName(string Username)
         {
             IInvitesModel result = new InvitesModel();
@@ -148,12 +141,11 @@ namespace DAL.Repository
             return result;
         }
 
-        //Repo method to add invitations to a project, the invited consultants userID is stored /MD
-        public void AddInvite(IInvitesModel inviteModel/*, List<string> specializtions*/)
+        /// <summary>
+        ///  Repo method to add invitations to a project, the invited consultants userID is stored /MS
+        /// </summary>
+        public void AddInvite(IInvitesModel inviteModel)
         {
-            IInvitesModel invite = new DAL.Models.InvitesModel();
-            //ISpecializationRepository specRepo = new SpecializationRepository();
-
             var linqInviteModel = new Linq.Invite();
 
             linqInviteModel.Project_ID = inviteModel.ProjectId;
@@ -164,20 +156,19 @@ namespace DAL.Repository
 
             DataContext.Invites.InsertOnSubmit(linqInviteModel);
             DataContext.SubmitChanges();
-
-            //specRepo.AddSpecializationsToUser(linqInviteModel.User_ID, specializtions);
         }
 
+        /// <summary>
+        /// Repo method to update the details of an invite in the database according to userId and projectId. /MS
+        /// </summary>
         public void UpdateInviteStatus(IInvitesModel inviteModel, int ProjectID)
         {
-            var dbInvites = DataContext.Invites.FirstOrDefault(i => i.User_ID == inviteModel.UserId && i.Project_ID == ProjectID);
+            var dbInvites = DataContext.Invites.First(i => i.User_ID == inviteModel.UserId && i.Project_ID == ProjectID);
 
             if (dbInvites != null && inviteModel != null)
             {
                 dbInvites.Invite_status = inviteModel.InviteStatus;
                 dbInvites.Accept_date = inviteModel.AcceptDate;
-                dbInvites.Invite_status = inviteModel.InviteStatus;
-                dbInvites.Invite_status = inviteModel.InviteStatus;
                 dbInvites.User_ID = inviteModel.UserId;
 
                 DataContext.SubmitChanges();

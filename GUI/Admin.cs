@@ -9,6 +9,8 @@ namespace GUI
     {
         private IUserModel adminUser;
 
+        private readonly IDomainServiceManager ServiceManager;
+
         private IUserService userService;
         private IProjectService projectService;
         private ISpecializationService specializationService;
@@ -18,13 +20,15 @@ namespace GUI
 
         private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
-        public Admin(string username)
+        public Admin(IDomainServiceManager serviceManager, string username)
         {
-            userService = new UserService();
-            projectService = new ProjectService();
-            specializationService = new SpecializationService();
+            ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
 
-            adminUser = userService.GetUser(username);
+            userService = serviceManager.UserService;
+            projectService = serviceManager.ProjectService;
+            specializationService = serviceManager.SpecializationService;
+
+            adminUser = userService.GetUserFromUsername(username);
 
             InitializeComponent();
             SetUpTB();
@@ -187,7 +191,6 @@ namespace GUI
             else
             {
                 UpdateUserModel();
-                IUserService userService = new UserService();
                 userService.UpdateUser(adminUser);
                 UnlockProfileForEditing(grpBoxProfileInfo, false);
                 bt_EditProfileCancel.Enabled = false;
@@ -201,7 +204,7 @@ namespace GUI
         /// </summary>
         private void PerformUserSearch(string userName = "")
         {
-            IUserService _ = new UserService();
+            IUserService _ = userService;
             string searchString = txtBox_UserSearchParams.Text;
             dgv_UserSearchResults.DataSource = null;
 
@@ -281,19 +284,19 @@ namespace GUI
         {
             if (userType == "manager")
             {
-                Manager manager = new Manager(userName);
+                Manager manager = new Manager(ServiceManager, userName);
                 manager.ShowDialog();
                 PerformUserSearch(userName);
             }
             if (userType == "consultant")
             {
-                Consultant consultant = new Consultant(userName);
+                Consultant consultant = new Consultant(ServiceManager, userName);
                 consultant.ShowDialog();
                 PerformUserSearch(userName);
             }
             if (userType == "admin")
             {
-                FeedBackMessage(lbl_FeedbackUserTab, "Admin's can't edit other Admins.", Color.Red, 5000);
+                FeedBackMessage(lbl_FeedbackUserTab, "Admin's can't edit other Admins.", Color.Red);
             }
         }
 
@@ -301,7 +304,7 @@ namespace GUI
         /// Async Task that turns on the visibility of the label provided in the parameters,
         /// shows the given message in the given color, for the given time. /DK
         /// </summary>
-        private async Task FeedBackMessage(Label label, string message, Color color, int milliseconds)
+        private async Task FeedBackMessage(Label label, string message, Color color, int milliseconds = 5000)
         {
             label.Text = message;
             label.ForeColor = color;

@@ -5,11 +5,15 @@ namespace GUI
 {
     public partial class ConsultantViewProjects : Form
     {
-        private IProjectService projectService = new Domain.Services.ProjectService();
+        private readonly IDomainServiceManager ServiceManager;
+        private IProjectService projectService;
         public int UserId { get; set; }
 
-        public ConsultantViewProjects(int userId)
+        public ConsultantViewProjects(IDomainServiceManager serviceManager, int userId)
         {
+            ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
+            projectService = ServiceManager.ProjectService;
+
             InitializeComponent();
             UserId = userId;
             ProjectsForConsultants();
