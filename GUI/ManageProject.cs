@@ -67,7 +67,7 @@ namespace GUI
                 MessageBoardGet.Add("Date: " + message.MessageDate.ToString());
                 MessageBoardGet.Add("User: " + UserServiceGet.GetUserFromID(ProjectGet.UserId).FirstName.ToString() + " " + UserServiceGet.GetUserFromID(ProjectGet.UserId).LastName.ToString());
                 //MessageBoardGet.Add(message.UserID.ToString());
-                MessageBoardGet.Add(message.Message.ToString());
+                MessageBoardGet.Add(message.Message.ToString() + "\n");
             }
             rtb_Message.Text = String.Join(Environment.NewLine, MessageBoardGet);
             rtb_newMessage.Text = "";
@@ -107,6 +107,18 @@ namespace GUI
         private void rtb_newMessage_TextChanged(object sender, EventArgs e)
         {
             lb_TextCounter.Text = rtb_newMessage.Text.Length.ToString() + "/255";
+
+            if (rtb_newMessage.Text.Count() < 255)
+            {
+                lb_warning.Visible = false;
+                lb_TextCounter.ForeColor = Color.Black;
+            }
+            else
+            {
+                lb_warning.Visible = true;
+                lb_TextCounter.ForeColor = Color.Red;
+            }
+
         }
 
         private void InvolvedUsers()

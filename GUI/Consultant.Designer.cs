@@ -55,6 +55,8 @@
             label5 = new Label();
             label4 = new Label();
             label6 = new Label();
+            bt_seeInvites = new Button();
+            bt_seeProjects = new Button();
             ((System.ComponentModel.ISupportInitialize)dgv_ConsultantsInvites).BeginInit();
             groupBox1.SuspendLayout();
             grpBoxProfileInfo.SuspendLayout();
@@ -62,7 +64,7 @@
             // 
             // bt_ViewProjects
             // 
-            bt_ViewProjects.Location = new Point(23, 193);
+            bt_ViewProjects.Location = new Point(405, 193);
             bt_ViewProjects.Margin = new Padding(2);
             bt_ViewProjects.Name = "bt_ViewProjects";
             bt_ViewProjects.Size = new Size(94, 29);
@@ -393,11 +395,33 @@
             label6.TabIndex = 5;
             label6.Text = "Address:";
             // 
+            // bt_seeInvites
+            // 
+            bt_seeInvites.Location = new Point(15, 196);
+            bt_seeInvites.Name = "bt_seeInvites";
+            bt_seeInvites.Size = new Size(125, 23);
+            bt_seeInvites.TabIndex = 42;
+            bt_seeInvites.Text = "See Invites";
+            bt_seeInvites.UseVisualStyleBackColor = true;
+            bt_seeInvites.Click += bt_seeInvites_Click;
+            // 
+            // bt_seeProjects
+            // 
+            bt_seeProjects.Location = new Point(146, 196);
+            bt_seeProjects.Name = "bt_seeProjects";
+            bt_seeProjects.Size = new Size(125, 23);
+            bt_seeProjects.TabIndex = 43;
+            bt_seeProjects.Text = "See Active Projects";
+            bt_seeProjects.UseVisualStyleBackColor = true;
+            bt_seeProjects.Click += bt_seeProjects_Click;
+            // 
             // Consultant
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(625, 654);
+            Controls.Add(bt_seeProjects);
+            Controls.Add(bt_seeInvites);
             Controls.Add(grpBoxProfileInfo);
             Controls.Add(bt_SearchProjects);
             Controls.Add(bt_ViewProjects);
@@ -441,5 +465,7 @@
         private Label label6;
         private Button bt_EditCancel;
         private Button bt_Edit;
+        private Button bt_seeInvites;
+        private Button bt_seeProjects;
     }
 }
