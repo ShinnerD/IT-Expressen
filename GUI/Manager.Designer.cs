@@ -51,6 +51,7 @@
             lblUserCreationDate = new Label();
             bt_EditProfile = new Button();
             ViewProjectsGrpBox = new GroupBox();
+            lbl_ViewProjectsFeedBack = new Label();
             btn_NewProject = new Button();
             bt_manageProject = new Button();
             bt_EditProject = new Button();
@@ -67,7 +68,6 @@
             dtp_NewProjectStartDate = new DateTimePicker();
             btn_NewProjectSave = new Button();
             btn_NewProjectBack = new Button();
-            lbl_ViewProjectsFeedBack = new Label();
             grpBoxProfileInfo.SuspendLayout();
             ViewProjectsGrpBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_Viewproject).BeginInit();
@@ -367,6 +367,18 @@
             ViewProjectsGrpBox.TabStop = false;
             ViewProjectsGrpBox.Text = "Projects";
             // 
+            // lbl_ViewProjectsFeedBack
+            // 
+            lbl_ViewProjectsFeedBack.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            lbl_ViewProjectsFeedBack.AutoSize = true;
+            lbl_ViewProjectsFeedBack.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            lbl_ViewProjectsFeedBack.Location = new Point(12, 358);
+            lbl_ViewProjectsFeedBack.Name = "lbl_ViewProjectsFeedBack";
+            lbl_ViewProjectsFeedBack.Size = new Size(166, 15);
+            lbl_ViewProjectsFeedBack.TabIndex = 16;
+            lbl_ViewProjectsFeedBack.Text = "Feedback label for messages...";
+            lbl_ViewProjectsFeedBack.Visible = false;
+            // 
             // btn_NewProject
             // 
             btn_NewProject.Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -383,7 +395,7 @@
             // bt_manageProject
             // 
             bt_manageProject.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            bt_manageProject.Location = new Point(6, 30);
+            bt_manageProject.Location = new Point(6, 29);
             bt_manageProject.Name = "bt_manageProject";
             bt_manageProject.Size = new Size(100, 25);
             bt_manageProject.TabIndex = 14;
@@ -586,18 +598,6 @@
             btn_NewProjectBack.Text = "Back";
             btn_NewProjectBack.UseVisualStyleBackColor = true;
             btn_NewProjectBack.Click += btn_NewProjectBack_Click;
-            // 
-            // lbl_ViewProjectsFeedBack
-            // 
-            lbl_ViewProjectsFeedBack.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            lbl_ViewProjectsFeedBack.AutoSize = true;
-            lbl_ViewProjectsFeedBack.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            lbl_ViewProjectsFeedBack.Location = new Point(12, 358);
-            lbl_ViewProjectsFeedBack.Name = "lbl_ViewProjectsFeedBack";
-            lbl_ViewProjectsFeedBack.Size = new Size(166, 15);
-            lbl_ViewProjectsFeedBack.TabIndex = 16;
-            lbl_ViewProjectsFeedBack.Text = "Feedback label for messages...";
-            lbl_ViewProjectsFeedBack.Visible = false;
             // 
             // Manager
             // 

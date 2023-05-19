@@ -3,6 +3,8 @@ using DAL.Repository;
 using Interfaces.Models;
 using Interfaces.Repositories;
 using Interfaces.Services;
+using Microsoft.Data.SqlClient;
+using System.Data.Common;
 
 namespace Domain.Services
 {
@@ -112,10 +114,39 @@ namespace Domain.Services
         /// <summary>
         /// Updates the Project in the database. The provided IProjectModel must be an existing project in the database. /DK
         /// </summary>
-        void IProjectService.UpdateProject(IProjectModel project)
+        void IProjectService.UpdateProject(IProjectModel project, List<string> specializations)
         {
             CheckValuesForProject(project);
-            _projectRepo.UpdateProject(project);
+
+            var currentProjectSpecializations = _domainServiceManager.SpecializationService.GetProjectSpecializations(project.ProjectId);
+
+            List<string> specsToBeRemoved = new List<string>();
+            List<string> specsToBeAdded = new List<string>();
+
+            foreach (var currentSpec in currentProjectSpecializations)
+            {
+                if (!specializations.Contains(currentSpec))
+                {
+                    specsToBeRemoved.Add(currentSpec);
+                }
+            }
+            foreach (var newSpec in specializations)
+            {
+                if (!currentProjectSpecializations.Contains(newSpec))
+                {
+                    specsToBeAdded.Add(newSpec);
+                }
+            }
+            try
+            {
+                _domainServiceManager.SpecializationService.RemoveFromProject(project.ProjectId, specsToBeRemoved);
+                _domainServiceManager.SpecializationService.AddToProject(project.ProjectId, specsToBeAdded);
+                _projectRepo.UpdateProject(project);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Failed to update project.",e);
+            }
         }
 
         /// <summary>

@@ -15,7 +15,7 @@ namespace Interfaces.Services
         /// <summary>
         /// Updates the Project in the database. The provided IProjectModel must be an existing project in the database. /DK
         /// </summary>
-        void UpdateProject(IProjectModel project);
+        void UpdateProject(IProjectModel project, List<string> specializations);
 
         /// <summary>
         /// Deletes the project specified by setting its status to 'deleted' in the database. Recoverable. /DK

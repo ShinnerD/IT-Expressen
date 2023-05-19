@@ -179,6 +179,7 @@ namespace GUI
 
         private void bt_EditProject_Click(object sender, EventArgs e)
         {
+            NewProjectGrpBox.Text = "Update Project";
             ManageSelectedProject();
         }
 
@@ -348,6 +349,7 @@ namespace GUI
             ViewProjectsGrpBox.Visible = false;
             NewProjectGrpBox.Visible = true;
             btn_NewProjectSave.Text = "Save Project";
+            NewProjectGrpBox.Text = "New Project";
         }
 
         private void NewProjectGrpBox_VisibleChanged(object sender, EventArgs e)
@@ -371,7 +373,28 @@ namespace GUI
             }
             else
             {
-                throw new NotImplementedException();
+                UpdateProject();
+            }
+        }
+
+        private void UpdateProject()
+        {
+            try
+            {
+                List<string> reqSkills = FindCheckedSkills();
+
+                SelectedProject.Title = txtBox_ProjectTitle.Text;
+                SelectedProject.Description = txtBox_ProjectDescription.Text;
+                SelectedProject.ProjectStartDate = dtp_NewProjectStartDate.Value;
+                SelectedProject.ProjectEndDate = dtp_NewProjectEndDate.Value;
+
+                projectService.UpdateProject(SelectedProject, reqSkills);
+
+                BackToViewProjects();
+            }
+            catch (Exception e)
+            {
+                FeedBackMessage(lbl_FeedBackNewProject, e.Message, Color.Red);
             }
         }
 

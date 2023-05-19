@@ -94,8 +94,12 @@ namespace GUI
                 IProjectService projectService = ServiceManager.ProjectService;
                 ISpecializationService specializationService = ServiceManager.SpecializationService;
 
-                List<string> removedSpecializations = CheckForRemovedSkills();
-                List<string> addedSpecializations = CheckForAddedSkills();
+                var specializations = new List<string>();
+
+                foreach (string checkedSkill in checkedListSkills.CheckedItems)
+                {
+                    specializations.Add(checkedSkill.ToString());
+                }
 
                 Project.Title = txtBoxTitle.Text;
                 Project.Description = txtBoxDescription.Text;
@@ -103,9 +107,7 @@ namespace GUI
                 Project.ProjectEndDate = dTPendDate.Value;
                 Project.ProjectModifyDate = DateTime.Now;
 
-                projectService.UpdateProject(Project);
-                specializationService.RemoveFromProject(Project.ProjectId, removedSpecializations);
-                specializationService.AddToProject(Project.ProjectId, addedSpecializations);
+                projectService.UpdateProject(Project, specializations);
 
                 lblFeedback.Text = "Project Changes Saved";
             }
