@@ -6,6 +6,7 @@ namespace GUI
 {
     public partial class ConsultantInvites : Form
     {
+        private readonly IDomainServiceManager ServiceManager;
         private string Username { get; set; }
         private IUserModel userModelGet { get; set; }
 
@@ -13,9 +14,10 @@ namespace GUI
         private IProjectModel ProjectGet { get; set; }
         private IUserService UserServiceGet { get; set; }
 
-        public ConsultantInvites(string userName)
+        public ConsultantInvites(IDomainServiceManager serviceManager, string userName)
         {
             InitializeComponent();
+            ServiceManager = serviceManager;
             Username = userName;
             GetUser();
             DataGridInitialSetup();
@@ -31,21 +33,29 @@ namespace GUI
 
         private void GetUser()
         {
-            IUserService userService = new UserService();
-            userModelGet = userService.GetUser(Username);
+
+            IUserService userService = ServiceManager.UserService;
+            userModelGet = userService.GetUserFromUsername(Username);
         }
 
         private void GetProjectInfo()
         {
-            IProjectService projectService = new ProjectService();
+            IProjectService projectService = ServiceManager.ProjectService;
+
+            var targetProject = (int)dgv_ConsultantsInvites.SelectedCells[3].Value;
+
+            var selectedProject = ServiceManager.ProjectService.GetProject(targetProject);
+
+            tb_ProjectTitle.Text = selectedProject.Title;
+            
 
             //ProjectGet = projectService.GetProject(ProjectID);
         }
 
         private void LoadInvitesToDGV()
         {
-            IInviteService inviteService = new InviteService();
-            invites = inviteService.GetInvitedUserIDList(userModelGet.ID);
+            IInviteService inviteService = ServiceManager.InviteService;
+            invites = inviteService.GetInvitesFromUserId(userModelGet.ID);
             dgv_ConsultantsInvites.DataSource = null;
             dgv_ConsultantsInvites.DataSource = invites;
         }
@@ -85,7 +95,7 @@ namespace GUI
         private void bt_seeInviteDetails_Click(object sender, EventArgs e)
         {
             var selectedProject = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as IInvitesModel;
-            AcceptInviteForm AccInvForm = new AcceptInviteForm(selectedProject.ProjectId);
+            AcceptInviteForm AccInvForm = new AcceptInviteForm(ServiceManager, selectedProject);
             this.Hide();
             AccInvForm.ShowDialog();
             this.Show();
@@ -94,9 +104,9 @@ namespace GUI
 
         private void dgv_ConsultantsInvites_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            tb_Country.Text = dgv_ConsultantsInvites.SelectedCells[3].Value.ToString();
-            //dgv_ConsultantsInvites.Columns[3].Selected
-            //var selectedProject = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as IInvitesModel;
+            GetProjectInfo();
+
+            
 
             //LoadInvitesToDGV();
         }

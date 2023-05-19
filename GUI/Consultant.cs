@@ -191,7 +191,7 @@ namespace GUI
         private void bt_seeInvites_Click(object sender, EventArgs e)
         {
             var userName = userModelGet.UserName;
-            ConsultantInvites seeInv = new ConsultantInvites(userName);
+            ConsultantInvites seeInv = new ConsultantInvites(ServiceManager, userName);
             this.Hide();
             seeInv.ShowDialog();
             this.Show();
@@ -200,7 +200,7 @@ namespace GUI
         private void bt_seeProjects_Click(object sender, EventArgs e)
         {
             var selectedProject = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as IInvitesModel;
-            ManageProject AccInvForm = new ManageProject(selectedProject.ProjectId);
+            ManageProject AccInvForm = new ManageProject(ServiceManager, selectedProject.ProjectId, Username);
             this.Hide();
             AccInvForm.ShowDialog();
             this.Show();

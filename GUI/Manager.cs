@@ -223,7 +223,7 @@ namespace GUI
             var selectedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;
             if (selectedProject != null)
             {
-                ManageProject ManProject = new GUI.ManageProject(ServiceManager, selectedProject.ProjectId);
+                ManageProject ManProject = new GUI.ManageProject(ServiceManager, selectedProject.ProjectId, Username);
                 this.Hide();
                 ManProject.ShowDialog();
                 this.Show();

@@ -10,13 +10,15 @@ namespace GUI
         private IProjectModel? ProjectGet;
         private List<IMessageModel>? MessageGet { get; set; }
         private List<string>? MessageBoardGet { get; set; }
+        private string UserName;
 
         private readonly IDomainServiceManager ServiceManager;
 
-        public ManageProject(IDomainServiceManager serviceManager, int projectId)
+        public ManageProject(IDomainServiceManager serviceManager, int projectId, string userName)
         {
             ServiceManager = serviceManager;
             ProjectID = projectId;
+            UserName = userName;
 
             InitializeComponent();
             GetProjectInfo();
@@ -52,7 +54,7 @@ namespace GUI
             foreach (IMessageModel message in MessageGet)
             {
                 MessageBoardGet.Add("Date: " + message.MessageDate.ToString());
-                MessageBoardGet.Add("User: " + UserServiceGet.GetUserFromID(ProjectGet.UserId).FirstName.ToString() + " " + UserServiceGet.GetUserFromID(ProjectGet.UserId).LastName.ToString());
+                MessageBoardGet.Add("User: " + ServiceManager.UserService.GetUserFromUsername(UserName).FirstName.ToString() + " " + ServiceManager.UserService.GetUserFromUsername(UserName).LastName.ToString());
                 //MessageBoardGet.Add(message.UserID.ToString());
                 MessageBoardGet.Add(message.Message.ToString() + "\n");
             }
@@ -70,7 +72,7 @@ namespace GUI
 
                     messageService.AddMessage(
                         ProjectGet.ProjectId,
-                        ProjectGet.UserId,
+                        ServiceManager.UserService.GetUserFromUsername(UserName).ID,
                         rtb_newMessage.Text,
                         DateTime.Now
                         );
@@ -118,7 +120,7 @@ namespace GUI
             dgv_InvolvedUsers.Columns["InviteStatus"].DataPropertyName = "InviteStatus";
 
 
-            dgv_InvolvedUsers.DataSource = invService.GetAllInvitedProjectID(ProjectGet.ProjectId).Where(i => i.InviteStatus.ToLower() != "declined").ToList(); ;
+            dgv_InvolvedUsers.DataSource = ServiceManager.InviteService.GetAllInvitedProjectID(ProjectGet.ProjectId).Where(i => i.InviteStatus.ToLower() != "declined").ToList(); ;
         }
     }
 }
