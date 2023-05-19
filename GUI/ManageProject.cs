@@ -52,8 +52,10 @@ namespace GUI
 
             foreach (IMessageModel message in MessageGet)
             {
+                var sender = ServiceManager.UserService.GetUserFromUsername(message.UserName);
+
                 MessageBoardGet.Add("Date: " + message.MessageDate.ToString());
-                MessageBoardGet.Add("User: " + ServiceManager.UserService.GetUserFromUsername(UserName).FirstName.ToString() + " " + ServiceManager.UserService.GetUserFromUsername(UserName).LastName.ToString());
+                MessageBoardGet.Add("User: " + sender.FullName);
                 //MessageBoardGet.Add(message.UserID.ToString());
                 MessageBoardGet.Add(message.Message.ToString() + "\n");
             }
