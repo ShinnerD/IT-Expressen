@@ -21,7 +21,7 @@ namespace Domain.Services
         /// </summary>
         public List<IMessageModel> GetAllMessageFromProjectID(int projectID)
         {
-            return AssignDomainProperties(MessageRepository.GetAllMessageFromProjectID(projectID));
+            return AssignDomainProperties(MessageRepository.GetAllMessageFromProjectID(projectID).OrderByDescending(i => i.MessageDate).ToList());
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Domain.Services
         /// </summary>
         public List<IMessageModel> GetAllMessageFromUserID(int userId)
         {
-            return AssignDomainProperties(MessageRepository.GetAllMessageFromUserId(userId));
+            return AssignDomainProperties(MessageRepository.GetAllMessageFromUserId(userId).OrderByDescending(i => i.MessageDate).ToList());
         }
 
         /// <summary>
