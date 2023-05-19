@@ -1,5 +1,4 @@
-﻿using Domain.Services;
-using Interfaces.Models;
+﻿using Interfaces.Models;
 using Interfaces.Services;
 
 namespace GUI
@@ -8,10 +7,12 @@ namespace GUI
     {
         private string Username;
         private IUserModel userModel;
+
         private readonly IDomainServiceManager ServiceManager;
+        private IProjectService projectService;
+
         private List<IProjectModel> ProjectList;
         private IProjectModel SelectedProject;
-        private IProjectService projectService;
 
         private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
@@ -66,17 +67,6 @@ namespace GUI
         }
 
         /// <summary>
-        /// (JQ)This method opens the NewProject form.
-        /// </summary>
-        private void OpenNewProjectForm()
-        {
-            this.Hide();
-            Form newProjectForm = new NewProject(ServiceManager, Username);
-            newProjectForm.ShowDialog();
-            this.Show();
-        }
-
-        /// <summary>
         /// (JQ)This method retrieves and sets the user information using IUserService.
         /// </summary>
         private void GetUser()
@@ -103,25 +93,6 @@ namespace GUI
         }
 
         /// <summary>
-        /// (JQ)Handle button click event for OpenNewProjectForm.
-        /// </summary>
-        private void bt_NewProject_Click(object sender, EventArgs e)
-        {
-            OpenNewProjectForm();
-        }
-
-        /// <summary>
-        /// (JQ)Handle button click event for ViewProjects and passes userId to ViewProjects form.
-        /// </summary>
-        //private void bt_ViewProjects_Click(object sender, EventArgs e)
-        //{
-        //    int userId = userModel.ID;
-        //    ViewProjects viewProjects = new ViewProjects(userId);
-        //    viewProjects.ShowDialog();
-        //    this.Show();
-        //}
-
-        /// <summary>
         /// Changes the Form into editing the currently selected project from the projects list. /DK
         /// </summary>
         private void ManageSelectedProject()
@@ -132,6 +103,10 @@ namespace GUI
             }
         }
 
+        /// <summary>
+        /// Sets the form to Edit Selected Project "mode." /DK
+        /// </summary>
+        /// <param name="selectedProject"></param>
         private void EditProjectDetails(IProjectModel selectedProject)
         {
             ViewProjectsGrpBox.Visible = false;
@@ -144,22 +119,15 @@ namespace GUI
             CheckProjectSkills();
         }
 
+        /// <summary>
+        /// Checks off the correct skills in the specializations list.
+        /// </summary>
         private void CheckProjectSkills()
         {
             foreach (var specialization in ServiceManager.SpecializationService.GetProjectSpecializations(SelectedProject.ProjectId))
             {
                 checkedListSkills.SetItemChecked(checkedListSkills.FindStringExact(specialization), true);
             }
-        }
-
-        /// <summary>
-        /// (JQ)Performs a search for projects matching the given search term and displays them in the DataGridView.
-        /// </summary>
-        private void SearchProjects()
-        {
-            // string searchTerm = tb_Search.Text.Trim();
-            // List<IProjectModel> projects = projectService.SearchProjects(searchTerm, UserId);
-            // dgv_Viewproject.DataSource = projects;
         }
 
         /// <summary>
@@ -175,22 +143,6 @@ namespace GUI
                 invConSul.ShowDialog();
                 this.Show();
             }
-        }
-
-        private void bt_EditProject_Click(object sender, EventArgs e)
-        {
-            NewProjectGrpBox.Text = "Update Project";
-            ManageSelectedProject();
-        }
-
-        private void bt_FindConsultants_Click(object sender, EventArgs e)
-        {
-            InvitedConsultantSelectedProject();
-        }
-
-        private void bt_EditProfile_Click(object sender, EventArgs e)
-        {
-            ChangeEditProfileState();
         }
 
         /// <summary>
@@ -219,7 +171,7 @@ namespace GUI
         }
 
         /// <summary>
-        /// Updates the pagewide userModel with the new information in the textboxes /DK
+        /// Updates the page-wide userModel with the new information in the textboxes /DK
         /// </summary>
         private void UpdateUserModel()
         {
@@ -263,15 +215,9 @@ namespace GUI
             }
         }
 
-        private void bt_EditProfileCancel_Click(object sender, EventArgs e)
-        {
-            bt_EditProfileCancel.Enabled = false;
-            bt_EditProfileCancel.Visible = false;
-            bt_EditProfile.Text = "Edit Profile";
-            UnlockProfileForEditing(grpBoxProfileInfo, false);
-            SetUpTB();
-        }
-
+        /// <summary>
+        /// Opens a form for managing the selected project.
+        /// </summary>
         private void ManageProject()
         {
             var selectedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;
@@ -284,6 +230,9 @@ namespace GUI
             }
         }
 
+        /// <summary>
+        /// Adds the database specializations to the checklist.
+        /// </summary>
         private void SetupSkillsCheckList()
         {
             checkedListSkills.Items.Clear();
@@ -314,21 +263,9 @@ namespace GUI
             label.Visible = false;
         }
 
-        private void bt_manageProject_Click(object sender, EventArgs e)
-        {
-            ManageProject();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            FeedBackMessage(lbl_FeedBackNewProject, "You clicked the button. Congrats.");
-        }
-
-        private void btn_NewProjectBack_Click(object sender, EventArgs e)
-        {
-            BackToViewProjects();
-        }
-
+        /// <summary>
+        /// Goes to the ViewProjectsGroupBox
+        /// </summary>
         private void BackToViewProjects()
         {
             txtBox_ProjectTitle.Clear();
@@ -342,6 +279,73 @@ namespace GUI
             ProjectList = null;
             ProjectList = projectService.GetUserProjects(userModel.ID).ToList();
             dgv_Viewproject.DataSource = ProjectList;
+        }
+
+        /// <summary>
+        /// Updates the information on the current project and tries to save them in the database.
+        /// </summary>
+        private void UpdateProject()
+        {
+            try
+            {
+                List<string> reqSkills = FindCheckedSkills();
+
+                SelectedProject.Title = txtBox_ProjectTitle.Text;
+                SelectedProject.Description = txtBox_ProjectDescription.Text;
+                SelectedProject.ProjectStartDate = dtp_NewProjectStartDate.Value;
+                SelectedProject.ProjectEndDate = dtp_NewProjectEndDate.Value;
+
+                projectService.UpdateProject(SelectedProject, reqSkills);
+
+                BackToViewProjects();
+            }
+            catch (Exception e)
+            {
+                FeedBackMessage(lbl_FeedBackNewProject, e.Message, Color.Red);
+            }
+        }
+
+        /// <summary>
+        /// Returns a list of strings with the checked items in the check list.
+        /// </summary>
+        private List<string> FindCheckedSkills()
+        {
+            List<string> result = new List<string>();
+
+            foreach (var skill in checkedListSkills.CheckedItems)
+            {
+                result.Add(skill.ToString());
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Saves a new Project to the database
+        /// </summary>
+        private void SaveNewProject()
+        {
+            try
+            {
+                List<string> reqSkills = FindCheckedSkills();
+
+                projectService.CreateProject(userModel.ID, txtBox_ProjectTitle.Text, txtBox_ProjectDescription.Text, dtp_NewProjectStartDate.Value, dtp_NewProjectEndDate.Value, reqSkills);
+
+                BackToViewProjects();
+            }
+            catch (Exception e)
+            {
+                FeedBackMessage(lbl_FeedBackNewProject, e.Message, Color.Red);
+            }
+        }
+
+        private void bt_manageProject_Click(object sender, EventArgs e)
+        {
+            ManageProject();
+        }
+
+        private void btn_NewProjectBack_Click(object sender, EventArgs e)
+        {
+            BackToViewProjects();
         }
 
         private void btn_NewProject_Click(object sender, EventArgs e)
@@ -365,6 +369,15 @@ namespace GUI
             }
         }
 
+        private void bt_EditProfileCancel_Click(object sender, EventArgs e)
+        {
+            bt_EditProfileCancel.Enabled = false;
+            bt_EditProfileCancel.Visible = false;
+            bt_EditProfile.Text = "Edit Profile";
+            UnlockProfileForEditing(grpBoxProfileInfo, false);
+            SetUpTB();
+        }
+
         private void btn_NewProjectSave_Click(object sender, EventArgs e)
         {
             if (btn_NewProjectSave.Text == "Save Project")
@@ -377,52 +390,20 @@ namespace GUI
             }
         }
 
-        private void UpdateProject()
+        private void bt_EditProject_Click(object sender, EventArgs e)
         {
-            try
-            {
-                List<string> reqSkills = FindCheckedSkills();
-
-                SelectedProject.Title = txtBox_ProjectTitle.Text;
-                SelectedProject.Description = txtBox_ProjectDescription.Text;
-                SelectedProject.ProjectStartDate = dtp_NewProjectStartDate.Value;
-                SelectedProject.ProjectEndDate = dtp_NewProjectEndDate.Value;
-
-                projectService.UpdateProject(SelectedProject, reqSkills);
-
-                BackToViewProjects();
-            }
-            catch (Exception e)
-            {
-                FeedBackMessage(lbl_FeedBackNewProject, e.Message, Color.Red);
-            }
+            NewProjectGrpBox.Text = "Update Project";
+            ManageSelectedProject();
         }
 
-        private List<string> FindCheckedSkills()
+        private void bt_FindConsultants_Click(object sender, EventArgs e)
         {
-            List<string> result = new List<string>();
-
-            foreach (var skill in checkedListSkills.CheckedItems)
-            {
-                result.Add(skill.ToString());
-            }
-            return result;
+            InvitedConsultantSelectedProject();
         }
 
-        private void SaveNewProject()
+        private void bt_EditProfile_Click(object sender, EventArgs e)
         {
-            try
-            {
-                List<string> reqSkills = FindCheckedSkills();
-
-                projectService.CreateProject(userModel.ID, txtBox_ProjectTitle.Text, txtBox_ProjectDescription.Text, dtp_NewProjectStartDate.Value, dtp_NewProjectEndDate.Value, reqSkills);
-
-                BackToViewProjects();
-            }
-            catch (Exception e)
-            {
-                FeedBackMessage(lbl_FeedBackNewProject, e.Message, Color.Red);
-            }
+            ChangeEditProfileState();
         }
     }
 }
