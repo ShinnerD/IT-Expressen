@@ -47,6 +47,10 @@ namespace Domain.Services
             {
                 throw new ArgumentException("Project end date cannot be before the current date.");
             }
+            if (_projectRepo.SearchProjects(newProject.Title, newProject.UserId).Count > 0) 
+            {
+                throw new ArgumentException("There's already a project with that name for this user."); 
+            }
 
             _projectRepo.CreateProject(newProject, specializations);
         }
@@ -71,10 +75,6 @@ namespace Domain.Services
             if (newProject.ProjectStartDate > newProject.ProjectEndDate)
             {
                 throw new ArgumentException("Project start date cannot be after end date.");
-            }
-            if (_projectRepo.SearchProjects(newProject.Title, newProject.UserId).Count > 0) 
-            {
-                throw new ArgumentException("There's already a project with that name for this user."); 
             }
         }
 
