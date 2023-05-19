@@ -32,8 +32,8 @@ namespace Domain.Services
             IProjectModel newProject = new ProjectModel();
 
             newProject.UserId = userId;
-            newProject.Title = title;
-            newProject.Description = description;
+            newProject.Title = title.Trim();
+            newProject.Description = description.Trim();
             newProject.ProjectStartDate = startDate;
             newProject.ProjectEndDate = endDate;
             newProject.ProjectModifyDate = DateTime.Now;
