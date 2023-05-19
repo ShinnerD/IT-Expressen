@@ -1,6 +1,4 @@
-﻿using DAL.Models;
-using Domain.Services;
-using Interfaces.Models;
+﻿using Interfaces.Models;
 using Interfaces.Services;
 
 namespace GUI
@@ -57,6 +55,7 @@ namespace GUI
             tb_Country.Text = userModelGet.Country;
             lblUserCreationDate.Text = "You've been a user for " + (DateTime.Now - userModelGet.CreationDate).GetValueOrDefault().Days.ToString() + " days";
         }
+
         private void ChangeEditProfileState()
         {
             if (bt_Edit.Text == "Edit Profile")
@@ -77,6 +76,7 @@ namespace GUI
                 bt_Edit.Text = "Edit Profile";
             }
         }
+
         private void UpdateUserModel()
         {
             userModelGet.FirstName = tb_Firstname.Text;
@@ -88,6 +88,7 @@ namespace GUI
             userModelGet.ZipCode = tb_Zipcode.Text;
             userModelGet.Country = tb_Country.Text;
         }
+
         private void UnlockProfileForEditing(Control control, bool unlock)
         {
             if (control is TextBox)
@@ -138,6 +139,7 @@ namespace GUI
             invites = inviteService.GetInvitesFromUserId(userModelGet.ID);
             dgv_ConsultantsInvites.DataSource = null;
             dgv_ConsultantsInvites.DataSource = invites;
+
         }
 
         private void DataGridInitialSetup()
@@ -156,6 +158,20 @@ namespace GUI
 
             dgv_ConsultantsInvites.Columns.Add("ProjectId", "Project ID");
             dgv_ConsultantsInvites.Columns["ProjectId"].DataPropertyName = "ProjectId";
+
+
+        }
+
+        private void RemovedDeclined()
+        {
+            for (int i = 0; i < dgv_ConsultantsInvites.Rows.Count - 1; i++)
+            {
+                if (dgv_ConsultantsInvites.Rows[i].Cells["InviteStatus"].Value.ToString() == "Declined")
+                {
+                    dgv_ConsultantsInvites.Rows[i].Visible = false;
+                }
+            }
+            dgv_ConsultantsInvites.Rows[0].Cells[0].Selected = false;
         }
 
         //Opens the form to accept the selected invitation, then refreshes the datagridview /MS
@@ -167,8 +183,8 @@ namespace GUI
             AccInvForm.ShowDialog();
             this.Show();
             LoadInvitesToDGV();
-
         }
+
         private void EditCancel()
         {
             bt_EditCancel.Enabled = false;
@@ -191,7 +207,8 @@ namespace GUI
         private void bt_seeInvites_Click(object sender, EventArgs e)
         {
             var userName = userModelGet.UserName;
-            ConsultantInvites seeInv = new ConsultantInvites(ServiceManager, userName);
+            var selectedProject = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as IInvitesModel;
+            ConsultantInvites seeInv = new ConsultantInvites(ServiceManager, userName, selectedProject);
             this.Hide();
             seeInv.ShowDialog();
             this.Show();
@@ -205,6 +222,11 @@ namespace GUI
             AccInvForm.ShowDialog();
             this.Show();
             LoadInvitesToDGV();
+        }
+
+        private void tb_test_Click(object sender, EventArgs e)
+        {
+            RemovedDeclined();
         }
     }
 }

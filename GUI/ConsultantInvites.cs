@@ -1,4 +1,4 @@
-﻿using Domain.Services;
+﻿using DAL.Linq;
 using Interfaces.Models;
 using Interfaces.Services;
 
@@ -13,17 +13,19 @@ namespace GUI
         private List<IInvitesModel> invites;
         private IProjectModel ProjectGet { get; set; }
         private IUserService UserServiceGet { get; set; }
+        private IInvitesModel CurrentInvite { get; set; }
 
-        public ConsultantInvites(IDomainServiceManager serviceManager, string userName)
+        public ConsultantInvites(IDomainServiceManager serviceManager, string userName, IInvitesModel invite)
         {
             InitializeComponent();
             ServiceManager = serviceManager;
             Username = userName;
+            CurrentInvite = invite;
             GetUser();
             DataGridInitialSetup();
-            LoadInvitesToDGV();
             SetupSkillsCheckList();
-            //LoadProjectData();
+            LoadInvitesToDGV();
+            dgv_ConsultantsInvites.Rows[0].Cells[0].Selected = false;
         }
 
         public ConsultantInvites(IProjectModel projectModel)
@@ -34,7 +36,6 @@ namespace GUI
 
         private void GetUser()
         {
-
             IUserService userService = ServiceManager.UserService;
             userModelGet = userService.GetUserFromUsername(Username);
         }
@@ -47,9 +48,15 @@ namespace GUI
 
             var selectedProject = ServiceManager.ProjectService.GetProject(targetProject);
 
-
-
+            tb_ProjectID.Text = selectedProject.ProjectId.ToString();
             tb_ProjectTitle.Text = selectedProject.Title;
+            tb_ProjectOwner.Text = ServiceManager.UserService.GetUserFromID(selectedProject.UserId).FirstName.ToString() + " " + ServiceManager.UserService.GetUserFromID(selectedProject.UserId).LastName.ToString();
+            tb_ProjectStatus.Text = selectedProject.ProjectStatus;
+            tb_ProjectStartDate.Text = selectedProject.ProjectStartDate.ToString();
+            tb_ProjectEndDate.Text = selectedProject.ProjectEndDate.ToString();
+            tb_ProjectModifiedDate.Text = selectedProject.ProjectModifyDate.ToString();
+            rtb_Description.Text = selectedProject.Description;
+            lb_DaysTilEnd.Text = "Project ends in " + (selectedProject.ProjectEndDate - DateTime.Now).GetValueOrDefault().Days.ToString() + " days";
 
             for (int i = 0; i < checkedListSkills.Items.Count; i++)
                 checkedListSkills.SetItemChecked(i, false);
@@ -58,8 +65,6 @@ namespace GUI
             {
                 checkedListSkills.SetItemChecked(checkedListSkills.FindStringExact(specialization), true);
             }
-
-            //ProjectGet = projectService.GetProject(ProjectID);
         }
 
         private void LoadInvitesToDGV()
@@ -68,20 +73,7 @@ namespace GUI
             invites = inviteService.GetInvitesFromUserId(userModelGet.ID);
             dgv_ConsultantsInvites.DataSource = null;
             dgv_ConsultantsInvites.DataSource = invites;
-        }
-
-        private void LoadProjectData()
-        {
-            grpBoxProfileInfo.Text = ProjectGet.Title;
-            tb_ProjectID.Text = ProjectGet.ProjectId.ToString();
-            tb_ProjectTitle.Text = ProjectGet.Title.ToString();
-            tb_ProjectOwner.Text = UserServiceGet.GetUserFromID(ProjectGet.UserId).FirstName.ToString() + " " + UserServiceGet.GetUserFromID(ProjectGet.UserId).LastName.ToString();
-            tb_ProjectStatus.Text = ProjectGet.ProjectStatus;
-            tb_ProjectStartDate.Text = ProjectGet.ProjectStartDate.ToString();
-            tb_ProjectEndDate.Text = ProjectGet.ProjectEndDate.ToString();
-            tb_ProjectModifiedDate.Text = ProjectGet.ProjectModifyDate.ToString();
-            rtb_Description.Text = ProjectGet.Description;
-            lb_DaysTilEnd.Text = "Project ends in " + (ProjectGet.ProjectEndDate - DateTime.Now).GetValueOrDefault().Days.ToString() + " days";
+            dgv_ConsultantsInvites.Rows[0].Cells[0].Selected = false;
         }
 
         private void DataGridInitialSetup()
@@ -115,15 +107,14 @@ namespace GUI
         private void dgv_ConsultantsInvites_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             GetProjectInfo();
+            StartDateCheck();
 
-
-
-            //LoadInvitesToDGV();
         }
+
         private void CheckProjectSkills()
         {
-
         }
+
         private void SetupSkillsCheckList()
         {
             checkedListSkills.Items.Clear();
@@ -134,6 +125,75 @@ namespace GUI
             {
                 checkedListSkills.Items.Add(item);
             }
+        }
+
+        private void Accept()
+        {
+            IProjectService projectService = ServiceManager.ProjectService;
+
+            var targetProject = (int)dgv_ConsultantsInvites.SelectedCells[3].Value;
+
+            var selectedProject = ServiceManager.ProjectService.GetProject(targetProject);
+
+
+            IInviteService inviteService = ServiceManager.InviteService;
+
+
+            CurrentInvite.InviteStatus = "Accepted";
+            CurrentInvite.AcceptDate = DateTime.Now;
+
+            inviteService.UpdateInviteStatus(CurrentInvite, selectedProject.ProjectId);
+
+            LoadInvitesToDGV();
+
+        }
+
+        private void Declined()
+        {
+            IProjectService projectService = ServiceManager.ProjectService;
+
+            var targetProject = (int)dgv_ConsultantsInvites.SelectedCells[3].Value;
+
+            var selectedProject = ServiceManager.ProjectService.GetProject(targetProject);
+
+            IInviteService inviteService = ServiceManager.InviteService;
+
+            CurrentInvite.InviteStatus = "Declined";
+            CurrentInvite.AcceptDate = DateTime.Now;
+
+            inviteService.UpdateInviteStatus(CurrentInvite, selectedProject.ProjectId);
+
+            LoadInvitesToDGV();
+
+        }
+        private void StartDateCheck()
+        {
+            IProjectService projectService = ServiceManager.ProjectService;
+
+            var targetProject = (int)dgv_ConsultantsInvites.SelectedCells[3].Value;
+
+            var selectedProject = ServiceManager.ProjectService.GetProject(targetProject);
+
+            if (selectedProject.ProjectEndDate < (DateTime.Now))
+            {
+                bt_AcceptInv.Enabled = false;
+                bt_decline.Enabled = false;
+            }
+            else
+            {
+                bt_AcceptInv.Enabled = true;
+                bt_decline.Enabled = true;
+            }
+        }
+
+        private void bt_AcceptInv_Click(object sender, EventArgs e)
+        {
+            Accept();
+        }
+
+        private void bt_decline_Click(object sender, EventArgs e)
+        {
+            Declined();
         }
     }
 }

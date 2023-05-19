@@ -33,6 +33,7 @@
             dgv_ConsultantsInvites = new DataGridView();
             bt_seeInviteDetails = new Button();
             groupBox1 = new GroupBox();
+            bt_seeProjects = new Button();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             grpBoxProfileInfo = new GroupBox();
             bt_Edit = new Button();
@@ -56,7 +57,7 @@
             label4 = new Label();
             label6 = new Label();
             bt_seeInvites = new Button();
-            bt_seeProjects = new Button();
+            tb_test = new Button();
             ((System.ComponentModel.ISupportInitialize)dgv_ConsultantsInvites).BeginInit();
             groupBox1.SuspendLayout();
             grpBoxProfileInfo.SuspendLayout();
@@ -91,6 +92,7 @@
             dgv_ConsultantsInvites.Dock = DockStyle.Top;
             dgv_ConsultantsInvites.Location = new Point(3, 19);
             dgv_ConsultantsInvites.Name = "dgv_ConsultantsInvites";
+            dgv_ConsultantsInvites.RowHeadersVisible = false;
             dgv_ConsultantsInvites.RowTemplate.Height = 25;
             dgv_ConsultantsInvites.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv_ConsultantsInvites.Size = new Size(595, 297);
@@ -98,8 +100,7 @@
             // 
             // bt_seeInviteDetails
             // 
-            bt_seeInviteDetails.Dock = DockStyle.Left;
-            bt_seeInviteDetails.Location = new Point(3, 316);
+            bt_seeInviteDetails.Location = new Point(179, 615);
             bt_seeInviteDetails.Name = "bt_seeInviteDetails";
             bt_seeInviteDetails.Size = new Size(101, 27);
             bt_seeInviteDetails.TabIndex = 39;
@@ -109,7 +110,7 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(bt_seeInviteDetails);
+            groupBox1.Controls.Add(bt_seeProjects);
             groupBox1.Controls.Add(dgv_ConsultantsInvites);
             groupBox1.Location = new Point(12, 227);
             groupBox1.Name = "groupBox1";
@@ -117,6 +118,16 @@
             groupBox1.TabIndex = 40;
             groupBox1.TabStop = false;
             groupBox1.Text = "Invites";
+            // 
+            // bt_seeProjects
+            // 
+            bt_seeProjects.Location = new Point(398, 320);
+            bt_seeProjects.Name = "bt_seeProjects";
+            bt_seeProjects.Size = new Size(200, 23);
+            bt_seeProjects.TabIndex = 43;
+            bt_seeProjects.Text = "See Accepted Project Details";
+            bt_seeProjects.UseVisualStyleBackColor = true;
+            bt_seeProjects.Click += bt_seeProjects_Click;
             // 
             // grpBoxProfileInfo
             // 
@@ -405,22 +416,23 @@
             bt_seeInvites.UseVisualStyleBackColor = true;
             bt_seeInvites.Click += bt_seeInvites_Click;
             // 
-            // bt_seeProjects
+            // tb_test
             // 
-            bt_seeProjects.Location = new Point(146, 196);
-            bt_seeProjects.Name = "bt_seeProjects";
-            bt_seeProjects.Size = new Size(125, 23);
-            bt_seeProjects.TabIndex = 43;
-            bt_seeProjects.Text = "See Active Projects";
-            bt_seeProjects.UseVisualStyleBackColor = true;
-            bt_seeProjects.Click += bt_seeProjects_Click;
+            tb_test.Location = new Point(344, 591);
+            tb_test.Name = "tb_test";
+            tb_test.Size = new Size(75, 23);
+            tb_test.TabIndex = 44;
+            tb_test.Text = "button1";
+            tb_test.UseVisualStyleBackColor = true;
+            tb_test.Click += tb_test_Click;
             // 
             // Consultant
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(625, 654);
-            Controls.Add(bt_seeProjects);
+            Controls.Add(bt_seeInviteDetails);
+            Controls.Add(tb_test);
             Controls.Add(bt_seeInvites);
             Controls.Add(grpBoxProfileInfo);
             Controls.Add(bt_SearchProjects);
@@ -467,5 +479,6 @@
         private Button bt_Edit;
         private Button bt_seeInvites;
         private Button bt_seeProjects;
+        private Button tb_test;
     }
 }
