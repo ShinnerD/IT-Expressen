@@ -227,6 +227,10 @@ namespace GUI
 
             dgv_UserSearchResults.DataSource = usersSearchResults;
 
+            if ()
+            {
+
+            }
             if (userName != "")
             {
                 int index = usersSearchResults.FindIndex(i => i.UserName == userName);
