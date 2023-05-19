@@ -50,6 +50,7 @@
             label6 = new Label();
             tabControl = new TabControl();
             tabPage_Users = new TabPage();
+            lbl_FeedbackUserTab = new Label();
             btn_NewUser = new Button();
             btn_DeleteUser = new Button();
             btn_EditUser = new Button();
@@ -72,7 +73,6 @@
             radio_Pending = new RadioButton();
             btn_SearchProjects = new Button();
             txtBox_ProjectSearchParams = new TextBox();
-            lbl_FeedbackUserTab = new Label();
             grpBoxProfileInfo.SuspendLayout();
             tabControl.SuspendLayout();
             tabPage_Users.SuspendLayout();
@@ -374,6 +374,17 @@
             tabPage_Users.TabIndex = 0;
             tabPage_Users.Text = "Users";
             // 
+            // lbl_FeedbackUserTab
+            // 
+            lbl_FeedbackUserTab.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            lbl_FeedbackUserTab.AutoSize = true;
+            lbl_FeedbackUserTab.Location = new Point(166, 382);
+            lbl_FeedbackUserTab.Name = "lbl_FeedbackUserTab";
+            lbl_FeedbackUserTab.Size = new Size(137, 15);
+            lbl_FeedbackUserTab.TabIndex = 34;
+            lbl_FeedbackUserTab.Text = "FeedBack Label Message";
+            lbl_FeedbackUserTab.Visible = false;
+            // 
             // btn_NewUser
             // 
             btn_NewUser.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
@@ -385,6 +396,7 @@
             btn_NewUser.TabIndex = 33;
             btn_NewUser.Text = "New User";
             btn_NewUser.UseVisualStyleBackColor = true;
+            btn_NewUser.Click += btn_NewUser_Click;
             // 
             // btn_DeleteUser
             // 
@@ -645,17 +657,6 @@
             txtBox_ProjectSearchParams.Size = new Size(283, 23);
             txtBox_ProjectSearchParams.TabIndex = 0;
             txtBox_ProjectSearchParams.KeyDown += txtBox_ProjectSearchParams_KeyDown;
-            // 
-            // lbl_FeedbackUserTab
-            // 
-            lbl_FeedbackUserTab.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            lbl_FeedbackUserTab.AutoSize = true;
-            lbl_FeedbackUserTab.Location = new Point(166, 382);
-            lbl_FeedbackUserTab.Name = "lbl_FeedbackUserTab";
-            lbl_FeedbackUserTab.Size = new Size(137, 15);
-            lbl_FeedbackUserTab.TabIndex = 34;
-            lbl_FeedbackUserTab.Text = "FeedBack Label Message";
-            lbl_FeedbackUserTab.Visible = false;
             // 
             // Admin
             // 

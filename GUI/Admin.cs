@@ -8,6 +8,7 @@ namespace GUI
     public partial class Admin : Form
     {
         private IUserModel adminUser;
+        public string CreatedUserName { get; set; }
 
         private readonly IDomainServiceManager ServiceManager;
 
@@ -301,12 +302,23 @@ namespace GUI
         }
 
         /// <summary>
+        /// Runs when User clicks the New User button. Opens the form for creating a new user.
+        /// </summary>
+        private void OpenNewUserForm()
+        {
+            CreateUser createUser = new CreateUser(ServiceManager, this, true);
+            createUser.ShowDialog();
+            this.Show();
+            PerformUserSearch(CreatedUserName);
+        }
+
+        /// <summary>
         /// Async Task that turns on the visibility of the label provided in the parameters,
         /// shows the given message in the given color, for the given time. /DK
         /// </summary>
         private async Task FeedBackMessage(Label label, string message, Color color, int milliseconds = 5000)
         {
-            label.Text = message;
+            label.Text = message.Trim();
             label.ForeColor = color;
             label.Visible = true;
             _cancellationTokenSource.Cancel();
@@ -362,5 +374,11 @@ namespace GUI
                 OpenUserProfile(dgv_UserSearchResults.SelectedRows[0].Cells["UserName"].Value.ToString(), dgv_UserSearchResults.SelectedRows[0].Cells["UserType"].Value.ToString().ToLower());
             }
         }
+
+        private void btn_NewUser_Click(object sender, EventArgs e)
+        {
+            OpenNewUserForm();
+        }
+
     }
 }

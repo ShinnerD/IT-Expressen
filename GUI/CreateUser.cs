@@ -9,6 +9,9 @@ namespace GUI
         private readonly IDomainServiceManager ServiceManager;
         private List<IUserModel> allUsers { get; set; }
         private IUserService userService;
+        bool isAdmin = false;
+
+        Admin AdminForm;
 
         public CreateUser(IDomainServiceManager serviceManager)
         {
@@ -19,8 +22,21 @@ namespace GUI
             LoadUserData();
             SetupSkillsCheckList();
         }
+
+        public CreateUser(IDomainServiceManager serviceManager, Admin adminForm, bool IsAdminCreatingUser)
+        {
+            ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
+            userService = ServiceManager.UserService;
+
+            AdminForm = adminForm;
+            isAdmin = IsAdminCreatingUser;
+
+            InitializeComponent();
+            LoadUserData();
+            SetupSkillsCheckList();
+        }
         //Creates a new user according to the parameters defined in the IUserService. 
-        public void CreatNewUser()
+        public void CreateNewUser()
         {
             try
             {
@@ -41,7 +57,15 @@ namespace GUI
                         FindCheckedSkills()
 
                         );
-                    forwardUserToProfile();
+                    if (!isAdmin)
+                    {
+                        forwardUserToProfile();
+                    }
+                    else
+                    {
+                        AdminForm.CreatedUserName = tb_UserName.Text;
+                        this.Close();
+                    }
                 }
                 else
                 {
@@ -75,7 +99,7 @@ namespace GUI
         // Button click event -> see method for results /MS
         private void bt_CreateUser_Click(object sender, EventArgs e)
         {
-            CreatNewUser();
+            CreateNewUser();
         }
         //Creates the CheckListBox used for specialization according to data from the database  //MS
         private void SetupSkillsCheckList()
