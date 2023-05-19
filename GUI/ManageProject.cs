@@ -6,50 +6,37 @@ namespace GUI
 {
     public partial class ManageProject : Form
     {
-        private int ProjectID { get; set; }
-        private IProjectModel ProjectGet { get; set; }
-        private IInvitesModel Invite { get; set; }
-        private List<IMessageModel> MessageGet { get; set; }
-        private List<string> MessageBoardGet { get; set; }
-        private IUserService UserServiceGet { get; set; }
+        private int ProjectID;
+        private IProjectModel? ProjectGet;
+        private List<IMessageModel>? MessageGet { get; set; }
+        private List<string>? MessageBoardGet { get; set; }
 
-        private IInviteService invService = new InviteService();
+        private readonly IDomainServiceManager ServiceManager;
 
-        public ManageProject(int projectId)
+        public ManageProject(IDomainServiceManager serviceManager, int projectId)
         {
-            InitializeComponent();
+            ServiceManager = serviceManager;
             ProjectID = projectId;
+
+            InitializeComponent();
             GetProjectInfo();
             LoadProjectData();
             LoadMessageData();
             InvolvedUsers();
         }
 
-        public ManageProject(IProjectModel projectModel)
-        {
-            InitializeComponent();
-            ProjectGet = projectModel;
-        }
-
         private void GetProjectInfo()
         {
-            IProjectService projectService = new ProjectService();
-            IInviteService inviteService = new InviteService();
-            IMessageService messageService = new MessageService();
-
-            ProjectGet = projectService.GetProject(ProjectID);
-            Invite = inviteService.GetInvitedProjectId(ProjectID);
-            MessageGet = messageService.GetAllMessageFromProjectID(ProjectID);
+            ProjectGet = ServiceManager.ProjectService.GetProject(ProjectID);
+            MessageGet = ServiceManager.MessageService.GetAllMessageFromProjectID(ProjectID);
         }
 
         private void LoadProjectData()
         {
-            UserServiceGet = new UserService();
-
             grpBoxProfileInfo.Text = ProjectGet.Title;
             tb_ProjectID.Text = ProjectGet.ProjectId.ToString();
-            tb_ProjectTitle.Text = ProjectGet.Title.ToString();
-            tb_ProjectOwner.Text = UserServiceGet.GetUserFromID(ProjectGet.UserId).FirstName.ToString() + " " + UserServiceGet.GetUserFromID(ProjectGet.UserId).LastName.ToString();
+            tb_ProjectTitle.Text = ProjectGet.Title;
+            tb_ProjectOwner.Text = ProjectGet.ManagerFullName;
             tb_ProjectStatus.Text = ProjectGet.ProjectStatus;
             tb_ProjectStartDate.Text = ProjectGet.ProjectStartDate.ToString();
             tb_ProjectEndDate.Text = ProjectGet.ProjectEndDate.ToString();
@@ -77,11 +64,9 @@ namespace GUI
         {
             if (!string.IsNullOrEmpty(rtb_newMessage.Text))
             {
-
-
                 try
                 {
-                    IMessageService messageService = new MessageService();
+                    IMessageService messageService = ServiceManager.MessageService;
 
                     messageService.AddMessage(
                         ProjectGet.ProjectId,
@@ -127,7 +112,7 @@ namespace GUI
             dgv_InvolvedUsers.StandardTab = true;
 
             dgv_InvolvedUsers.Columns.Add("UserName", "User Name");
-            dgv_InvolvedUsers.Columns["UserName"].DataPropertyName = "UserName";
+            dgv_InvolvedUsers.Columns["UserName"].DataPropertyName = "InvitedUserName";
 
             dgv_InvolvedUsers.Columns.Add("InviteStatus", "Invite Status");
             dgv_InvolvedUsers.Columns["InviteStatus"].DataPropertyName = "InviteStatus";

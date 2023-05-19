@@ -1,27 +1,27 @@
-﻿using DAL.Linq;
-using Domain.Services;
-using Interfaces.Models;
-using Interfaces.Services;
+﻿using Interfaces.Services;
 
 namespace GUI
 {
     public partial class ConsultantPick : Form
     {
         public string UserType { get; set; }
-        private IUserService UserService = new UserService();
+        private IUserService userService;
+        private readonly IDomainServiceManager ServiceManager;
 
-        public ConsultantPick()
+        public ConsultantPick(IDomainServiceManager serviceManager)
         {
+            ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
+            userService = ServiceManager.UserService;
+
             InitializeComponent();
             LoadConsultantData();
             UserType = "consultant";
-
         }
 
         //Loads DataGridView with users with UserType "Consultat" and removes unwanted attributes - MS
         private void LoadConsultantData()
         {
-            dgv_ConsultantList.DataSource = UserService.FindUsersWithUserType(UserType);
+            dgv_ConsultantList.DataSource = userService.FindUsersWithUserType(UserType);
 
             this.dgv_ConsultantList.Columns["password"].Visible = false;
             this.dgv_ConsultantList.Columns["Address"].Visible = false;

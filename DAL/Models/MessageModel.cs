@@ -10,7 +10,7 @@ namespace DAL.Models
         public int UserID { get; set; }
         public string Message { get; set; }
         public DateTime MessageDate { get; set; }
-        public string UserName { get { return new UserRepository().GetUserFromID(this.UserID).UserName; } }
+        public string? UserName { get; set; }
 
     }
 }

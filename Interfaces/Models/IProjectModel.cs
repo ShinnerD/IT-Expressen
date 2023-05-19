@@ -9,7 +9,7 @@
         DateTime? ProjectModifyDate { get; set; }
         DateTime? ProjectStartDate { get; set; }
         string? ProjectStatus { get; set; }
-        string? Title { get; set; }
+        string Title { get; set; }
         decimal? TotalInvoicePrice { get; set; }
         int UserId { get; set; }
         string? Description { get; set; }

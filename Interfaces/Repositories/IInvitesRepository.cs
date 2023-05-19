@@ -1,34 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Interfaces.Models;
+﻿using Interfaces.Models;
+
 ///Written by Erik
 namespace Interfaces.Repositories
 {
     public interface IInvitesRepository
     {
         /// <summary>
-        /// Returns a List of IInvitesRepository with projects related to AllProjectID provided. 
-        /// </summary>
-        List<IInvitesModel> GetAllInviteProjectID(int projectid);
-        /// <summary>
-        /// Returns a List of IInvitesRepository with projects related to the Allinvites provided. 
+        /// Getting a list off all invites, with the attributes that is in invites.
         /// </summary>
         List<IInvitesModel> GetAllInvites();
+
         /// <summary>
-        /// Returns a List of IInvitesRepository with projects related to ProjectID provided. 
+        /// Getting a list off all invites with a specific ProjectID
         /// </summary>
-        IInvitesModel GetInviteProjectId(int ProjectId);
+        List<IInvitesModel> GetAllInviteProjectID(int projectid);
+
         /// <summary>
-        /// Returns a List of IInvitesRepository with projects related to UserId provided. 
+        /// Getting a list off all invites with a specific UserId
         /// </summary>
-        IInvitesModel GetInviteUserId(int UserId);
-        List<IInvitesModel> GetInviteUserIdList(int UserId);
-        IInvitesModel GetInviteUserName(string Username);
+        List<IInvitesModel> GetAllInviteUserId(int UserId);
+
+        /// <summary>
+        /// Repo method to update the details of an invite in the database according to userId and projectId. /MS
+        /// </summary>
         void UpdateInviteStatus(IInvitesModel inviteModel, int ProjectID);
 
-        void AddInvite(IInvitesModel inviteModel/*, List<string> specializtions*/);
+        /// <summary>
+        ///  Repo method to add invitations to a project, the invited consultants userID is stored /MS
+        /// </summary>
+        void AddInvite(IInvitesModel inviteModel);
     }
 }
