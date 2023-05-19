@@ -296,7 +296,7 @@ namespace GUI
             }
             if (userType == "admin")
             {
-                FeedBackMessage(lbl_FeedbackUserTab, "Admin's can't edit other Admins.", Color.Red, 5000);
+                FeedBackMessage(lbl_FeedbackUserTab, "Admin's can't edit other Admins.", Color.Red);
             }
         }
 
@@ -304,7 +304,7 @@ namespace GUI
         /// Async Task that turns on the visibility of the label provided in the parameters,
         /// shows the given message in the given color, for the given time. /DK
         /// </summary>
-        private async Task FeedBackMessage(Label label, string message, Color color, int milliseconds)
+        private async Task FeedBackMessage(Label label, string message, Color color, int milliseconds = 5000)
         {
             label.Text = message;
             label.ForeColor = color;

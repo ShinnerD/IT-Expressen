@@ -9,10 +9,16 @@ namespace GUI
         private string Username;
         private IUserModel userModel;
         private readonly IDomainServiceManager ServiceManager;
+        private List<IProjectModel> ProjectList;
+        private IProjectModel SelectedProject;
+        private IProjectService projectService;
+
+        private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
         public Manager(IDomainServiceManager serviceManager, string username)
         {
             ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
+            projectService = ServiceManager.ProjectService;
             InitializeComponent();
             Username = username;
             GetUser();
@@ -26,26 +32,37 @@ namespace GUI
         /// </summary>
         private void SetUpProjects()
         {
-            dgv_Viewproject.AutoGenerateColumns = false;
-            dgv_Viewproject.StandardTab = true;
+            try
+            {
+                ProjectList = projectService.GetUserProjects(userModel.ID).ToList();
+            }
+            catch (Exception)
+            {
+                FeedBackMessage(lbl_ViewProjectsFeedBack, "Unable to retrieve projects.", Color.Red);
+            }
+            finally
+            {
+                dgv_Viewproject.AutoGenerateColumns = false;
+                dgv_Viewproject.StandardTab = true;
 
-            dgv_Viewproject.Columns.Add("Title", "Project Name");
-            dgv_Viewproject.Columns["Title"].DataPropertyName = "Title";
-            dgv_Viewproject.Columns["Title"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dgv_Viewproject.Columns.Add("Title", "Project Name");
+                dgv_Viewproject.Columns["Title"].DataPropertyName = "Title";
+                dgv_Viewproject.Columns["Title"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-            dgv_Viewproject.Columns.Add("Status", "Status");
-            dgv_Viewproject.Columns["Status"].DataPropertyName = "ProjectStatus";
+                dgv_Viewproject.Columns.Add("Status", "Status");
+                dgv_Viewproject.Columns["Status"].DataPropertyName = "ProjectStatus";
 
-            dgv_Viewproject.Columns.Add("Start", "Start");
-            dgv_Viewproject.Columns["Start"].DataPropertyName = "ProjectStartDate";
+                dgv_Viewproject.Columns.Add("Start", "Start");
+                dgv_Viewproject.Columns["Start"].DataPropertyName = "ProjectStartDate";
 
-            dgv_Viewproject.Columns.Add("End", "End");
-            dgv_Viewproject.Columns["End"].DataPropertyName = "ProjectEndDate";
+                dgv_Viewproject.Columns.Add("End", "End");
+                dgv_Viewproject.Columns["End"].DataPropertyName = "ProjectEndDate";
 
-            dgv_Viewproject.Columns.Add("Invoiced", "Invoiced");
-            dgv_Viewproject.Columns["Invoiced"].DataPropertyName = "TotalInvoicePrice";
+                dgv_Viewproject.Columns.Add("Invoiced", "Invoiced");
+                dgv_Viewproject.Columns["Invoiced"].DataPropertyName = "TotalInvoicePrice";
 
-            dgv_Viewproject.DataSource = ServiceManager.ProjectService.GetUserProjects(userModel.ID).OrderBy(i => i.Title).ToList();
+                dgv_Viewproject.DataSource = ProjectList;
+            }
         }
 
         /// <summary>
@@ -105,17 +122,33 @@ namespace GUI
         //}
 
         /// <summary>
-        /// Opens the Form for editing a project. /DK
+        /// Changes the Form into editing the currently selected project from the projects list. /DK
         /// </summary>
         private void ManageSelectedProject()
         {
-            var selectedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;
-            if (selectedProject != null)
+            if (SelectedProject != null)
             {
-                EditProject editProject = new EditProject(ServiceManager, selectedProject.ProjectId);
-                this.Hide();
-                editProject.ShowDialog();
-                this.Show();
+                EditProjectDetails(SelectedProject);
+            }
+        }
+
+        private void EditProjectDetails(IProjectModel selectedProject)
+        {
+            ViewProjectsGrpBox.Visible = false;
+            NewProjectGrpBox.Visible = true;
+            btn_NewProjectSave.Text = "Update Project";
+            txtBox_ProjectTitle.Text = selectedProject.Title;
+            txtBox_ProjectDescription.Text = selectedProject.Description;
+            dtp_NewProjectStartDate.Value = selectedProject.ProjectStartDate ?? DateTime.MinValue;
+            dtp_NewProjectEndDate.Value = selectedProject.ProjectEndDate ?? DateTime.MinValue;
+            CheckProjectSkills();
+        }
+
+        private void CheckProjectSkills()
+        {
+            foreach (var specialization in ServiceManager.SpecializationService.GetProjectSpecializations(SelectedProject.ProjectId))
+            {
+                checkedListSkills.SetItemChecked(checkedListSkills.FindStringExact(specialization), true);
             }
         }
 
@@ -184,7 +217,6 @@ namespace GUI
             }
         }
 
-
         /// <summary>
         /// Updates the pagewide userModel with the new information in the textboxes /DK
         /// </summary>
@@ -238,6 +270,7 @@ namespace GUI
             UnlockProfileForEditing(grpBoxProfileInfo, false);
             SetUpTB();
         }
+
         private void ManageProject()
         {
             var selectedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;
@@ -249,9 +282,124 @@ namespace GUI
                 this.Show();
             }
         }
+
+        private void SetupSkillsCheckList()
+        {
+            checkedListSkills.Items.Clear();
+
+            List<string> items = ServiceManager.SpecializationService.ListDefinedSpecializations();
+
+            foreach (var item in items)
+            {
+                checkedListSkills.Items.Add(item);
+            }
+        }
+
+        /// <summary>
+        /// Async Task that turns on the visibility of the label provided in the parameters,
+        /// shows the given message in the given color, for the given time. /DK
+        /// </summary>
+        private async Task FeedBackMessage(Label label, string message, Color? color = null, int milliseconds = 5000)
+        {
+            label.Text = message;
+            label.ForeColor = color ?? Color.Black;
+            label.Visible = true;
+            _cancellationTokenSource.Cancel();
+            _cancellationTokenSource = new CancellationTokenSource();
+
+            await Task.Delay(milliseconds, _cancellationTokenSource.Token);
+            label.Text = string.Empty;
+            label.ForeColor = Color.Black;
+            label.Visible = false;
+        }
+
         private void bt_manageProject_Click(object sender, EventArgs e)
         {
             ManageProject();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            FeedBackMessage(lbl_FeedBackNewProject, "You clicked the button. Congrats.");
+        }
+
+        private void btn_NewProjectBack_Click(object sender, EventArgs e)
+        {
+            BackToViewProjects();
+        }
+
+        private void BackToViewProjects()
+        {
+            txtBox_ProjectTitle.Clear();
+            txtBox_ProjectDescription.Clear();
+            dtp_NewProjectEndDate.Value = DateTime.Now;
+            dtp_NewProjectStartDate.Value = DateTime.Now;
+            checkedListSkills.ClearSelected();
+            NewProjectGrpBox.Visible = false;
+            ViewProjectsGrpBox.Visible = true;
+            dgv_Viewproject.DataSource = null;
+            ProjectList = null;
+            ProjectList = projectService.GetUserProjects(userModel.ID).ToList();
+            dgv_Viewproject.DataSource = ProjectList;
+        }
+
+        private void btn_NewProject_Click(object sender, EventArgs e)
+        {
+            ViewProjectsGrpBox.Visible = false;
+            NewProjectGrpBox.Visible = true;
+            btn_NewProjectSave.Text = "Save Project";
+        }
+
+        private void NewProjectGrpBox_VisibleChanged(object sender, EventArgs e)
+        {
+            SetupSkillsCheckList();
+        }
+
+        private void dgv_Viewproject_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgv_Viewproject.SelectedRows.Count > 0)
+            {
+                SelectedProject = (IProjectModel)dgv_Viewproject.SelectedRows[0].DataBoundItem;
+            }
+        }
+
+        private void btn_NewProjectSave_Click(object sender, EventArgs e)
+        {
+            if (btn_NewProjectSave.Text == "Save Project")
+            {
+                SaveNewProject();
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        private List<string> FindCheckedSkills()
+        {
+            List<string> result = new List<string>();
+
+            foreach (var skill in checkedListSkills.CheckedItems)
+            {
+                result.Add(skill.ToString());
+            }
+            return result;
+        }
+
+        private void SaveNewProject()
+        {
+            try
+            {
+                List<string> reqSkills = FindCheckedSkills();
+
+                projectService.CreateProject(userModel.ID, txtBox_ProjectTitle.Text, txtBox_ProjectDescription.Text, dtp_NewProjectStartDate.Value, dtp_NewProjectEndDate.Value, reqSkills);
+
+                BackToViewProjects();
+            }
+            catch (Exception e)
+            {
+                FeedBackMessage(lbl_FeedBackNewProject, e.Message, Color.Red);
+            }
         }
     }
 }

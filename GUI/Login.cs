@@ -70,14 +70,21 @@ namespace GUI
         //Temp method used to bypass the login and connect straigt to an instance of the manager form, on a specific user -> Used only for development purposes and will be deleted before final release /MS
         private void OpenManagerForm()
         {
-            var user = userService.GetAllUsers();
-            var targetUser = user.Where(i => i.UserName == tb_UserName.Text).First();
-            this.Hide();
-            targetUser.UserName = "amusto0";
-            targetUser.Password = "password";
-            Manager manager = new Manager(ServiceManager, targetUser.UserName);
-            manager.ShowDialog();
-            this.Show();
+            try
+            {
+                var user = userService.GetAllUsers();
+                var targetUser = user.Where(i => i.UserName == tb_UserName.Text).First();
+                this.Hide();
+                targetUser.UserName = "amusto0";
+                targetUser.Password = "password";
+                Manager manager = new Manager(ServiceManager, targetUser.UserName);
+                manager.ShowDialog();
+                this.Show();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
         // Button click event -> see method for results /MS
         private void bt_Login_Click(object sender, EventArgs e)

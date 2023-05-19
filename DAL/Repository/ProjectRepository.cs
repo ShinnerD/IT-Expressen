@@ -87,9 +87,9 @@ namespace DAL.Repository
         /// </summary>
         public List<IProjectModel> GetUserProjects(int userId)
         {
-            var targetUser = dbContext.Users.First(i => i.User_ID == userId);
+            var targetProjects = dbContext.Projects.Where(i => i.User_ID == userId).ToList();
 
-            List<IProjectModel> result = TransferAllProjectProperties(targetUser.Projects.ToList());
+            List<IProjectModel> result = TransferAllProjectProperties(targetProjects);
 
             return result;
         }
@@ -178,7 +178,7 @@ namespace DAL.Repository
 
             if (targetUser != null)
             {
-                dtoProjects = dbContext.Projects.Where(i => i.User_ID == userId && i.Title.Contains(searchTerm)).ToList();
+                dtoProjects = dbContext.Projects.Where(i => i.User_ID == userId && i.Title.ToLower().Contains(searchTerm.ToLower())).ToList();
             }
 
             List<IProjectModel> result = TransferAllProjectProperties(dtoProjects);

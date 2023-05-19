@@ -25,16 +25,11 @@ namespace GUI
         private void SetupSkillsCheckList()
         {
             ISpecializationService specService = ServiceManager.SpecializationService;
-            List<string> items = specService.ListDefinedSpecializations().OrderBy(i => i).ToList();
+            List<string> items = specService.ListDefinedSpecializations();
 
             foreach (var item in items)
             {
                 checkedListSkills.Items.Add(item);
-            }
-
-            if (items.Count == 0)
-            {
-                MessageBox.Show("Failed to retrieve skills from server.");
             }
         }
 
