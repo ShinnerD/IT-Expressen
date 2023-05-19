@@ -53,6 +53,8 @@
             label5 = new Label();
             label4 = new Label();
             label6 = new Label();
+            lbl_ReqSkills = new Label();
+            checkedListSkills = new CheckedListBox();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_ConsultantsInvites).BeginInit();
             grpBoxProfileInfo.SuspendLayout();
@@ -96,6 +98,8 @@
             // 
             // grpBoxProfileInfo
             // 
+            grpBoxProfileInfo.Controls.Add(lbl_ReqSkills);
+            grpBoxProfileInfo.Controls.Add(checkedListSkills);
             grpBoxProfileInfo.Controls.Add(label1);
             grpBoxProfileInfo.Controls.Add(rtb_Description);
             grpBoxProfileInfo.Controls.Add(bt_EditProfileCancel);
@@ -130,7 +134,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(29, 148);
+            label1.Location = new Point(29, 138);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
             label1.Size = new Size(70, 15);
@@ -140,10 +144,10 @@
             // rtb_Description
             // 
             rtb_Description.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            rtb_Description.Location = new Point(29, 166);
+            rtb_Description.Location = new Point(29, 156);
             rtb_Description.Name = "rtb_Description";
             rtb_Description.ReadOnly = true;
-            rtb_Description.Size = new Size(653, 98);
+            rtb_Description.Size = new Size(337, 108);
             rtb_Description.TabIndex = 101;
             rtb_Description.Text = "";
             // 
@@ -375,6 +379,31 @@
             label6.TabIndex = 5;
             label6.Text = "Project Start Date:";
             // 
+            // lbl_ReqSkills
+            // 
+            lbl_ReqSkills.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lbl_ReqSkills.AutoSize = true;
+            lbl_ReqSkills.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_ReqSkills.Location = new Point(424, 136);
+            lbl_ReqSkills.Margin = new Padding(2, 0, 2, 0);
+            lbl_ReqSkills.Name = "lbl_ReqSkills";
+            lbl_ReqSkills.Size = new Size(95, 17);
+            lbl_ReqSkills.TabIndex = 104;
+            lbl_ReqSkills.Text = "Required Skills";
+            // 
+            // checkedListSkills
+            // 
+            checkedListSkills.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            checkedListSkills.BackColor = SystemColors.Control;
+            checkedListSkills.BorderStyle = BorderStyle.None;
+            checkedListSkills.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            checkedListSkills.FormattingEnabled = true;
+            checkedListSkills.Location = new Point(372, 156);
+            checkedListSkills.MultiColumn = true;
+            checkedListSkills.Name = "checkedListSkills";
+            checkedListSkills.Size = new Size(310, 108);
+            checkedListSkills.TabIndex = 103;
+            // 
             // ConsultantInvites
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -417,5 +446,7 @@
         private Label label5;
         private Label label4;
         private Label label6;
+        private Label lbl_ReqSkills;
+        private CheckedListBox checkedListSkills;
     }
 }

@@ -1,5 +1,4 @@
-﻿using Domain.Services;
-using Interfaces.Models;
+﻿using Interfaces.Models;
 using Interfaces.Services;
 
 namespace GUI
@@ -105,7 +104,6 @@ namespace GUI
                 lb_warning.Visible = true;
                 lb_TextCounter.ForeColor = Color.Red;
             }
-
         }
 
         private void InvolvedUsers()
@@ -118,7 +116,6 @@ namespace GUI
 
             dgv_InvolvedUsers.Columns.Add("InviteStatus", "Invite Status");
             dgv_InvolvedUsers.Columns["InviteStatus"].DataPropertyName = "InviteStatus";
-
 
             dgv_InvolvedUsers.DataSource = ServiceManager.InviteService.GetAllInvitedProjectID(ProjectGet.ProjectId).Where(i => i.InviteStatus.ToLower() != "declined").ToList(); ;
         }

@@ -22,6 +22,7 @@ namespace GUI
             GetUser();
             DataGridInitialSetup();
             LoadInvitesToDGV();
+            SetupSkillsCheckList();
             //LoadProjectData();
         }
 
@@ -46,8 +47,17 @@ namespace GUI
 
             var selectedProject = ServiceManager.ProjectService.GetProject(targetProject);
 
+
+
             tb_ProjectTitle.Text = selectedProject.Title;
-            
+
+            for (int i = 0; i < checkedListSkills.Items.Count; i++)
+                checkedListSkills.SetItemChecked(i, false);
+
+            foreach (var specialization in ServiceManager.SpecializationService.GetProjectSpecializations(selectedProject.ProjectId))
+            {
+                checkedListSkills.SetItemChecked(checkedListSkills.FindStringExact(specialization), true);
+            }
 
             //ProjectGet = projectService.GetProject(ProjectID);
         }
@@ -106,9 +116,24 @@ namespace GUI
         {
             GetProjectInfo();
 
-            
+
 
             //LoadInvitesToDGV();
+        }
+        private void CheckProjectSkills()
+        {
+
+        }
+        private void SetupSkillsCheckList()
+        {
+            checkedListSkills.Items.Clear();
+
+            List<string> items = ServiceManager.SpecializationService.ListDefinedSpecializations();
+
+            foreach (var item in items)
+            {
+                checkedListSkills.Items.Add(item);
+            }
         }
     }
 }
