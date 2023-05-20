@@ -6,22 +6,25 @@ namespace GUI
     public partial class Consultant : Form
     {
         private IInviteService invService;
+
         private IUserService userServiceGet;
+
         private readonly IDomainServiceManager ServiceManager;
 
         private string Username;
+
         public IUserModel userModelGet;
 
         private List<IInvitesModel> invites;
-        private IInvitesModel invitesModelGet;
 
-        private IProjectModel ProjectGet;
+
 
         public Consultant(IDomainServiceManager domainServiceManager, string username)
         {
             ServiceManager = domainServiceManager ?? throw new ArgumentNullException(nameof(domainServiceManager));
             invService = domainServiceManager.InviteService;
             userServiceGet = domainServiceManager.UserService;
+            projectService = ServiceManager.ProjectService;
 
             InitializeComponent();
             Username = username;
@@ -132,14 +135,15 @@ namespace GUI
             viewProjectsForm.ShowDialog();
         }
 
-        //Clears and loads the Datagridview //MS
+        /// <summary>
+        /// Clears and loads the Datagridview //MS
+        /// </summary>
         private void LoadInvitesToDGV()
         {
             IInviteService inviteService = invService;
             invites = inviteService.GetInvitesFromUserId(userModelGet.ID);
             dgv_ConsultantsInvites.DataSource = null;
             dgv_ConsultantsInvites.DataSource = invites;
-
         }
 
         private void DataGridInitialSetup()
@@ -158,8 +162,6 @@ namespace GUI
 
             dgv_ConsultantsInvites.Columns.Add("ProjectId", "Project ID");
             dgv_ConsultantsInvites.Columns["ProjectId"].DataPropertyName = "ProjectId";
-
-
         }
 
         private void RemovedDeclined()

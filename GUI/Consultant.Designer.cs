@@ -125,7 +125,7 @@
             bt_seeProjects.Name = "bt_seeProjects";
             bt_seeProjects.Size = new Size(200, 23);
             bt_seeProjects.TabIndex = 43;
-            bt_seeProjects.Text = "See Accepted Project Details";
+            bt_seeProjects.Text = "Go To Project";
             bt_seeProjects.UseVisualStyleBackColor = true;
             bt_seeProjects.Click += bt_seeProjects_Click;
             // 
