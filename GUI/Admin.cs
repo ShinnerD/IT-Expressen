@@ -2,6 +2,7 @@
 using Interfaces.Models;
 using Interfaces.Services;
 using System.Data;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace GUI
 {
@@ -242,7 +243,7 @@ namespace GUI
         /// <summary>
         /// Searches and Filters Projects based on text in search field and selected Radio Buttons. /DK
         /// </summary>
-        private void PerformProjectSearch()
+        private void PerformProjectSearch(int selectThisProjectAfterSearch = 0)
         {
             string searchString = txtBox_ProjectSearchParams.Text;
             List<string> allSpecializations = specializationService.ListDefinedSpecializations();
@@ -267,6 +268,16 @@ namespace GUI
 
             projectsSearchResults = projectsSearchResults.Where(i => i.Title.ToLower().Contains(searchString.ToLower())).OrderBy(o => o.Title).ToList();
             dgv_ProjectSearchResults.DataSource = projectsSearchResults;
+
+            if (selectThisProjectAfterSearch != 0)
+            {
+                int index = projectsSearchResults.FindIndex(i => i.ProjectId == selectThisProjectAfterSearch);
+                if (index >= 0)
+                {
+                    dgv_ProjectSearchResults.Rows[index].Selected = true;
+                    dgv_ProjectSearchResults.FirstDisplayedScrollingRowIndex = index;
+                }
+            }
         }
 
         /// <summary>
@@ -384,5 +395,21 @@ namespace GUI
             OpenNewUserForm();
         }
 
+        private void btn_EditProject_Click(object sender, EventArgs e)
+        {
+            if (dgv_ProjectSearchResults.SelectedRows.Count != 0)
+            {
+                OpenProject(dgv_ProjectSearchResults.SelectedRows[0].DataBoundItem as IProjectModel);
+            }
+        }
+
+        private void OpenProject(IProjectModel targetProject)
+        {
+            Manager manager = new Manager(ServiceManager, targetProject.ManagerUserName);
+            manager.SelectedProject = targetProject;
+            manager.bt_EditProject_Click(this, new EventArgs());
+            manager.ShowDialog();
+            PerformProjectSearch(manager.SelectedProject.ProjectId);
+        }
     }
 }

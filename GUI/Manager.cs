@@ -12,7 +12,7 @@ namespace GUI
         private IProjectService projectService;
 
         private List<IProjectModel> ProjectList;
-        private IProjectModel SelectedProject;
+        public IProjectModel SelectedProject { get; set; }
 
         private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
@@ -396,7 +396,7 @@ namespace GUI
             }
         }
 
-        private void bt_EditProject_Click(object sender, EventArgs e)
+        public void bt_EditProject_Click(object sender, EventArgs e)
         {
             NewProjectGrpBox.Text = "Update Project";
             ManageSelectedProject();

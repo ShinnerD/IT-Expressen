@@ -35,6 +35,7 @@
             bt_back = new Button();
             checkedListSkills = new CheckedListBox();
             grpBoxSpecFilter = new GroupBox();
+            btn_Search = new Button();
             lblSearchParamAnyAll = new Label();
             radioBtnAll = new RadioButton();
             radioBtnAny = new RadioButton();
@@ -53,6 +54,7 @@
             // 
             dgv_ConsultantList.AllowUserToAddRows = false;
             dgv_ConsultantList.AllowUserToDeleteRows = false;
+            dgv_ConsultantList.AllowUserToResizeRows = false;
             dgv_ConsultantList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_ConsultantList.Dock = DockStyle.Fill;
             dgv_ConsultantList.Location = new Point(3, 19);
@@ -60,15 +62,16 @@
             dgv_ConsultantList.Name = "dgv_ConsultantList";
             dgv_ConsultantList.ReadOnly = true;
             dgv_ConsultantList.RowHeadersVisible = false;
+            dgv_ConsultantList.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dgv_ConsultantList.RowTemplate.Height = 25;
             dgv_ConsultantList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv_ConsultantList.Size = new Size(769, 296);
+            dgv_ConsultantList.Size = new Size(770, 308);
             dgv_ConsultantList.TabIndex = 0;
             // 
             // bt_AddConcultant
             // 
             bt_AddConcultant.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            bt_AddConcultant.Location = new Point(12, 474);
+            bt_AddConcultant.Location = new Point(12, 483);
             bt_AddConcultant.Name = "bt_AddConcultant";
             bt_AddConcultant.Size = new Size(125, 23);
             bt_AddConcultant.TabIndex = 3;
@@ -83,7 +86,7 @@
             // bt_back
             // 
             bt_back.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            bt_back.Location = new Point(664, 474);
+            bt_back.Location = new Point(659, 483);
             bt_back.Name = "bt_back";
             bt_back.Size = new Size(125, 23);
             bt_back.TabIndex = 5;
@@ -94,34 +97,46 @@
             // checkedListSkills
             // 
             checkedListSkills.BackColor = SystemColors.Control;
+            checkedListSkills.BorderStyle = BorderStyle.None;
             checkedListSkills.CheckOnClick = true;
-            checkedListSkills.Dock = DockStyle.Fill;
             checkedListSkills.FormattingEnabled = true;
             checkedListSkills.Location = new Point(3, 19);
             checkedListSkills.MultiColumn = true;
             checkedListSkills.Name = "checkedListSkills";
-            checkedListSkills.Size = new Size(428, 114);
+            checkedListSkills.Size = new Size(374, 108);
             checkedListSkills.TabIndex = 27;
-            checkedListSkills.MouseUp += checkedListSkills_MouseUp;
             // 
             // grpBoxSpecFilter
             // 
-            grpBoxSpecFilter.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            grpBoxSpecFilter.Controls.Add(btn_Search);
             grpBoxSpecFilter.Controls.Add(lblSearchParamAnyAll);
             grpBoxSpecFilter.Controls.Add(radioBtnAll);
             grpBoxSpecFilter.Controls.Add(radioBtnAny);
             grpBoxSpecFilter.Controls.Add(checkedListSkills);
             grpBoxSpecFilter.Location = new Point(12, 8);
             grpBoxSpecFilter.Name = "grpBoxSpecFilter";
-            grpBoxSpecFilter.Size = new Size(434, 136);
+            grpBoxSpecFilter.Size = new Size(491, 136);
             grpBoxSpecFilter.TabIndex = 29;
             grpBoxSpecFilter.TabStop = false;
             grpBoxSpecFilter.Text = "Specialization Search Filter";
             // 
+            // btn_Search
+            // 
+            btn_Search.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btn_Search.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_Search.Location = new Point(382, 101);
+            btn_Search.Margin = new Padding(2);
+            btn_Search.Name = "btn_Search";
+            btn_Search.Size = new Size(100, 25);
+            btn_Search.TabIndex = 31;
+            btn_Search.Text = "Search";
+            btn_Search.UseVisualStyleBackColor = true;
+            btn_Search.Click += btn_Search_Click;
+            // 
             // lblSearchParamAnyAll
             // 
             lblSearchParamAnyAll.AutoSize = true;
-            lblSearchParamAnyAll.Location = new Point(326, 87);
+            lblSearchParamAnyAll.Location = new Point(393, 25);
             lblSearchParamAnyAll.Name = "lblSearchParamAnyAll";
             lblSearchParamAnyAll.Size = new Size(81, 15);
             lblSearchParamAnyAll.TabIndex = 30;
@@ -130,71 +145,71 @@
             // radioBtnAll
             // 
             radioBtnAll.AutoSize = true;
-            radioBtnAll.Location = new Point(378, 105);
+            radioBtnAll.Location = new Point(440, 43);
             radioBtnAll.Name = "radioBtnAll";
             radioBtnAll.Size = new Size(39, 19);
             radioBtnAll.TabIndex = 29;
             radioBtnAll.TabStop = true;
             radioBtnAll.Text = "All";
             radioBtnAll.UseVisualStyleBackColor = true;
-            radioBtnAll.CheckedChanged += radioBtnAny_CheckedChanged;
             // 
             // radioBtnAny
             // 
             radioBtnAny.AutoSize = true;
             radioBtnAny.Checked = true;
-            radioBtnAny.Location = new Point(326, 105);
+            radioBtnAny.Location = new Point(388, 43);
             radioBtnAny.Name = "radioBtnAny";
             radioBtnAny.Size = new Size(46, 19);
             radioBtnAny.TabIndex = 28;
             radioBtnAny.TabStop = true;
             radioBtnAny.Text = "Any";
             radioBtnAny.UseVisualStyleBackColor = true;
-            radioBtnAny.CheckedChanged += radioBtnAny_CheckedChanged;
             // 
             // grpBoxProjectRequirements
             // 
-            grpBoxProjectRequirements.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            grpBoxProjectRequirements.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             grpBoxProjectRequirements.Controls.Add(listBoxProjectRequirements);
-            grpBoxProjectRequirements.Location = new Point(453, 8);
+            grpBoxProjectRequirements.Location = new Point(509, 8);
             grpBoxProjectRequirements.Name = "grpBoxProjectRequirements";
-            grpBoxProjectRequirements.Size = new Size(337, 136);
+            grpBoxProjectRequirements.Padding = new Padding(15, 3, 3, 3);
+            grpBoxProjectRequirements.Size = new Size(278, 136);
             grpBoxProjectRequirements.TabIndex = 30;
             grpBoxProjectRequirements.TabStop = false;
             grpBoxProjectRequirements.Text = "Project Requirements";
             // 
             // listBoxProjectRequirements
             // 
-            listBoxProjectRequirements.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             listBoxProjectRequirements.BackColor = SystemColors.Control;
             listBoxProjectRequirements.BorderStyle = BorderStyle.None;
+            listBoxProjectRequirements.Dock = DockStyle.Fill;
             listBoxProjectRequirements.FormattingEnabled = true;
             listBoxProjectRequirements.ItemHeight = 15;
-            listBoxProjectRequirements.Location = new Point(20, 19);
+            listBoxProjectRequirements.Location = new Point(15, 19);
             listBoxProjectRequirements.MultiColumn = true;
             listBoxProjectRequirements.Name = "listBoxProjectRequirements";
             listBoxProjectRequirements.SelectionMode = SelectionMode.None;
-            listBoxProjectRequirements.Size = new Size(314, 105);
+            listBoxProjectRequirements.Size = new Size(260, 114);
             listBoxProjectRequirements.TabIndex = 0;
             // 
             // grpBoxSearchResult
             // 
             grpBoxSearchResult.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             grpBoxSearchResult.Controls.Add(dgv_ConsultantList);
-            grpBoxSearchResult.Location = new Point(12, 150);
+            grpBoxSearchResult.Location = new Point(12, 147);
             grpBoxSearchResult.Name = "grpBoxSearchResult";
-            grpBoxSearchResult.Size = new Size(775, 318);
+            grpBoxSearchResult.Size = new Size(776, 330);
             grpBoxSearchResult.TabIndex = 31;
             grpBoxSearchResult.TabStop = false;
             grpBoxSearchResult.Text = "Matching Consultants";
             // 
             // lblFeedback
             // 
+            lblFeedback.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lblFeedback.AutoSize = true;
-            lblFeedback.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblFeedback.Location = new Point(143, 476);
+            lblFeedback.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblFeedback.Location = new Point(143, 485);
             lblFeedback.Name = "lblFeedback";
-            lblFeedback.Size = new Size(140, 21);
+            lblFeedback.Size = new Size(119, 17);
             lblFeedback.TabIndex = 32;
             lblFeedback.Text = "Feedback message";
             // 
@@ -209,6 +224,7 @@
             Controls.Add(grpBoxSpecFilter);
             Controls.Add(bt_back);
             Controls.Add(bt_AddConcultant);
+            HelpButton = true;
             MinimumSize = new Size(816, 557);
             Name = "ConsultantAdd";
             Text = "ConsultantAdd";
@@ -237,5 +253,6 @@
         private RadioButton radioBtnAll;
         private Label lblSearchParamAnyAll;
         private Label lblFeedback;
+        private Button btn_Search;
     }
 }
