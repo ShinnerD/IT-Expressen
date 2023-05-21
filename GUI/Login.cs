@@ -147,17 +147,16 @@ namespace GUI
         //Delay is just there to make sure, its possiable to see the method fuctions. /MS
         public async void WakeUpDB()
         {
-            await Task.Delay(3000);
+            //await Task.Delay(3000);
             try
             {
-                var user = userService.GetAllUsers();
-                var anyUser = user.Where(i => i.UserName.IsNullOrEmpty());
-                if (anyUser != null)
+                var anyUser = userService.GetAllUsers();
+                if (anyUser.Count > 0)
                 {
                     lb_connectionTest.Invoke((MethodInvoker)(() => lb_connectionTest.Text = "OK!"));
                     pb_ConnectionStatus.Image = img_RedGreen.Images[1];
                 }
-                if (anyUser == null)
+                else 
                 {
                     lb_connectionTest.Invoke((MethodInvoker)(() => lb_connectionTest.Text = "No connection!"));
                     pb_ConnectionStatus.Image = img_RedGreen.Images[0];

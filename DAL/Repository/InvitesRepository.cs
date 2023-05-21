@@ -46,7 +46,7 @@ namespace DAL.Repository
         {
             List<IInvitesModel> result = new List<IInvitesModel>();
 
-            var dbInvites = DataContext.Projects.First(i => i.Project_ID == projectid).Invites;
+            var dbInvites = DataContext.Invites.Where(i => i.Project_ID == projectid);
 
             foreach (var dbInvite in dbInvites)
             {
