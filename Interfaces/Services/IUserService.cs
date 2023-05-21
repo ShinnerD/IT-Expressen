@@ -19,7 +19,7 @@ namespace Interfaces.Services
         /// <summary>
         /// Deletes a user from the database.
         /// </summary>
-        void Delete(string Delete);
+        void Delete(int userId);
 
         /// <summary>
         /// Gets a list of all users from the database.

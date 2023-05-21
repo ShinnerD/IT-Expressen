@@ -47,9 +47,9 @@ namespace Domain.Services
             {
                 throw new ArgumentException("Project end date cannot be before the current date.");
             }
-            if (_projectRepo.SearchProjects(newProject.Title, newProject.UserId).Count > 0) 
+            if (_projectRepo.SearchProjects(newProject.Title, newProject.UserId).Count > 0)
             {
-                throw new ArgumentException("There's already a project with that name for this user."); 
+                throw new ArgumentException("There's already a project with that name for this user.");
             }
 
             _projectRepo.CreateProject(newProject, specializations);
@@ -114,7 +114,7 @@ namespace Domain.Services
         /// <summary>
         /// Updates the Project in the database. The provided IProjectModel must be an existing project in the database. /DK
         /// </summary>
-        void IProjectService.UpdateProject(IProjectModel project, List<string> specializations)
+        public void UpdateProject(IProjectModel project, List<string> specializations)
         {
             CheckValuesForProject(project);
 
@@ -145,14 +145,14 @@ namespace Domain.Services
             }
             catch (Exception e)
             {
-                throw new Exception("Failed to update project.",e);
+                throw new Exception("Failed to update project.", e);
             }
         }
 
         /// <summary>
         /// Deletes the project specified by setting its status to 'deleted' in the database. Recoverable. /DK
         /// </summary>
-        void IProjectService.DeleteProject(int projectId)
+        public void DeleteProject(int projectId)
         {
             _projectRepo.DeleteProject(projectId);
         }
@@ -160,7 +160,7 @@ namespace Domain.Services
         /// <summary>
         /// Retrieves a List of IProjectModels in which each project require ALL of the provided specializations. Ordered by Title. /DK
         /// </summary>
-        List<IProjectModel> IProjectService.GetProjectsFromAllSpecializations(List<string> specializations)
+        public List<IProjectModel> GetProjectsFromAllSpecializations(List<string> specializations)
         {
             return AssignDomainDetails(_projectRepo.GetProjectsFromAllSpecializations(specializations).OrderBy(i => i.Title).ToList());
         }
@@ -168,7 +168,7 @@ namespace Domain.Services
         /// <summary>
         /// Retrieves a List of IProjectModels in which each project requires at least one of the specializations specified. Ordered by Title. /DK
         /// </summary>
-        List<IProjectModel> IProjectService.GetProjectsFromAnySpecializations(List<string> specializations)
+        public List<IProjectModel> GetProjectsFromAnySpecializations(List<string> specializations)
         {
             return AssignDomainDetails(_projectRepo.GetProjectsFromAnySpecializations(specializations).OrderBy(i => i.Title).ToList());
         }
@@ -198,9 +198,12 @@ namespace Domain.Services
         /// </summary>
         private void AssignDomainDetails(IProjectModel project)
         {
-            var manager = _domainServiceManager.UserService.GetUserFromID(project.UserId);
-            project.ManagerFullName = manager.FullName;
-            project.ManagerUserName = manager.UserName;
+            if (project != null)
+            {
+                var manager = _domainServiceManager.UserService.GetUserFromID(project.UserId);
+                project.ManagerFullName = manager.FullName;
+                project.ManagerUserName = manager.UserName;
+            }
         }
     }
 }

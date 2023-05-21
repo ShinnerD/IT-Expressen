@@ -70,11 +70,21 @@ namespace Domain.Services
         /// </summary>
         private List<IInvitesModel> AssignDomainProperties(List<IInvitesModel> inviteList)
         {
+            List<IInvitesModel> invalidInvites = new List<IInvitesModel>();
+
             foreach (var invite in inviteList)
             {
                 AssignDomainProperties(invite);
+
+                //Check to see if an active (undeleted) project is connected to the invite, if there isn't (I.e. the project title is null)
+                //then the invite is added to a list that subtracted from the result before returning the result.
+                if (invite.ProjectTitle == null)
+                {
+                    invalidInvites.Add(invite);
+                }
             }
-            return inviteList;
+
+            return inviteList.Except(invalidInvites).ToList();
         }
 
         /// <summary>
@@ -83,14 +93,17 @@ namespace Domain.Services
         /// </summary>
         private void AssignDomainProperties(IInvitesModel invite)
         {
-            var invitedUser = DomainServiceManager.UserService.GetUserFromID(invite.UserId);
-            var invitedToProject = DomainServiceManager.ProjectService.GetProject(invite.ProjectId);
-            DomainServiceManager.SpecializationService.FillUserSpecializationsProperty(new List<IUserModel>() { invitedUser });
+                var invitedUser = DomainServiceManager.UserService.GetUserFromID(invite.UserId);
+                var invitedToProject = DomainServiceManager.ProjectService.GetProject(invite.ProjectId);
+                DomainServiceManager.SpecializationService.FillUserSpecializationsProperty(new List<IUserModel>() { invitedUser });
 
-            invite.InvitedUserName = invitedUser.UserName;
-            invite.InvitedUserSpecializations = invitedUser.Specializations;
-            invite.ProjectTitle = invitedToProject.Title;
-            invite.ManagerName = invitedToProject.ManagerFullName;
+            if (invitedUser != null && invitedToProject != null)
+            {
+                invite.InvitedUserName = invitedUser.UserName;
+                invite.InvitedUserSpecializations = invitedUser.Specializations;
+                invite.ProjectTitle = invitedToProject.Title;
+                invite.ManagerName = invitedToProject.ManagerFullName;
+            }
         }
     }
 }

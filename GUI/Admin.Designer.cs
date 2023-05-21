@@ -414,6 +414,7 @@
             btn_DeleteUser.TabIndex = 32;
             btn_DeleteUser.Text = "Delete";
             btn_DeleteUser.UseVisualStyleBackColor = true;
+            btn_DeleteUser.Click += btn_DeleteUser_Click;
             // 
             // btn_EditUser
             // 
@@ -523,6 +524,7 @@
             // 
             txtBox_UserSearchParams.Location = new Point(6, 22);
             txtBox_UserSearchParams.Name = "txtBox_UserSearchParams";
+            txtBox_UserSearchParams.PlaceholderText = "ID, Username, Full Name";
             txtBox_UserSearchParams.Size = new Size(283, 23);
             txtBox_UserSearchParams.TabIndex = 0;
             // 
@@ -589,6 +591,7 @@
             btn_DeleteProject.TabIndex = 33;
             btn_DeleteProject.Text = "Delete";
             btn_DeleteProject.UseVisualStyleBackColor = true;
+            btn_DeleteProject.Click += btn_DeleteProject_Click;
             // 
             // dgv_ProjectSearchResults
             // 
@@ -698,6 +701,7 @@
             // 
             txtBox_ProjectSearchParams.Location = new Point(6, 22);
             txtBox_ProjectSearchParams.Name = "txtBox_ProjectSearchParams";
+            txtBox_ProjectSearchParams.PlaceholderText = "Project Title, Manager Name or User Name";
             txtBox_ProjectSearchParams.Size = new Size(283, 23);
             txtBox_ProjectSearchParams.TabIndex = 0;
             txtBox_ProjectSearchParams.KeyDown += txtBox_ProjectSearchParams_KeyDown;
