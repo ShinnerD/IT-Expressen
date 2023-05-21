@@ -17,6 +17,10 @@ namespace GUI
 
         private List<IInvitesModel> invites;
 
+        private List<IProjectModel> ProjectList;
+
+        private IProjectService projectService;
+
 
 
         public Consultant(IDomainServiceManager domainServiceManager, string username)
@@ -24,7 +28,6 @@ namespace GUI
             ServiceManager = domainServiceManager ?? throw new ArgumentNullException(nameof(domainServiceManager));
             invService = domainServiceManager.InviteService;
             userServiceGet = domainServiceManager.UserService;
-            projectService = ServiceManager.ProjectService;
 
             InitializeComponent();
             Username = username;
