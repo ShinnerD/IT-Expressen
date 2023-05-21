@@ -225,7 +225,7 @@ namespace GUI
         {
             if (dgv_Viewproject.SelectedRows.Count > 0)
             {
-             SelectedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;
+                SelectedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;
             }
             if (SelectedProject != null)
             {

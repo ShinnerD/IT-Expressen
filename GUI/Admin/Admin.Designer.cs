@@ -1,6 +1,6 @@
-﻿namespace GUI
+﻿namespace GUI.Admin
 {
-    partial class Admin
+    partial class AdminMain
     {
         /// <summary>
         /// Required designer variable.
@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             grpBoxProfileInfo = new GroupBox();
             bt_EditProfileCancel = new Button();
             lblUserCreationDate = new Label();
@@ -78,6 +78,7 @@
             radio_Pending = new RadioButton();
             btn_SearchProjects = new Button();
             txtBox_ProjectSearchParams = new TextBox();
+            btn_DetailsEdit = new Button();
             grpBoxProfileInfo.SuspendLayout();
             tabControl.SuspendLayout();
             tabPage_Users.SuspendLayout();
@@ -434,19 +435,19 @@
             dgv_UserSearchResults.AllowUserToAddRows = false;
             dgv_UserSearchResults.AllowUserToDeleteRows = false;
             dgv_UserSearchResults.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = Color.WhiteSmoke;
-            dgv_UserSearchResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.BackColor = Color.WhiteSmoke;
+            dgv_UserSearchResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             dgv_UserSearchResults.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgv_UserSearchResults.BackgroundColor = SystemColors.Control;
             dgv_UserSearchResults.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Control;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgv_UserSearchResults.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = SystemColors.Control;
+            dataGridViewCellStyle8.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle8.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
+            dgv_UserSearchResults.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             dgv_UserSearchResults.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_UserSearchResults.Location = new Point(0, 63);
             dgv_UserSearchResults.MultiSelect = false;
@@ -531,6 +532,7 @@
             // tabPage_Projects
             // 
             tabPage_Projects.BackColor = SystemColors.Control;
+            tabPage_Projects.Controls.Add(btn_DetailsEdit);
             tabPage_Projects.Controls.Add(lbl_FeedbackProjectTab);
             tabPage_Projects.Controls.Add(btn_NewProject);
             tabPage_Projects.Controls.Add(btn_EditProject);
@@ -559,7 +561,7 @@
             // 
             btn_NewProject.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btn_NewProject.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_NewProject.Location = new Point(587, 468);
+            btn_NewProject.Location = new Point(698, 468);
             btn_NewProject.Margin = new Padding(2);
             btn_NewProject.Name = "btn_NewProject";
             btn_NewProject.Size = new Size(107, 25);
@@ -598,19 +600,19 @@
             dgv_ProjectSearchResults.AllowUserToAddRows = false;
             dgv_ProjectSearchResults.AllowUserToDeleteRows = false;
             dgv_ProjectSearchResults.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.BackColor = Color.WhiteSmoke;
-            dgv_ProjectSearchResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.BackColor = Color.WhiteSmoke;
+            dgv_ProjectSearchResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             dgv_ProjectSearchResults.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgv_ProjectSearchResults.BackgroundColor = SystemColors.Control;
             dgv_ProjectSearchResults.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = SystemColors.Control;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            dgv_ProjectSearchResults.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = SystemColors.Control;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle6.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
+            dgv_ProjectSearchResults.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             dgv_ProjectSearchResults.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_ProjectSearchResults.Location = new Point(0, 63);
             dgv_ProjectSearchResults.MultiSelect = false;
@@ -706,7 +708,20 @@
             txtBox_ProjectSearchParams.TabIndex = 0;
             txtBox_ProjectSearchParams.KeyDown += txtBox_ProjectSearchParams_KeyDown;
             // 
-            // Admin
+            // btn_DetailsEdit
+            // 
+            btn_DetailsEdit.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btn_DetailsEdit.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_DetailsEdit.Location = new Point(587, 468);
+            btn_DetailsEdit.Margin = new Padding(2);
+            btn_DetailsEdit.Name = "btn_DetailsEdit";
+            btn_DetailsEdit.Size = new Size(107, 25);
+            btn_DetailsEdit.TabIndex = 37;
+            btn_DetailsEdit.Text = "Edit Details";
+            btn_DetailsEdit.UseVisualStyleBackColor = true;
+            btn_DetailsEdit.Click += btn_DetailsEdit_Click;
+            // 
+            // AdminMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -714,7 +729,7 @@
             Controls.Add(tabControl);
             Controls.Add(grpBoxProfileInfo);
             MinimumSize = new Size(755, 625);
-            Name = "Admin";
+            Name = "AdminMain";
             Text = "Admin";
             grpBoxProfileInfo.ResumeLayout(false);
             grpBoxProfileInfo.PerformLayout();
@@ -780,5 +795,6 @@
         private Button btn_DeleteProject;
         private Label lbl_FeedbackUserTab;
         private Label lbl_FeedbackProjectTab;
+        private Button btn_DetailsEdit;
     }
 }

@@ -3,6 +3,7 @@ using Domain.Services;
 using Interfaces.Models;
 using Interfaces.Services;
 using Microsoft.IdentityModel.Tokens;
+using GUI.Admin;
 
 namespace GUI
 {
@@ -45,7 +46,7 @@ namespace GUI
             try
             {
                 this.Hide();
-                Admin Admin = new Admin(ServiceManager, "admin");
+                AdminMain Admin = new AdminMain(ServiceManager, "admin");
                 Admin.ShowDialog();
                 this.Show();
             }
@@ -127,7 +128,7 @@ namespace GUI
                 if (targetUser.Password == tb_Password.Text && targetUser.UserType == "admin")
                 {
                     this.Hide();
-                    GUI.Admin a = new Admin(ServiceManager, targetUser.UserName);
+                    AdminMain a = new AdminMain(ServiceManager, targetUser.UserName);
                     a.Show();
                 }
             }

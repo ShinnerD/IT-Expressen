@@ -1,6 +1,7 @@
 ﻿using Domain.Services;
 using Interfaces.Models;
 using Interfaces.Services;
+using GUI.Admin;
 
 namespace GUI
 {
@@ -11,7 +12,7 @@ namespace GUI
         private IUserService userService;
         bool isAdmin = false;
 
-        Admin AdminForm;
+        AdminMain AdminForm;
 
         public CreateUser(IDomainServiceManager serviceManager)
         {
@@ -23,7 +24,7 @@ namespace GUI
             SetupSkillsCheckList();
         }
 
-        public CreateUser(IDomainServiceManager serviceManager, Admin adminForm, bool IsAdminCreatingUser)
+        public CreateUser(IDomainServiceManager serviceManager, AdminMain adminForm, bool IsAdminCreatingUser)
         {
             ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
             userService = ServiceManager.UserService;
@@ -157,7 +158,7 @@ namespace GUI
             if (user.UserType == "admin")
             {
                 this.Hide();
-                GUI.Admin a = new Admin(ServiceManager, user.UserName);
+                AdminMain a = new AdminMain(ServiceManager, user.UserName);
                 a.Show();
             }
         }

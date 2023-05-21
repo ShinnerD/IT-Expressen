@@ -604,8 +604,8 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(699, 539);
-            Controls.Add(ViewProjectsGrpBox);
             Controls.Add(NewProjectGrpBox);
+            Controls.Add(ViewProjectsGrpBox);
             Controls.Add(grpBoxProfileInfo);
             MinimumSize = new Size(715, 578);
             Name = "Manager";

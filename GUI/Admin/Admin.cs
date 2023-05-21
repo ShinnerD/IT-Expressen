@@ -5,9 +5,9 @@ using Microsoft.VisualBasic.Devices;
 using System.Data;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
-namespace GUI
+namespace GUI.Admin
 {
-    public partial class Admin : Form
+    public partial class AdminMain : Form
     {
         private IUserModel adminUser;
         public string CreatedUserName { get; set; }
@@ -23,7 +23,7 @@ namespace GUI
 
         private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
-        public Admin(IDomainServiceManager serviceManager, string username)
+        public AdminMain(IDomainServiceManager serviceManager, string username)
         {
             ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
 
@@ -429,6 +429,15 @@ namespace GUI
             }
         }
 
+        private void btn_EditProjectDetails_Click(object sender, EventArgs e)
+        {
+            if (dgv_ProjectSearchResults.SelectedRows.Count != 0)
+            {
+                AdminProjectEdit EditProjectForm = new AdminProjectEdit(ServiceManager, dgv_ProjectSearchResults.SelectedRows[0].DataBoundItem as IProjectModel);
+                EditProjectForm.ShowDialog();
+            }
+        }
+
         private void btn_DeleteUser_Click(object sender, EventArgs e)
         {
             DeleteUser();
@@ -484,6 +493,16 @@ namespace GUI
                         FeedBackMessage(lbl_FeedbackUserTab, e.Message, Color.Red);
                     }
                 }
+            }
+        }
+
+        private void btn_DetailsEdit_Click(object sender, EventArgs e)
+        {
+            if (dgv_ProjectSearchResults.SelectedRows.Count != 0)
+            {
+                AdminProjectEdit EditProjectForm = new AdminProjectEdit(ServiceManager, dgv_ProjectSearchResults.SelectedRows[0].DataBoundItem as IProjectModel);
+                EditProjectForm.ShowDialog();
+                PerformProjectSearch();
             }
         }
     }
