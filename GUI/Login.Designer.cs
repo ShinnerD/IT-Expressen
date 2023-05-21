@@ -28,233 +28,235 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
-            bt_CreateUser = new Button();
-            bt_AdminAccess = new Button();
-            bt_ConsultantAccess = new Button();
-            bt_ManagerAccess = new Button();
-            label1 = new Label();
-            tb_UserName = new TextBox();
-            tb_Password = new TextBox();
-            lb_UserName = new Label();
-            lb_Password = new Label();
-            pic_ProfilePic = new PictureBox();
-            lb_NotAUser = new Label();
-            bt_Login = new Button();
-            bt_cancel = new Button();
-            lb_connectionTest = new Label();
-            groupBox1 = new GroupBox();
-            pb_ConnectionStatus = new PictureBox();
-            label2 = new Label();
-            img_RedGreen = new ImageList(components);
-            sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
-            ((System.ComponentModel.ISupportInitialize)pic_ProfilePic).BeginInit();
-            groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pb_ConnectionStatus).BeginInit();
-            SuspendLayout();
+            this.bt_CreateUser = new System.Windows.Forms.Button();
+            this.bt_AdminAccess = new System.Windows.Forms.Button();
+            this.bt_ConsultantAccess = new System.Windows.Forms.Button();
+            this.bt_ManagerAccess = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tb_UserName = new System.Windows.Forms.TextBox();
+            this.tb_Password = new System.Windows.Forms.TextBox();
+            this.lb_UserName = new System.Windows.Forms.Label();
+            this.lb_Password = new System.Windows.Forms.Label();
+            this.pic_ProfilePic = new System.Windows.Forms.PictureBox();
+            this.lb_NotAUser = new System.Windows.Forms.Label();
+            this.bt_Login = new System.Windows.Forms.Button();
+            this.bt_cancel = new System.Windows.Forms.Button();
+            this.lb_connectionTest = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pb_ConnectionStatus = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.img_RedGreen = new System.Windows.Forms.ImageList(this.components);
+            this.sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip3 = new System.Windows.Forms.ToolTip(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.pic_ProfilePic)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_ConnectionStatus)).BeginInit();
+            this.SuspendLayout();
             // 
             // bt_CreateUser
             // 
-            bt_CreateUser.Location = new Point(310, 316);
-            bt_CreateUser.Name = "bt_CreateUser";
-            bt_CreateUser.Size = new Size(95, 23);
-            bt_CreateUser.TabIndex = 0;
-            bt_CreateUser.Text = "Create User";
-            bt_CreateUser.UseVisualStyleBackColor = true;
-            bt_CreateUser.Click += bt_CreateUser_Click;
+            this.bt_CreateUser.Location = new System.Drawing.Point(310, 316);
+            this.bt_CreateUser.Name = "bt_CreateUser";
+            this.bt_CreateUser.Size = new System.Drawing.Size(95, 23);
+            this.bt_CreateUser.TabIndex = 0;
+            this.bt_CreateUser.Text = "Create User";
+            this.bt_CreateUser.UseVisualStyleBackColor = true;
             // 
             // bt_AdminAccess
             // 
-            bt_AdminAccess.Location = new Point(443, 147);
-            bt_AdminAccess.Name = "bt_AdminAccess";
-            bt_AdminAccess.Size = new Size(75, 23);
-            bt_AdminAccess.TabIndex = 1;
-            bt_AdminAccess.Text = "Admin";
-            bt_AdminAccess.UseVisualStyleBackColor = true;
-            bt_AdminAccess.Click += bt_AdminAccess_Click;
+            this.bt_AdminAccess.Location = new System.Drawing.Point(443, 147);
+            this.bt_AdminAccess.Name = "bt_AdminAccess";
+            this.bt_AdminAccess.Size = new System.Drawing.Size(75, 23);
+            this.bt_AdminAccess.TabIndex = 1;
+            this.bt_AdminAccess.Text = "Admin";
+            this.bt_AdminAccess.UseVisualStyleBackColor = true;
             // 
             // bt_ConsultantAccess
             // 
-            bt_ConsultantAccess.Location = new Point(443, 176);
-            bt_ConsultantAccess.Name = "bt_ConsultantAccess";
-            bt_ConsultantAccess.Size = new Size(75, 23);
-            bt_ConsultantAccess.TabIndex = 2;
-            bt_ConsultantAccess.Text = "Consultant";
-            bt_ConsultantAccess.UseVisualStyleBackColor = true;
-            bt_ConsultantAccess.Click += bt_ConsultantAccess_Click;
+            this.bt_ConsultantAccess.Location = new System.Drawing.Point(443, 176);
+            this.bt_ConsultantAccess.Name = "bt_ConsultantAccess";
+            this.bt_ConsultantAccess.Size = new System.Drawing.Size(75, 23);
+            this.bt_ConsultantAccess.TabIndex = 2;
+            this.bt_ConsultantAccess.Text = "Consultant";
+            this.bt_ConsultantAccess.UseVisualStyleBackColor = true;
             // 
             // bt_ManagerAccess
             // 
-            bt_ManagerAccess.Location = new Point(443, 205);
-            bt_ManagerAccess.Name = "bt_ManagerAccess";
-            bt_ManagerAccess.Size = new Size(75, 23);
-            bt_ManagerAccess.TabIndex = 3;
-            bt_ManagerAccess.Text = "Manager";
-            bt_ManagerAccess.UseVisualStyleBackColor = true;
-            bt_ManagerAccess.Click += bt_ManagerAccess_Click;
+            this.bt_ManagerAccess.Location = new System.Drawing.Point(443, 205);
+            this.bt_ManagerAccess.Name = "bt_ManagerAccess";
+            this.bt_ManagerAccess.Size = new System.Drawing.Size(75, 23);
+            this.bt_ManagerAccess.TabIndex = 3;
+            this.bt_ManagerAccess.Text = "Manager";
+            this.bt_ManagerAccess.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
-            label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(422, 12);
-            label1.Name = "label1";
-            label1.Size = new Size(119, 132);
-            label1.TabIndex = 4;
-            label1.Text = "MUST BE DELETED BEFORE RELEASE";
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(422, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(119, 132);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "MUST BE DELETED BEFORE RELEASE";
             // 
             // tb_UserName
             // 
-            tb_UserName.Location = new Point(170, 223);
-            tb_UserName.Name = "tb_UserName";
-            tb_UserName.Size = new Size(235, 23);
-            tb_UserName.TabIndex = 5;
+            this.tb_UserName.Location = new System.Drawing.Point(170, 223);
+            this.tb_UserName.Name = "tb_UserName";
+            this.tb_UserName.Size = new System.Drawing.Size(235, 23);
+            this.tb_UserName.TabIndex = 5;
             // 
             // tb_Password
             // 
-            tb_Password.Location = new Point(170, 252);
-            tb_Password.Name = "tb_Password";
-            tb_Password.Size = new Size(235, 23);
-            tb_Password.TabIndex = 6;
-            tb_Password.UseSystemPasswordChar = true;
+            this.tb_Password.Location = new System.Drawing.Point(170, 252);
+            this.tb_Password.Name = "tb_Password";
+            this.tb_Password.Size = new System.Drawing.Size(235, 23);
+            this.tb_Password.TabIndex = 6;
+            this.tb_Password.UseSystemPasswordChar = true;
             // 
             // lb_UserName
             // 
-            lb_UserName.AutoSize = true;
-            lb_UserName.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lb_UserName.Location = new Point(63, 223);
-            lb_UserName.Name = "lb_UserName";
-            lb_UserName.Size = new Size(101, 25);
-            lb_UserName.TabIndex = 7;
-            lb_UserName.Text = "Username";
+            this.lb_UserName.AutoSize = true;
+            this.lb_UserName.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lb_UserName.Location = new System.Drawing.Point(63, 223);
+            this.lb_UserName.Name = "lb_UserName";
+            this.lb_UserName.Size = new System.Drawing.Size(101, 25);
+            this.lb_UserName.TabIndex = 7;
+            this.lb_UserName.Text = "Username";
             // 
             // lb_Password
             // 
-            lb_Password.AutoSize = true;
-            lb_Password.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lb_Password.Location = new Point(63, 252);
-            lb_Password.Name = "lb_Password";
-            lb_Password.Size = new Size(97, 25);
-            lb_Password.TabIndex = 8;
-            lb_Password.Text = "Password";
+            this.lb_Password.AutoSize = true;
+            this.lb_Password.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lb_Password.Location = new System.Drawing.Point(63, 252);
+            this.lb_Password.Name = "lb_Password";
+            this.lb_Password.Size = new System.Drawing.Size(97, 25);
+            this.lb_Password.TabIndex = 8;
+            this.lb_Password.Text = "Password";
             // 
             // pic_ProfilePic
             // 
-            pic_ProfilePic.Image = Properties.Resources.blank_profile_picture_gca8f6a276_1280;
-            pic_ProfilePic.Location = new Point(170, 12);
-            pic_ProfilePic.Name = "pic_ProfilePic";
-            pic_ProfilePic.Size = new Size(235, 205);
-            pic_ProfilePic.SizeMode = PictureBoxSizeMode.StretchImage;
-            pic_ProfilePic.TabIndex = 9;
-            pic_ProfilePic.TabStop = false;
+            this.pic_ProfilePic.Image = global::GUI.Properties.Resources.blank_profile_picture_gca8f6a276_1280;
+            this.pic_ProfilePic.Location = new System.Drawing.Point(170, 12);
+            this.pic_ProfilePic.Name = "pic_ProfilePic";
+            this.pic_ProfilePic.Size = new System.Drawing.Size(235, 205);
+            this.pic_ProfilePic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pic_ProfilePic.TabIndex = 9;
+            this.pic_ProfilePic.TabStop = false;
             // 
             // lb_NotAUser
             // 
-            lb_NotAUser.Location = new Point(170, 316);
-            lb_NotAUser.Name = "lb_NotAUser";
-            lb_NotAUser.Size = new Size(131, 56);
-            lb_NotAUser.TabIndex = 10;
-            lb_NotAUser.Text = "Not a user? Click the \"Greate User\" to create your profile";
+            this.lb_NotAUser.Location = new System.Drawing.Point(170, 316);
+            this.lb_NotAUser.Name = "lb_NotAUser";
+            this.lb_NotAUser.Size = new System.Drawing.Size(131, 56);
+            this.lb_NotAUser.TabIndex = 10;
+            this.lb_NotAUser.Text = "Not a user? Click the \"Greate User\" to create your profile";
             // 
             // bt_Login
             // 
-            bt_Login.Location = new Point(170, 281);
-            bt_Login.Name = "bt_Login";
-            bt_Login.Size = new Size(95, 23);
-            bt_Login.TabIndex = 11;
-            bt_Login.Text = "Login";
-            bt_Login.UseVisualStyleBackColor = true;
-            bt_Login.Click += bt_Login_Click;
+            this.bt_Login.Location = new System.Drawing.Point(170, 281);
+            this.bt_Login.Name = "bt_Login";
+            this.bt_Login.Size = new System.Drawing.Size(95, 23);
+            this.bt_Login.TabIndex = 11;
+            this.bt_Login.Text = "Login";
+            this.toolTip1.SetToolTip(this.bt_Login, "Login button will get you into your account ");
+            this.bt_Login.UseVisualStyleBackColor = true;
             // 
             // bt_cancel
             // 
-            bt_cancel.Location = new Point(310, 281);
-            bt_cancel.Name = "bt_cancel";
-            bt_cancel.Size = new Size(95, 23);
-            bt_cancel.TabIndex = 12;
-            bt_cancel.Text = "Cancel";
-            bt_cancel.UseVisualStyleBackColor = true;
-            bt_cancel.Click += bt_cancel_Click;
+            this.bt_cancel.Location = new System.Drawing.Point(310, 281);
+            this.bt_cancel.Name = "bt_cancel";
+            this.bt_cancel.Size = new System.Drawing.Size(95, 23);
+            this.bt_cancel.TabIndex = 12;
+            this.bt_cancel.Text = "Cancel";
+            this.toolTip2.SetToolTip(this.bt_cancel, "Will close the program.");
+            this.bt_cancel.UseVisualStyleBackColor = true;
             // 
             // lb_connectionTest
             // 
-            lb_connectionTest.Location = new Point(377, 14);
-            lb_connectionTest.Name = "lb_connectionTest";
-            lb_connectionTest.Size = new Size(99, 15);
-            lb_connectionTest.TabIndex = 13;
-            lb_connectionTest.Text = "Please wait....";
-            lb_connectionTest.TextAlign = ContentAlignment.TopRight;
+            this.lb_connectionTest.Location = new System.Drawing.Point(377, 14);
+            this.lb_connectionTest.Name = "lb_connectionTest";
+            this.lb_connectionTest.Size = new System.Drawing.Size(99, 15);
+            this.lb_connectionTest.TabIndex = 13;
+            this.lb_connectionTest.Text = "Please wait....";
+            this.lb_connectionTest.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(pb_ConnectionStatus);
-            groupBox1.Controls.Add(label2);
-            groupBox1.Controls.Add(lb_connectionTest);
-            groupBox1.Location = new Point(12, 375);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(529, 35);
-            groupBox1.TabIndex = 15;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Connection Status";
+            this.groupBox1.Controls.Add(this.pb_ConnectionStatus);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.lb_connectionTest);
+            this.groupBox1.Location = new System.Drawing.Point(12, 375);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(529, 35);
+            this.groupBox1.TabIndex = 15;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Connection Status";
             // 
             // pb_ConnectionStatus
             // 
-            pb_ConnectionStatus.Image = Properties.Resources.Red_Circle;
-            pb_ConnectionStatus.Location = new Point(482, 14);
-            pb_ConnectionStatus.Name = "pb_ConnectionStatus";
-            pb_ConnectionStatus.Size = new Size(18, 15);
-            pb_ConnectionStatus.SizeMode = PictureBoxSizeMode.StretchImage;
-            pb_ConnectionStatus.TabIndex = 16;
-            pb_ConnectionStatus.TabStop = false;
+            this.pb_ConnectionStatus.Image = global::GUI.Properties.Resources.Red_Circle;
+            this.pb_ConnectionStatus.Location = new System.Drawing.Point(482, 14);
+            this.pb_ConnectionStatus.Name = "pb_ConnectionStatus";
+            this.pb_ConnectionStatus.Size = new System.Drawing.Size(18, 15);
+            this.pb_ConnectionStatus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_ConnectionStatus.TabIndex = 16;
+            this.pb_ConnectionStatus.TabStop = false;
+            this.toolTip3.SetToolTip(this.pb_ConnectionStatus, "Show your connection too the database.\r\n\r\nIf Red then no connection\r\n\r\nif green y" +
+        "ou have a connection\r\n\r\nContact admin if you can\'t connect: Adm@mail.com\r\n");
             // 
             // label2
             // 
-            label2.Location = new Point(167, 14);
-            label2.Name = "label2";
-            label2.Size = new Size(204, 18);
-            label2.TabIndex = 14;
-            label2.Text = "Checking connection to databebase";
+            this.label2.Location = new System.Drawing.Point(167, 14);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(204, 18);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Checking connection to databebase";
             // 
             // img_RedGreen
             // 
-            img_RedGreen.ColorDepth = ColorDepth.Depth8Bit;
-            img_RedGreen.ImageStream = (ImageListStreamer)resources.GetObject("img_RedGreen.ImageStream");
-            img_RedGreen.TransparentColor = Color.Transparent;
-            img_RedGreen.Images.SetKeyName(0, "Red.png");
-            img_RedGreen.Images.SetKeyName(1, "green-check-transparent-background-21.png");
+            this.img_RedGreen.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.img_RedGreen.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("img_RedGreen.ImageStream")));
+            this.img_RedGreen.TransparentColor = System.Drawing.Color.Transparent;
+            this.img_RedGreen.Images.SetKeyName(0, "Red.png");
+            this.img_RedGreen.Images.SetKeyName(1, "green-check-transparent-background-21.png");
             // 
             // sqlCommand1
             // 
-            sqlCommand1.CommandTimeout = 30;
-            sqlCommand1.EnableOptimizedParameterBinding = false;
+            this.sqlCommand1.CommandTimeout = 30;
+            this.sqlCommand1.EnableOptimizedParameterBinding = false;
             // 
             // Login
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(553, 413);
-            Controls.Add(groupBox1);
-            Controls.Add(bt_cancel);
-            Controls.Add(bt_Login);
-            Controls.Add(lb_NotAUser);
-            Controls.Add(pic_ProfilePic);
-            Controls.Add(lb_Password);
-            Controls.Add(lb_UserName);
-            Controls.Add(tb_Password);
-            Controls.Add(tb_UserName);
-            Controls.Add(label1);
-            Controls.Add(bt_ManagerAccess);
-            Controls.Add(bt_ConsultantAccess);
-            Controls.Add(bt_AdminAccess);
-            Controls.Add(bt_CreateUser);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            Name = "Login";
-            Text = "Log in";
-            ((System.ComponentModel.ISupportInitialize)pic_ProfilePic).EndInit();
-            groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pb_ConnectionStatus).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(553, 413);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.bt_cancel);
+            this.Controls.Add(this.bt_Login);
+            this.Controls.Add(this.lb_NotAUser);
+            this.Controls.Add(this.pic_ProfilePic);
+            this.Controls.Add(this.lb_Password);
+            this.Controls.Add(this.lb_UserName);
+            this.Controls.Add(this.tb_Password);
+            this.Controls.Add(this.tb_UserName);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.bt_ManagerAccess);
+            this.Controls.Add(this.bt_ConsultantAccess);
+            this.Controls.Add(this.bt_AdminAccess);
+            this.Controls.Add(this.bt_CreateUser);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Name = "Login";
+            this.Text = "Log in";
+            ((System.ComponentModel.ISupportInitialize)(this.pic_ProfilePic)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pb_ConnectionStatus)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
@@ -278,5 +280,8 @@
         private Label label2;
         private ImageList img_RedGreen;
         private Microsoft.Data.SqlClient.SqlCommand sqlCommand1;
+        private ToolTip toolTip1;
+        private ToolTip toolTip2;
+        private ToolTip toolTip3;
     }
 }
