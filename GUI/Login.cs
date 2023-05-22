@@ -133,7 +133,7 @@ namespace GUI
         //Delay is just there to make sure, its possiable to see the method fuctions. /MS
         public async void WakeUpDB()
         {
-            await Task.Delay(3000);
+            //await Task.Delay(3000);
             try
             {
                 var user = userService.GetAllUsers();

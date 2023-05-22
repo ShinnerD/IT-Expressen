@@ -15,12 +15,12 @@ namespace GUI
         private IUserService UserServiceGet { get; set; }
         private IInvitesModel CurrentInvite { get; set; }
 
-        public ConsultantInvites(IDomainServiceManager serviceManager, string userName, IInvitesModel invite)
+        public ConsultantInvites(IDomainServiceManager serviceManager, string userName)
         {
             InitializeComponent();
             ServiceManager = serviceManager;
             Username = userName;
-            CurrentInvite = invite;
+            //CurrentInvite = invite;
             GetUser();
             DataGridInitialSetup();
             SetupSkillsCheckList();
@@ -28,11 +28,11 @@ namespace GUI
             dgv_ConsultantsInvites.Rows[0].Cells[0].Selected = false;
         }
 
-        public ConsultantInvites(IProjectModel projectModel)
-        {
-            InitializeComponent();
-            ProjectGet = projectModel;
-        }
+        //public ConsultantInvites(IProjectModel projectModel)
+        //{
+        //    InitializeComponent();
+        //    ProjectGet = projectModel;
+        //}
 
         private void GetUser()
         {
@@ -84,7 +84,7 @@ namespace GUI
             dgv_ConsultantsInvites.Columns.Add("InviteStatus", "Invite Status");
             dgv_ConsultantsInvites.Columns["InviteStatus"].DataPropertyName = "InviteStatus";
 
-            dgv_ConsultantsInvites.Columns.Add("AcceptDate", "Accept Date");
+            dgv_ConsultantsInvites.Columns.Add("AcceptDate", "Accept/Declined Date");
             dgv_ConsultantsInvites.Columns["AcceptDate"].DataPropertyName = "AcceptDate";
 
             dgv_ConsultantsInvites.Columns.Add("InviteDate", "Invitation Date");
@@ -111,10 +111,6 @@ namespace GUI
 
         }
 
-        private void CheckProjectSkills()
-        {
-        }
-
         private void SetupSkillsCheckList()
         {
             checkedListSkills.Items.Clear();
@@ -135,14 +131,15 @@ namespace GUI
 
             var selectedProject = ServiceManager.ProjectService.GetProject(targetProject);
 
+            var selectedInvite = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as IInvitesModel;
 
             IInviteService inviteService = ServiceManager.InviteService;
 
 
-            CurrentInvite.InviteStatus = "Accepted";
-            CurrentInvite.AcceptDate = DateTime.Now;
+            selectedInvite.InviteStatus = "Accepted";
+            selectedInvite.AcceptDate = DateTime.Now;
 
-            inviteService.UpdateInviteStatus(CurrentInvite, selectedProject.ProjectId);
+            inviteService.UpdateInviteStatus(selectedInvite, selectedProject.ProjectId);
 
             LoadInvitesToDGV();
 
@@ -156,12 +153,14 @@ namespace GUI
 
             var selectedProject = ServiceManager.ProjectService.GetProject(targetProject);
 
+            var selectedInvite = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as IInvitesModel;
+
             IInviteService inviteService = ServiceManager.InviteService;
 
-            CurrentInvite.InviteStatus = "Declined";
-            CurrentInvite.AcceptDate = DateTime.Now;
+            selectedInvite.InviteStatus = "Declined";
+            selectedInvite.AcceptDate = DateTime.Now;
 
-            inviteService.UpdateInviteStatus(CurrentInvite, selectedProject.ProjectId);
+            inviteService.UpdateInviteStatus(selectedInvite, selectedProject.ProjectId);
 
             LoadInvitesToDGV();
 
