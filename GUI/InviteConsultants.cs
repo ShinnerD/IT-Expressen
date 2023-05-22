@@ -47,17 +47,15 @@ namespace GUI
         //Loads the data transfered into textboxes, and updates the invites list so the user can see the information about the given project //MS
         private void LoadProjectData()
         {
+            var selectedProject = ServiceManager.ProjectService.GetProject(ProjectID);
+
             tb_ProjectID.Text = ProjectGet.ProjectId.ToString();
-            tb_Title.Text = ProjectGet.Title;
-            tb_UserID.Text = ProjectGet.UserId.ToString();
+            tb_ProjectTitle.Text = ProjectGet.Title;
+            tb_ProjectOwner.Text = ServiceManager.UserService.GetUserFromID(selectedProject.UserId).FullName.ToString();
             tb_ProjectStatus.Text = ProjectGet.ProjectStatus;
             tb_ProjectStartDate.Text = ProjectGet.ProjectStartDate.ToString();
             tb_ProjectEndDate.Text = ProjectGet.ProjectEndDate.ToString();
-            tb_Description.Text = ProjectGet.Description;
-            dgv_ConsultantList.DataSource = null;
-            InviteList = null;
-            InviteList = invService.GetAllInvitedProjectID(ProjectGet.ProjectId).ToList();
-            dgv_ConsultantList.DataSource = InviteList;
+            rtb_Description.Text = ProjectGet.Description;
         }
 
         // Button click event -> see method for results /MS
@@ -78,10 +76,22 @@ namespace GUI
         //Datagridview to see all consultants that has been invited to the project //MS
         private void invitedConsultants()
         {
-            dgv_ConsultantList.DataSource = null;
-            InviteList = null;
-            InviteList = invService.GetAllInvitedProjectID(ProjectGet.ProjectId);
-            dgv_ConsultantList.DataSource = InviteList;
+            dgv_ConsultantList.AutoGenerateColumns = false;
+            dgv_ConsultantList.StandardTab = true;
+
+            dgv_ConsultantList.Columns.Add("InvitedUserFullName", "Full name");
+            dgv_ConsultantList.Columns["InvitedUSerFullName"].DataPropertyName = "InvitedUSerFullName";
+
+            dgv_ConsultantList.Columns.Add("InviteStatus", " Status for invite");
+            dgv_ConsultantList.Columns["InviteStatus"].DataPropertyName = "InviteStatus";
+
+            dgv_ConsultantList.Columns.Add("InvitedUserSpecializations", "Specializations");
+            dgv_ConsultantList.Columns["InvitedUserSpecializations"].DataPropertyName = "InvitedUserSpecializations";
+
+            dgv_ConsultantList.Columns.Add("AcceptDate", "Accept Date");
+            dgv_ConsultantList.Columns["AcceptDate"].DataPropertyName = "AcceptDate";
+
+            dgv_ConsultantList.DataSource = invService.GetAllInvitedProjectID(ProjectGet.ProjectId);
         }
     }
 }

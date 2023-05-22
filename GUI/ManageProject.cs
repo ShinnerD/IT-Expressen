@@ -56,7 +56,6 @@ namespace GUI
 
                 MessageBoardGet.Add("Date: " + message.MessageDate.ToString());
                 MessageBoardGet.Add("User: " + sender.FullName);
-                //MessageBoardGet.Add(message.UserID.ToString());
                 MessageBoardGet.Add(message.Message.ToString() + "\n");
             }
             rtb_Message.Text = String.Join(Environment.NewLine, MessageBoardGet);

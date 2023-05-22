@@ -2,6 +2,8 @@
 using DAL.Models;
 using Interfaces.Models;
 using Interfaces.Repositories;
+using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace DAL.Repository
 {
@@ -243,6 +245,36 @@ namespace DAL.Repository
             dtoUsers = dtoUsers.Where(u => targetSpecIds.All(i => u.Specialisations_Lines.Select(x => x.Spec_Id).Contains(i))).ToList();
 
             return TransferAllUserProperties(dtoUsers);
+        }
+
+        /// <summary>
+        /// The StoredProcedure from the Database Called DeleteInvitesAndConsulent that delete a Consulent and alle pending invites.
+        /// Written by Erik
+        /// </summary>
+        /// <param name="userID"></param>
+        public void DeleteConsultantStoredProcedure(int userID)
+        {
+            using (SqlConnection connection = new SqlConnection(DbConnectionString.ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand("TestProcedure", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    // Add parameter
+                    command.Parameters.AddWithValue("@User_ID", userID);
+
+                    try
+                    {
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        Console.WriteLine("Stored procedure executed successfully.");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("An error occurred: " + ex.Message);
+                    }
+                }
+            }
         }
     }
 }
