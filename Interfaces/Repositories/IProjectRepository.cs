@@ -44,7 +44,7 @@ namespace Interfaces.Repositories
         List<IProjectModel> GetProjectsFromAnySpecializations(List<string> specializations);
 
         /// <summary>
-        /// This method searches for projects based on a search term and a user ID. /JQ
+        /// (JQ)This method searches for projects based on a search term and a user ID.
         /// </summary>
         List<IProjectModel> SearchProjects(string searchTerm, int userId);
     }
