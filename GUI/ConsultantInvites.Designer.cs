@@ -155,7 +155,7 @@
             grpBoxProfileInfo.Size = new Size(694, 289);
             grpBoxProfileInfo.TabIndex = 42;
             grpBoxProfileInfo.TabStop = false;
-            grpBoxProfileInfo.Text = "User Name";
+            grpBoxProfileInfo.Text = "Project Details";
             // 
             // lbl_ReqSkills
             // 

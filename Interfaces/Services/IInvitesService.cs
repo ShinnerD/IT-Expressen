@@ -28,5 +28,10 @@ namespace Interfaces.Services
         ///  Adds an invitation to a project, the invited consultants userID is stored /MS
         /// </summary>
         void AddInvites(int ProjectID, int UserID, DateTime inviteDate, string InviteStatus);
+
+        /// <summary>
+        /// Deletes an invite from the database.
+        /// </summary>
+        void DeleteInvite(IInvitesModel invite);
     }
 }

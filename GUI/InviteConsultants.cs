@@ -10,7 +10,9 @@ namespace GUI
         private readonly IDomainServiceManager ServiceManager;
 
         private int ProjectID { get; set; }
-        private IProjectModel ProjectGet { get; set; }
+        private IProjectModel ProjectGet;
+
+        private List<IInvitesModel> InviteList;
 
         private IInviteService invService;
 
@@ -25,7 +27,6 @@ namespace GUI
             InitializeComponent();
             GetProjectInfo();
             LoadProjectData();
-            invitedConsultants();
         }
 
         //Constructor method loaded with project model. All relevent data is loaded /MS
@@ -39,12 +40,11 @@ namespace GUI
         private void GetProjectInfo()
         {
             IProjectService projectService = ServiceManager.ProjectService;
-            ISpecializationService specializationService = ServiceManager.SpecializationService;
 
             ProjectGet = projectService.GetProject(ProjectID);
         }
 
-        //Loads the data transfered into textboxes, so the user can see the information about the given project //MS
+        //Loads the data transfered into textboxes, and updates the invites list so the user can see the information about the given project //MS
         private void LoadProjectData()
         {
             tb_ProjectID.Text = ProjectGet.ProjectId.ToString();
@@ -54,6 +54,10 @@ namespace GUI
             tb_ProjectStartDate.Text = ProjectGet.ProjectStartDate.ToString();
             tb_ProjectEndDate.Text = ProjectGet.ProjectEndDate.ToString();
             tb_Description.Text = ProjectGet.Description;
+            dgv_ConsultantList.DataSource = null;
+            InviteList = null;
+            InviteList = invService.GetAllInvitedProjectID(ProjectGet.ProjectId).ToList();
+            dgv_ConsultantList.DataSource = InviteList;
         }
 
         // Button click event -> see method for results /MS
@@ -65,16 +69,19 @@ namespace GUI
         //Opens new form and forwards the project ID /MS
         private void OpenConsutantAdd()
         {
-            ConsultantAdd invConSul = new ConsultantAdd(ServiceManager, ProjectGet.ProjectId);
-            this.Hide();
+            ConsultantAdd invConSul = new ConsultantAdd(ServiceManager, ProjectID);
             invConSul.ShowDialog();
-            this.Show();
+            invConSul.Dispose();
+            LoadProjectData();
         }
 
         //Datagridview to see all consultants that has been invited to the project //MS
         private void invitedConsultants()
         {
-            dgv_ConsultantList.DataSource = invService.GetAllInvitedProjectID(ProjectGet.ProjectId);
+            dgv_ConsultantList.DataSource = null;
+            InviteList = null;
+            InviteList = invService.GetAllInvitedProjectID(ProjectGet.ProjectId);
+            dgv_ConsultantList.DataSource = InviteList;
         }
     }
 }

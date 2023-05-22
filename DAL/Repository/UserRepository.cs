@@ -21,7 +21,7 @@ namespace DAL.Repository
         /// </summary>
         public List<IUserModel> GetAllUsers()
         {
-            var AlldtoUsers = dbContext.Users;
+            var AlldtoUsers = dbContext.Users.Where(i => i.Active_Status == true);
 
             List<IUserModel> result = new List<IUserModel>();
 
@@ -54,7 +54,7 @@ namespace DAL.Repository
         /// </summary>
         public List<IUserModel> GetUsersType(string UserType)
         {
-            var targetType = dbContext.Users.Where(i => i.User_Type == UserType).ToList();
+            var targetType = dbContext.Users.Where(i => i.User_Type == UserType && i.Active_Status == true).ToList();
 
             List<IUserModel> result = TransferAllUserProperties(targetType);
 
@@ -98,7 +98,7 @@ namespace DAL.Repository
         {
             IUserModel user = new DAL.Models.UserModel();
 
-            var dbUser = dbContext.Users.First(i => i.User_name == username);
+            var dbUser = dbContext.Users.First(i => i.User_name == username && i.Active_Status == true);
 
             if (dbUser != null)
             {
@@ -127,7 +127,7 @@ namespace DAL.Repository
         {
             IUserModel user = new DAL.Models.UserModel();
 
-            var dbUser = dbContext.Users.First(i => i.User_ID == ID);
+            var dbUser = dbContext.Users.First(i => i.User_ID == ID && i.Active_Status == true);
 
             if (dbUser != null)
             {
@@ -153,9 +153,11 @@ namespace DAL.Repository
         /// <summary>
         /// Deletes a user in the database.
         /// </summary>
-        public void Delete(string delete)
+        public void Delete(int userId)
         {
-            throw new NotImplementedException();
+            var targetUser = dbContext.Users.First(i => i.User_ID==userId);
+            targetUser.Active_Status = false;
+            dbContext.SubmitChanges();
         }
 
         /// <summary>
@@ -221,7 +223,9 @@ namespace DAL.Repository
 
             if (targetSpecIds.Count == 0) return new List<IUserModel>();
 
-            var dtoUsers = dbContext.Users.Where(u => u.User_Type == "consultant" && u.Specialisations_Lines.Any(x => targetSpecIds.Contains(x.Spec_Id))).ToList();
+            var dtoUsers = dbContext.Users.Where(u => u.User_Type == "consultant" 
+                && u.Active_Status == true 
+                && u.Specialisations_Lines.Any(x => targetSpecIds.Contains(x.Spec_Id))).ToList();
 
             return TransferAllUserProperties(dtoUsers);
         }
@@ -235,7 +239,7 @@ namespace DAL.Repository
 
             if (targetSpecIds.Count == 0) return new List<IUserModel>();
 
-            var dtoUsers = dbContext.Users.Where(u => u.User_Type == "consultant").ToList();
+            var dtoUsers = dbContext.Users.Where(u => u.User_Type == "consultant" && u.Active_Status == true).ToList();
             dtoUsers = dtoUsers.Where(u => targetSpecIds.All(i => u.Specialisations_Lines.Select(x => x.Spec_Id).Contains(i))).ToList();
 
             return TransferAllUserProperties(dtoUsers);

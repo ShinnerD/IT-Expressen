@@ -12,7 +12,7 @@ namespace GUI
         private IProjectService projectService;
 
         private List<IProjectModel> ProjectList;
-        private IProjectModel SelectedProject;
+        public IProjectModel SelectedProject { get; set; }
 
         private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
@@ -114,8 +114,8 @@ namespace GUI
             btn_NewProjectSave.Text = "Update Project";
             txtBox_ProjectTitle.Text = selectedProject.Title;
             txtBox_ProjectDescription.Text = selectedProject.Description;
-            dtp_NewProjectStartDate.Value = selectedProject.ProjectStartDate ?? DateTime.MinValue;
-            dtp_NewProjectEndDate.Value = selectedProject.ProjectEndDate ?? DateTime.MinValue;
+            dtp_NewProjectStartDate.Value = selectedProject.ProjectStartDate ?? dtp_NewProjectStartDate.MinDate;
+            dtp_NewProjectEndDate.Value = selectedProject.ProjectEndDate ?? dtp_NewProjectEndDate.MinDate;
             CheckProjectSkills();
         }
 
@@ -135,10 +135,13 @@ namespace GUI
         /// </summary>
         private void InvitedConsultantSelectedProject()
         {
-            var selectedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;
-            if (selectedProject != null)
+            if (dgv_Viewproject.SelectedRows.Count > 0)
             {
-                InviteConsultants invConSul = new InviteConsultants(ServiceManager, selectedProject.ProjectId);
+                SelectedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;
+            }
+            if (SelectedProject != null)
+            {
+                InviteConsultants invConSul = new InviteConsultants(ServiceManager, SelectedProject.ProjectId);
                 this.Hide();
                 invConSul.ShowDialog();
                 this.Show();
@@ -220,10 +223,13 @@ namespace GUI
         /// </summary>
         private void ManageProject()
         {
-            var selectedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;
-            if (selectedProject != null)
+            if (dgv_Viewproject.SelectedRows.Count > 0)
             {
-                ManageProject ManProject = new GUI.ManageProject(ServiceManager, selectedProject.ProjectId, Username);
+                SelectedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;
+            }
+            if (SelectedProject != null)
+            {
+                ManageProject ManProject = new GUI.ManageProject(ServiceManager, SelectedProject.ProjectId, Username);
                 this.Hide();
                 ManProject.ShowDialog();
                 this.Show();
@@ -390,7 +396,7 @@ namespace GUI
             }
         }
 
-        private void bt_EditProject_Click(object sender, EventArgs e)
+        public void bt_EditProject_Click(object sender, EventArgs e)
         {
             NewProjectGrpBox.Text = "Update Project";
             ManageSelectedProject();

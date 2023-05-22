@@ -32,7 +32,7 @@ namespace Interfaces.Repositories
         /// <summary>
         /// Deletes a user in the database.
         /// </summary>
-        void Delete(string delete);
+        void Delete(int userId);
 
         /// <summary>
         /// Returns a list of Users that have any of the specializations provided in the list specified in the parameters. /DK

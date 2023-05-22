@@ -102,8 +102,9 @@
   </Table>
   <Table Name="dbo.Invites" Member="Invites">
     <Type Name="Invite">
-      <Column Name="Project_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="User_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Invite_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Project_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="User_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Invite_Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="Invite_status" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
       <Column Name="Accept_date" Type="System.DateTime" DbType="Date" CanBeNull="true" />

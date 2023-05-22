@@ -33,9 +33,6 @@ namespace DAL.Linq
     partial void InsertConsultant_Line(Consultant_Line instance);
     partial void UpdateConsultant_Line(Consultant_Line instance);
     partial void DeleteConsultant_Line(Consultant_Line instance);
-    partial void InsertInvite(Invite instance);
-    partial void UpdateInvite(Invite instance);
-    partial void DeleteInvite(Invite instance);
     partial void InsertProject_Message_Line(Project_Message_Line instance);
     partial void UpdateProject_Message_Line(Project_Message_Line instance);
     partial void DeleteProject_Message_Line(Project_Message_Line instance);
@@ -57,6 +54,9 @@ namespace DAL.Linq
     partial void InsertInvoice(Invoice instance);
     partial void UpdateInvoice(Invoice instance);
     partial void DeleteInvoice(Invoice instance);
+    partial void InsertInvite(Invite instance);
+    partial void UpdateInvite(Invite instance);
+    partial void DeleteInvite(Invite instance);
     #endregion
 		
 		public DataClassesDataContext(string connection) : 
@@ -88,14 +88,6 @@ namespace DAL.Linq
 			get
 			{
 				return this.GetTable<Consultant_Line>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Invite> Invites
-		{
-			get
-			{
-				return this.GetTable<Invite>();
 			}
 		}
 		
@@ -152,6 +144,14 @@ namespace DAL.Linq
 			get
 			{
 				return this.GetTable<Invoice>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Invite> Invites
+		{
+			get
+			{
+				return this.GetTable<Invite>();
 			}
 		}
 	}
@@ -424,246 +424,6 @@ namespace DAL.Linq
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Invites")]
-	public partial class Invite : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Project_ID;
-		
-		private int _User_ID;
-		
-		private System.Nullable<System.DateTime> _Invite_Date;
-		
-		private string _Invite_status;
-		
-		private System.Nullable<System.DateTime> _Accept_date;
-		
-		private EntityRef<Project> _Project;
-		
-		private EntityRef<User> _User;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnProject_IDChanging(int value);
-    partial void OnProject_IDChanged();
-    partial void OnUser_IDChanging(int value);
-    partial void OnUser_IDChanged();
-    partial void OnInvite_DateChanging(System.Nullable<System.DateTime> value);
-    partial void OnInvite_DateChanged();
-    partial void OnInvite_statusChanging(string value);
-    partial void OnInvite_statusChanged();
-    partial void OnAccept_dateChanging(System.Nullable<System.DateTime> value);
-    partial void OnAccept_dateChanged();
-    #endregion
-		
-		public Invite()
-		{
-			this._Project = default(EntityRef<Project>);
-			this._User = default(EntityRef<User>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Project_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int Project_ID
-		{
-			get
-			{
-				return this._Project_ID;
-			}
-			set
-			{
-				if ((this._Project_ID != value))
-				{
-					if (this._Project.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnProject_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Project_ID = value;
-					this.SendPropertyChanged("Project_ID");
-					this.OnProject_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_User_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int User_ID
-		{
-			get
-			{
-				return this._User_ID;
-			}
-			set
-			{
-				if ((this._User_ID != value))
-				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnUser_IDChanging(value);
-					this.SendPropertyChanging();
-					this._User_ID = value;
-					this.SendPropertyChanged("User_ID");
-					this.OnUser_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Invite_Date", DbType="Date")]
-		public System.Nullable<System.DateTime> Invite_Date
-		{
-			get
-			{
-				return this._Invite_Date;
-			}
-			set
-			{
-				if ((this._Invite_Date != value))
-				{
-					this.OnInvite_DateChanging(value);
-					this.SendPropertyChanging();
-					this._Invite_Date = value;
-					this.SendPropertyChanged("Invite_Date");
-					this.OnInvite_DateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Invite_status", DbType="VarChar(25)")]
-		public string Invite_status
-		{
-			get
-			{
-				return this._Invite_status;
-			}
-			set
-			{
-				if ((this._Invite_status != value))
-				{
-					this.OnInvite_statusChanging(value);
-					this.SendPropertyChanging();
-					this._Invite_status = value;
-					this.SendPropertyChanged("Invite_status");
-					this.OnInvite_statusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Accept_date", DbType="Date")]
-		public System.Nullable<System.DateTime> Accept_date
-		{
-			get
-			{
-				return this._Accept_date;
-			}
-			set
-			{
-				if ((this._Accept_date != value))
-				{
-					this.OnAccept_dateChanging(value);
-					this.SendPropertyChanging();
-					this._Accept_date = value;
-					this.SendPropertyChanged("Accept_date");
-					this.OnAccept_dateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Project_Invite", Storage="_Project", ThisKey="Project_ID", OtherKey="Project_ID", IsForeignKey=true)]
-		public Project Project
-		{
-			get
-			{
-				return this._Project.Entity;
-			}
-			set
-			{
-				Project previousValue = this._Project.Entity;
-				if (((previousValue != value) 
-							|| (this._Project.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Project.Entity = null;
-						previousValue.Invites.Remove(this);
-					}
-					this._Project.Entity = value;
-					if ((value != null))
-					{
-						value.Invites.Add(this);
-						this._Project_ID = value.Project_ID;
-					}
-					else
-					{
-						this._Project_ID = default(int);
-					}
-					this.SendPropertyChanged("Project");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Invite", Storage="_User", ThisKey="User_ID", OtherKey="User_ID", IsForeignKey=true)]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.Invites.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.Invites.Add(this);
-						this._User_ID = value.User_ID;
-					}
-					else
-					{
-						this._User_ID = default(int);
-					}
-					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Project_Message_Line")]
 	public partial class Project_Message_Line : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -930,13 +690,13 @@ namespace DAL.Linq
 		
 		private EntitySet<Consultant_Line> _Consultant_Lines;
 		
-		private EntitySet<Invite> _Invites;
-		
 		private EntitySet<Project_Message_Line> _Project_Message_Lines;
 		
 		private EntitySet<Projects_Specialisation_Line> _Projects_Specialisation_Lines;
 		
 		private EntitySet<Invoice> _Invoices;
+		
+		private EntitySet<Invite> _Invites;
 		
 		private EntityRef<User> _User;
 		
@@ -967,10 +727,10 @@ namespace DAL.Linq
 		public Project()
 		{
 			this._Consultant_Lines = new EntitySet<Consultant_Line>(new Action<Consultant_Line>(this.attach_Consultant_Lines), new Action<Consultant_Line>(this.detach_Consultant_Lines));
-			this._Invites = new EntitySet<Invite>(new Action<Invite>(this.attach_Invites), new Action<Invite>(this.detach_Invites));
 			this._Project_Message_Lines = new EntitySet<Project_Message_Line>(new Action<Project_Message_Line>(this.attach_Project_Message_Lines), new Action<Project_Message_Line>(this.detach_Project_Message_Lines));
 			this._Projects_Specialisation_Lines = new EntitySet<Projects_Specialisation_Line>(new Action<Projects_Specialisation_Line>(this.attach_Projects_Specialisation_Lines), new Action<Projects_Specialisation_Line>(this.detach_Projects_Specialisation_Lines));
 			this._Invoices = new EntitySet<Invoice>(new Action<Invoice>(this.attach_Invoices), new Action<Invoice>(this.detach_Invoices));
+			this._Invites = new EntitySet<Invite>(new Action<Invite>(this.attach_Invites), new Action<Invite>(this.detach_Invites));
 			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
@@ -1172,19 +932,6 @@ namespace DAL.Linq
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Project_Invite", Storage="_Invites", ThisKey="Project_ID", OtherKey="Project_ID")]
-		public EntitySet<Invite> Invites
-		{
-			get
-			{
-				return this._Invites;
-			}
-			set
-			{
-				this._Invites.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Project_Project_Message_Line", Storage="_Project_Message_Lines", ThisKey="Project_ID", OtherKey="Project_ID")]
 		public EntitySet<Project_Message_Line> Project_Message_Lines
 		{
@@ -1221,6 +968,19 @@ namespace DAL.Linq
 			set
 			{
 				this._Invoices.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Project_Invite", Storage="_Invites", ThisKey="Project_ID", OtherKey="Project_ID")]
+		public EntitySet<Invite> Invites
+		{
+			get
+			{
+				return this._Invites;
+			}
+			set
+			{
+				this._Invites.Assign(value);
 			}
 		}
 		
@@ -1290,18 +1050,6 @@ namespace DAL.Linq
 			entity.Project = null;
 		}
 		
-		private void attach_Invites(Invite entity)
-		{
-			this.SendPropertyChanging();
-			entity.Project = this;
-		}
-		
-		private void detach_Invites(Invite entity)
-		{
-			this.SendPropertyChanging();
-			entity.Project = null;
-		}
-		
 		private void attach_Project_Message_Lines(Project_Message_Line entity)
 		{
 			this.SendPropertyChanging();
@@ -1333,6 +1081,18 @@ namespace DAL.Linq
 		}
 		
 		private void detach_Invoices(Invoice entity)
+		{
+			this.SendPropertyChanging();
+			entity.Project = null;
+		}
+		
+		private void attach_Invites(Invite entity)
+		{
+			this.SendPropertyChanging();
+			entity.Project = this;
+		}
+		
+		private void detach_Invites(Invite entity)
 		{
 			this.SendPropertyChanging();
 			entity.Project = null;
@@ -1877,13 +1637,13 @@ namespace DAL.Linq
 		
 		private EntitySet<Consultant_Line> _Consultant_Lines;
 		
-		private EntitySet<Invite> _Invites;
-		
 		private EntitySet<Project_Message_Line> _Project_Message_Lines;
 		
 		private EntitySet<Project> _Projects;
 		
 		private EntitySet<Specialisations_Line> _Specialisations_Lines;
+		
+		private EntitySet<Invite> _Invites;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1922,10 +1682,10 @@ namespace DAL.Linq
 		public User()
 		{
 			this._Consultant_Lines = new EntitySet<Consultant_Line>(new Action<Consultant_Line>(this.attach_Consultant_Lines), new Action<Consultant_Line>(this.detach_Consultant_Lines));
-			this._Invites = new EntitySet<Invite>(new Action<Invite>(this.attach_Invites), new Action<Invite>(this.detach_Invites));
 			this._Project_Message_Lines = new EntitySet<Project_Message_Line>(new Action<Project_Message_Line>(this.attach_Project_Message_Lines), new Action<Project_Message_Line>(this.detach_Project_Message_Lines));
 			this._Projects = new EntitySet<Project>(new Action<Project>(this.attach_Projects), new Action<Project>(this.detach_Projects));
 			this._Specialisations_Lines = new EntitySet<Specialisations_Line>(new Action<Specialisations_Line>(this.attach_Specialisations_Lines), new Action<Specialisations_Line>(this.detach_Specialisations_Lines));
+			this._Invites = new EntitySet<Invite>(new Action<Invite>(this.attach_Invites), new Action<Invite>(this.detach_Invites));
 			OnCreated();
 		}
 		
@@ -2222,19 +1982,6 @@ namespace DAL.Linq
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Invite", Storage="_Invites", ThisKey="User_ID", OtherKey="User_ID")]
-		public EntitySet<Invite> Invites
-		{
-			get
-			{
-				return this._Invites;
-			}
-			set
-			{
-				this._Invites.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Project_Message_Line", Storage="_Project_Message_Lines", ThisKey="User_ID", OtherKey="User_ID")]
 		public EntitySet<Project_Message_Line> Project_Message_Lines
 		{
@@ -2274,6 +2021,19 @@ namespace DAL.Linq
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Invite", Storage="_Invites", ThisKey="User_ID", OtherKey="User_ID")]
+		public EntitySet<Invite> Invites
+		{
+			get
+			{
+				return this._Invites;
+			}
+			set
+			{
+				this._Invites.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -2301,18 +2061,6 @@ namespace DAL.Linq
 		}
 		
 		private void detach_Consultant_Lines(Consultant_Line entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
-		}
-		
-		private void attach_Invites(Invite entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_Invites(Invite entity)
 		{
 			this.SendPropertyChanging();
 			entity.User = null;
@@ -2349,6 +2097,18 @@ namespace DAL.Linq
 		}
 		
 		private void detach_Specialisations_Lines(Specialisations_Line entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
+		private void attach_Invites(Invite entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Invites(Invite entity)
 		{
 			this.SendPropertyChanging();
 			entity.User = null;
@@ -2570,6 +2330,270 @@ namespace DAL.Linq
 						this._Project_ID = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Project");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Invites")]
+	public partial class Invite : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Invite_ID;
+		
+		private int _Project_ID;
+		
+		private int _User_ID;
+		
+		private System.Nullable<System.DateTime> _Invite_Date;
+		
+		private string _Invite_status;
+		
+		private System.Nullable<System.DateTime> _Accept_date;
+		
+		private EntityRef<Project> _Project;
+		
+		private EntityRef<User> _User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnInvite_IDChanging(int value);
+    partial void OnInvite_IDChanged();
+    partial void OnProject_IDChanging(int value);
+    partial void OnProject_IDChanged();
+    partial void OnUser_IDChanging(int value);
+    partial void OnUser_IDChanged();
+    partial void OnInvite_DateChanging(System.Nullable<System.DateTime> value);
+    partial void OnInvite_DateChanged();
+    partial void OnInvite_statusChanging(string value);
+    partial void OnInvite_statusChanged();
+    partial void OnAccept_dateChanging(System.Nullable<System.DateTime> value);
+    partial void OnAccept_dateChanged();
+    #endregion
+		
+		public Invite()
+		{
+			this._Project = default(EntityRef<Project>);
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Invite_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Invite_ID
+		{
+			get
+			{
+				return this._Invite_ID;
+			}
+			set
+			{
+				if ((this._Invite_ID != value))
+				{
+					this.OnInvite_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Invite_ID = value;
+					this.SendPropertyChanged("Invite_ID");
+					this.OnInvite_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Project_ID", DbType="Int NOT NULL")]
+		public int Project_ID
+		{
+			get
+			{
+				return this._Project_ID;
+			}
+			set
+			{
+				if ((this._Project_ID != value))
+				{
+					if (this._Project.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnProject_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Project_ID = value;
+					this.SendPropertyChanged("Project_ID");
+					this.OnProject_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_User_ID", DbType="Int NOT NULL")]
+		public int User_ID
+		{
+			get
+			{
+				return this._User_ID;
+			}
+			set
+			{
+				if ((this._User_ID != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUser_IDChanging(value);
+					this.SendPropertyChanging();
+					this._User_ID = value;
+					this.SendPropertyChanged("User_ID");
+					this.OnUser_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Invite_Date", DbType="Date")]
+		public System.Nullable<System.DateTime> Invite_Date
+		{
+			get
+			{
+				return this._Invite_Date;
+			}
+			set
+			{
+				if ((this._Invite_Date != value))
+				{
+					this.OnInvite_DateChanging(value);
+					this.SendPropertyChanging();
+					this._Invite_Date = value;
+					this.SendPropertyChanged("Invite_Date");
+					this.OnInvite_DateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Invite_status", DbType="VarChar(25)")]
+		public string Invite_status
+		{
+			get
+			{
+				return this._Invite_status;
+			}
+			set
+			{
+				if ((this._Invite_status != value))
+				{
+					this.OnInvite_statusChanging(value);
+					this.SendPropertyChanging();
+					this._Invite_status = value;
+					this.SendPropertyChanged("Invite_status");
+					this.OnInvite_statusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Accept_date", DbType="Date")]
+		public System.Nullable<System.DateTime> Accept_date
+		{
+			get
+			{
+				return this._Accept_date;
+			}
+			set
+			{
+				if ((this._Accept_date != value))
+				{
+					this.OnAccept_dateChanging(value);
+					this.SendPropertyChanging();
+					this._Accept_date = value;
+					this.SendPropertyChanged("Accept_date");
+					this.OnAccept_dateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Project_Invite", Storage="_Project", ThisKey="Project_ID", OtherKey="Project_ID", IsForeignKey=true)]
+		public Project Project
+		{
+			get
+			{
+				return this._Project.Entity;
+			}
+			set
+			{
+				Project previousValue = this._Project.Entity;
+				if (((previousValue != value) 
+							|| (this._Project.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Project.Entity = null;
+						previousValue.Invites.Remove(this);
+					}
+					this._Project.Entity = value;
+					if ((value != null))
+					{
+						value.Invites.Add(this);
+						this._Project_ID = value.Project_ID;
+					}
+					else
+					{
+						this._Project_ID = default(int);
+					}
+					this.SendPropertyChanged("Project");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Invite", Storage="_User", ThisKey="User_ID", OtherKey="User_ID", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Invites.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Invites.Add(this);
+						this._User_ID = value.User_ID;
+					}
+					else
+					{
+						this._User_ID = default(int);
+					}
+					this.SendPropertyChanged("User");
 				}
 			}
 		}

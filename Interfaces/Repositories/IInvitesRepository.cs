@@ -29,5 +29,10 @@ namespace Interfaces.Repositories
         ///  Repo method to add invitations to a project, the invited consultants userID is stored /MS
         /// </summary>
         void AddInvite(IInvitesModel inviteModel);
+
+        /// <summary>
+        /// Deletes an Invite in the database.
+        /// </summary>
+        void DeleteInvite(int projectId, int userId);
     }
 }
