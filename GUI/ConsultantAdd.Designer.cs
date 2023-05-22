@@ -81,7 +81,7 @@
             // 
             // userServiceBindingSource
             // 
-            userServiceBindingSource.DataSource = typeof(Domain.Services.UserService);
+            this.userServiceBindingSource.DataSource = typeof(Domain.Services.UserService);
             // 
             // bt_back
             // 
@@ -96,15 +96,17 @@
             // 
             // checkedListSkills
             // 
-            checkedListSkills.BackColor = SystemColors.Control;
-            checkedListSkills.BorderStyle = BorderStyle.None;
-            checkedListSkills.CheckOnClick = true;
-            checkedListSkills.FormattingEnabled = true;
-            checkedListSkills.Location = new Point(3, 19);
-            checkedListSkills.MultiColumn = true;
-            checkedListSkills.Name = "checkedListSkills";
-            checkedListSkills.Size = new Size(374, 108);
-            checkedListSkills.TabIndex = 27;
+            this.checkedListSkills.BackColor = System.Drawing.SystemColors.Control;
+            this.checkedListSkills.CheckOnClick = true;
+            this.checkedListSkills.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkedListSkills.FormattingEnabled = true;
+            this.checkedListSkills.Location = new System.Drawing.Point(3, 19);
+            this.checkedListSkills.MultiColumn = true;
+            this.checkedListSkills.Name = "checkedListSkills";
+            this.checkedListSkills.Size = new System.Drawing.Size(428, 114);
+            this.checkedListSkills.TabIndex = 27;
+            this.toolTip1.SetToolTip(this.checkedListSkills, "Here you can push the button of your Specialization.\r\n\r\nIf your Specialization is" +
+        " not here contact admin: Adm@mail.com");
             // 
             // grpBoxSpecFilter
             // 
@@ -256,6 +258,7 @@
         private RadioButton radioBtnAll;
         private Label lblSearchParamAnyAll;
         private Label lblFeedback;
+        private ToolTip toolTip1;
         private Button btn_Search;
         private CheckedListBox checkedListProjReq;
     }

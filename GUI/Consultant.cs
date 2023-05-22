@@ -1,5 +1,4 @@
 ﻿using DAL.Models;
-using Domain.Services;
 using Interfaces.Models;
 using Interfaces.Services;
 
@@ -8,16 +7,22 @@ namespace GUI
     public partial class Consultant : Form
     {
         private IInviteService invService;
+
         private IUserService userServiceGet;
+
         private readonly IDomainServiceManager ServiceManager;
 
         private string Username;
+
         public IUserModel userModelGet;
 
         private List<IInvitesModel> invites;
-        private IInvitesModel invitesModelGet;
 
-        private IProjectModel ProjectGet;
+        private List<IProjectModel> ProjectList;
+
+        private IProjectService projectService;
+
+
 
         public Consultant(IDomainServiceManager domainServiceManager, string username)
         {
@@ -57,6 +62,7 @@ namespace GUI
             tb_Country.Text = userModelGet.Country;
             lblUserCreationDate.Text = "You've been a user for " + (DateTime.Now - userModelGet.CreationDate).GetValueOrDefault().Days.ToString() + " days";
         }
+
         private void ChangeEditProfileState()
         {
             if (bt_Edit.Text == "Edit Profile")
@@ -77,6 +83,7 @@ namespace GUI
                 bt_Edit.Text = "Edit Profile";
             }
         }
+
         private void UpdateUserModel()
         {
             userModelGet.FirstName = tb_Firstname.Text;
@@ -88,6 +95,7 @@ namespace GUI
             userModelGet.ZipCode = tb_Zipcode.Text;
             userModelGet.Country = tb_Country.Text;
         }
+
         private void UnlockProfileForEditing(Control control, bool unlock)
         {
             if (control is TextBox)
@@ -131,13 +139,22 @@ namespace GUI
             viewProjectsForm.ShowDialog();
         }
 
-        //Clears and loads the Datagridview //MS
+        /// <summary>
+        /// Clears and loads the Datagridview //MS
+        /// </summary>
         private void LoadInvitesToDGV()
         {
+
             IInviteService inviteService = invService;
-            invites = inviteService.GetInvitesFromUserId(userModelGet.ID);
-            dgv_ConsultantsInvites.DataSource = null;
-            dgv_ConsultantsInvites.DataSource = invites;
+            invites = inviteService.GetInvitesFromUserId(userModelGet.ID).Where(i => i.InviteStatus.ToLower() == "accepted").ToList();
+            List<IProjectModel> relatedProjects = new List<IProjectModel>();
+
+            foreach (IInvitesModel invite in invites)
+            {
+                relatedProjects.Add(ServiceManager.ProjectService.GetProject(invite.ProjectId));
+
+            }
+            dgv_ConsultantsInvites.DataSource = relatedProjects;
         }
 
         private void DataGridInitialSetup()
@@ -145,17 +162,21 @@ namespace GUI
             dgv_ConsultantsInvites.AutoGenerateColumns = false;
             dgv_ConsultantsInvites.StandardTab = true;
 
-            dgv_ConsultantsInvites.Columns.Add("InviteStatus", "Invite Status");
-            dgv_ConsultantsInvites.Columns["InviteStatus"].DataPropertyName = "InviteStatus";
+            dgv_ConsultantsInvites.Columns.Add("ManagerFullName", "Owner");
+            dgv_ConsultantsInvites.Columns["ManagerFullName"].DataPropertyName = "ManagerFullName";
 
-            dgv_ConsultantsInvites.Columns.Add("AcceptDate", "Accept Date");
-            dgv_ConsultantsInvites.Columns["AcceptDate"].DataPropertyName = "AcceptDate";
+            dgv_ConsultantsInvites.Columns.Add("Title", "Project Name");
+            dgv_ConsultantsInvites.Columns["Title"].DataPropertyName = "Title";
+            dgv_ConsultantsInvites.Columns["Title"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-            dgv_ConsultantsInvites.Columns.Add("InviteDate", "Invitation Date");
-            dgv_ConsultantsInvites.Columns["InviteDate"].DataPropertyName = "InviteDate";
+            dgv_ConsultantsInvites.Columns.Add("Status", "Status");
+            dgv_ConsultantsInvites.Columns["Status"].DataPropertyName = "ProjectStatus";
 
-            dgv_ConsultantsInvites.Columns.Add("ProjectId", "Project ID");
-            dgv_ConsultantsInvites.Columns["ProjectId"].DataPropertyName = "ProjectId";
+            dgv_ConsultantsInvites.Columns.Add("Start", "Start");
+            dgv_ConsultantsInvites.Columns["Start"].DataPropertyName = "ProjectStartDate";
+
+            dgv_ConsultantsInvites.Columns.Add("End", "End");
+            dgv_ConsultantsInvites.Columns["End"].DataPropertyName = "ProjectEndDate";
         }
 
         //Opens the form to accept the selected invitation, then refreshes the datagridview /MS
@@ -188,6 +209,25 @@ namespace GUI
         private void bt_EditCancel_Click(object sender, EventArgs e)
         {
             EditCancel();
+        }
+
+        private void bt_seeInvites_Click(object sender, EventArgs e)
+        {
+            var userName = userModelGet.UserName;
+            ConsultantInvites seeInv = new ConsultantInvites(ServiceManager, userName);
+            this.Hide();
+            seeInv.ShowDialog();
+            this.Show();
+        }
+
+        private void bt_seeProjects_Click(object sender, EventArgs e)
+        {
+            var selectedProject = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as ProjectModel;
+            ManageProject AccInvForm = new ManageProject(ServiceManager, selectedProject.ProjectId, Username);
+            this.Hide();
+            AccInvForm.ShowDialog();
+            this.Show();
+            LoadInvitesToDGV();
         }
     }
 }

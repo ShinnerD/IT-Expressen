@@ -352,6 +352,7 @@
             // 
             // ViewProjectsGrpBox
             // 
+            ViewProjectsGrpBox.Controls.Add(NewProjectGrpBox);
             ViewProjectsGrpBox.Controls.Add(lbl_ViewProjectsFeedBack);
             ViewProjectsGrpBox.Controls.Add(btn_NewProject);
             ViewProjectsGrpBox.Controls.Add(bt_manageProject);
@@ -458,9 +459,9 @@
             NewProjectGrpBox.Controls.Add(btn_NewProjectBack);
             NewProjectGrpBox.Dock = DockStyle.Fill;
             NewProjectGrpBox.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            NewProjectGrpBox.Location = new Point(0, 157);
+            NewProjectGrpBox.Location = new Point(3, 21);
             NewProjectGrpBox.Name = "NewProjectGrpBox";
-            NewProjectGrpBox.Size = new Size(699, 382);
+            NewProjectGrpBox.Size = new Size(693, 358);
             NewProjectGrpBox.TabIndex = 23;
             NewProjectGrpBox.TabStop = false;
             NewProjectGrpBox.Text = "New Project";
@@ -472,7 +473,7 @@
             lbl_FeedBackNewProject.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lbl_FeedBackNewProject.AutoSize = true;
             lbl_FeedBackNewProject.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            lbl_FeedBackNewProject.Location = new Point(23, 352);
+            lbl_FeedBackNewProject.Location = new Point(23, 328);
             lbl_FeedBackNewProject.Name = "lbl_FeedBackNewProject";
             lbl_FeedBackNewProject.Size = new Size(163, 15);
             lbl_FeedBackNewProject.TabIndex = 16;
@@ -484,7 +485,7 @@
             lbl_StartDate.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lbl_StartDate.AutoSize = true;
             lbl_StartDate.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lbl_StartDate.Location = new Point(429, 39);
+            lbl_StartDate.Location = new Point(423, 39);
             lbl_StartDate.Margin = new Padding(2, 0, 2, 0);
             lbl_StartDate.Name = "lbl_StartDate";
             lbl_StartDate.Size = new Size(68, 17);
@@ -496,7 +497,7 @@
             lbl_EndDate.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lbl_EndDate.AutoSize = true;
             lbl_EndDate.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lbl_EndDate.Location = new Point(429, 89);
+            lbl_EndDate.Location = new Point(423, 89);
             lbl_EndDate.Margin = new Padding(2, 0, 2, 0);
             lbl_EndDate.Name = "lbl_EndDate";
             lbl_EndDate.Size = new Size(62, 17);
@@ -508,7 +509,7 @@
             lbl_ReqSkills.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lbl_ReqSkills.AutoSize = true;
             lbl_ReqSkills.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lbl_ReqSkills.Location = new Point(429, 154);
+            lbl_ReqSkills.Location = new Point(423, 154);
             lbl_ReqSkills.Margin = new Padding(2, 0, 2, 0);
             lbl_ReqSkills.Name = "lbl_ReqSkills";
             lbl_ReqSkills.Size = new Size(95, 17);
@@ -540,7 +541,7 @@
             txtBox_ProjectDescription.Multiline = true;
             txtBox_ProjectDescription.Name = "txtBox_ProjectDescription";
             txtBox_ProjectDescription.PlaceholderText = "Descrition";
-            txtBox_ProjectDescription.Size = new Size(360, 187);
+            txtBox_ProjectDescription.Size = new Size(354, 163);
             txtBox_ProjectDescription.TabIndex = 19;
             txtBox_ProjectDescription.TabStop = false;
             // 
@@ -551,17 +552,17 @@
             checkedListSkills.BorderStyle = BorderStyle.None;
             checkedListSkills.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             checkedListSkills.FormattingEnabled = true;
-            checkedListSkills.Location = new Point(429, 174);
+            checkedListSkills.Location = new Point(423, 174);
             checkedListSkills.MultiColumn = true;
             checkedListSkills.Name = "checkedListSkills";
-            checkedListSkills.Size = new Size(258, 144);
+            checkedListSkills.Size = new Size(258, 108);
             checkedListSkills.TabIndex = 24;
             // 
             // dtp_NewProjectEndDate
             // 
             dtp_NewProjectEndDate.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             dtp_NewProjectEndDate.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            dtp_NewProjectEndDate.Location = new Point(429, 109);
+            dtp_NewProjectEndDate.Location = new Point(423, 109);
             dtp_NewProjectEndDate.Name = "dtp_NewProjectEndDate";
             dtp_NewProjectEndDate.Size = new Size(170, 25);
             dtp_NewProjectEndDate.TabIndex = 23;
@@ -571,7 +572,7 @@
             dtp_NewProjectStartDate.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             dtp_NewProjectStartDate.CustomFormat = "dd/MM/yy";
             dtp_NewProjectStartDate.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            dtp_NewProjectStartDate.Location = new Point(429, 58);
+            dtp_NewProjectStartDate.Location = new Point(423, 58);
             dtp_NewProjectStartDate.Name = "dtp_NewProjectStartDate";
             dtp_NewProjectStartDate.Size = new Size(170, 25);
             dtp_NewProjectStartDate.TabIndex = 21;

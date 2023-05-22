@@ -1,6 +1,6 @@
 ﻿namespace GUI
 {
-    partial class ManageProject
+    partial class ConsultantInvites
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            groupBox1 = new GroupBox();
+            bt_decline = new Button();
+            bt_AcceptInv = new Button();
+            bt_seeInviteDetails = new Button();
+            dgv_ConsultantsInvites = new DataGridView();
             grpBoxProfileInfo = new GroupBox();
+            lbl_ReqSkills = new Label();
+            checkedListSkills = new CheckedListBox();
             label1 = new Label();
             rtb_Description = new RichTextBox();
             bt_EditProfileCancel = new Button();
@@ -37,9 +44,7 @@
             label2 = new Label();
             tb_ProjectID = new TextBox();
             label7 = new Label();
-            tb_Country = new TextBox();
             tb_ProjectTitle = new TextBox();
-            label9 = new Label();
             tb_ProjectModifiedDate = new TextBox();
             label8 = new Label();
             label3 = new Label();
@@ -50,18 +55,80 @@
             label5 = new Label();
             label4 = new Label();
             label6 = new Label();
-            rtb_Message = new RichTextBox();
-            rtb_newMessage = new RichTextBox();
-            bt_send = new Button();
-            lb_TextCounter = new Label();
-            dgv_InvolvedUsers = new DataGridView();
-            lb_warning = new Label();
+            groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgv_ConsultantsInvites).BeginInit();
             grpBoxProfileInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgv_InvolvedUsers).BeginInit();
             SuspendLayout();
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(bt_decline);
+            groupBox1.Controls.Add(bt_AcceptInv);
+            groupBox1.Controls.Add(bt_seeInviteDetails);
+            groupBox1.Controls.Add(dgv_ConsultantsInvites);
+            groupBox1.Dock = DockStyle.Bottom;
+            groupBox1.Location = new Point(0, 287);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(694, 346);
+            groupBox1.TabIndex = 41;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Invites";
+            // 
+            // bt_decline
+            // 
+            bt_decline.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            bt_decline.Location = new Point(110, 312);
+            bt_decline.Name = "bt_decline";
+            bt_decline.Size = new Size(98, 27);
+            bt_decline.TabIndex = 48;
+            bt_decline.Text = "Decline";
+            bt_decline.UseVisualStyleBackColor = true;
+            bt_decline.Click += bt_decline_Click;
+            // 
+            // bt_AcceptInv
+            // 
+            bt_AcceptInv.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            bt_AcceptInv.Location = new Point(6, 312);
+            bt_AcceptInv.Name = "bt_AcceptInv";
+            bt_AcceptInv.Size = new Size(98, 27);
+            bt_AcceptInv.TabIndex = 47;
+            bt_AcceptInv.Text = "Accept";
+            bt_AcceptInv.UseVisualStyleBackColor = true;
+            bt_AcceptInv.Click += bt_AcceptInv_Click;
+            // 
+            // bt_seeInviteDetails
+            // 
+            bt_seeInviteDetails.Dock = DockStyle.Right;
+            bt_seeInviteDetails.Location = new Point(590, 310);
+            bt_seeInviteDetails.Name = "bt_seeInviteDetails";
+            bt_seeInviteDetails.Size = new Size(101, 33);
+            bt_seeInviteDetails.TabIndex = 39;
+            bt_seeInviteDetails.Text = "See Details";
+            bt_seeInviteDetails.UseVisualStyleBackColor = true;
+            bt_seeInviteDetails.Click += bt_seeInviteDetails_Click;
+            // 
+            // dgv_ConsultantsInvites
+            // 
+            dgv_ConsultantsInvites.AllowUserToAddRows = false;
+            dgv_ConsultantsInvites.AllowUserToDeleteRows = false;
+            dgv_ConsultantsInvites.AllowUserToOrderColumns = true;
+            dgv_ConsultantsInvites.AllowUserToResizeRows = false;
+            dgv_ConsultantsInvites.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv_ConsultantsInvites.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv_ConsultantsInvites.Dock = DockStyle.Top;
+            dgv_ConsultantsInvites.Location = new Point(3, 19);
+            dgv_ConsultantsInvites.Name = "dgv_ConsultantsInvites";
+            dgv_ConsultantsInvites.RowHeadersVisible = false;
+            dgv_ConsultantsInvites.RowTemplate.Height = 25;
+            dgv_ConsultantsInvites.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv_ConsultantsInvites.Size = new Size(688, 291);
+            dgv_ConsultantsInvites.TabIndex = 37;
+            dgv_ConsultantsInvites.CellClick += dgv_ConsultantsInvites_CellClick;
             // 
             // grpBoxProfileInfo
             // 
+            grpBoxProfileInfo.Controls.Add(lbl_ReqSkills);
+            grpBoxProfileInfo.Controls.Add(checkedListSkills);
             grpBoxProfileInfo.Controls.Add(label1);
             grpBoxProfileInfo.Controls.Add(rtb_Description);
             grpBoxProfileInfo.Controls.Add(bt_EditProfileCancel);
@@ -70,9 +137,7 @@
             grpBoxProfileInfo.Controls.Add(label2);
             grpBoxProfileInfo.Controls.Add(tb_ProjectID);
             grpBoxProfileInfo.Controls.Add(label7);
-            grpBoxProfileInfo.Controls.Add(tb_Country);
             grpBoxProfileInfo.Controls.Add(tb_ProjectTitle);
-            grpBoxProfileInfo.Controls.Add(label9);
             grpBoxProfileInfo.Controls.Add(tb_ProjectModifiedDate);
             grpBoxProfileInfo.Controls.Add(label8);
             grpBoxProfileInfo.Controls.Add(label3);
@@ -87,16 +152,41 @@
             grpBoxProfileInfo.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             grpBoxProfileInfo.Location = new Point(0, 0);
             grpBoxProfileInfo.Name = "grpBoxProfileInfo";
-            grpBoxProfileInfo.Size = new Size(887, 157);
-            grpBoxProfileInfo.TabIndex = 23;
+            grpBoxProfileInfo.Size = new Size(694, 289);
+            grpBoxProfileInfo.TabIndex = 42;
             grpBoxProfileInfo.TabStop = false;
             grpBoxProfileInfo.Text = "User Name";
+            // 
+            // lbl_ReqSkills
+            // 
+            lbl_ReqSkills.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lbl_ReqSkills.AutoSize = true;
+            lbl_ReqSkills.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_ReqSkills.Location = new Point(424, 136);
+            lbl_ReqSkills.Margin = new Padding(2, 0, 2, 0);
+            lbl_ReqSkills.Name = "lbl_ReqSkills";
+            lbl_ReqSkills.Size = new Size(95, 17);
+            lbl_ReqSkills.TabIndex = 104;
+            lbl_ReqSkills.Text = "Required Skills";
+            // 
+            // checkedListSkills
+            // 
+            checkedListSkills.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            checkedListSkills.BackColor = SystemColors.Control;
+            checkedListSkills.BorderStyle = BorderStyle.None;
+            checkedListSkills.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            checkedListSkills.FormattingEnabled = true;
+            checkedListSkills.Location = new Point(351, 156);
+            checkedListSkills.MultiColumn = true;
+            checkedListSkills.Name = "checkedListSkills";
+            checkedListSkills.Size = new Size(331, 126);
+            checkedListSkills.TabIndex = 103;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(693, 22);
+            label1.Location = new Point(14, 138);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
             label1.Size = new Size(70, 15);
@@ -106,10 +196,10 @@
             // rtb_Description
             // 
             rtb_Description.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            rtb_Description.Location = new Point(693, 48);
+            rtb_Description.Location = new Point(12, 156);
             rtb_Description.Name = "rtb_Description";
             rtb_Description.ReadOnly = true;
-            rtb_Description.Size = new Size(182, 98);
+            rtb_Description.Size = new Size(333, 126);
             rtb_Description.TabIndex = 101;
             rtb_Description.Text = "";
             // 
@@ -118,7 +208,7 @@
             bt_EditProfileCancel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             bt_EditProfileCancel.Enabled = false;
             bt_EditProfileCancel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            bt_EditProfileCancel.Location = new Point(1167, 126);
+            bt_EditProfileCancel.Location = new Point(1661, 126);
             bt_EditProfileCancel.Margin = new Padding(2);
             bt_EditProfileCancel.Name = "bt_EditProfileCancel";
             bt_EditProfileCancel.Size = new Size(100, 25);
@@ -131,17 +221,17 @@
             // 
             lb_DaysTilEnd.AutoSize = true;
             lb_DaysTilEnd.Font = new Font("Segoe UI", 9.75F, FontStyle.Italic, GraphicsUnit.Point);
-            lb_DaysTilEnd.Location = new Point(219, 129);
+            lb_DaysTilEnd.Location = new Point(464, 99);
             lb_DaysTilEnd.Name = "lb_DaysTilEnd";
-            lb_DaysTilEnd.Size = new Size(186, 17);
+            lb_DaysTilEnd.Size = new Size(137, 17);
             lb_DaysTilEnd.TabIndex = 100;
-            lb_DaysTilEnd.Text = "You've been a user for 154 days";
+            lb_DaysTilEnd.Text = "Days until project ends:";
             // 
             // bt_EditProfile
             // 
             bt_EditProfile.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             bt_EditProfile.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            bt_EditProfile.Location = new Point(1271, 126);
+            bt_EditProfile.Location = new Point(1765, 126);
             bt_EditProfile.Margin = new Padding(2);
             bt_EditProfile.Name = "bt_EditProfile";
             bt_EditProfile.Size = new Size(100, 25);
@@ -184,19 +274,6 @@
             label7.TabIndex = 6;
             label7.Text = "Title:";
             // 
-            // tb_Country
-            // 
-            tb_Country.BackColor = SystemColors.ControlLight;
-            tb_Country.BorderStyle = BorderStyle.None;
-            tb_Country.Enabled = false;
-            tb_Country.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            tb_Country.Location = new Point(431, 101);
-            tb_Country.Margin = new Padding(2);
-            tb_Country.Name = "tb_Country";
-            tb_Country.Size = new Size(251, 16);
-            tb_Country.TabIndex = 8;
-            tb_Country.TabStop = false;
-            // 
             // tb_ProjectTitle
             // 
             tb_ProjectTitle.BackColor = SystemColors.ControlLight;
@@ -209,17 +286,6 @@
             tb_ProjectTitle.Size = new Size(208, 16);
             tb_ProjectTitle.TabIndex = 2;
             tb_ProjectTitle.TabStop = false;
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label9.Location = new Point(372, 101);
-            label9.Margin = new Padding(2, 0, 2, 0);
-            label9.Name = "label9";
-            label9.Size = new Size(55, 15);
-            label9.TabIndex = 8;
-            label9.Text = "UNUSED!";
             // 
             // tb_ProjectModifiedDate
             // 
@@ -341,101 +407,36 @@
             label6.TabIndex = 5;
             label6.Text = "Project Start Date:";
             // 
-            // rtb_Message
-            // 
-            rtb_Message.Location = new Point(26, 181);
-            rtb_Message.Name = "rtb_Message";
-            rtb_Message.ReadOnly = true;
-            rtb_Message.Size = new Size(661, 207);
-            rtb_Message.TabIndex = 24;
-            rtb_Message.Text = "";
-            // 
-            // rtb_newMessage
-            // 
-            rtb_newMessage.Location = new Point(26, 394);
-            rtb_newMessage.Name = "rtb_newMessage";
-            rtb_newMessage.Size = new Size(661, 96);
-            rtb_newMessage.TabIndex = 25;
-            rtb_newMessage.Text = "";
-            rtb_newMessage.TextChanged += rtb_newMessage_TextChanged;
-            // 
-            // bt_send
-            // 
-            bt_send.Location = new Point(612, 504);
-            bt_send.Name = "bt_send";
-            bt_send.Size = new Size(75, 23);
-            bt_send.TabIndex = 26;
-            bt_send.Text = "Send";
-            bt_send.UseVisualStyleBackColor = true;
-            bt_send.Click += bt_send_Click;
-            // 
-            // lb_TextCounter
-            // 
-            lb_TextCounter.AutoSize = true;
-            lb_TextCounter.BackColor = SystemColors.Window;
-            lb_TextCounter.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lb_TextCounter.Location = new Point(611, 471);
-            lb_TextCounter.Name = "lb_TextCounter";
-            lb_TextCounter.Size = new Size(40, 15);
-            lb_TextCounter.TabIndex = 27;
-            lb_TextCounter.Text = "0/255";
-            // 
-            // dgv_InvolvedUsers
-            // 
-            dgv_InvolvedUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgv_InvolvedUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_InvolvedUsers.Location = new Point(693, 181);
-            dgv_InvolvedUsers.Name = "dgv_InvolvedUsers";
-            dgv_InvolvedUsers.RowHeadersVisible = false;
-            dgv_InvolvedUsers.RowTemplate.Height = 25;
-            dgv_InvolvedUsers.Size = new Size(182, 346);
-            dgv_InvolvedUsers.TabIndex = 28;
-            // 
-            // lb_warning
-            // 
-            lb_warning.AutoSize = true;
-            lb_warning.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lb_warning.Location = new Point(298, 506);
-            lb_warning.Margin = new Padding(2, 0, 2, 0);
-            lb_warning.Name = "lb_warning";
-            lb_warning.Size = new Size(309, 17);
-            lb_warning.TabIndex = 29;
-            lb_warning.Text = "A message can be no longer then 255 characters!";
-            lb_warning.Visible = false;
-            // 
-            // ManageProject
+            // ConsultantInvites
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(887, 539);
-            Controls.Add(lb_warning);
-            Controls.Add(dgv_InvolvedUsers);
-            Controls.Add(lb_TextCounter);
-            Controls.Add(bt_send);
-            Controls.Add(rtb_newMessage);
-            Controls.Add(rtb_Message);
+            ClientSize = new Size(694, 633);
             Controls.Add(grpBoxProfileInfo);
-            Name = "ManageProject";
-            Text = "ManageProject";
+            Controls.Add(groupBox1);
+            Name = "ConsultantInvites";
+            Text = "ConsultantInvites";
+            groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgv_ConsultantsInvites).EndInit();
             grpBoxProfileInfo.ResumeLayout(false);
             grpBoxProfileInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgv_InvolvedUsers).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-
+        private GroupBox groupBox1;
+        private Button bt_seeInviteDetails;
+        private DataGridView dgv_ConsultantsInvites;
         private GroupBox grpBoxProfileInfo;
+        private Label label1;
+        private RichTextBox rtb_Description;
         private Button bt_EditProfileCancel;
         private Label lb_DaysTilEnd;
         private Button bt_EditProfile;
         private Label label2;
         private TextBox tb_ProjectID;
         private Label label7;
-        private TextBox tb_Country;
         private TextBox tb_ProjectTitle;
-        private Label label9;
         private TextBox tb_ProjectModifiedDate;
         private Label label8;
         private Label label3;
@@ -446,13 +447,9 @@
         private Label label5;
         private Label label4;
         private Label label6;
-        private RichTextBox rtb_Message;
-        private RichTextBox rtb_newMessage;
-        private Button bt_send;
-        private Label lb_TextCounter;
-        private DataGridView dgv_InvolvedUsers;
-        private RichTextBox rtb_Description;
-        private Label label1;
-        private Label lb_warning;
+        private Label lbl_ReqSkills;
+        private CheckedListBox checkedListSkills;
+        private Button bt_decline;
+        private Button bt_AcceptInv;
     }
 }
