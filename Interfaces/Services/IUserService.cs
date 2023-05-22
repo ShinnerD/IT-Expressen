@@ -61,5 +61,10 @@ namespace Interfaces.Services
         /// Returns a list of Users that have all of the specializations provided in the list specified in the parameters. /DK
         /// </summary>
         public List<IUserModel> GetUsersWithAllSpecializations(List<string> specializations);
+
+        public void DeleteConsultantStoredProcedure(int userID);
+        /// <summary>
+        /// Delete a User from the Database./Erik
+        /// </summary>
     }
 }
