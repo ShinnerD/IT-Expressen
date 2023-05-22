@@ -109,16 +109,33 @@ namespace GUI
 
         private void InvolvedUsers()
         {
+            if (ServiceManager.UserService.GetUserFromUsername(UserName).UserType.ToLower() == "consultant")
+            {
+                DataInvolvedUseres();
+
+                dgv_InvolvedUsers.DataSource = ServiceManager.InviteService.GetAllInvitedProjectID(ProjectGet.ProjectId).Where(i => i.InviteStatus.ToLower() != "declined").ToList(); ;
+            }
+            else
+            {
+                DataInvolvedUseres();
+
+                dgv_InvolvedUsers.DataSource = ServiceManager.InviteService.GetAllInvitedProjectID(ProjectGet.ProjectId).ToList(); ;
+            }
+        }
+
+        private void DataInvolvedUseres()
+        {
             dgv_InvolvedUsers.AutoGenerateColumns = false;
             dgv_InvolvedUsers.StandardTab = true;
 
-            dgv_InvolvedUsers.Columns.Add("UserName", "User Name");
-            dgv_InvolvedUsers.Columns["UserName"].DataPropertyName = "InvitedUserName";
+            dgv_InvolvedUsers.Columns.Add("InvitedUserFullName", "Consultant Name");
+            dgv_InvolvedUsers.Columns["InvitedUserFullName"].DataPropertyName = "InvitedUserFullName";
 
             dgv_InvolvedUsers.Columns.Add("InviteStatus", "Invite Status");
             dgv_InvolvedUsers.Columns["InviteStatus"].DataPropertyName = "InviteStatus";
 
-            dgv_InvolvedUsers.DataSource = ServiceManager.InviteService.GetAllInvitedProjectID(ProjectGet.ProjectId).Where(i => i.InviteStatus.ToLower() != "declined").ToList(); ;
+            dgv_InvolvedUsers.Columns.Add("InvitedUserSpecializations", "User Specializations");
+            dgv_InvolvedUsers.Columns["InvitedUserSpecializations"].DataPropertyName = "InvitedUserSpecializations";
         }
     }
 }

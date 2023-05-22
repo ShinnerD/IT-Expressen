@@ -12,7 +12,6 @@ namespace DAL.Models
         public DateTime? InviteDate { get; set; }
         public string? InviteStatus { get; set; }
         public DateTime? AcceptDate { get; set; }
-
         public string? InvitedUserName { get; set; }
         public string? InvitedUserFullName { get; set; }
         public string? InvitedUserSpecializations { get; set; }
