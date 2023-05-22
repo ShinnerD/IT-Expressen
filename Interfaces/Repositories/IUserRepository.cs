@@ -49,5 +49,11 @@ namespace Interfaces.Repositories
         /// The Provided IUserModel must be a valid user from the database. /DK
         /// </summary>
         void UpdateUser(IUserModel user);
+
+        public void DeleteConsultantStoredProcedure(int userID);
+        /// <summary>
+        /// Deletes a user in the database. /Erik
+        /// </summary>
+
     }
 }

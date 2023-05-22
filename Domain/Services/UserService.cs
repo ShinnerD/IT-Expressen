@@ -143,5 +143,12 @@ namespace Domain.Services
         {
             userRepo.UpdateUser(user);
         }
+        /// <summary>
+        /// Delete a Consulent from data base with the specifik UserID /Erik
+        /// </summary>
+        void IUserService.DeleteConsultantStoredProcedure(int userID)
+        {
+            userRepo.DeleteConsultantStoredProcedure(userID);
+        }
     }
 }
