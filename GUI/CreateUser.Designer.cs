@@ -312,7 +312,7 @@
             grpBoxProfileInfo.Size = new Size(652, 209);
             grpBoxProfileInfo.TabIndex = 32;
             grpBoxProfileInfo.TabStop = false;
-            grpBoxProfileInfo.Text = "User Name";
+            grpBoxProfileInfo.Text = "Fill out the form, to creat your user:";
             // 
             // tb_UserName
             // 
