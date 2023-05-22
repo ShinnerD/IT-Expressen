@@ -1,5 +1,4 @@
-﻿using DAL.Linq;
-using Interfaces.Models;
+﻿using Interfaces.Models;
 using Interfaces.Services;
 
 namespace GUI
@@ -27,12 +26,6 @@ namespace GUI
             LoadInvitesToDGV();
             dgv_ConsultantsInvites.Rows[0].Cells[0].Selected = false;
         }
-
-        //public ConsultantInvites(IProjectModel projectModel)
-        //{
-        //    InitializeComponent();
-        //    ProjectGet = projectModel;
-        //}
 
         private void GetUser()
         {
@@ -108,7 +101,6 @@ namespace GUI
         {
             GetProjectInfo();
             StartDateCheck();
-
         }
 
         private void SetupSkillsCheckList()
