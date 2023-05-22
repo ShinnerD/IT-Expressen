@@ -75,11 +75,18 @@ namespace DAL.Repository
         /// </summary>
         public IProjectModel GetProject(int projectId)
         {
-            var targetProject = dbContext.Projects.First(i => i.Project_ID == projectId);
+            var targetProject = dbContext.Projects.FirstOrDefault(i => i.Project_ID == projectId);
 
             List<Linq.Project> dtoResult = new List<Linq.Project> { targetProject };
 
-            return TransferAllProjectProperties(dtoResult)[0];
+            var resultList = TransferAllProjectProperties(dtoResult);
+
+            if (resultList.Count <= 0)
+            {
+                return null;
+            }
+
+            return resultList[0];
         }
 
         /// <summary>
@@ -117,9 +124,10 @@ namespace DAL.Repository
 
             if (targetSpecIds.Count == 0) return new List<IProjectModel>();
 
-            var dtoProjects = dbContext.Projects.Where(i => i.Projects_Specialisation_Lines.Count == 0 || i.Projects_Specialisation_Lines.Any(x => targetSpecIds.Contains(x.Spec_Id))).ToList();
+            var dtoProjects = dbContext.Projects.Where(i => i.Projects_Specialisation_Lines.Count == 0
+                || i.Projects_Specialisation_Lines.Any(x => targetSpecIds.Contains(x.Spec_Id)));
 
-            List<IProjectModel> result = TransferAllProjectProperties(dtoProjects);
+            List<IProjectModel> result = TransferAllProjectProperties(dtoProjects.ToList());
 
             return result;
         }
@@ -133,7 +141,7 @@ namespace DAL.Repository
 
             foreach (var dtoProject in dtoProjects)
             {
-                if (dtoProject.Project_Status != "deleted")
+                if (dtoProject.Project_Status.ToLower() != "deleted")
                 {
                     IProjectModel projectModel = new ProjectModel();
 
@@ -178,7 +186,8 @@ namespace DAL.Repository
 
             if (targetUser != null)
             {
-                dtoProjects = dbContext.Projects.Where(i => i.User_ID == userId && i.Title.ToLower().Contains(searchTerm.ToLower())).ToList();
+                dtoProjects = dbContext.Projects.Where(i => i.User_ID == userId 
+                    && i.Title.ToLower().Contains(searchTerm.ToLower())).ToList();
             }
 
             List<IProjectModel> result = TransferAllProjectProperties(dtoProjects);

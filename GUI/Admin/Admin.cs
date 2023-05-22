@@ -1,13 +1,16 @@
 ﻿using Domain.Services;
 using Interfaces.Models;
 using Interfaces.Services;
+using Microsoft.VisualBasic.Devices;
 using System.Data;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
-namespace GUI
+namespace GUI.Admin
 {
-    public partial class Admin : Form
+    public partial class AdminMain : Form
     {
         private IUserModel adminUser;
+        public string CreatedUserName { get; set; }
 
         private readonly IDomainServiceManager ServiceManager;
 
@@ -20,7 +23,7 @@ namespace GUI
 
         private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
-        public Admin(IDomainServiceManager serviceManager, string username)
+        public AdminMain(IDomainServiceManager serviceManager, string username)
         {
             ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
 
@@ -49,8 +52,11 @@ namespace GUI
             dgv_ProjectSearchResults.Columns.Add("Title", "Title");
             dgv_ProjectSearchResults.Columns["Title"].DataPropertyName = "Title";
 
-            dgv_ProjectSearchResults.Columns.Add("Manager", "Manager");
-            dgv_ProjectSearchResults.Columns["Manager"].DataPropertyName = "ManagerFullName";
+            dgv_ProjectSearchResults.Columns.Add("ManagerFullName", "Manager Name");
+            dgv_ProjectSearchResults.Columns["ManagerFullName"].DataPropertyName = "ManagerFullName";
+
+            dgv_ProjectSearchResults.Columns.Add("ManagerUserName", "User Name");
+            dgv_ProjectSearchResults.Columns["ManagerUserName"].DataPropertyName = "ManagerUserName";
 
             dgv_ProjectSearchResults.Columns.Add("ProjectStatus", "Status");
             dgv_ProjectSearchResults.Columns["ProjectStatus"].DataPropertyName = "ProjectStatus";
@@ -64,8 +70,8 @@ namespace GUI
             dgv_ProjectSearchResults.Columns.Add("ProjectModifyDate", "Last Modified");
             dgv_ProjectSearchResults.Columns["ProjectModifyDate"].DataPropertyName = "ProjectModifyDate";
 
-            List<string> allSpecializations = specializationService.ListDefinedSpecializations();
-            projectsSearchResults = projectService.GetProjectsFromAnySpecializations(allSpecializations).OrderBy(i => i.Title).ToList();
+            //List<string> allSpecializations = specializationService.ListDefinedSpecializations();
+            //projectsSearchResults = projectService.GetProjectsFromAnySpecializations(allSpecializations).OrderBy(i => i.Title).ToList();
             dgv_ProjectSearchResults.DataSource = projectsSearchResults;
         }
 
@@ -109,7 +115,7 @@ namespace GUI
             dgv_UserSearchResults.Columns.Add("CreationDate", "Date of Creation");
             dgv_UserSearchResults.Columns["CreationDate"].DataPropertyName = "CreationDate";
 
-            usersSearchResults = userService.GetAllUsers().OrderBy(i => i.UserName).ToList();
+            //usersSearchResults = userService.GetAllUsers().OrderBy(i => i.UserName).ToList();
             dgv_UserSearchResults.DataSource = usersSearchResults;
         }
 
@@ -204,6 +210,8 @@ namespace GUI
         /// </summary>
         private void PerformUserSearch(string userName = "")
         {
+            Cursor = Cursors.WaitCursor;
+
             IUserService _ = userService;
             string searchString = txtBox_UserSearchParams.Text;
             dgv_UserSearchResults.DataSource = null;
@@ -221,24 +229,31 @@ namespace GUI
                 usersSearchResults = _.GetAllUsers().Where(i => i.UserType.ToLower() == "manager").ToList();
             }
 
-            usersSearchResults = usersSearchResults.Where(x => x.UserName.ToLower().Contains(searchString.ToLower()) || x.FullName.ToLower().Contains(searchString.ToLower()))
+            usersSearchResults = usersSearchResults.Where(x => x.UserName.ToLower().Contains(searchString.ToLower())
+                    || x.FullName.ToLower().Contains(searchString.ToLower())
+                    || x.ID.ToString().Contains(searchString.ToLower()))
                     .OrderBy(o => o.UserName).ToList();
 
             dgv_UserSearchResults.DataSource = usersSearchResults;
 
-            if (userName != "")
+            if (!string.IsNullOrWhiteSpace(userName))
             {
                 int index = usersSearchResults.FindIndex(i => i.UserName == userName);
-                dgv_UserSearchResults.Rows[index].Selected = true;
-                dgv_UserSearchResults.FirstDisplayedScrollingRowIndex = index;
+                if (index >= 0)
+                {
+                    dgv_UserSearchResults.Rows[index].Selected = true;
+                    dgv_UserSearchResults.FirstDisplayedScrollingRowIndex = index;
+                }
             }
+            Cursor = Cursors.Default;
         }
 
         /// <summary>
         /// Searches and Filters Projects based on text in search field and selected Radio Buttons. /DK
         /// </summary>
-        private void PerformProjectSearch()
+        private void PerformProjectSearch(int selectThisProjectAfterSearch = 0)
         {
+            Cursor = Cursors.WaitCursor;
             string searchString = txtBox_ProjectSearchParams.Text;
             List<string> allSpecializations = specializationService.ListDefinedSpecializations();
             dgv_ProjectSearchResults.DataSource = null;
@@ -260,8 +275,23 @@ namespace GUI
                 projectsSearchResults = projectService.GetProjectsFromAnySpecializations(allSpecializations).Where(x => x.ProjectStatus.ToLower() == "ended").ToList();
             }
 
-            projectsSearchResults = projectsSearchResults.Where(i => i.Title.ToLower().Contains(searchString.ToLower())).OrderBy(o => o.Title).ToList();
+            projectsSearchResults = projectsSearchResults.Where(i => i.Title.ToLower().Contains(searchString.ToLower())
+                || i.ManagerFullName.ToLower().Contains(searchString.ToLower())
+                || i.ManagerUserName.ToLower().Contains(searchString.ToLower()))
+                .OrderBy(o => o.Title).ToList();
+
             dgv_ProjectSearchResults.DataSource = projectsSearchResults;
+
+            if (selectThisProjectAfterSearch != 0)
+            {
+                int index = projectsSearchResults.FindIndex(i => i.ProjectId == selectThisProjectAfterSearch);
+                if (index >= 0)
+                {
+                    dgv_ProjectSearchResults.Rows[index].Selected = true;
+                    dgv_ProjectSearchResults.FirstDisplayedScrollingRowIndex = index;
+                }
+            }
+            Cursor = Cursors.Default;
         }
 
         /// <summary>
@@ -282,43 +312,60 @@ namespace GUI
         /// </summary>
         private void OpenUserProfile(string userName, string userType)
         {
-            if (userType == "manager")
+            if (userType.ToLower() == "manager")
             {
                 Manager manager = new Manager(ServiceManager, userName);
                 manager.ShowDialog();
                 PerformUserSearch(userName);
             }
-            if (userType == "consultant")
+            if (userType.ToLower() == "consultant")
             {
                 Consultant consultant = new Consultant(ServiceManager, userName);
                 consultant.ShowDialog();
                 PerformUserSearch(userName);
             }
-            if (userType == "admin")
+            if (userType.ToLower() == "admin")
             {
                 FeedBackMessage(lbl_FeedbackUserTab, "Admin's can't edit other Admins.", Color.Red);
             }
         }
 
         /// <summary>
+        /// Runs when User clicks the New User button. Opens the form for creating a new user.
+        /// </summary>
+        private void OpenNewUserForm()
+        {
+            CreateUser createUser = new CreateUser(ServiceManager, this, true);
+            createUser.ShowDialog();
+            this.Show();
+            PerformUserSearch(CreatedUserName);
+        }
+
+        /// <summary>
+        /// Opens a Manager form directly to the edit-panel of the project.
+        /// </summary>
+        private void OpenProject(IProjectModel targetProject)
+        {
+            ManageProject ManageProjectForm = new ManageProject(ServiceManager, targetProject.ProjectId, adminUser.UserName);
+            ManageProjectForm.ShowDialog();
+        }
+
+        /// <summary>
         /// Async Task that turns on the visibility of the label provided in the parameters,
         /// shows the given message in the given color, for the given time. /DK
         /// </summary>
-        private async Task FeedBackMessage(Label label, string message, Color color, int milliseconds = 5000)
+        private async Task FeedBackMessage(Label label, string message, Color? color = null, int milliseconds = 5000)
         {
             label.Text = message;
-            label.ForeColor = color;
+            label.ForeColor = color ?? Color.Black;
             label.Visible = true;
             _cancellationTokenSource.Cancel();
             _cancellationTokenSource = new CancellationTokenSource();
-            try
-            {
-                await Task.Delay(milliseconds, _cancellationTokenSource.Token);
-                label.Text = string.Empty;
-                label.ForeColor = Color.Black;
-                label.Visible = false;
-            }
-            catch (TaskCanceledException) { }
+
+            await Task.Delay(milliseconds, _cancellationTokenSource.Token);
+            label.Text = string.Empty;
+            label.ForeColor = Color.Black;
+            label.Visible = false;
         }
 
         private void bt_EditProfileCancel_Click(object sender, EventArgs e)
@@ -359,7 +406,108 @@ namespace GUI
         {
             if (dgv_UserSearchResults.SelectedRows.Count != 0)
             {
-                OpenUserProfile(dgv_UserSearchResults.SelectedRows[0].Cells["UserName"].Value.ToString(), dgv_UserSearchResults.SelectedRows[0].Cells["UserType"].Value.ToString().ToLower());
+                string userName = dgv_UserSearchResults.SelectedRows[0].Cells["UserName"].Value.ToString();
+                string userType = dgv_UserSearchResults.SelectedRows[0].Cells["UserType"].Value.ToString().ToLower();
+                OpenUserProfile(userName, userType);
+            }
+        }
+
+        private void btn_NewUser_Click(object sender, EventArgs e)
+        {
+            OpenNewUserForm();
+        }
+
+        private void btn_EditProject_Click(object sender, EventArgs e)
+        {
+            if (dgv_ProjectSearchResults.SelectedRows.Count != 0)
+            {
+                OpenProject(dgv_ProjectSearchResults.SelectedRows[0].DataBoundItem as IProjectModel);
+            }
+        }
+
+        private void btn_EditProjectDetails_Click(object sender, EventArgs e)
+        {
+            if (dgv_ProjectSearchResults.SelectedRows.Count != 0)
+            {
+                AdminProjectEdit EditProjectForm = new AdminProjectEdit(ServiceManager, dgv_ProjectSearchResults.SelectedRows[0].DataBoundItem as IProjectModel);
+                EditProjectForm.ShowDialog();
+            }
+        }
+
+        private void btn_DeleteUser_Click(object sender, EventArgs e)
+        {
+            DeleteUser();
+        }
+
+        /// <summary>
+        /// Deletes the User when the admin presses the delete user button. Shows a dialog box for confirmation.
+        /// Provides an error message if it didn't succeed. Provides a success message if it did succeed.
+        /// </summary>
+        private void DeleteUser()
+        {
+            if (dgv_UserSearchResults.SelectedRows.Count > 0)
+            {
+                var confirmation = MessageBox.Show(this, "Are you sure you want to delete this user?", "Delete User", MessageBoxButtons.OKCancel);
+                if (confirmation == DialogResult.OK)
+                {
+                    try
+                    {
+                        int userId = int.Parse(dgv_UserSearchResults.SelectedRows[0].Cells["UserId"].Value.ToString());
+                        userService.Delete(userId);
+                        PerformUserSearch();
+                        FeedBackMessage(lbl_FeedbackUserTab, "User successfully deleted.", Color.Green);
+                    }
+                    catch (Exception e)
+                    {
+                        FeedBackMessage(lbl_FeedbackUserTab, e.Message, Color.Red);
+                    }
+                }
+            }
+        }
+
+        private void btn_DeleteProject_Click(object sender, EventArgs e)
+        {
+            DeleteProject();
+        }
+
+        private void DeleteProject()
+        {
+            if (dgv_ProjectSearchResults.SelectedRows.Count > 0)
+            {
+                var confirmation = MessageBox.Show(this, "Are you sure you want to delete this project?", "Delete Project", MessageBoxButtons.OKCancel);
+                if (confirmation == DialogResult.OK)
+                {
+                    try
+                    {
+                        int projectId = int.Parse(dgv_ProjectSearchResults.SelectedRows[0].Cells["ProjectId"].Value.ToString());
+                        projectService.DeleteProject(projectId);
+                        PerformProjectSearch();
+                        FeedBackMessage(lbl_FeedbackUserTab, "Project successfully deleted.", Color.Green);
+                    }
+                    catch (Exception e)
+                    {
+                        FeedBackMessage(lbl_FeedbackUserTab, e.Message, Color.Red);
+                    }
+                }
+            }
+        }
+
+        private void btn_DetailsEdit_Click(object sender, EventArgs e)
+        {
+            if (dgv_ProjectSearchResults.SelectedRows.Count != 0)
+            {
+                AdminProjectEdit EditProjectForm = new AdminProjectEdit(ServiceManager, dgv_ProjectSearchResults.SelectedRows[0].DataBoundItem as IProjectModel);
+                EditProjectForm.ShowDialog();
+                PerformProjectSearch();
+            }
+        }
+
+        private void btn_ViewInvites_Click(object sender, EventArgs e)
+        {
+            if (dgv_ProjectSearchResults.SelectedRows.Count != 0)
+            {
+                AdminViewInvites ViewInvitesForm = new AdminViewInvites(ServiceManager, dgv_ProjectSearchResults.SelectedRows[0].DataBoundItem as IProjectModel);
+                ViewInvitesForm.ShowDialog();
             }
         }
     }

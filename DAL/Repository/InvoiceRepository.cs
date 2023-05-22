@@ -49,7 +49,7 @@ namespace DAL.Repository
         {
             List<IInvoiceModel> result = new List<IInvoiceModel>();
 
-            var dbInvoices = DataContext.Projects.First(i => i.Project_ID == projectId).Invoices;
+            var dbInvoices = DataContext.Invoices.Where(i => i.Project_ID == projectId);
 
             foreach (var dbInvoiced in dbInvoices)
             {

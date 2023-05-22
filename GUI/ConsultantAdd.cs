@@ -1,6 +1,7 @@
 ﻿using Domain.Services;
 using Interfaces.Models;
 using Interfaces.Services;
+using System.Threading;
 
 namespace GUI
 {
@@ -12,12 +13,13 @@ namespace GUI
         private List<IUserModel> SearchResults { get; set; }
         private IProjectModel ProjectGet { get; set; }
 
-
         private readonly IDomainServiceManager ServiceManager;
         private IUserService userService;
         private ISpecializationService SpecService;
 
         private List<string> ProjectSpecializations { get; set; }
+
+        private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
         //Constructor method loaded with project ID. All relevent data is loaded /MS
         public ConsultantAdd(IDomainServiceManager serviceManager, int projectID)
@@ -27,10 +29,9 @@ namespace GUI
             SpecService = ServiceManager.SpecializationService;
 
             ProjectID = projectID;
-            ProjectSpecializations = SpecService.GetProjectSpecializations(ProjectID);
 
             InitializeComponent();
-            
+
             lblFeedback.Text = "";
 
             GetProjectInfo();
@@ -39,7 +40,6 @@ namespace GUI
             SetupSkillsCheckList();
 
             SetupDataGridView();
-            LoadSearchResults();
         }
 
         /// <summary>
@@ -47,6 +47,8 @@ namespace GUI
         /// </summary>
         private void LoadSearchResults()
         {
+            Cursor = Cursors.WaitCursor;
+
             List<string> searchParams = GetSpecializationSearchParameters();
 
             if (!radioBtnAll.Checked)
@@ -61,6 +63,8 @@ namespace GUI
             SpecService.FillUserSpecializationsProperty(SearchResults);
 
             dgv_ConsultantList.DataSource = SearchResults.OrderBy(i => i.FullName).ToList();
+
+            Cursor = Cursors.Default;
         }
 
         /// <summary>
@@ -75,7 +79,7 @@ namespace GUI
                 result.Add(specialization);
             }
 
-            if (result.Count <= 0) 
+            if (result.Count <= 0)
             {
                 result.AddRange(checkedListSkills.Items.Cast<string>());
             }
@@ -131,18 +135,31 @@ namespace GUI
                     DateTime.Now,
                     "Pending");
 
-                lblFeedback.ForeColor = System.Drawing.Color.Green;
-                lblFeedback.Text = "Invite Sent to " + (string)dgv_ConsultantList.CurrentRow.Cells["FullName"].Value;
+                string successMessage = "Invite Sent to " + (string)dgv_ConsultantList.CurrentRow.Cells["FullName"].Value;
+                FeedBackMessage(lblFeedback, successMessage, Color.Green);
             }
             catch (Exception e)
             {
-                if (e.Message.Contains("UNIQUE KEY constraint"))
-                {
-                    lblFeedback.ForeColor = Color.Red;
-                    lblFeedback.Text = "This person already has an invitation to this project.";
-                }              
+                    FeedBackMessage(lblFeedback, e.Message, Color.Red);
             }
-            
+
+        }
+
+        /// <summary>
+        /// Async Task that turns on the visibility of the label provided in the parameters,
+        /// shows the given message in the given color, for the given time. /DK
+        /// </summary>
+        private async Task FeedBackMessage(Label label, string message, Color? color = null, int milliseconds = 5000)
+        {
+            label.Text = message.Trim();
+            label.ForeColor = color ?? Color.Black;
+            label.Visible = true;
+            _cancellationTokenSource.Cancel();
+            _cancellationTokenSource = new CancellationTokenSource();
+            await Task.Delay(milliseconds, _cancellationTokenSource.Token);
+            label.Text = string.Empty;
+            label.ForeColor = Color.Black;
+            label.Visible = false;
         }
 
         // Button click event -> see method for results /MS
@@ -160,33 +177,43 @@ namespace GUI
         //Sets up the selection of skills at the initialization of the window /DK
         private void SetupSkillsCheckList()
         {
-            ISpecializationService specService = SpecService;
-            List<string> items = specService.ListDefinedSpecializations().OrderBy(i => i).ToList();
-
-            foreach (var item in items)
+            try
             {
-                checkedListSkills.Items.Add(item);
-                if (ProjectSpecializations.Contains(item)) checkedListSkills.SetItemChecked(checkedListSkills.Items.Count - 1, true);
+                ISpecializationService specService = SpecService;
+                List<string> items = specService.ListDefinedSpecializations().OrderBy(i => i).ToList();
+
+                foreach (var item in items)
+                {
+                    checkedListSkills.Items.Add(item);
+                    if (ProjectSpecializations.Contains(item)) checkedListSkills.SetItemChecked(checkedListSkills.Items.Count - 1, true);
+                }
             }
-
-            if (items.Count == 0)
+            catch (Exception)
             {
-                MessageBox.Show("Failed to retrieve skills from server.");
+                FeedBackMessage(lblFeedback, "Failed to retrieve skills from server.", Color.Red);
             }
         }
 
         // Sets up the right side list box of specializations chosen for the project that is currently being invited to.
         private void SetupProjectRequirementsList()
         {
-            listBoxProjectRequirements.DataSource = ProjectSpecializations;
+            //Try-Catch for getting specializations
+            try
+            {
+                checkedListProjReq.Items.AddRange(ServiceManager.SpecializationService.GetProjectSpecializations(ProjectID).ToArray());
+                /// Checks off the skills in the specializations list.
+                for (int i = 0; i < checkedListProjReq.Items.Count; i++)
+                {
+                    checkedListProjReq.SetItemChecked(i, true);
+                }
+            }
+            catch (Exception)
+            {
+                FeedBackMessage(lblFeedback, "Failed to retrieve list of defined skills", Color.Red);
+            }
         }
 
-        private void checkedListSkills_MouseUp(object sender, MouseEventArgs e)
-        {
-            LoadSearchResults();
-        }
-
-        private void radioBtnAny_CheckedChanged(object sender, EventArgs e)
+        private void btn_Search_Click(object sender, EventArgs e)
         {
             LoadSearchResults();
         }

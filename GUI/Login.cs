@@ -3,6 +3,7 @@ using Domain.Services;
 using Interfaces.Models;
 using Interfaces.Services;
 using Microsoft.IdentityModel.Tokens;
+using GUI.Admin;
 
 namespace GUI
 {
@@ -42,22 +43,36 @@ namespace GUI
         //Temp method used to bypass the login and connect straigt to an instance of the admin form -> Used only for development purposes will be deleted before final release /MS
         private void OpenAdminForm()
         {
-            this.Hide();
-            Admin Admin = new Admin(ServiceManager, "admin");
-            Admin.ShowDialog();
-            this.Show();
+            try
+            {
+                this.Hide();
+                AdminMain Admin = new AdminMain(ServiceManager, "admin");
+                Admin.ShowDialog();
+                this.Show();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error");
+            }
         }
         //Temp method used to bypass the login and connect straigt to an instance of the consultant form, on a specific user -> Used only for development purposes and will be deleted before final release /MS
         private void OpenConsultantForm()
         {
-            var user = userService.GetAllUsers();
-            var targetUser = user.Where(i => i.UserName == tb_UserName.Text).First();
-            this.Hide();
-            targetUser.UserName = "fbeccles0";
-            targetUser.Password = "password";
-            Consultant consultant = new Consultant(ServiceManager, targetUser.UserName);
-            consultant.ShowDialog();
-            this.Show();
+            try
+            {
+                var user = userService.GetAllUsers();
+                var targetUser = user.Where(i => i.UserName == tb_UserName.Text).First();
+                this.Hide();
+                targetUser.UserName = "fbeccles0";
+                targetUser.Password = "password";
+                Consultant consultant = new Consultant(ServiceManager, targetUser.UserName);
+                consultant.ShowDialog();
+                this.Show();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error");
+            }
         }
         //Method to open form for creating a new user in the system /MS
         private void OpenCreateUserForm()
@@ -113,7 +128,7 @@ namespace GUI
                 if (targetUser.Password == tb_Password.Text && targetUser.UserType == "admin")
                 {
                     this.Hide();
-                    GUI.Admin a = new Admin(ServiceManager, targetUser.UserName);
+                    AdminMain a = new AdminMain(ServiceManager, targetUser.UserName);
                     a.Show();
                 }
             }
@@ -136,14 +151,13 @@ namespace GUI
             //await Task.Delay(3000);
             try
             {
-                var user = userService.GetAllUsers();
-                var anyUser = user.Where(i => i.UserName.IsNullOrEmpty());
-                if (anyUser != null)
+                var anyUser = userService.GetAllUsers();
+                if (anyUser.Count > 0)
                 {
                     lb_connectionTest.Invoke((MethodInvoker)(() => lb_connectionTest.Text = "OK!"));
                     pb_ConnectionStatus.Image = img_RedGreen.Images[1];
                 }
-                if (anyUser == null)
+                else 
                 {
                     lb_connectionTest.Invoke((MethodInvoker)(() => lb_connectionTest.Text = "No connection!"));
                     pb_ConnectionStatus.Image = img_RedGreen.Images[0];

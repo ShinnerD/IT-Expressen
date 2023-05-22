@@ -30,9 +30,9 @@ namespace DAL.Repository
 
                 Invite.ProjectId = dbInvite.Project_ID;
                 Invite.UserId = dbInvite.User_ID;
-                Invite.InviteDate = (DateTime)dbInvite.Invite_Date;
+                Invite.InviteDate = dbInvite.Invite_Date;
                 Invite.InviteStatus = dbInvite.Invite_status;
-                Invite.AcceptDate = (DateTime)dbInvite.Accept_date;
+                Invite.AcceptDate = dbInvite.Accept_date;
 
                 result.Add(Invite);
             }
@@ -46,7 +46,7 @@ namespace DAL.Repository
         {
             List<IInvitesModel> result = new List<IInvitesModel>();
 
-            var dbInvites = DataContext.Projects.First(i => i.Project_ID == projectid).Invites;
+            var dbInvites = DataContext.Invites.Where(i => i.Project_ID == projectid);
 
             foreach (var dbInvite in dbInvites)
             {
@@ -54,9 +54,9 @@ namespace DAL.Repository
 
                 Invite.ProjectId = dbInvite.Project_ID;
                 Invite.UserId = dbInvite.User_ID;
-                Invite.InviteDate = (DateTime)dbInvite.Invite_Date;
+                Invite.InviteDate = dbInvite.Invite_Date;
                 Invite.InviteStatus = dbInvite.Invite_status;
-                Invite.AcceptDate = (DateTime)dbInvite.Accept_date;
+                Invite.AcceptDate = dbInvite.Accept_date;
 
                 result.Add(Invite);
             }
@@ -74,9 +74,9 @@ namespace DAL.Repository
 
             result.ProjectId = dbInvite.Project_ID;
             result.UserId = dbInvite.User_ID;
-            result.InviteDate = (DateTime)dbInvite.Invite_Date;
+            result.InviteDate = dbInvite.Invite_Date;
             result.InviteStatus = dbInvite.Invite_status;
-            result.AcceptDate = (DateTime)dbInvite.Accept_date;
+            result.AcceptDate = dbInvite.Accept_date;
 
             return result;
         }
@@ -92,9 +92,9 @@ namespace DAL.Repository
 
             result.ProjectId = dbInvite.Project_ID;
             result.UserId = dbInvite.User_ID;
-            result.InviteDate = (DateTime)dbInvite.Invite_Date;
+            result.InviteDate = dbInvite.Invite_Date;
             result.InviteStatus = dbInvite.Invite_status;
-            result.AcceptDate = (DateTime)dbInvite.Accept_date;
+            result.AcceptDate = dbInvite.Accept_date;
 
             return result;
         }
@@ -114,9 +114,9 @@ namespace DAL.Repository
 
                 invite.ProjectId = dbinvite.Project_ID;
                 invite.UserId = dbinvite.User_ID;
-                invite.InviteDate = (DateTime)dbinvite.Invite_Date;
+                invite.InviteDate = dbinvite.Invite_Date;
                 invite.InviteStatus = dbinvite.Invite_status;
-                invite.AcceptDate = (DateTime)dbinvite.Accept_date;
+                invite.AcceptDate = dbinvite.Accept_date;
 
                 result.Add(invite);
             }
@@ -134,9 +134,9 @@ namespace DAL.Repository
 
             result.ProjectId = dbInvite.Project_ID;
             result.UserId = dbInvite.User_ID;
-            result.InviteDate = (DateTime)dbInvite.Invite_Date;
+            result.InviteDate = dbInvite.Invite_Date;
             result.InviteStatus = dbInvite.Invite_status;
-            result.AcceptDate = (DateTime)dbInvite.Accept_date;
+            result.AcceptDate = dbInvite.Accept_date;
 
             return result;
         }
@@ -146,6 +146,15 @@ namespace DAL.Repository
         /// </summary>
         public void AddInvite(IInvitesModel inviteModel)
         {
+            //Check to make sure the invite isn't a duplicate <-- check works in database as well, but code fails if it his SubmitChanges and
+            //the failed invite stays in memory and doesn't get cleared. /DK
+            ///  Don't remove the check for duplicate entries in this method. "For some reason" the session gets completely
+            ///  locked from adding new invites if one fails because of duplicate keys. So the check is there to make sure
+            ///  you never reach .SubmitChanges() if there already is a duplicate value. This prevents the locked state.
+            bool InviteExists = DataContext.Invites.Any(i => i.User_ID == inviteModel.UserId && i.Project_ID == inviteModel.ProjectId);
+            if (InviteExists) throw new Exception("An Invite for this user on this project, already exists.");
+
+            //If the invite doesn't exist on the database, go ahead and make one and insert.
             var linqInviteModel = new Linq.Invite();
 
             linqInviteModel.Project_ID = inviteModel.ProjectId;
@@ -163,7 +172,7 @@ namespace DAL.Repository
         /// </summary>
         public void UpdateInviteStatus(IInvitesModel inviteModel, int ProjectID)
         {
-            var dbInvites = DataContext.Invites.First(i => i.User_ID == inviteModel.UserId && i.Project_ID == ProjectID);
+            var dbInvites = DataContext.Invites.FirstOrDefault(i => i.User_ID == inviteModel.UserId && i.Project_ID == ProjectID);
 
             if (dbInvites != null && inviteModel != null)
             {
@@ -171,6 +180,20 @@ namespace DAL.Repository
                 dbInvites.Accept_date = inviteModel.AcceptDate;
                 dbInvites.User_ID = inviteModel.UserId;
 
+                DataContext.SubmitChanges();
+            }
+        }
+
+        /// <summary>
+        /// Deletes an Invite in the database.
+        /// </summary>
+        public void DeleteInvite(int projectId, int userId)
+        {
+            var dbInvite = DataContext.Invites.FirstOrDefault(i => i.Project_ID == projectId && i.User_ID == userId);
+
+            if (dbInvite != null)
+            {
+                DataContext.Invites.DeleteOnSubmit(dbInvite);
                 DataContext.SubmitChanges();
             }
         }

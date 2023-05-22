@@ -117,44 +117,49 @@ namespace GUI
 
         private void Accept()
         {
-            IProjectService projectService = ServiceManager.ProjectService;
+            if (dgv_ConsultantsInvites.SelectedRows.Count > 0)
+            {
+                IProjectService projectService = ServiceManager.ProjectService;
 
-            var targetProject = (int)dgv_ConsultantsInvites.SelectedCells[3].Value;
+                var targetProject = (int)dgv_ConsultantsInvites.SelectedCells[3].Value;
 
-            var selectedProject = ServiceManager.ProjectService.GetProject(targetProject);
+                var selectedProject = ServiceManager.ProjectService.GetProject(targetProject);
 
-            var selectedInvite = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as IInvitesModel;
+                var selectedInvite = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as IInvitesModel;
 
-            IInviteService inviteService = ServiceManager.InviteService;
+                IInviteService inviteService = ServiceManager.InviteService;
 
-            selectedInvite.InviteStatus = "Accepted";
-            selectedInvite.AcceptDate = DateTime.Now;
 
-            inviteService.UpdateInviteStatus(selectedInvite, selectedProject.ProjectId);
+                selectedInvite.InviteStatus = "Accepted";
+                selectedInvite.AcceptDate = DateTime.Now;
 
-            LoadInvitesToDGV();
+                inviteService.UpdateInviteStatus(selectedInvite, selectedProject.ProjectId);
+
+                LoadInvitesToDGV();
+            }
         }
 
         private void Declined()
         {
-            IProjectService projectService = ServiceManager.ProjectService;
+            if (dgv_ConsultantsInvites.SelectedRows.Count > 0)
+            {
+                IProjectService projectService = ServiceManager.ProjectService;
 
-            var targetProject = (int)dgv_ConsultantsInvites.SelectedCells[3].Value;
+                var targetProject = (int)dgv_ConsultantsInvites.SelectedCells[3].Value;
+                var selectedProject = ServiceManager.ProjectService.GetProject(targetProject);
 
-            var selectedProject = ServiceManager.ProjectService.GetProject(targetProject);
+                var selectedInvite = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as IInvitesModel;
 
-            var selectedInvite = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as IInvitesModel;
+                IInviteService inviteService = ServiceManager.InviteService;
 
-            IInviteService inviteService = ServiceManager.InviteService;
+                selectedInvite.InviteStatus = "Declined";
+                selectedInvite.AcceptDate = DateTime.Now;
 
-            selectedInvite.InviteStatus = "Declined";
-            selectedInvite.AcceptDate = DateTime.Now;
+                inviteService.UpdateInviteStatus(selectedInvite, selectedProject.ProjectId);
 
-            inviteService.UpdateInviteStatus(selectedInvite, selectedProject.ProjectId);
-
-            LoadInvitesToDGV();
+                LoadInvitesToDGV();
+            }
         }
-
         private void StartDateCheck()
         {
             IProjectService projectService = ServiceManager.ProjectService;

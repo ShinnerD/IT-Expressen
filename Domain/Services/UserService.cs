@@ -98,11 +98,25 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Deletes a user from the database.
+        /// Deletes a user from the database. /DK
         /// </summary>
-        public void Delete(string Delete)
+        public void Delete(int userId)
         {
-            userRepo.Delete(Delete);
+            //Check for Pending or Active or Pending Projects.
+            bool hasCurrentProjects = _domainServiceManager.ProjectService.GetUserProjects(userId)
+                .Where(i => i.ProjectStatus.ToLower() != "ended" && i.ProjectStatus.ToLower() != "deleted").Count() > 0;
+
+            //If they don't then proceed with user deletion.
+            if (!hasCurrentProjects)
+            {
+                userRepo.Delete(userId);
+            }
+            //Otherwise throw an exception to the presentation layer that says the user cant be deleted
+            //because of pending or active projects.
+            else
+            {
+                throw new Exception("Can't delete user. They stil have active or pending projects.");
+            }
         }
 
         /// <summary>
