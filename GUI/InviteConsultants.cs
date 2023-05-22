@@ -27,6 +27,7 @@ namespace GUI
             InitializeComponent();
             GetProjectInfo();
             LoadProjectData();
+            invitedConsultants();
         }
 
         //Constructor method loaded with project model. All relevent data is loaded /MS
@@ -82,14 +83,17 @@ namespace GUI
             dgv_ConsultantList.Columns.Add("InvitedUserFullName", "Full name");
             dgv_ConsultantList.Columns["InvitedUSerFullName"].DataPropertyName = "InvitedUSerFullName";
 
+            dgv_ConsultantList.Columns.Add("InviteDate", "Invited Date");
+            dgv_ConsultantList.Columns["InviteDate"].DataPropertyName = "InviteDate";
+
             dgv_ConsultantList.Columns.Add("InviteStatus", " Status for invite");
             dgv_ConsultantList.Columns["InviteStatus"].DataPropertyName = "InviteStatus";
 
-            dgv_ConsultantList.Columns.Add("InvitedUserSpecializations", "Specializations");
-            dgv_ConsultantList.Columns["InvitedUserSpecializations"].DataPropertyName = "InvitedUserSpecializations";
-
             dgv_ConsultantList.Columns.Add("AcceptDate", "Accept Date");
             dgv_ConsultantList.Columns["AcceptDate"].DataPropertyName = "AcceptDate";
+
+            dgv_ConsultantList.Columns.Add("InvitedUserSpecializations", "Specializations");
+            dgv_ConsultantList.Columns["InvitedUserSpecializations"].DataPropertyName = "InvitedUserSpecializations";
 
             dgv_ConsultantList.DataSource = invService.GetAllInvitedProjectID(ProjectGet.ProjectId);
         }
