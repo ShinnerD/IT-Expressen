@@ -75,6 +75,7 @@
             this.bt_AddConcultant.TabIndex = 3;
             this.bt_AddConcultant.Text = "Invite Consultant";
             this.bt_AddConcultant.UseVisualStyleBackColor = true;
+            this.bt_AddConcultant.Click += new System.EventHandler(this.bt_AddConcultant_Click);
             // 
             // userServiceBindingSource
             // 
@@ -89,6 +90,7 @@
             this.bt_back.TabIndex = 5;
             this.bt_back.Text = "Back";
             this.bt_back.UseVisualStyleBackColor = true;
+            this.bt_back.Click += new System.EventHandler(this.bt_back_Click);
             // 
             // checkedListSkills
             // 
@@ -138,6 +140,7 @@
             this.radioBtnAll.TabStop = true;
             this.radioBtnAll.Text = "All";
             this.radioBtnAll.UseVisualStyleBackColor = true;
+            this.radioBtnAll.Click += new System.EventHandler(this.radioBtnAny_CheckedChanged);
             // 
             // radioBtnAny
             // 
@@ -150,6 +153,7 @@
             this.radioBtnAny.TabStop = true;
             this.radioBtnAny.Text = "Any";
             this.radioBtnAny.UseVisualStyleBackColor = true;
+            this.radioBtnAny.Click += new System.EventHandler(this.radioBtnAny_CheckedChanged);
             // 
             // grpBoxProjectRequirements
             // 

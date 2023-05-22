@@ -65,6 +65,7 @@
             this.bt_CreateUser.TabIndex = 0;
             this.bt_CreateUser.Text = "Create User";
             this.bt_CreateUser.UseVisualStyleBackColor = true;
+            this.bt_CreateUser.Click += new System.EventHandler(this.bt_CreateUser_Click);
             // 
             // bt_AdminAccess
             // 
@@ -74,6 +75,7 @@
             this.bt_AdminAccess.TabIndex = 1;
             this.bt_AdminAccess.Text = "Admin";
             this.bt_AdminAccess.UseVisualStyleBackColor = true;
+            this.bt_AdminAccess.Click += new System.EventHandler(this.bt_AdminAccess_Click);
             // 
             // bt_ConsultantAccess
             // 
@@ -83,6 +85,7 @@
             this.bt_ConsultantAccess.TabIndex = 2;
             this.bt_ConsultantAccess.Text = "Consultant";
             this.bt_ConsultantAccess.UseVisualStyleBackColor = true;
+            this.bt_ConsultantAccess.Click += new System.EventHandler(this.bt_ConsultantAccess_Click);
             // 
             // bt_ManagerAccess
             // 
@@ -92,6 +95,7 @@
             this.bt_ManagerAccess.TabIndex = 3;
             this.bt_ManagerAccess.Text = "Manager";
             this.bt_ManagerAccess.UseVisualStyleBackColor = true;
+            this.bt_ManagerAccess.Click += new System.EventHandler(this.bt_ManagerAccess_Click);
             // 
             // label1
             // 
@@ -164,6 +168,7 @@
             this.bt_Login.Text = "Login";
             this.toolTip1.SetToolTip(this.bt_Login, "Login button will get you into your account ");
             this.bt_Login.UseVisualStyleBackColor = true;
+            this.bt_Login.Click += new System.EventHandler(this.bt_Login_Click);
             // 
             // bt_cancel
             // 
@@ -174,6 +179,7 @@
             this.bt_cancel.Text = "Cancel";
             this.toolTip2.SetToolTip(this.bt_cancel, "Will close the program.");
             this.bt_cancel.UseVisualStyleBackColor = true;
+            this.bt_cancel.Click += new System.EventHandler(this.bt_cancel_Click);
             // 
             // lb_connectionTest
             // 

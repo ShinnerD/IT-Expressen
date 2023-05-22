@@ -282,6 +282,7 @@
             this.bt_CreateUser.TabIndex = 22;
             this.bt_CreateUser.Text = "Ok";
             this.bt_CreateUser.UseVisualStyleBackColor = true;
+            this.bt_CreateUser.Click += new System.EventHandler(this.bt_CreateUser_Click);
             // 
             // cb_UserType
             // 
@@ -293,6 +294,7 @@
             this.cb_UserType.Name = "cb_UserType";
             this.cb_UserType.Size = new System.Drawing.Size(179, 23);
             this.cb_UserType.TabIndex = 24;
+            this.cb_UserType.Click += new System.EventHandler(this.cb_UserType_SelectedValueChanged);
             // 
             // clb_Skills
             // 
@@ -351,6 +353,7 @@
             this.bt_back.TabIndex = 31;
             this.bt_back.Text = "Cancel";
             this.bt_back.UseVisualStyleBackColor = true;
+            this.bt_back.Click += new System.EventHandler(this.bt_back_Click);
             // 
             // CreateUser
             // 
