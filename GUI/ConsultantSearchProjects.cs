@@ -7,9 +7,6 @@ namespace GUI
     public partial class ConsultantSearchProjects : Form
     {
         private readonly IDomainServiceManager ServiceManager;
-        private IProjectService projectService;
-        private IUserService userService;
-        private List<IProjectModel> projectsSearchResults;
 
         public List<string> ConsultantSpecializations { get; set; }
         private List<IProjectModel> SearchResults { get; set; }
@@ -19,21 +16,14 @@ namespace GUI
         public ConsultantSearchProjects(IDomainServiceManager serviceManager, int userId)
         {
             ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
-            projectService = ServiceManager.ProjectService;
-            userService = ServiceManager.UserService;
 
             InitializeComponent();
-            SetUpUserDataGridView();
-            SetupSkillsCheckList();
             UserId = userId;
-            GetProjectInfo();
             SetupPageElements();
-            SetupsDataGridview();
         }
 
         private void SetUpUserDataGridView()
         {
-            ISpecializationService specService = ServiceManager.SpecializationService;
             dgv_Searchproject.AutoGenerateColumns = false;
 
             dgv_Searchproject.Columns.Add("ProjectId", "ID");
@@ -47,32 +37,21 @@ namespace GUI
 
             dgv_Searchproject.Columns.Add("ProjectStatus", "Status");
             dgv_Searchproject.Columns["ProjectStatus"].DataPropertyName = "ProjectStatus";
-
-            List<string> allSpecializations = specService.ListDefinedSpecializations();
-            projectsSearchResults = projectService.GetProjectsFromAnySpecializations(allSpecializations).OrderBy(i => i.Title).ToList();
-            dgv_Searchproject.DataSource = projectsSearchResults;
         }
 
         private void GetProjectInfo()
         {
-            ISpecializationService specializationService = ServiceManager.SpecializationService;
-
-            Consultant = userService.GetUserFromID(UserId);
-            ConsultantSpecializations = specializationService.GetUserSpecializations(UserId);
+            Consultant = ServiceManager.UserService.GetUserFromID(UserId);
+            ConsultantSpecializations = ServiceManager.SpecializationService.GetUserSpecializations(UserId);
         }
 
         private void SetupPageElements()
         {
+            GetProjectInfo();
+            SetUpUserDataGridView();
+            SetupSkillsCheckList();
             CheckProjectSkills();
-            SetupDataGridview();
-        }
-
-        private void SetupDataGridview()
-        {
-            ISpecializationService specService = ServiceManager.SpecializationService;
-            List<string> allSpecializations = specService.ListDefinedSpecializations();
-            SearchResults = projectService.GetProjectsFromAnySpecializations(allSpecializations);
-            dgv_Searchproject.DataSource = SearchResults;
+            UpdateDataGridView();
         }
 
         private void CheckProjectSkills()
@@ -85,44 +64,24 @@ namespace GUI
 
         private void SetupSkillsCheckList()
         {
-            ISpecializationService specService = ServiceManager.SpecializationService;
-            List<string> items = specService.ListDefinedSpecializations().OrderBy(i => i).ToList();
-
-            foreach (var item in items)
-            {
-                checkedListSkills.Items.Add(item);
-            }
-
-            if (items.Count == 0)
-            {
-                MessageBox.Show("Failed to retrieve skills from server.");
-            }
+            checkedListSkills.Items.AddRange(ServiceManager.SpecializationService.ListDefinedSpecializations().ToArray());
         }
 
-        private void SetupsDataGridview()
+        private void UpdateDataGridView()
         {
-            ISpecializationService specService = ServiceManager.SpecializationService;
-            List<string> allSpecializations = specService.ListDefinedSpecializations();
-
             // Filter projects based on selected skills
-            List<string> selectedSkills = new List<string>();
+            List<string> selectedSkills = checkedListSkills.CheckedItems.Cast<string>().ToList();
 
-            foreach (var item in checkedListSkills.CheckedItems)
-            {
-                if (item is string skill)
-                {
-                    selectedSkills.Add(skill);
-                }
-            }
+            dgv_Searchproject.DataSource = null;
 
-            SearchResults = projectService.GetProjectsFromAnySpecializations(selectedSkills);
+            SearchResults = ServiceManager.ProjectService.GetProjectsFromAnySpecializations(selectedSkills);
 
             dgv_Searchproject.DataSource = SearchResults;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            SetupsDataGridview();
+            UpdateDataGridView();
         }
     }
 }
