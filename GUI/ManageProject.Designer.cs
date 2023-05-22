@@ -87,7 +87,7 @@
             grpBoxProfileInfo.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             grpBoxProfileInfo.Location = new Point(0, 0);
             grpBoxProfileInfo.Name = "grpBoxProfileInfo";
-            grpBoxProfileInfo.Size = new Size(887, 157);
+            grpBoxProfileInfo.Size = new Size(957, 157);
             grpBoxProfileInfo.TabIndex = 23;
             grpBoxProfileInfo.TabStop = false;
             grpBoxProfileInfo.Text = "User Name";
@@ -96,7 +96,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(693, 22);
+            label1.Location = new Point(678, 23);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
             label1.Size = new Size(70, 15);
@@ -106,10 +106,10 @@
             // rtb_Description
             // 
             rtb_Description.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            rtb_Description.Location = new Point(693, 48);
+            rtb_Description.Location = new Point(680, 48);
             rtb_Description.Name = "rtb_Description";
             rtb_Description.ReadOnly = true;
-            rtb_Description.Size = new Size(182, 98);
+            rtb_Description.Size = new Size(265, 98);
             rtb_Description.TabIndex = 101;
             rtb_Description.Text = "";
             // 
@@ -118,7 +118,7 @@
             bt_EditProfileCancel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             bt_EditProfileCancel.Enabled = false;
             bt_EditProfileCancel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            bt_EditProfileCancel.Location = new Point(1167, 126);
+            bt_EditProfileCancel.Location = new Point(1237, 126);
             bt_EditProfileCancel.Margin = new Padding(2);
             bt_EditProfileCancel.Name = "bt_EditProfileCancel";
             bt_EditProfileCancel.Size = new Size(100, 25);
@@ -141,7 +141,7 @@
             // 
             bt_EditProfile.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             bt_EditProfile.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            bt_EditProfile.Location = new Point(1271, 126);
+            bt_EditProfile.Location = new Point(1341, 126);
             bt_EditProfile.Margin = new Padding(2);
             bt_EditProfile.Name = "bt_EditProfile";
             bt_EditProfile.Size = new Size(100, 25);
@@ -190,7 +190,7 @@
             tb_Country.BorderStyle = BorderStyle.None;
             tb_Country.Enabled = false;
             tb_Country.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            tb_Country.Location = new Point(431, 101);
+            tb_Country.Location = new Point(423, 101);
             tb_Country.Margin = new Padding(2);
             tb_Country.Name = "tb_Country";
             tb_Country.Size = new Size(251, 16);
@@ -214,7 +214,7 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label9.Location = new Point(372, 101);
+            label9.Location = new Point(364, 101);
             label9.Margin = new Padding(2, 0, 2, 0);
             label9.Name = "label9";
             label9.Size = new Size(55, 15);
@@ -227,7 +227,7 @@
             tb_ProjectModifiedDate.BorderStyle = BorderStyle.None;
             tb_ProjectModifiedDate.Enabled = false;
             tb_ProjectModifiedDate.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            tb_ProjectModifiedDate.Location = new Point(431, 74);
+            tb_ProjectModifiedDate.Location = new Point(423, 74);
             tb_ProjectModifiedDate.Margin = new Padding(2);
             tb_ProjectModifiedDate.Name = "tb_ProjectModifiedDate";
             tb_ProjectModifiedDate.Size = new Size(251, 16);
@@ -238,7 +238,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label8.Location = new Point(305, 77);
+            label8.Location = new Point(297, 77);
             label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
             label8.Size = new Size(122, 15);
@@ -262,7 +262,7 @@
             tb_ProjectEndDate.BorderStyle = BorderStyle.None;
             tb_ProjectEndDate.Enabled = false;
             tb_ProjectEndDate.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            tb_ProjectEndDate.Location = new Point(431, 48);
+            tb_ProjectEndDate.Location = new Point(423, 48);
             tb_ProjectEndDate.Margin = new Padding(2);
             tb_ProjectEndDate.Name = "tb_ProjectEndDate";
             tb_ProjectEndDate.Size = new Size(251, 16);
@@ -288,7 +288,7 @@
             tb_ProjectStartDate.BorderStyle = BorderStyle.None;
             tb_ProjectStartDate.Enabled = false;
             tb_ProjectStartDate.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            tb_ProjectStartDate.Location = new Point(431, 22);
+            tb_ProjectStartDate.Location = new Point(423, 22);
             tb_ProjectStartDate.Margin = new Padding(2);
             tb_ProjectStartDate.Name = "tb_ProjectStartDate";
             tb_ProjectStartDate.Size = new Size(251, 16);
@@ -312,7 +312,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(333, 51);
+            label5.Location = new Point(325, 51);
             label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
             label5.Size = new Size(94, 15);
@@ -334,7 +334,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.Location = new Point(326, 25);
+            label6.Location = new Point(318, 25);
             label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
             label6.Size = new Size(101, 15);
@@ -346,7 +346,7 @@
             rtb_Message.Location = new Point(26, 181);
             rtb_Message.Name = "rtb_Message";
             rtb_Message.ReadOnly = true;
-            rtb_Message.Size = new Size(661, 207);
+            rtb_Message.Size = new Size(648, 207);
             rtb_Message.TabIndex = 24;
             rtb_Message.Text = "";
             // 
@@ -354,14 +354,14 @@
             // 
             rtb_newMessage.Location = new Point(26, 394);
             rtb_newMessage.Name = "rtb_newMessage";
-            rtb_newMessage.Size = new Size(661, 96);
+            rtb_newMessage.Size = new Size(648, 96);
             rtb_newMessage.TabIndex = 25;
             rtb_newMessage.Text = "";
             rtb_newMessage.TextChanged += rtb_newMessage_TextChanged;
             // 
             // bt_send
             // 
-            bt_send.Location = new Point(612, 504);
+            bt_send.Location = new Point(599, 504);
             bt_send.Name = "bt_send";
             bt_send.Size = new Size(75, 23);
             bt_send.TabIndex = 26;
@@ -374,7 +374,7 @@
             lb_TextCounter.AutoSize = true;
             lb_TextCounter.BackColor = SystemColors.Window;
             lb_TextCounter.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lb_TextCounter.Location = new Point(611, 471);
+            lb_TextCounter.Location = new Point(599, 475);
             lb_TextCounter.Name = "lb_TextCounter";
             lb_TextCounter.Size = new Size(40, 15);
             lb_TextCounter.TabIndex = 27;
@@ -384,18 +384,18 @@
             // 
             dgv_InvolvedUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_InvolvedUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_InvolvedUsers.Location = new Point(693, 181);
+            dgv_InvolvedUsers.Location = new Point(680, 181);
             dgv_InvolvedUsers.Name = "dgv_InvolvedUsers";
             dgv_InvolvedUsers.RowHeadersVisible = false;
             dgv_InvolvedUsers.RowTemplate.Height = 25;
-            dgv_InvolvedUsers.Size = new Size(182, 346);
+            dgv_InvolvedUsers.Size = new Size(265, 346);
             dgv_InvolvedUsers.TabIndex = 28;
             // 
             // lb_warning
             // 
             lb_warning.AutoSize = true;
             lb_warning.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lb_warning.Location = new Point(298, 506);
+            lb_warning.Location = new Point(285, 506);
             lb_warning.Margin = new Padding(2, 0, 2, 0);
             lb_warning.Name = "lb_warning";
             lb_warning.Size = new Size(309, 17);
@@ -407,7 +407,8 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(887, 539);
+            AutoSize = true;
+            ClientSize = new Size(957, 539);
             Controls.Add(lb_warning);
             Controls.Add(dgv_InvolvedUsers);
             Controls.Add(lb_TextCounter);
