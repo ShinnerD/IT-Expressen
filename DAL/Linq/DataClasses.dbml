@@ -112,4 +112,7 @@
       <Association Name="User_Invite" Member="User" ThisKey="User_ID" OtherKey="User_ID" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
+  <Function Name="dbo.UpdateProjectStatusForAll" Method="UpdateProjectStatusForAll">
+    <Return Type="System.Int32" />
+  </Function>
 </Database>

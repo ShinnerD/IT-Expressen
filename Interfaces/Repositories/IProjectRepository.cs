@@ -47,5 +47,11 @@ namespace Interfaces.Repositories
         /// This method searches for projects based on a search term and a user ID. /JQ
         /// </summary>
         List<IProjectModel> SearchProjects(string searchTerm, int userId);
+
+        /// <summary>
+        /// Runs a stored procedure on the database. Updates the Project Status column for all rows on the Projects table
+        /// according to the project's start and end date by using the current date.
+        /// </summary>
+        void UpdateProjectStatusForAll();
     }
 }

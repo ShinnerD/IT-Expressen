@@ -146,7 +146,7 @@ namespace GUI
         {
 
             IInviteService inviteService = invService;
-            invites = inviteService.GetInvitesFromUserId(userModelGet.ID).Where(i => i.InviteStatus.ToLower() == "accepted").ToList();
+            invites = inviteService.GetInvitesFromUserId(userModelGet.ID).Where(i => i.InviteStatus?.ToLower() == "accepted").ToList();
             List<IProjectModel> relatedProjects = new List<IProjectModel>();
 
             foreach (IInvitesModel invite in invites)
@@ -184,12 +184,12 @@ namespace GUI
         {
             if (dgv_ConsultantsInvites.SelectedRows.Count > 0)
             {
-            var selectedProject = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as IInvitesModel;
-            AcceptInviteForm AccInvForm = new AcceptInviteForm(ServiceManager, selectedProject);
-            this.Hide();
-            AccInvForm.ShowDialog();
-            this.Show();
-            LoadInvitesToDGV();
+                var selectedProject = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as IInvitesModel;
+                AcceptInviteForm AccInvForm = new AcceptInviteForm(ServiceManager, selectedProject);
+                this.Hide();
+                AccInvForm.ShowDialog();
+                this.Show();
+                LoadInvitesToDGV();
             }
         }
         private void EditCancel()

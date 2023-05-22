@@ -117,6 +117,8 @@ namespace Domain.Services
         public void UpdateProject(IProjectModel project, List<string> specializations)
         {
             CheckValuesForProject(project);
+            //Check Specific to UpdateProject
+            if (project.ProjectEndDate < DateTime.Now) { throw new ArgumentException("Can't update project details after project end."); }
 
             var currentProjectSpecializations = _domainServiceManager.SpecializationService.GetProjectSpecializations(project.ProjectId);
 
@@ -180,6 +182,16 @@ namespace Domain.Services
         {
             return AssignDomainDetails(_projectRepo.SearchProjects(searchTerm, userId).OrderBy(i => i.Title).ToList());
         }
+
+        /// <summary>
+        /// Updates the Project Status for ALL projects in the Projects table.
+        /// Stored Procedure to be executed on program launch. /DK
+        /// </summary>
+        public void UpdateAllProjectStatus()
+        {
+            _projectRepo.UpdateProjectStatusForAll();
+        }
+
 
         /// <summary>
         /// Private service method. Assigns manager details to the IProjectModels. (Full Name and User Name) /DK

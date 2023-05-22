@@ -186,13 +186,29 @@ namespace DAL.Repository
 
             if (targetUser != null)
             {
-                dtoProjects = dbContext.Projects.Where(i => i.User_ID == userId 
+                dtoProjects = dbContext.Projects.Where(i => i.User_ID == userId
                     && i.Title.ToLower().Contains(searchTerm.ToLower())).ToList();
             }
 
             List<IProjectModel> result = TransferAllProjectProperties(dtoProjects);
 
             return result;
+        }
+
+        /// <summary>
+        /// Updates the Project Status for ALL projects in the Projects table.
+        /// Stored Procedure to be executed on program launch. /DK
+        /// </summary>
+        public void UpdateProjectStatusForAll()
+        {
+            try
+            {
+                dbContext.UpdateProjectStatusForAll();
+            }
+            catch (Exception)
+            {
+                throw new Exception("Server failed to update project status'.");
+            }
         }
     }
 }

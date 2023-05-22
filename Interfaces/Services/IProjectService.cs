@@ -43,6 +43,12 @@ namespace Interfaces.Services
         List<IProjectModel> GetProjectsFromAnySpecializations(List<string> specializations);
 
         /// <summary>
+        /// Updates the Project Status for ALL projects in the Projects table.
+        /// Stored Procedure to be executed on program launch. /DK
+        /// </summary>
+        void UpdateAllProjectStatus();
+
+        /// <summary>
         /// This method searches for projects based on a search term and a user ID. /JQ
         /// </summary>
         List<IProjectModel> SearchProjects(string searchTerm, int userId);

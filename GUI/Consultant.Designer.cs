@@ -63,7 +63,8 @@
             // 
             // bt_ViewProjects
             // 
-            bt_ViewProjects.Location = new Point(410, 160);
+            bt_ViewProjects.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            bt_ViewProjects.Location = new Point(424, 160);
             bt_ViewProjects.Margin = new Padding(2);
             bt_ViewProjects.Name = "bt_ViewProjects";
             bt_ViewProjects.Size = new Size(100, 26);
@@ -74,7 +75,8 @@
             // 
             // bt_SearchProjects
             // 
-            bt_SearchProjects.Location = new Point(514, 160);
+            bt_SearchProjects.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            bt_SearchProjects.Location = new Point(528, 160);
             bt_SearchProjects.Margin = new Padding(2);
             bt_SearchProjects.Name = "bt_SearchProjects";
             bt_SearchProjects.Size = new Size(100, 26);
@@ -85,31 +87,33 @@
             // 
             // dgv_ConsultantsInvites
             // 
+            dgv_ConsultantsInvites.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgv_ConsultantsInvites.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_ConsultantsInvites.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_ConsultantsInvites.Dock = DockStyle.Top;
             dgv_ConsultantsInvites.Location = new Point(3, 19);
             dgv_ConsultantsInvites.Name = "dgv_ConsultantsInvites";
             dgv_ConsultantsInvites.RowHeadersVisible = false;
             dgv_ConsultantsInvites.RowTemplate.Height = 25;
             dgv_ConsultantsInvites.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv_ConsultantsInvites.Size = new Size(595, 297);
+            dgv_ConsultantsInvites.Size = new Size(609, 302);
             dgv_ConsultantsInvites.TabIndex = 37;
             // 
             // groupBox1
             // 
+            groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             groupBox1.Controls.Add(bt_seeProjects);
             groupBox1.Controls.Add(dgv_ConsultantsInvites);
             groupBox1.Location = new Point(12, 194);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(601, 348);
+            groupBox1.Size = new Size(615, 356);
             groupBox1.TabIndex = 40;
             groupBox1.TabStop = false;
             groupBox1.Text = "My Projects";
             // 
             // bt_seeProjects
             // 
-            bt_seeProjects.Location = new Point(398, 320);
+            bt_seeProjects.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            bt_seeProjects.Location = new Point(412, 327);
             bt_seeProjects.Name = "bt_seeProjects";
             bt_seeProjects.Size = new Size(200, 23);
             bt_seeProjects.TabIndex = 43;
@@ -143,7 +147,7 @@
             grpBoxProfileInfo.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             grpBoxProfileInfo.Location = new Point(0, 0);
             grpBoxProfileInfo.Name = "grpBoxProfileInfo";
-            grpBoxProfileInfo.Size = new Size(625, 157);
+            grpBoxProfileInfo.Size = new Size(639, 157);
             grpBoxProfileInfo.TabIndex = 41;
             grpBoxProfileInfo.TabStop = false;
             grpBoxProfileInfo.Text = "User Name";
@@ -152,7 +156,7 @@
             // 
             bt_Edit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             bt_Edit.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            bt_Edit.Location = new Point(514, 126);
+            bt_Edit.Location = new Point(528, 126);
             bt_Edit.Margin = new Padding(2);
             bt_Edit.Name = "bt_Edit";
             bt_Edit.Size = new Size(100, 25);
@@ -166,7 +170,7 @@
             bt_EditCancel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             bt_EditCancel.Enabled = false;
             bt_EditCancel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            bt_EditCancel.Location = new Point(410, 126);
+            bt_EditCancel.Location = new Point(424, 126);
             bt_EditCancel.Margin = new Padding(2);
             bt_EditCancel.Name = "bt_EditCancel";
             bt_EditCancel.Size = new Size(100, 25);
@@ -190,7 +194,7 @@
             // 
             bt_EditProfileTest.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             bt_EditProfileTest.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            bt_EditProfileTest.Location = new Point(1013, 126);
+            bt_EditProfileTest.Location = new Point(1027, 126);
             bt_EditProfileTest.Margin = new Padding(2);
             bt_EditProfileTest.Name = "bt_EditProfileTest";
             bt_EditProfileTest.Size = new Size(100, 25);
@@ -243,7 +247,7 @@
             tb_Country.Location = new Point(360, 101);
             tb_Country.Margin = new Padding(2);
             tb_Country.Name = "tb_Country";
-            tb_Country.Size = new Size(753, 16);
+            tb_Country.Size = new Size(274, 16);
             tb_Country.TabIndex = 8;
             tb_Country.TabStop = false;
             // 
@@ -281,7 +285,7 @@
             tb_Zipcode.Location = new Point(360, 74);
             tb_Zipcode.Margin = new Padding(2);
             tb_Zipcode.Name = "tb_Zipcode";
-            tb_Zipcode.Size = new Size(753, 16);
+            tb_Zipcode.Size = new Size(274, 16);
             tb_Zipcode.TabIndex = 7;
             tb_Zipcode.TabStop = false;
             // 
@@ -317,7 +321,7 @@
             tb_City.Location = new Point(360, 49);
             tb_City.Margin = new Padding(2);
             tb_City.Name = "tb_City";
-            tb_City.Size = new Size(753, 16);
+            tb_City.Size = new Size(274, 16);
             tb_City.TabIndex = 6;
             tb_City.TabStop = false;
             // 
@@ -344,7 +348,7 @@
             tb_Address.Location = new Point(360, 22);
             tb_Address.Margin = new Padding(2);
             tb_Address.Name = "tb_Address";
-            tb_Address.Size = new Size(753, 16);
+            tb_Address.Size = new Size(274, 16);
             tb_Address.TabIndex = 5;
             tb_Address.TabStop = false;
             // 
@@ -408,13 +412,15 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(625, 553);
+            ClientSize = new Size(639, 561);
             Controls.Add(bt_seeInvites);
             Controls.Add(grpBoxProfileInfo);
             Controls.Add(bt_SearchProjects);
             Controls.Add(bt_ViewProjects);
             Controls.Add(groupBox1);
+            MinimumSize = new Size(655, 600);
             Name = "Consultant";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Consultant";
             ((System.ComponentModel.ISupportInitialize)dgv_ConsultantsInvites).EndInit();
             groupBox1.ResumeLayout(false);

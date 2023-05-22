@@ -151,13 +151,15 @@ namespace GUI
             //await Task.Delay(3000);
             try
             {
+                ServiceManager.ProjectService.UpdateAllProjectStatus();
                 var anyUser = userService.GetAllUsers();
                 if (anyUser.Count > 0)
                 {
                     lb_connectionTest.Invoke((MethodInvoker)(() => lb_connectionTest.Text = "OK!"));
+                    lb_FeedbackLabel.Invoke((MethodInvoker)(() => lb_FeedbackLabel.Text = "Connection Established"));
                     pb_ConnectionStatus.Image = img_RedGreen.Images[1];
                 }
-                else 
+                else
                 {
                     lb_connectionTest.Invoke((MethodInvoker)(() => lb_connectionTest.Text = "No connection!"));
                     pb_ConnectionStatus.Image = img_RedGreen.Images[0];
