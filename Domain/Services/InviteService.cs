@@ -65,6 +65,14 @@ namespace Domain.Services
         }
 
         /// <summary>
+        /// Deletes an invite from the database.
+        /// </summary>
+        public void DeleteInvite(IInvitesModel invite)
+        {
+            InvRepo.DeleteInvite(invite.ProjectId, invite.UserId);
+        }
+
+        /// <summary>
         /// Private Service Class method that fills additional properties on the IInviteModels that needs to
         /// fetched from other repositories than the InvitesRepository.
         /// </summary>
@@ -100,6 +108,7 @@ namespace Domain.Services
             if (invitedUser != null && invitedToProject != null)
             {
                 invite.InvitedUserName = invitedUser.UserName;
+                invite.InvitedUserFullName = invitedUser.FullName;
                 invite.InvitedUserSpecializations = invitedUser.Specializations;
                 invite.ProjectTitle = invitedToProject.Title;
                 invite.ManagerName = invitedToProject.ManagerFullName;

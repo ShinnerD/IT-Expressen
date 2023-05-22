@@ -30,9 +30,9 @@ namespace DAL.Repository
 
                 Invite.ProjectId = dbInvite.Project_ID;
                 Invite.UserId = dbInvite.User_ID;
-                Invite.InviteDate = (DateTime)dbInvite.Invite_Date;
+                Invite.InviteDate = dbInvite.Invite_Date;
                 Invite.InviteStatus = dbInvite.Invite_status;
-                Invite.AcceptDate = (DateTime)dbInvite.Accept_date;
+                Invite.AcceptDate = dbInvite.Accept_date;
 
                 result.Add(Invite);
             }
@@ -54,9 +54,9 @@ namespace DAL.Repository
 
                 Invite.ProjectId = dbInvite.Project_ID;
                 Invite.UserId = dbInvite.User_ID;
-                Invite.InviteDate = (DateTime)dbInvite.Invite_Date;
+                Invite.InviteDate = dbInvite.Invite_Date;
                 Invite.InviteStatus = dbInvite.Invite_status;
-                Invite.AcceptDate = (DateTime)dbInvite.Accept_date;
+                Invite.AcceptDate = dbInvite.Accept_date;
 
                 result.Add(Invite);
             }
@@ -74,9 +74,9 @@ namespace DAL.Repository
 
             result.ProjectId = dbInvite.Project_ID;
             result.UserId = dbInvite.User_ID;
-            result.InviteDate = (DateTime)dbInvite.Invite_Date;
+            result.InviteDate = dbInvite.Invite_Date;
             result.InviteStatus = dbInvite.Invite_status;
-            result.AcceptDate = (DateTime)dbInvite.Accept_date;
+            result.AcceptDate = dbInvite.Accept_date;
 
             return result;
         }
@@ -92,9 +92,9 @@ namespace DAL.Repository
 
             result.ProjectId = dbInvite.Project_ID;
             result.UserId = dbInvite.User_ID;
-            result.InviteDate = (DateTime)dbInvite.Invite_Date;
+            result.InviteDate = dbInvite.Invite_Date;
             result.InviteStatus = dbInvite.Invite_status;
-            result.AcceptDate = (DateTime)dbInvite.Accept_date;
+            result.AcceptDate = dbInvite.Accept_date;
 
             return result;
         }
@@ -114,9 +114,9 @@ namespace DAL.Repository
 
                 invite.ProjectId = dbinvite.Project_ID;
                 invite.UserId = dbinvite.User_ID;
-                invite.InviteDate = (DateTime)dbinvite.Invite_Date;
+                invite.InviteDate = dbinvite.Invite_Date;
                 invite.InviteStatus = dbinvite.Invite_status;
-                invite.AcceptDate = (DateTime)dbinvite.Accept_date;
+                invite.AcceptDate = dbinvite.Accept_date;
 
                 result.Add(invite);
             }
@@ -134,9 +134,9 @@ namespace DAL.Repository
 
             result.ProjectId = dbInvite.Project_ID;
             result.UserId = dbInvite.User_ID;
-            result.InviteDate = (DateTime)dbInvite.Invite_Date;
+            result.InviteDate = dbInvite.Invite_Date;
             result.InviteStatus = dbInvite.Invite_status;
-            result.AcceptDate = (DateTime)dbInvite.Accept_date;
+            result.AcceptDate = dbInvite.Accept_date;
 
             return result;
         }
@@ -163,7 +163,7 @@ namespace DAL.Repository
         /// </summary>
         public void UpdateInviteStatus(IInvitesModel inviteModel, int ProjectID)
         {
-            var dbInvites = DataContext.Invites.First(i => i.User_ID == inviteModel.UserId && i.Project_ID == ProjectID);
+            var dbInvites = DataContext.Invites.FirstOrDefault(i => i.User_ID == inviteModel.UserId && i.Project_ID == ProjectID);
 
             if (dbInvites != null && inviteModel != null)
             {
@@ -171,6 +171,20 @@ namespace DAL.Repository
                 dbInvites.Accept_date = inviteModel.AcceptDate;
                 dbInvites.User_ID = inviteModel.UserId;
 
+                DataContext.SubmitChanges();
+            }
+        }
+
+        /// <summary>
+        /// Deletes an Invite in the database.
+        /// </summary>
+        public void DeleteInvite(int projectId, int userId)
+        {
+            var dbInvite = DataContext.Invites.FirstOrDefault(i => i.Project_ID == projectId && i.User_ID == userId);
+
+            if (dbInvite != null)
+            {
+                DataContext.Invites.DeleteOnSubmit(dbInvite);
                 DataContext.SubmitChanges();
             }
         }

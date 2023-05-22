@@ -6,13 +6,14 @@
     /// </summary>
     public interface IInvitesModel
     {
-        DateTime AcceptDate { get; set; }
-        DateTime InviteDate { get; set; }
+        DateTime? AcceptDate { get; set; }
+        DateTime? InviteDate { get; set; }
         string? InviteStatus { get; set; }
         int ProjectId { get; set; }
         int UserId { get; set; }
 
         string? InvitedUserName { get; set; }
+        string? InvitedUserFullName { get; set; }
         string? InvitedUserSpecializations { get; set; }
         string? ProjectTitle { get; set; }
         string? ManagerName { get; set; }

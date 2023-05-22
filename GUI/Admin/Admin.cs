@@ -347,11 +347,8 @@ namespace GUI.Admin
         /// <param name="targetProject"></param>
         private void OpenProject(IProjectModel targetProject)
         {
-            Manager manager = new Manager(ServiceManager, targetProject.ManagerUserName);
-            manager.SelectedProject = targetProject;
-            manager.bt_EditProject_Click(this, new EventArgs());
-            manager.ShowDialog();
-            PerformProjectSearch(manager.SelectedProject.ProjectId);
+            ManageProject ManageProjectForm = new ManageProject(ServiceManager, targetProject.ProjectId);
+            ManageProjectForm.ShowDialog();
         }
 
         /// <summary>
@@ -503,6 +500,15 @@ namespace GUI.Admin
                 AdminProjectEdit EditProjectForm = new AdminProjectEdit(ServiceManager, dgv_ProjectSearchResults.SelectedRows[0].DataBoundItem as IProjectModel);
                 EditProjectForm.ShowDialog();
                 PerformProjectSearch();
+            }
+        }
+
+        private void btn_ViewInvites_Click(object sender, EventArgs e)
+        {
+            if (dgv_ProjectSearchResults.SelectedRows.Count != 0)
+            {
+                AdminViewInvites ViewInvitesForm = new AdminViewInvites(ServiceManager, dgv_ProjectSearchResults.SelectedRows[0].DataBoundItem as IProjectModel);
+                ViewInvitesForm.ShowDialog();
             }
         }
     }

@@ -208,7 +208,20 @@ namespace GUI
         // Sets up the right side list box of specializations chosen for the project that is currently being invited to.
         private void SetupProjectRequirementsList()
         {
-            listBoxProjectRequirements.DataSource = ProjectSpecializations;
+            //Try-Catch for getting specializations
+            try
+            {
+                checkedListProjReq.Items.AddRange(ServiceManager.SpecializationService.GetProjectSpecializations(ProjectID).ToArray());
+                /// Checks off the skills in the specializations list.
+                for (int i = 0; i < checkedListProjReq.Items.Count; i++)
+                {
+                    checkedListProjReq.SetItemChecked(i, true);
+                }
+            }
+            catch (Exception)
+            {
+                FeedBackMessage(lblFeedback, "Failed to retrieve list of defined skills", Color.Red);
+            }
         }
 
         private void btn_Search_Click(object sender, EventArgs e)

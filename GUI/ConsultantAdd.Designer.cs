@@ -40,7 +40,7 @@
             radioBtnAll = new RadioButton();
             radioBtnAny = new RadioButton();
             grpBoxProjectRequirements = new GroupBox();
-            listBoxProjectRequirements = new ListBox();
+            checkedListProjReq = new CheckedListBox();
             grpBoxSearchResult = new GroupBox();
             lblFeedback = new Label();
             ((System.ComponentModel.ISupportInitialize)dgv_ConsultantList).BeginInit();
@@ -71,11 +71,11 @@
             // bt_AddConcultant
             // 
             bt_AddConcultant.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            bt_AddConcultant.Location = new Point(12, 483);
+            bt_AddConcultant.Location = new Point(688, 489);
             bt_AddConcultant.Name = "bt_AddConcultant";
-            bt_AddConcultant.Size = new Size(125, 23);
+            bt_AddConcultant.Size = new Size(100, 25);
             bt_AddConcultant.TabIndex = 3;
-            bt_AddConcultant.Text = "Invite Consultant";
+            bt_AddConcultant.Text = "Send Invite";
             bt_AddConcultant.UseVisualStyleBackColor = true;
             bt_AddConcultant.Click += bt_AddConcultant_Click;
             // 
@@ -86,9 +86,9 @@
             // bt_back
             // 
             bt_back.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            bt_back.Location = new Point(659, 483);
+            bt_back.Location = new Point(562, 489);
             bt_back.Name = "bt_back";
-            bt_back.Size = new Size(125, 23);
+            bt_back.Size = new Size(100, 25);
             bt_back.TabIndex = 5;
             bt_back.Text = "Back";
             bt_back.UseVisualStyleBackColor = true;
@@ -168,7 +168,7 @@
             // grpBoxProjectRequirements
             // 
             grpBoxProjectRequirements.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            grpBoxProjectRequirements.Controls.Add(listBoxProjectRequirements);
+            grpBoxProjectRequirements.Controls.Add(checkedListProjReq);
             grpBoxProjectRequirements.Location = new Point(509, 8);
             grpBoxProjectRequirements.Name = "grpBoxProjectRequirements";
             grpBoxProjectRequirements.Padding = new Padding(15, 3, 3, 3);
@@ -177,19 +177,21 @@
             grpBoxProjectRequirements.TabStop = false;
             grpBoxProjectRequirements.Text = "Project Requirements";
             // 
-            // listBoxProjectRequirements
+            // checkedListProjReq
             // 
-            listBoxProjectRequirements.BackColor = SystemColors.Control;
-            listBoxProjectRequirements.BorderStyle = BorderStyle.None;
-            listBoxProjectRequirements.Dock = DockStyle.Fill;
-            listBoxProjectRequirements.FormattingEnabled = true;
-            listBoxProjectRequirements.ItemHeight = 15;
-            listBoxProjectRequirements.Location = new Point(15, 19);
-            listBoxProjectRequirements.MultiColumn = true;
-            listBoxProjectRequirements.Name = "listBoxProjectRequirements";
-            listBoxProjectRequirements.SelectionMode = SelectionMode.None;
-            listBoxProjectRequirements.Size = new Size(260, 114);
-            listBoxProjectRequirements.TabIndex = 0;
+            checkedListProjReq.BackColor = SystemColors.Control;
+            checkedListProjReq.BorderStyle = BorderStyle.None;
+            checkedListProjReq.CheckOnClick = true;
+            checkedListProjReq.Dock = DockStyle.Fill;
+            checkedListProjReq.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            checkedListProjReq.FormattingEnabled = true;
+            checkedListProjReq.Location = new Point(15, 19);
+            checkedListProjReq.MultiColumn = true;
+            checkedListProjReq.Name = "checkedListProjReq";
+            checkedListProjReq.SelectionMode = SelectionMode.None;
+            checkedListProjReq.Size = new Size(260, 114);
+            checkedListProjReq.TabIndex = 6;
+            checkedListProjReq.TabStop = false;
             // 
             // grpBoxSearchResult
             // 
@@ -206,10 +208,10 @@
             // 
             lblFeedback.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lblFeedback.AutoSize = true;
-            lblFeedback.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lblFeedback.Location = new Point(143, 485);
+            lblFeedback.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            lblFeedback.Location = new Point(12, 494);
             lblFeedback.Name = "lblFeedback";
-            lblFeedback.Size = new Size(119, 17);
+            lblFeedback.Size = new Size(106, 15);
             lblFeedback.TabIndex = 32;
             lblFeedback.Text = "Feedback message";
             // 
@@ -218,13 +220,15 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 518);
+            ControlBox = false;
             Controls.Add(lblFeedback);
             Controls.Add(grpBoxSearchResult);
             Controls.Add(grpBoxProjectRequirements);
             Controls.Add(grpBoxSpecFilter);
             Controls.Add(bt_back);
             Controls.Add(bt_AddConcultant);
-            HelpButton = true;
+            MaximizeBox = false;
+            MinimizeBox = false;
             MinimumSize = new Size(816, 557);
             Name = "ConsultantAdd";
             Text = "ConsultantAdd";
@@ -247,12 +251,12 @@
         private CheckedListBox checkedListSkills;
         private GroupBox grpBoxSpecFilter;
         private GroupBox grpBoxProjectRequirements;
-        private ListBox listBoxProjectRequirements;
         private GroupBox grpBoxSearchResult;
         private RadioButton radioBtnAny;
         private RadioButton radioBtnAll;
         private Label lblSearchParamAnyAll;
         private Label lblFeedback;
         private Button btn_Search;
+        private CheckedListBox checkedListProjReq;
     }
 }
