@@ -135,19 +135,12 @@ namespace GUI
                     DateTime.Now,
                     "Pending");
 
-                lblFeedback.ForeColor = System.Drawing.Color.Green;
-                lblFeedback.Text = "Invite Sent to " + (string)dgv_ConsultantList.CurrentRow.Cells["FullName"].Value;
+                string successMessage = "Invite Sent to " + (string)dgv_ConsultantList.CurrentRow.Cells["FullName"].Value;
+                FeedBackMessage(lblFeedback, successMessage, Color.Green);
             }
             catch (Exception e)
             {
-                if (e.Message.Contains("key that is already in use"))
-                {
-                    FeedBackMessage(lblFeedback, "This person already has an invitation to this project.", Color.Red);
-                }
-                else
-                {
                     FeedBackMessage(lblFeedback, e.Message, Color.Red);
-                }
             }
 
         }
@@ -156,21 +149,17 @@ namespace GUI
         /// Async Task that turns on the visibility of the label provided in the parameters,
         /// shows the given message in the given color, for the given time. /DK
         /// </summary>
-        private async Task FeedBackMessage(Label label, string message, Color color, int milliseconds = 5000)
+        private async Task FeedBackMessage(Label label, string message, Color? color = null, int milliseconds = 5000)
         {
             label.Text = message.Trim();
-            label.ForeColor = color;
+            label.ForeColor = color ?? Color.Black;
             label.Visible = true;
             _cancellationTokenSource.Cancel();
             _cancellationTokenSource = new CancellationTokenSource();
-            try
-            {
-                await Task.Delay(milliseconds, _cancellationTokenSource.Token);
-                label.Text = string.Empty;
-                label.ForeColor = Color.Black;
-                label.Visible = false;
-            }
-            catch (TaskCanceledException) { }
+            await Task.Delay(milliseconds, _cancellationTokenSource.Token);
+            label.Text = string.Empty;
+            label.ForeColor = Color.Black;
+            label.Visible = false;
         }
 
         // Button click event -> see method for results /MS

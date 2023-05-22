@@ -344,10 +344,9 @@ namespace GUI.Admin
         /// <summary>
         /// Opens a Manager form directly to the edit-panel of the project.
         /// </summary>
-        /// <param name="targetProject"></param>
         private void OpenProject(IProjectModel targetProject)
         {
-            ManageProject ManageProjectForm = new ManageProject(ServiceManager, targetProject.ProjectId);
+            ManageProject ManageProjectForm = new ManageProject(ServiceManager, targetProject.ProjectId, adminUser.UserName);
             ManageProjectForm.ShowDialog();
         }
 

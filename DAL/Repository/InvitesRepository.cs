@@ -146,6 +146,15 @@ namespace DAL.Repository
         /// </summary>
         public void AddInvite(IInvitesModel inviteModel)
         {
+            //Check to make sure the invite isn't a duplicate <-- check works in database as well, but code fails if it his SubmitChanges and
+            //the failed invite stays in memory and doesn't get cleared. /DK
+            ///  Don't remove the check for duplicate entries in this method. "For some reason" the session gets completely
+            ///  locked from adding new invites if one fails because of duplicate keys. So the check is there to make sure
+            ///  you never reach .SubmitChanges() if there already is a duplicate value. This prevents the locked state.
+            bool InviteExists = DataContext.Invites.Any(i => i.User_ID == inviteModel.UserId && i.Project_ID == inviteModel.ProjectId);
+            if (InviteExists) throw new Exception("An Invite for this user on this project, already exists.");
+
+            //If the invite doesn't exist on the database, go ahead and make one and insert.
             var linqInviteModel = new Linq.Invite();
 
             linqInviteModel.Project_ID = inviteModel.ProjectId;

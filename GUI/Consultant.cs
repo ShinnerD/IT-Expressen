@@ -218,6 +218,7 @@ namespace GUI
             this.Hide();
             seeInv.ShowDialog();
             this.Show();
+            LoadInvitesToDGV();
         }
 
         private void bt_seeProjects_Click(object sender, EventArgs e)

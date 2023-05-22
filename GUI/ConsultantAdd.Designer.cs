@@ -43,6 +43,7 @@
             checkedListProjReq = new CheckedListBox();
             grpBoxSearchResult = new GroupBox();
             lblFeedback = new Label();
+            toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)dgv_ConsultantList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)userServiceBindingSource).BeginInit();
             grpBoxSpecFilter.SuspendLayout();
@@ -81,7 +82,7 @@
             // 
             // userServiceBindingSource
             // 
-            this.userServiceBindingSource.DataSource = typeof(Domain.Services.UserService);
+            userServiceBindingSource.DataSource = typeof(Domain.Services.UserService);
             // 
             // bt_back
             // 
@@ -96,16 +97,16 @@
             // 
             // checkedListSkills
             // 
-            this.checkedListSkills.BackColor = System.Drawing.SystemColors.Control;
-            this.checkedListSkills.CheckOnClick = true;
-            this.checkedListSkills.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkedListSkills.FormattingEnabled = true;
-            this.checkedListSkills.Location = new System.Drawing.Point(3, 19);
-            this.checkedListSkills.MultiColumn = true;
-            this.checkedListSkills.Name = "checkedListSkills";
-            this.checkedListSkills.Size = new System.Drawing.Size(428, 114);
-            this.checkedListSkills.TabIndex = 27;
-            this.toolTip1.SetToolTip(this.checkedListSkills, "Here you can push the button of your Specialization.\r\n\r\nIf your Specialization is" +
+            checkedListSkills.BackColor = SystemColors.Control;
+            checkedListSkills.CheckOnClick = true;
+            checkedListSkills.Dock = DockStyle.Fill;
+            checkedListSkills.FormattingEnabled = true;
+            checkedListSkills.Location = new Point(3, 19);
+            checkedListSkills.MultiColumn = true;
+            checkedListSkills.Name = "checkedListSkills";
+            checkedListSkills.Size = new Size(485, 114);
+            checkedListSkills.TabIndex = 27;
+            toolTip1.SetToolTip(this.checkedListSkills, "Here you can push the button of your Specialization.\r\n\r\nIf your Specialization is" +
         " not here contact admin: Adm@mail.com");
             // 
             // grpBoxSpecFilter
@@ -221,7 +222,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 518);
+            ClientSize = new Size(800, 541);
             ControlBox = false;
             Controls.Add(lblFeedback);
             Controls.Add(grpBoxSearchResult);

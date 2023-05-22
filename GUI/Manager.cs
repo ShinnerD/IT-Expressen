@@ -229,7 +229,7 @@ namespace GUI
             }
             if (SelectedProject != null)
             {
-                ManageProject ManProject = new GUI.ManageProject(ServiceManager, selectedProject.ProjectId, Username);
+                ManageProject ManProject = new GUI.ManageProject(ServiceManager, SelectedProject.ProjectId, Username);
                 this.Hide();
                 ManProject.ShowDialog();
                 this.Show();
