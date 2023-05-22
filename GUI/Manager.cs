@@ -405,5 +405,10 @@ namespace GUI
         {
             ChangeEditProfileState();
         }
+
+        private void tb_Lastname_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

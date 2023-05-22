@@ -28,407 +28,486 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.tb_UserName = new System.Windows.Forms.TextBox();
-            this.tb_Password = new System.Windows.Forms.TextBox();
-            this.tb_RePassword = new System.Windows.Forms.TextBox();
-            this.tb_Email = new System.Windows.Forms.TextBox();
-            this.tb_FirstName = new System.Windows.Forms.TextBox();
-            this.tb_LastName = new System.Windows.Forms.TextBox();
-            this.tb_Address = new System.Windows.Forms.TextBox();
-            this.tb_City = new System.Windows.Forms.TextBox();
-            this.tb_ZipCode = new System.Windows.Forms.TextBox();
-            this.tb_Country = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.tb_PhoneNr = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.bt_CreateUser = new System.Windows.Forms.Button();
-            this.cb_UserType = new System.Windows.Forms.ComboBox();
-            this.clb_Skills = new System.Windows.Forms.CheckedListBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.bt_back = new System.Windows.Forms.Button();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
-            this.toolTip3 = new System.Windows.Forms.ToolTip(this.components);
-            this.toolTip4 = new System.Windows.Forms.ToolTip(this.components);
-            this.toolTip5 = new System.Windows.Forms.ToolTip(this.components);
-            this.toolTip6 = new System.Windows.Forms.ToolTip(this.components);
-            this.toolTip7 = new System.Windows.Forms.ToolTip(this.components);
-            this.toolTip8 = new System.Windows.Forms.ToolTip(this.components);
-            this.toolTip9 = new System.Windows.Forms.ToolTip(this.components);
-            this.toolTip10 = new System.Windows.Forms.ToolTip(this.components);
-            this.toolTip11 = new System.Windows.Forms.ToolTip(this.components);
-            this.toolTip12 = new System.Windows.Forms.ToolTip(this.components);
-            this.toolTip13 = new System.Windows.Forms.ToolTip(this.components);
-            this.SuspendLayout();
-            // 
-            // tb_UserName
-            // 
-            this.tb_UserName.Location = new System.Drawing.Point(136, 46);
-            this.tb_UserName.Name = "tb_UserName";
-            this.tb_UserName.Size = new System.Drawing.Size(179, 23);
-            this.tb_UserName.TabIndex = 0;
-            // 
-            // tb_Password
-            // 
-            this.tb_Password.Location = new System.Drawing.Point(136, 75);
-            this.tb_Password.Name = "tb_Password";
-            this.tb_Password.Size = new System.Drawing.Size(179, 23);
-            this.tb_Password.TabIndex = 1;
-            this.tb_Password.UseSystemPasswordChar = true;
-            // 
-            // tb_RePassword
-            // 
-            this.tb_RePassword.Location = new System.Drawing.Point(433, 75);
-            this.tb_RePassword.Name = "tb_RePassword";
-            this.tb_RePassword.Size = new System.Drawing.Size(179, 23);
-            this.tb_RePassword.TabIndex = 2;
-            this.tb_RePassword.UseSystemPasswordChar = true;
-            // 
-            // tb_Email
-            // 
-            this.tb_Email.Location = new System.Drawing.Point(136, 133);
-            this.tb_Email.Name = "tb_Email";
-            this.tb_Email.Size = new System.Drawing.Size(179, 23);
-            this.tb_Email.TabIndex = 3;
-            // 
-            // tb_FirstName
-            // 
-            this.tb_FirstName.Location = new System.Drawing.Point(136, 162);
-            this.tb_FirstName.Name = "tb_FirstName";
-            this.tb_FirstName.Size = new System.Drawing.Size(179, 23);
-            this.tb_FirstName.TabIndex = 4;
-            // 
-            // tb_LastName
-            // 
-            this.tb_LastName.Location = new System.Drawing.Point(136, 191);
-            this.tb_LastName.Name = "tb_LastName";
-            this.tb_LastName.Size = new System.Drawing.Size(179, 23);
-            this.tb_LastName.TabIndex = 5;
-            // 
-            // tb_Address
-            // 
-            this.tb_Address.Location = new System.Drawing.Point(433, 133);
-            this.tb_Address.Name = "tb_Address";
-            this.tb_Address.Size = new System.Drawing.Size(179, 23);
-            this.tb_Address.TabIndex = 6;
-            // 
-            // tb_City
-            // 
-            this.tb_City.Location = new System.Drawing.Point(433, 162);
-            this.tb_City.Name = "tb_City";
-            this.tb_City.Size = new System.Drawing.Size(179, 23);
-            this.tb_City.TabIndex = 7;
-            // 
-            // tb_ZipCode
-            // 
-            this.tb_ZipCode.Location = new System.Drawing.Point(433, 191);
-            this.tb_ZipCode.Name = "tb_ZipCode";
-            this.tb_ZipCode.Size = new System.Drawing.Size(179, 23);
-            this.tb_ZipCode.TabIndex = 8;
-            // 
-            // tb_Country
-            // 
-            this.tb_Country.Location = new System.Drawing.Point(433, 220);
-            this.tb_Country.Name = "tb_Country";
-            this.tb_Country.Size = new System.Drawing.Size(179, 23);
-            this.tb_Country.TabIndex = 9;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(24, 46);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 15);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "User Name";
-            this.toolTip1.SetToolTip(this.label1, "Enter your user ame here.");
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(24, 75);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 15);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "Password";
-            this.toolTip2.SetToolTip(this.label2, "Enter the password you what to your account.");
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(24, 162);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(67, 15);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "First Name";
-            this.toolTip9.SetToolTip(this.label3, "Your first name.");
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(24, 191);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 15);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "Last Name";
-            this.toolTip10.SetToolTip(this.label4, "The last name of your name.");
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(321, 133);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(51, 15);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "Address";
-            this.toolTip6.SetToolTip(this.label5, "A home adresse or company adresse.");
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(321, 162);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(28, 15);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "City";
-            this.toolTip11.SetToolTip(this.label6, "The City you live in.");
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(321, 191);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(55, 15);
-            this.label7.TabIndex = 16;
-            this.label7.Text = "Zip Code";
-            this.toolTip7.SetToolTip(this.label7, "The zip code off your distrikt.");
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(321, 219);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(51, 15);
-            this.label8.TabIndex = 17;
-            this.label8.Text = "Country";
-            this.toolTip8.SetToolTip(this.label8, "The country yuo live in.");
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(24, 219);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(91, 15);
-            this.label9.TabIndex = 18;
-            this.label9.Text = "Phone Number";
-            this.toolTip5.SetToolTip(this.label9, "The number you wan\'t connected too this account.");
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label10.Location = new System.Drawing.Point(24, 133);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(41, 15);
-            this.label10.TabIndex = 19;
-            this.label10.Text = "E-Mail";
-            this.toolTip4.SetToolTip(this.label10, "The mail you whan\'t too connect to this account.");
-            // 
-            // tb_PhoneNr
-            // 
-            this.tb_PhoneNr.Location = new System.Drawing.Point(136, 220);
-            this.tb_PhoneNr.Name = "tb_PhoneNr";
-            this.tb_PhoneNr.Size = new System.Drawing.Size(179, 23);
-            this.tb_PhoneNr.TabIndex = 20;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label11.Location = new System.Drawing.Point(320, 75);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(112, 15);
-            this.label11.TabIndex = 21;
-            this.label11.Text = "Re-Enter password";
-            this.toolTip3.SetToolTip(this.label11, "Save Password and make sure its the same as the password before.");
+            components = new System.ComponentModel.Container();
+            bt_CreateUser = new Button();
+            cb_UserType = new ComboBox();
+            clb_Skills = new CheckedListBox();
+            label12 = new Label();
+            label13 = new Label();
+            label15 = new Label();
+            bt_back = new Button();
+            toolTip1 = new ToolTip(components);
+            label1 = new Label();
+            toolTip2 = new ToolTip(components);
+            label10 = new Label();
+            toolTip3 = new ToolTip(components);
+            label11 = new Label();
+            toolTip4 = new ToolTip(components);
+            label3 = new Label();
+            toolTip5 = new ToolTip(components);
+            label4 = new Label();
+            toolTip6 = new ToolTip(components);
+            label6 = new Label();
+            toolTip7 = new ToolTip(components);
+            label8 = new Label();
+            toolTip8 = new ToolTip(components);
+            label9 = new Label();
+            toolTip9 = new ToolTip(components);
+            label2 = new Label();
+            toolTip10 = new ToolTip(components);
+            label7 = new Label();
+            toolTip11 = new ToolTip(components);
+            label5 = new Label();
+            toolTip12 = new ToolTip(components);
+            toolTip13 = new ToolTip(components);
+            grpBoxProfileInfo = new GroupBox();
+            tb_UserName = new TextBox();
+            tb_Password = new TextBox();
+            tb_RePassword = new TextBox();
+            bt_EditProfileCancel = new Button();
+            bt_EditProfile = new Button();
+            tb_FirstName = new TextBox();
+            tb_Country = new TextBox();
+            tb_LastName = new TextBox();
+            tb_Zipcode = new TextBox();
+            tb_City = new TextBox();
+            tb_Email = new TextBox();
+            tb_Address = new TextBox();
+            tb_PhoneNumber = new TextBox();
+            grpBoxProfileInfo.SuspendLayout();
+            SuspendLayout();
             // 
             // bt_CreateUser
             // 
-            this.bt_CreateUser.Location = new System.Drawing.Point(537, 436);
-            this.bt_CreateUser.Name = "bt_CreateUser";
-            this.bt_CreateUser.Size = new System.Drawing.Size(75, 23);
-            this.bt_CreateUser.TabIndex = 22;
-            this.bt_CreateUser.Text = "Ok";
-            this.bt_CreateUser.UseVisualStyleBackColor = true;
-            this.bt_CreateUser.Click += new System.EventHandler(this.bt_CreateUser_Click);
+            bt_CreateUser.Location = new Point(557, 403);
+            bt_CreateUser.Name = "bt_CreateUser";
+            bt_CreateUser.Size = new Size(75, 24);
+            bt_CreateUser.TabIndex = 22;
+            bt_CreateUser.Text = "Ok";
+            bt_CreateUser.UseVisualStyleBackColor = true;
+            bt_CreateUser.Click += bt_CreateUser_Click;
             // 
             // cb_UserType
             // 
-            this.cb_UserType.FormattingEnabled = true;
-            this.cb_UserType.Items.AddRange(new object[] {
-            "manager",
-            "consultant"});
-            this.cb_UserType.Location = new System.Drawing.Point(433, 266);
-            this.cb_UserType.Name = "cb_UserType";
-            this.cb_UserType.Size = new System.Drawing.Size(179, 23);
-            this.cb_UserType.TabIndex = 24;
-            this.cb_UserType.Click += new System.EventHandler(this.cb_UserType_SelectedValueChanged);
+            cb_UserType.DropDownStyle = ComboBoxStyle.DropDownList;
+            cb_UserType.FormattingEnabled = true;
+            cb_UserType.Items.AddRange(new object[] { "manager", "consultant" });
+            cb_UserType.Location = new Point(456, 220);
+            cb_UserType.Name = "cb_UserType";
+            cb_UserType.Size = new Size(176, 23);
+            cb_UserType.TabIndex = 24;
+            cb_UserType.Click += cb_UserType_SelectedValueChanged;
             // 
             // clb_Skills
             // 
-            this.clb_Skills.FormattingEnabled = true;
-            this.clb_Skills.Location = new System.Drawing.Point(136, 295);
-            this.clb_Skills.MultiColumn = true;
-            this.clb_Skills.Name = "clb_Skills";
-            this.clb_Skills.Size = new System.Drawing.Size(476, 130);
-            this.clb_Skills.TabIndex = 25;
+            clb_Skills.FormattingEnabled = true;
+            clb_Skills.Location = new Point(115, 249);
+            clb_Skills.MultiColumn = true;
+            clb_Skills.Name = "clb_Skills";
+            clb_Skills.Size = new Size(517, 148);
+            clb_Skills.TabIndex = 25;
             // 
             // label12
             // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label12.Location = new System.Drawing.Point(320, 266);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(98, 15);
-            this.label12.TabIndex = 26;
-            this.label12.Text = "Pick profile type";
-            this.toolTip12.SetToolTip(this.label12, "What are you looking for of specializations.");
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label12.Location = new Point(352, 223);
+            label12.Name = "label12";
+            label12.Size = new Size(89, 13);
+            label12.TabIndex = 26;
+            label12.Text = "Pick profile type";
+            toolTip12.SetToolTip(label12, "What are you looking for of specializations.");
             // 
             // label13
             // 
-            this.label13.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label13.Location = new System.Drawing.Point(24, 295);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(106, 42);
-            this.label13.TabIndex = 27;
-            this.label13.Text = "For consultants only:";
+            label13.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label13.Location = new Point(3, 249);
+            label13.Name = "label13";
+            label13.Size = new Size(106, 43);
+            label13.TabIndex = 27;
+            label13.Text = "For consultants only:";
             // 
             // label15
             // 
-            this.label15.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label15.Location = new System.Drawing.Point(24, 331);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(106, 42);
-            this.label15.TabIndex = 29;
-            this.label15.Text = "Select your specializations";
-            this.toolTip13.SetToolTip(this.label15, "Enter what specializations you have.\r\n\r\nIf the  specializations is not here conta" +
-        "ct admin: Adm@mail.com");
-            // 
-            // label14
-            // 
-            this.label14.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label14.Location = new System.Drawing.Point(136, 9);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(349, 25);
-            this.label14.TabIndex = 30;
-            this.label14.Text = "Fil out the form to create your profile";
+            label15.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label15.Location = new Point(3, 285);
+            label15.Name = "label15";
+            label15.Size = new Size(106, 43);
+            label15.TabIndex = 29;
+            label15.Text = "Select your specializations";
+            toolTip13.SetToolTip(label15, "Enter what specializations you have.\r\n\r\nIf the  specializations is not here contact admin: Adm@mail.com");
             // 
             // bt_back
             // 
-            this.bt_back.Location = new System.Drawing.Point(136, 436);
-            this.bt_back.Name = "bt_back";
-            this.bt_back.Size = new System.Drawing.Size(75, 23);
-            this.bt_back.TabIndex = 31;
-            this.bt_back.Text = "Cancel";
-            this.bt_back.UseVisualStyleBackColor = true;
-            this.bt_back.Click += new System.EventHandler(this.bt_back_Click);
+            bt_back.Location = new Point(115, 403);
+            bt_back.Name = "bt_back";
+            bt_back.Size = new Size(75, 24);
+            bt_back.TabIndex = 31;
+            bt_back.Text = "Cancel";
+            bt_back.UseVisualStyleBackColor = true;
+            bt_back.Click += bt_back_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(3, 30);
+            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(63, 15);
+            label1.TabIndex = 101;
+            label1.Text = "Username:";
+            toolTip1.SetToolTip(label1, "Enter your user name here.");
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label10.Location = new Point(3, 56);
+            label10.Margin = new Padding(2, 0, 2, 0);
+            label10.Name = "label10";
+            label10.Size = new Size(60, 15);
+            label10.TabIndex = 107;
+            label10.Text = "Password:";
+            toolTip2.SetToolTip(label10, "Enter the password you what to your account.");
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label11.Location = new Point(296, 56);
+            label11.Margin = new Padding(2, 0, 2, 0);
+            label11.Name = "label11";
+            label11.Size = new Size(108, 15);
+            label11.TabIndex = 104;
+            label11.Text = "Re-Enter Password:";
+            toolTip3.SetToolTip(label11, "Save Password and make sure its the same as the password before.");
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(25, 149);
+            label3.Margin = new Padding(2, 0, 2, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(39, 15);
+            label3.TabIndex = 2;
+            label3.Text = "Email:";
+            toolTip4.SetToolTip(label3, "The mail you whan't too connect to this account.");
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Location = new Point(20, 176);
+            label4.Margin = new Padding(2, 0, 2, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(44, 15);
+            label4.TabIndex = 3;
+            label4.Text = "Phone:";
+            toolTip5.SetToolTip(label4, "The number you wan't connected too this account.");
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.Location = new Point(352, 97);
+            label6.Margin = new Padding(2, 0, 2, 0);
+            label6.Name = "label6";
+            label6.Size = new Size(52, 15);
+            label6.TabIndex = 5;
+            label6.Text = "Address:";
+            toolTip6.SetToolTip(label6, "A home adresse or company adresse.");
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label8.Location = new Point(352, 149);
+            label8.Margin = new Padding(2, 0, 2, 0);
+            label8.Name = "label8";
+            label8.Size = new Size(53, 15);
+            label8.TabIndex = 7;
+            label8.Text = "Zipcode:";
+            toolTip7.SetToolTip(label8, "The zip code off your distrikt.");
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label9.Location = new Point(351, 176);
+            label9.Margin = new Padding(2, 0, 2, 0);
+            label9.Name = "label9";
+            label9.Size = new Size(53, 15);
+            label9.TabIndex = 8;
+            label9.Text = "Country:";
+            toolTip8.SetToolTip(label9, "The country yuo live in.");
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(3, 97);
+            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(62, 15);
+            label2.TabIndex = 1;
+            label2.Text = "Firstname:";
+            toolTip9.SetToolTip(label2, "Your first name.");
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.Location = new Point(3, 123);
+            label7.Margin = new Padding(2, 0, 2, 0);
+            label7.Name = "label7";
+            label7.Size = new Size(61, 15);
+            label7.TabIndex = 6;
+            label7.Text = "Lastname:";
+            toolTip10.SetToolTip(label7, "The last name of your name.");
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Location = new Point(373, 123);
+            label5.Margin = new Padding(2, 0, 2, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(31, 15);
+            label5.TabIndex = 4;
+            label5.Text = "City:";
+            toolTip11.SetToolTip(label5, "The City you live in.");
+            // 
+            // grpBoxProfileInfo
+            // 
+            grpBoxProfileInfo.Controls.Add(label1);
+            grpBoxProfileInfo.Controls.Add(tb_UserName);
+            grpBoxProfileInfo.Controls.Add(label10);
+            grpBoxProfileInfo.Controls.Add(tb_Password);
+            grpBoxProfileInfo.Controls.Add(tb_RePassword);
+            grpBoxProfileInfo.Controls.Add(label11);
+            grpBoxProfileInfo.Controls.Add(bt_EditProfileCancel);
+            grpBoxProfileInfo.Controls.Add(bt_EditProfile);
+            grpBoxProfileInfo.Controls.Add(label2);
+            grpBoxProfileInfo.Controls.Add(tb_FirstName);
+            grpBoxProfileInfo.Controls.Add(label7);
+            grpBoxProfileInfo.Controls.Add(tb_Country);
+            grpBoxProfileInfo.Controls.Add(tb_LastName);
+            grpBoxProfileInfo.Controls.Add(label9);
+            grpBoxProfileInfo.Controls.Add(tb_Zipcode);
+            grpBoxProfileInfo.Controls.Add(label8);
+            grpBoxProfileInfo.Controls.Add(label3);
+            grpBoxProfileInfo.Controls.Add(tb_City);
+            grpBoxProfileInfo.Controls.Add(tb_Email);
+            grpBoxProfileInfo.Controls.Add(tb_Address);
+            grpBoxProfileInfo.Controls.Add(tb_PhoneNumber);
+            grpBoxProfileInfo.Controls.Add(label5);
+            grpBoxProfileInfo.Controls.Add(label4);
+            grpBoxProfileInfo.Controls.Add(label6);
+            grpBoxProfileInfo.Dock = DockStyle.Top;
+            grpBoxProfileInfo.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            grpBoxProfileInfo.Location = new Point(0, 0);
+            grpBoxProfileInfo.Name = "grpBoxProfileInfo";
+            grpBoxProfileInfo.Size = new Size(652, 209);
+            grpBoxProfileInfo.TabIndex = 32;
+            grpBoxProfileInfo.TabStop = false;
+            grpBoxProfileInfo.Text = "User Name";
+            // 
+            // tb_UserName
+            // 
+            tb_UserName.BackColor = SystemColors.ControlLight;
+            tb_UserName.BorderStyle = BorderStyle.None;
+            tb_UserName.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            tb_UserName.Location = new Point(68, 27);
+            tb_UserName.Margin = new Padding(2);
+            tb_UserName.Name = "tb_UserName";
+            tb_UserName.Size = new Size(225, 16);
+            tb_UserName.TabIndex = 102;
+            tb_UserName.TabStop = false;
+            // 
+            // tb_Password
+            // 
+            tb_Password.BackColor = SystemColors.ControlLight;
+            tb_Password.BorderStyle = BorderStyle.None;
+            tb_Password.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            tb_Password.Location = new Point(68, 53);
+            tb_Password.Margin = new Padding(2);
+            tb_Password.Name = "tb_Password";
+            tb_Password.PasswordChar = '*';
+            tb_Password.Size = new Size(225, 16);
+            tb_Password.TabIndex = 103;
+            tb_Password.TabStop = false;
+            // 
+            // tb_RePassword
+            // 
+            tb_RePassword.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tb_RePassword.BackColor = SystemColors.ControlLight;
+            tb_RePassword.BorderStyle = BorderStyle.None;
+            tb_RePassword.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            tb_RePassword.Location = new Point(407, 53);
+            tb_RePassword.Margin = new Padding(2);
+            tb_RePassword.Name = "tb_RePassword";
+            tb_RePassword.PasswordChar = '*';
+            tb_RePassword.Size = new Size(225, 16);
+            tb_RePassword.TabIndex = 108;
+            tb_RePassword.TabStop = false;
+            // 
+            // bt_EditProfileCancel
+            // 
+            bt_EditProfileCancel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            bt_EditProfileCancel.Enabled = false;
+            bt_EditProfileCancel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            bt_EditProfileCancel.Location = new Point(936, 126);
+            bt_EditProfileCancel.Margin = new Padding(2);
+            bt_EditProfileCancel.Name = "bt_EditProfileCancel";
+            bt_EditProfileCancel.Size = new Size(100, 25);
+            bt_EditProfileCancel.TabIndex = 9;
+            bt_EditProfileCancel.Text = "Cancel";
+            bt_EditProfileCancel.UseVisualStyleBackColor = true;
+            bt_EditProfileCancel.Visible = false;
+            // 
+            // bt_EditProfile
+            // 
+            bt_EditProfile.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            bt_EditProfile.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            bt_EditProfile.Location = new Point(1040, 126);
+            bt_EditProfile.Margin = new Padding(2);
+            bt_EditProfile.Name = "bt_EditProfile";
+            bt_EditProfile.Size = new Size(100, 25);
+            bt_EditProfile.TabIndex = 9;
+            bt_EditProfile.Text = "Edit Profile";
+            bt_EditProfile.UseVisualStyleBackColor = true;
+            // 
+            // tb_FirstName
+            // 
+            tb_FirstName.BackColor = SystemColors.ControlLight;
+            tb_FirstName.BorderStyle = BorderStyle.None;
+            tb_FirstName.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            tb_FirstName.Location = new Point(68, 94);
+            tb_FirstName.Margin = new Padding(2);
+            tb_FirstName.Name = "tb_FirstName";
+            tb_FirstName.Size = new Size(225, 16);
+            tb_FirstName.TabIndex = 1;
+            tb_FirstName.TabStop = false;
+            // 
+            // tb_Country
+            // 
+            tb_Country.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tb_Country.BackColor = SystemColors.ControlLight;
+            tb_Country.BorderStyle = BorderStyle.None;
+            tb_Country.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            tb_Country.Location = new Point(407, 173);
+            tb_Country.Margin = new Padding(2);
+            tb_Country.Name = "tb_Country";
+            tb_Country.Size = new Size(225, 16);
+            tb_Country.TabIndex = 8;
+            tb_Country.TabStop = false;
+            // 
+            // tb_LastName
+            // 
+            tb_LastName.BackColor = SystemColors.ControlLight;
+            tb_LastName.BorderStyle = BorderStyle.None;
+            tb_LastName.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            tb_LastName.Location = new Point(68, 120);
+            tb_LastName.Margin = new Padding(2);
+            tb_LastName.Name = "tb_LastName";
+            tb_LastName.Size = new Size(225, 16);
+            tb_LastName.TabIndex = 2;
+            tb_LastName.TabStop = false;
+            // 
+            // tb_Zipcode
+            // 
+            tb_Zipcode.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tb_Zipcode.BackColor = SystemColors.ControlLight;
+            tb_Zipcode.BorderStyle = BorderStyle.None;
+            tb_Zipcode.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            tb_Zipcode.Location = new Point(407, 146);
+            tb_Zipcode.Margin = new Padding(2);
+            tb_Zipcode.Name = "tb_Zipcode";
+            tb_Zipcode.Size = new Size(225, 16);
+            tb_Zipcode.TabIndex = 7;
+            tb_Zipcode.TabStop = false;
+            // 
+            // tb_City
+            // 
+            tb_City.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tb_City.BackColor = SystemColors.ControlLight;
+            tb_City.BorderStyle = BorderStyle.None;
+            tb_City.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            tb_City.Location = new Point(407, 121);
+            tb_City.Margin = new Padding(2);
+            tb_City.Name = "tb_City";
+            tb_City.Size = new Size(225, 16);
+            tb_City.TabIndex = 6;
+            tb_City.TabStop = false;
+            // 
+            // tb_Email
+            // 
+            tb_Email.BackColor = SystemColors.ControlLight;
+            tb_Email.BorderStyle = BorderStyle.None;
+            tb_Email.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            tb_Email.Location = new Point(68, 146);
+            tb_Email.Margin = new Padding(2);
+            tb_Email.Name = "tb_Email";
+            tb_Email.Size = new Size(225, 16);
+            tb_Email.TabIndex = 3;
+            tb_Email.TabStop = false;
+            // 
+            // tb_Address
+            // 
+            tb_Address.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tb_Address.BackColor = SystemColors.ControlLight;
+            tb_Address.BorderStyle = BorderStyle.None;
+            tb_Address.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            tb_Address.Location = new Point(407, 94);
+            tb_Address.Margin = new Padding(2);
+            tb_Address.Name = "tb_Address";
+            tb_Address.Size = new Size(225, 16);
+            tb_Address.TabIndex = 5;
+            tb_Address.TabStop = false;
+            // 
+            // tb_PhoneNumber
+            // 
+            tb_PhoneNumber.BackColor = SystemColors.ControlLight;
+            tb_PhoneNumber.BorderStyle = BorderStyle.None;
+            tb_PhoneNumber.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            tb_PhoneNumber.Location = new Point(68, 173);
+            tb_PhoneNumber.Margin = new Padding(2);
+            tb_PhoneNumber.Name = "tb_PhoneNumber";
+            tb_PhoneNumber.Size = new Size(225, 16);
+            tb_PhoneNumber.TabIndex = 4;
+            tb_PhoneNumber.TabStop = false;
             // 
             // CreateUser
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(652, 471);
-            this.Controls.Add(this.bt_back);
-            this.Controls.Add(this.label14);
-            this.Controls.Add(this.label15);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.clb_Skills);
-            this.Controls.Add(this.cb_UserType);
-            this.Controls.Add(this.bt_CreateUser);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.tb_PhoneNr);
-            this.Controls.Add(this.tb_Country);
-            this.Controls.Add(this.tb_ZipCode);
-            this.Controls.Add(this.tb_City);
-            this.Controls.Add(this.tb_Address);
-            this.Controls.Add(this.tb_LastName);
-            this.Controls.Add(this.tb_FirstName);
-            this.Controls.Add(this.tb_Email);
-            this.Controls.Add(this.tb_RePassword);
-            this.Controls.Add(this.tb_Password);
-            this.Controls.Add(this.tb_UserName);
-            this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.Name = "CreateUser";
-            this.Text = "CreateUser";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(652, 452);
+            Controls.Add(grpBoxProfileInfo);
+            Controls.Add(bt_back);
+            Controls.Add(label15);
+            Controls.Add(label13);
+            Controls.Add(label12);
+            Controls.Add(clb_Skills);
+            Controls.Add(cb_UserType);
+            Controls.Add(bt_CreateUser);
+            Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            Name = "CreateUser";
+            Text = "CreateUser";
+            grpBoxProfileInfo.ResumeLayout(false);
+            grpBoxProfileInfo.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
-
-        private TextBox tb_UserName;
-        private TextBox tb_Password;
-        private TextBox tb_RePassword;
-        private TextBox tb_Email;
-        private TextBox tb_FirstName;
-        private TextBox tb_LastName;
-        private TextBox tb_Address;
-        private TextBox tb_City;
-        private TextBox tb_ZipCode;
-        private TextBox tb_Country;
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private Label label4;
-        private Label label5;
-        private Label label6;
-        private Label label7;
-        private Label label8;
-        private Label label9;
-        private Label label10;
-        private TextBox tb_PhoneNr;
-        private Label label11;
         private Button bt_CreateUser;
         private ComboBox cb_UserType;
         private CheckedListBox clb_Skills;
         private Label label12;
         private Label label13;
         private Label label15;
-        private Label label14;
         private Button bt_back;
         private ToolTip toolTip1;
         private ToolTip toolTip2;
@@ -443,5 +522,30 @@
         private ToolTip toolTip3;
         private ToolTip toolTip12;
         private ToolTip toolTip13;
+        private GroupBox grpBoxProfileInfo;
+        private Button bt_EditProfileCancel;
+        private Button bt_EditProfile;
+        private Label label2;
+        private TextBox tb_FirstName;
+        private Label label7;
+        private TextBox tb_Country;
+        private TextBox tb_LastName;
+        private Label label9;
+        private TextBox tb_Zipcode;
+        private Label label8;
+        private Label label3;
+        private TextBox tb_City;
+        private TextBox tb_Email;
+        private TextBox tb_Address;
+        private TextBox tb_PhoneNumber;
+        private Label label5;
+        private Label label4;
+        private Label label6;
+        private Label label1;
+        private TextBox tb_UserName;
+        private Label label10;
+        private TextBox tb_Password;
+        private TextBox tb_RePassword;
+        private Label label11;
     }
 }

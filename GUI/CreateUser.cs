@@ -34,9 +34,9 @@ namespace GUI
                         tb_LastName.Text,
                         tb_Address.Text,
                         tb_City.Text,
-                        tb_ZipCode.Text,
+                        tb_Zipcode.Text,
                         tb_Country.Text,
-                        tb_PhoneNr.Text,
+                        tb_PhoneNumber.Text,
                         tb_Email.Text,
                         FindCheckedSkills()
 
