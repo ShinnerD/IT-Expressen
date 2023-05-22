@@ -64,11 +64,11 @@ namespace GUI
         // Button click event -> see method for results /MS
         private void bt_AddConsultant_Click(object sender, EventArgs e)
         {
-            OpenConsutantAdd();
+            OpenConsultantAdd();
         }
 
         //Opens new form and forwards the project ID /MS
-        private void OpenConsutantAdd()
+        private void OpenConsultantAdd()
         {
             ConsultantAdd invConSul = new ConsultantAdd(ServiceManager, ProjectID);
             invConSul.ShowDialog();
