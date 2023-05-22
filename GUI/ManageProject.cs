@@ -1,5 +1,4 @@
-﻿using Domain.Services;
-using Interfaces.Models;
+﻿using Interfaces.Models;
 using Interfaces.Services;
 
 namespace GUI
@@ -10,13 +9,15 @@ namespace GUI
         private IProjectModel? ProjectGet;
         private List<IMessageModel>? MessageGet { get; set; }
         private List<string>? MessageBoardGet { get; set; }
+        private string UserName;
 
         private readonly IDomainServiceManager ServiceManager;
 
-        public ManageProject(IDomainServiceManager serviceManager, int projectId)
+        public ManageProject(IDomainServiceManager serviceManager, int projectId, string userName)
         {
             ServiceManager = serviceManager;
             ProjectID = projectId;
+            UserName = userName;
 
             InitializeComponent();
             GetProjectInfo();
@@ -51,9 +52,12 @@ namespace GUI
 
             foreach (IMessageModel message in MessageGet)
             {
+                var sender = ServiceManager.UserService.GetUserFromUsername(message.UserName);
+
                 MessageBoardGet.Add("Date: " + message.MessageDate.ToString());
-                MessageBoardGet.Add("User: " + message.UserName);
-                MessageBoardGet.Add(message.Message.ToString());
+                MessageBoardGet.Add("User: " + sender.FullName);
+                //MessageBoardGet.Add(message.UserID.ToString());
+                MessageBoardGet.Add(message.Message.ToString() + "\n");
             }
             rtb_Message.Text = String.Join(Environment.NewLine, MessageBoardGet);
             rtb_newMessage.Text = "";
@@ -69,7 +73,7 @@ namespace GUI
 
                     messageService.AddMessage(
                         ProjectGet.ProjectId,
-                        ProjectGet.UserId,
+                        ServiceManager.UserService.GetUserFromUsername(UserName).ID,
                         rtb_newMessage.Text,
                         DateTime.Now
                         );
@@ -91,6 +95,17 @@ namespace GUI
         private void rtb_newMessage_TextChanged(object sender, EventArgs e)
         {
             lb_TextCounter.Text = rtb_newMessage.Text.Length.ToString() + "/255";
+
+            if (rtb_newMessage.Text.Count() < 255)
+            {
+                lb_warning.Visible = false;
+                lb_TextCounter.ForeColor = Color.Black;
+            }
+            else
+            {
+                lb_warning.Visible = true;
+                lb_TextCounter.ForeColor = Color.Red;
+            }
         }
 
         private void InvolvedUsers()
@@ -104,7 +119,7 @@ namespace GUI
             dgv_InvolvedUsers.Columns.Add("InviteStatus", "Invite Status");
             dgv_InvolvedUsers.Columns["InviteStatus"].DataPropertyName = "InviteStatus";
 
-            dgv_InvolvedUsers.DataSource = ServiceManager.InviteService.GetAllInvitedProjectID(ProjectGet.ProjectId);
+            dgv_InvolvedUsers.DataSource = ServiceManager.InviteService.GetAllInvitedProjectID(ProjectGet.ProjectId).Where(i => i.InviteStatus.ToLower() != "declined").ToList(); ;
         }
     }
 }

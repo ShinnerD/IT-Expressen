@@ -31,8 +31,8 @@
             bt_ViewProjects = new Button();
             bt_SearchProjects = new Button();
             dgv_ConsultantsInvites = new DataGridView();
-            bt_seeInviteDetails = new Button();
             groupBox1 = new GroupBox();
+            bt_seeProjects = new Button();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             grpBoxProfileInfo = new GroupBox();
             bt_Edit = new Button();
@@ -55,6 +55,7 @@
             label5 = new Label();
             label4 = new Label();
             label6 = new Label();
+            bt_seeInvites = new Button();
             ((System.ComponentModel.ISupportInitialize)dgv_ConsultantsInvites).BeginInit();
             groupBox1.SuspendLayout();
             grpBoxProfileInfo.SuspendLayout();
@@ -62,10 +63,10 @@
             // 
             // bt_ViewProjects
             // 
-            bt_ViewProjects.Location = new Point(23, 193);
+            bt_ViewProjects.Location = new Point(410, 160);
             bt_ViewProjects.Margin = new Padding(2);
             bt_ViewProjects.Name = "bt_ViewProjects";
-            bt_ViewProjects.Size = new Size(94, 29);
+            bt_ViewProjects.Size = new Size(100, 26);
             bt_ViewProjects.TabIndex = 35;
             bt_ViewProjects.Text = "ViewProjects";
             bt_ViewProjects.UseVisualStyleBackColor = true;
@@ -73,10 +74,10 @@
             // 
             // bt_SearchProjects
             // 
-            bt_SearchProjects.Location = new Point(503, 193);
+            bt_SearchProjects.Location = new Point(514, 160);
             bt_SearchProjects.Margin = new Padding(2);
             bt_SearchProjects.Name = "bt_SearchProjects";
-            bt_SearchProjects.Size = new Size(94, 29);
+            bt_SearchProjects.Size = new Size(100, 26);
             bt_SearchProjects.TabIndex = 36;
             bt_SearchProjects.Text = "SearchProjects";
             bt_SearchProjects.UseVisualStyleBackColor = true;
@@ -89,32 +90,32 @@
             dgv_ConsultantsInvites.Dock = DockStyle.Top;
             dgv_ConsultantsInvites.Location = new Point(3, 19);
             dgv_ConsultantsInvites.Name = "dgv_ConsultantsInvites";
+            dgv_ConsultantsInvites.RowHeadersVisible = false;
             dgv_ConsultantsInvites.RowTemplate.Height = 25;
             dgv_ConsultantsInvites.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv_ConsultantsInvites.Size = new Size(595, 297);
             dgv_ConsultantsInvites.TabIndex = 37;
             // 
-            // bt_seeInviteDetails
-            // 
-            bt_seeInviteDetails.Dock = DockStyle.Left;
-            bt_seeInviteDetails.Location = new Point(3, 316);
-            bt_seeInviteDetails.Name = "bt_seeInviteDetails";
-            bt_seeInviteDetails.Size = new Size(101, 27);
-            bt_seeInviteDetails.TabIndex = 39;
-            bt_seeInviteDetails.Text = "See Details";
-            bt_seeInviteDetails.UseVisualStyleBackColor = true;
-            bt_seeInviteDetails.Click += bt_seeInviteDetails_Click;
-            // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(bt_seeInviteDetails);
+            groupBox1.Controls.Add(bt_seeProjects);
             groupBox1.Controls.Add(dgv_ConsultantsInvites);
-            groupBox1.Location = new Point(12, 227);
+            groupBox1.Location = new Point(12, 194);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(601, 346);
+            groupBox1.Size = new Size(601, 348);
             groupBox1.TabIndex = 40;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Invites";
+            groupBox1.Text = "My Projects";
+            // 
+            // bt_seeProjects
+            // 
+            bt_seeProjects.Location = new Point(398, 320);
+            bt_seeProjects.Name = "bt_seeProjects";
+            bt_seeProjects.Size = new Size(200, 23);
+            bt_seeProjects.TabIndex = 43;
+            bt_seeProjects.Text = "Go To Project";
+            bt_seeProjects.UseVisualStyleBackColor = true;
+            bt_seeProjects.Click += bt_seeProjects_Click;
             // 
             // grpBoxProfileInfo
             // 
@@ -393,11 +394,22 @@
             label6.TabIndex = 5;
             label6.Text = "Address:";
             // 
+            // bt_seeInvites
+            // 
+            bt_seeInvites.Location = new Point(15, 163);
+            bt_seeInvites.Name = "bt_seeInvites";
+            bt_seeInvites.Size = new Size(125, 23);
+            bt_seeInvites.TabIndex = 42;
+            bt_seeInvites.Text = "See Invites";
+            bt_seeInvites.UseVisualStyleBackColor = true;
+            bt_seeInvites.Click += bt_seeInvites_Click;
+            // 
             // Consultant
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(625, 654);
+            ClientSize = new Size(625, 553);
+            Controls.Add(bt_seeInvites);
             Controls.Add(grpBoxProfileInfo);
             Controls.Add(bt_SearchProjects);
             Controls.Add(bt_ViewProjects);
@@ -416,7 +428,6 @@
         private Button bt_ViewProjects;
         private Button bt_SearchProjects;
         private DataGridView dgv_ConsultantsInvites;
-        private Button bt_seeInviteDetails;
         private GroupBox groupBox1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private GroupBox grpBoxProfileInfo;
@@ -441,5 +452,7 @@
         private Label label6;
         private Button bt_EditCancel;
         private Button bt_Edit;
+        private Button bt_seeInvites;
+        private Button bt_seeProjects;
     }
 }
