@@ -25,9 +25,9 @@ namespace GUI
             ProjectID = projectID;
 
             InitializeComponent();
+            invitedConsultants();
             GetProjectInfo();
             LoadProjectData();
-            invitedConsultants();
         }
 
         //Constructor method loaded with project model. All relevent data is loaded /MS
@@ -57,6 +57,8 @@ namespace GUI
             tb_ProjectStartDate.Text = ProjectGet.ProjectStartDate.ToString();
             tb_ProjectEndDate.Text = ProjectGet.ProjectEndDate.ToString();
             rtb_Description.Text = ProjectGet.Description;
+            dgv_ConsultantList.DataSource = null;
+            dgv_ConsultantList.DataSource = invService.GetAllInvitedProjectID(ProjectGet.ProjectId);
         }
 
         // Button click event -> see method for results /MS
@@ -94,8 +96,6 @@ namespace GUI
 
             dgv_ConsultantList.Columns.Add("InvitedUserSpecializations", "Specializations");
             dgv_ConsultantList.Columns["InvitedUserSpecializations"].DataPropertyName = "InvitedUserSpecializations";
-
-            dgv_ConsultantList.DataSource = invService.GetAllInvitedProjectID(ProjectGet.ProjectId);
         }
     }
 }
