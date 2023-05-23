@@ -1,4 +1,5 @@
-﻿using DAL.Repository;
+﻿using DAL.Models;
+using DAL.Repository;
 using Interfaces.Models;
 using Interfaces.Repositories;
 using Interfaces.Services;
@@ -38,6 +39,10 @@ namespace Domain.Services
         public IInvoiceModel GetInvoiceID(int invoiceID)
         {
             return InvoiceRepository.GetInvoiceID(invoiceID);
+        }
+        public void UpdateInvoice(IInvoiceModel invoice)
+        {
+            InvoiceRepository.UpdateInvoice(invoice);
         }
     }
 }
