@@ -12,6 +12,8 @@ namespace Domain.Services
         readonly IInviteService InviteService;
         readonly ISpecializationService SpecializationService;
         readonly IMessageService MessageService;
+        readonly IConsultantLineService ConsultantLineService;
+        readonly IInvoiceService InvoiceService;
 
         public DomainServiceManager()
         {
@@ -22,6 +24,8 @@ namespace Domain.Services
             InviteService = new InviteService(this, dataContext);
             SpecializationService = new SpecializationService(this, dataContext);
             MessageService = new MessageService(this, dataContext);
+            ConsultantLineService = new ConsultantLineService(this, dataContext);
+            InvoiceService = new InvoiceService(this, dataContext);
         }
 
         IUserService IDomainServiceManager.UserService => UserService;
@@ -32,6 +36,11 @@ namespace Domain.Services
 
         ISpecializationService IDomainServiceManager.SpecializationService => SpecializationService;
 
-       IMessageService IDomainServiceManager.MessageService => MessageService;
+        IMessageService IDomainServiceManager.MessageService => MessageService;
+
+        IConsultantLineService IDomainServiceManager.ConsultantLineService => ConsultantLineService;
+
+        IInvoiceService IDomainServiceManager.InvoiceService => InvoiceService;
+
     }
 }

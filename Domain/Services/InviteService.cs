@@ -54,6 +54,11 @@ namespace Domain.Services
         /// </summary>
         public void AddInvites(int ProjectID, int UserID, DateTime inviteDate, string InviteStatus)
         {
+            if (DomainServiceManager.ProjectService.GetProject(ProjectID).ProjectEndDate < DateTime.Now)
+            {
+                throw new Exception("Can't create an invite for a project that has ended.");
+            }
+
             IInvitesModel newInvite = new DAL.Models.InvitesModel();
 
             newInvite.ProjectId = ProjectID;

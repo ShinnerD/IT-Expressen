@@ -151,7 +151,8 @@ namespace GUI
             //await Task.Delay(3000);
             try
             {
-                ServiceManager.ProjectService.UpdateAllProjectStatus(); //<-- Execution of stored procedure to update project status column. Piggybacking on this task as a temp solution. /DK
+                ServiceManager.ProjectService.UpdateAllProjectStatus(); //<-- Execution of stored procedure to update project status column.
+                                                                                                          //Piggybacking on this task as a temporary solution. /DK
                 var anyUser = userService.GetAllUsers();
                 if (anyUser.Count > 0)
                 {

@@ -35,12 +35,12 @@ namespace Interfaces.Services
         /// <summary>
         /// Retrieves a List of IProjectModels in which each project require ALL of the provided specializations. /DK
         /// </summary>
-        List<IProjectModel> GetProjectsFromAllSpecializations(List<string> specializations);
+        List<IProjectModel> GetProjectsFromAllSpecializations(List<string> specializations, bool includeEndedProjects = false);
 
         /// <summary>
         /// Retrieves a List of IProjectModels in which each project requires at least one of the specializations specified. /DK
         /// </summary>
-        List<IProjectModel> GetProjectsFromAnySpecializations(List<string> specializations);
+        List<IProjectModel> GetProjectsFromAnySpecializations(List<string> specializations, bool includeEndedProjects = false);
 
         /// <summary>
         /// Updates the Project Status for ALL projects in the Projects table.

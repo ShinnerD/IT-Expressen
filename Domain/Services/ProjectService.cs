@@ -3,8 +3,6 @@ using DAL.Repository;
 using Interfaces.Models;
 using Interfaces.Repositories;
 using Interfaces.Services;
-using Microsoft.Data.SqlClient;
-using System.Data.Common;
 
 namespace Domain.Services
 {
@@ -98,7 +96,7 @@ namespace Domain.Services
         /// </summary>
         public List<IProjectModel> GetUserProjects(int userId)
         {
-            return AssignDomainDetails(_projectRepo.GetUserProjects(userId)).OrderBy(i => i.Title).ToList();
+            return _projectRepo.GetUserProjects(userId).OrderBy(i => i.Title).ToList();
         }
 
         /// <summary>
@@ -107,7 +105,6 @@ namespace Domain.Services
         public IProjectModel GetProject(int projectId)
         {
             var result = _projectRepo.GetProject(projectId);
-            AssignDomainDetails(result);
             return result;
         }
 
@@ -162,17 +159,17 @@ namespace Domain.Services
         /// <summary>
         /// Retrieves a List of IProjectModels in which each project require ALL of the provided specializations. Ordered by Title. /DK
         /// </summary>
-        public List<IProjectModel> GetProjectsFromAllSpecializations(List<string> specializations)
+        public List<IProjectModel> GetProjectsFromAllSpecializations(List<string> specializations, bool includeEndedProjects = false)
         {
-            return AssignDomainDetails(_projectRepo.GetProjectsFromAllSpecializations(specializations).OrderBy(i => i.Title).ToList());
+            return _projectRepo.GetProjectsFromAllSpecializations(specializations, includeEndedProjects).OrderBy(i => i.Title).ToList();
         }
 
         /// <summary>
         /// Retrieves a List of IProjectModels in which each project requires at least one of the specializations specified. Ordered by Title. /DK
         /// </summary>
-        public List<IProjectModel> GetProjectsFromAnySpecializations(List<string> specializations)
+        public List<IProjectModel> GetProjectsFromAnySpecializations(List<string> specializations, bool includeEndedProjects = false)
         {
-            return AssignDomainDetails(_projectRepo.GetProjectsFromAnySpecializations(specializations).OrderBy(i => i.Title).ToList());
+            return _projectRepo.GetProjectsFromAnySpecializations(specializations, includeEndedProjects).OrderBy(i => i.Title).ToList();
         }
 
         /// <summary>
@@ -180,7 +177,7 @@ namespace Domain.Services
         /// </summary>
         public List<IProjectModel> SearchProjects(string searchTerm, int userId)
         {
-            return AssignDomainDetails(_projectRepo.SearchProjects(searchTerm, userId).OrderBy(i => i.Title).ToList());
+            return _projectRepo.SearchProjects(searchTerm, userId).OrderBy(i => i.Title).ToList();
         }
 
         /// <summary>
@@ -190,32 +187,6 @@ namespace Domain.Services
         public void UpdateAllProjectStatus()
         {
             _projectRepo.UpdateProjectStatusForAll();
-        }
-
-
-        /// <summary>
-        /// Private service method. Assigns manager details to the IProjectModels. (Full Name and User Name) /DK
-        /// </summary>
-        private List<IProjectModel> AssignDomainDetails(List<IProjectModel> projectList)
-        {
-            foreach (var project in projectList)
-            {
-                AssignDomainDetails(project);
-            }
-            return projectList;
-        }
-
-        /// <summary>
-        /// Private void service method. Assigns manager details to the IProjectModel. (Full Name and User Name) /DK
-        /// </summary>
-        private void AssignDomainDetails(IProjectModel project)
-        {
-            if (project != null)
-            {
-                var manager = _domainServiceManager.UserService.GetUserFromID(project.UserId);
-                project.ManagerFullName = manager.FullName;
-                project.ManagerUserName = manager.UserName;
-            }
         }
     }
 }

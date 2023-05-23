@@ -82,7 +82,7 @@
             bt_CreateUser.Location = new Point(557, 403);
             bt_CreateUser.Name = "bt_CreateUser";
             bt_CreateUser.Size = new Size(75, 24);
-            bt_CreateUser.TabIndex = 22;
+            bt_CreateUser.TabIndex = 15;
             bt_CreateUser.Text = "Ok";
             bt_CreateUser.UseVisualStyleBackColor = true;
             bt_CreateUser.Click += bt_CreateUser_Click;
@@ -95,7 +95,7 @@
             cb_UserType.Location = new Point(456, 220);
             cb_UserType.Name = "cb_UserType";
             cb_UserType.Size = new Size(176, 23);
-            cb_UserType.TabIndex = 24;
+            cb_UserType.TabIndex = 12;
             cb_UserType.Click += cb_UserType_SelectedValueChanged;
             // 
             // clb_Skills
@@ -105,7 +105,7 @@
             clb_Skills.MultiColumn = true;
             clb_Skills.Name = "clb_Skills";
             clb_Skills.Size = new Size(517, 148);
-            clb_Skills.TabIndex = 25;
+            clb_Skills.TabIndex = 13;
             // 
             // label12
             // 
@@ -142,7 +142,7 @@
             bt_back.Location = new Point(115, 403);
             bt_back.Name = "bt_back";
             bt_back.Size = new Size(75, 24);
-            bt_back.TabIndex = 31;
+            bt_back.TabIndex = 14;
             bt_back.Text = "Cancel";
             bt_back.UseVisualStyleBackColor = true;
             bt_back.Click += bt_back_Click;
@@ -312,7 +312,7 @@
             grpBoxProfileInfo.Size = new Size(652, 209);
             grpBoxProfileInfo.TabIndex = 32;
             grpBoxProfileInfo.TabStop = false;
-            grpBoxProfileInfo.Text = "Fill out the form, to creat your user:";
+            grpBoxProfileInfo.Text = "Fill out the form to create your user account";
             // 
             // tb_UserName
             // 
@@ -323,8 +323,7 @@
             tb_UserName.Margin = new Padding(2);
             tb_UserName.Name = "tb_UserName";
             tb_UserName.Size = new Size(225, 16);
-            tb_UserName.TabIndex = 102;
-            tb_UserName.TabStop = false;
+            tb_UserName.TabIndex = 1;
             // 
             // tb_Password
             // 
@@ -336,8 +335,7 @@
             tb_Password.Name = "tb_Password";
             tb_Password.PasswordChar = '*';
             tb_Password.Size = new Size(225, 16);
-            tb_Password.TabIndex = 103;
-            tb_Password.TabStop = false;
+            tb_Password.TabIndex = 2;
             // 
             // tb_RePassword
             // 
@@ -350,8 +348,7 @@
             tb_RePassword.Name = "tb_RePassword";
             tb_RePassword.PasswordChar = '*';
             tb_RePassword.Size = new Size(225, 16);
-            tb_RePassword.TabIndex = 108;
-            tb_RePassword.TabStop = false;
+            tb_RePassword.TabIndex = 3;
             // 
             // bt_EditProfileCancel
             // 
@@ -388,8 +385,7 @@
             tb_FirstName.Margin = new Padding(2);
             tb_FirstName.Name = "tb_FirstName";
             tb_FirstName.Size = new Size(225, 16);
-            tb_FirstName.TabIndex = 1;
-            tb_FirstName.TabStop = false;
+            tb_FirstName.TabIndex = 4;
             // 
             // tb_Country
             // 
@@ -401,8 +397,7 @@
             tb_Country.Margin = new Padding(2);
             tb_Country.Name = "tb_Country";
             tb_Country.Size = new Size(225, 16);
-            tb_Country.TabIndex = 8;
-            tb_Country.TabStop = false;
+            tb_Country.TabIndex = 11;
             // 
             // tb_LastName
             // 
@@ -413,8 +408,7 @@
             tb_LastName.Margin = new Padding(2);
             tb_LastName.Name = "tb_LastName";
             tb_LastName.Size = new Size(225, 16);
-            tb_LastName.TabIndex = 2;
-            tb_LastName.TabStop = false;
+            tb_LastName.TabIndex = 5;
             // 
             // tb_Zipcode
             // 
@@ -426,8 +420,7 @@
             tb_Zipcode.Margin = new Padding(2);
             tb_Zipcode.Name = "tb_Zipcode";
             tb_Zipcode.Size = new Size(225, 16);
-            tb_Zipcode.TabIndex = 7;
-            tb_Zipcode.TabStop = false;
+            tb_Zipcode.TabIndex = 10;
             // 
             // tb_City
             // 
@@ -439,8 +432,7 @@
             tb_City.Margin = new Padding(2);
             tb_City.Name = "tb_City";
             tb_City.Size = new Size(225, 16);
-            tb_City.TabIndex = 6;
-            tb_City.TabStop = false;
+            tb_City.TabIndex = 9;
             // 
             // tb_Email
             // 
@@ -451,8 +443,7 @@
             tb_Email.Margin = new Padding(2);
             tb_Email.Name = "tb_Email";
             tb_Email.Size = new Size(225, 16);
-            tb_Email.TabIndex = 3;
-            tb_Email.TabStop = false;
+            tb_Email.TabIndex = 6;
             // 
             // tb_Address
             // 
@@ -464,8 +455,7 @@
             tb_Address.Margin = new Padding(2);
             tb_Address.Name = "tb_Address";
             tb_Address.Size = new Size(225, 16);
-            tb_Address.TabIndex = 5;
-            tb_Address.TabStop = false;
+            tb_Address.TabIndex = 8;
             // 
             // tb_PhoneNumber
             // 
@@ -476,13 +466,14 @@
             tb_PhoneNumber.Margin = new Padding(2);
             tb_PhoneNumber.Name = "tb_PhoneNumber";
             tb_PhoneNumber.Size = new Size(225, 16);
-            tb_PhoneNumber.TabIndex = 4;
-            tb_PhoneNumber.TabStop = false;
+            tb_PhoneNumber.TabIndex = 7;
             // 
             // CreateUser
             // 
+            AcceptButton = bt_CreateUser;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            CancelButton = bt_back;
             ClientSize = new Size(652, 452);
             Controls.Add(grpBoxProfileInfo);
             Controls.Add(bt_back);
@@ -493,7 +484,11 @@
             Controls.Add(cb_UserType);
             Controls.Add(bt_CreateUser);
             Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimumSize = new Size(668, 491);
             Name = "CreateUser";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "CreateUser";
             grpBoxProfileInfo.ResumeLayout(false);
             grpBoxProfileInfo.PerformLayout();

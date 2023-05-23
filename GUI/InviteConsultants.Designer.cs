@@ -58,6 +58,7 @@
             // 
             // dgv_ConsultantList
             // 
+            dgv_ConsultantList.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgv_ConsultantList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_ConsultantList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_ConsultantList.Location = new Point(12, 312);
@@ -68,6 +69,7 @@
             // 
             // bt_AddConsultant
             // 
+            bt_AddConsultant.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             bt_AddConsultant.Location = new Point(680, 283);
             bt_AddConsultant.Name = "bt_AddConsultant";
             bt_AddConsultant.Size = new Size(108, 23);
@@ -78,6 +80,7 @@
             // 
             // grpBoxProfileInfo
             // 
+            grpBoxProfileInfo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             grpBoxProfileInfo.Controls.Add(lbl_ReqSkills);
             grpBoxProfileInfo.Controls.Add(checkedListSkills);
             grpBoxProfileInfo.Controls.Add(label1);
@@ -99,7 +102,6 @@
             grpBoxProfileInfo.Controls.Add(label5);
             grpBoxProfileInfo.Controls.Add(label4);
             grpBoxProfileInfo.Controls.Add(label6);
-            grpBoxProfileInfo.Dock = DockStyle.Top;
             grpBoxProfileInfo.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             grpBoxProfileInfo.Location = new Point(0, 0);
             grpBoxProfileInfo.Name = "grpBoxProfileInfo";
@@ -146,6 +148,7 @@
             // 
             // rtb_Description
             // 
+            rtb_Description.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             rtb_Description.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             rtb_Description.Location = new Point(12, 156);
             rtb_Description.Name = "rtb_Description";
@@ -240,6 +243,7 @@
             // 
             // tb_ProjectModifiedDate
             // 
+            tb_ProjectModifiedDate.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             tb_ProjectModifiedDate.BackColor = SystemColors.ControlLight;
             tb_ProjectModifiedDate.BorderStyle = BorderStyle.None;
             tb_ProjectModifiedDate.Enabled = false;
@@ -275,6 +279,7 @@
             // 
             // tb_ProjectEndDate
             // 
+            tb_ProjectEndDate.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             tb_ProjectEndDate.BackColor = SystemColors.ControlLight;
             tb_ProjectEndDate.BorderStyle = BorderStyle.None;
             tb_ProjectEndDate.Enabled = false;
@@ -301,6 +306,7 @@
             // 
             // tb_ProjectStartDate
             // 
+            tb_ProjectStartDate.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             tb_ProjectStartDate.BackColor = SystemColors.ControlLight;
             tb_ProjectStartDate.BorderStyle = BorderStyle.None;
             tb_ProjectStartDate.Enabled = false;
@@ -366,7 +372,9 @@
             Controls.Add(bt_AddConsultant);
             Controls.Add(grpBoxProfileInfo);
             Controls.Add(dgv_ConsultantList);
+            MinimumSize = new Size(816, 599);
             Name = "InviteConsultants";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "InviteConsultants";
             ((System.ComponentModel.ISupportInitialize)dgv_ConsultantList).EndInit();
             grpBoxProfileInfo.ResumeLayout(false);

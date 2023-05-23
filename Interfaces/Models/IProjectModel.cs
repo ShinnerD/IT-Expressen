@@ -13,5 +13,6 @@
         decimal? TotalInvoicePrice { get; set; }
         int UserId { get; set; }
         string? Description { get; set; }
+        string? SpecializationsString { get; set; }
     }
 }

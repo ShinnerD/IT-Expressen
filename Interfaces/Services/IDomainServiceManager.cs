@@ -7,5 +7,7 @@
         IInviteService InviteService { get; }
         ISpecializationService SpecializationService { get; }
         IMessageService MessageService { get; }
+        IConsultantLineService ConsultantLineService { get; }
+        IInvoiceService InvoiceService { get; }
     }
 }
