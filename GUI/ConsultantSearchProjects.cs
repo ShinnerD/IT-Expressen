@@ -31,6 +31,9 @@ namespace GUI
             SetupsDataGridview();
         }
 
+        /// <summary>
+        /// (JQ)Sets up the data grid view to display user projects and configures its columns.
+        /// </summary>
         private void SetUpUserDataGridView()
         {
             ISpecializationService specService = ServiceManager.SpecializationService;
@@ -53,6 +56,9 @@ namespace GUI
             dgv_Searchproject.DataSource = projectsSearchResults;
         }
 
+        /// <summary>
+        /// (JQ)Retrieves information about the user and their specializations.
+        /// </summary>
         private void GetProjectInfo()
         {
             ISpecializationService specializationService = ServiceManager.SpecializationService;
@@ -61,12 +67,18 @@ namespace GUI
             ConsultantSpecializations = specializationService.GetUserSpecializations(UserId);
         }
 
+        /// <summary>
+        /// (JQ)Sets up the page elements and checks project skills based on consultant specializations.
+        /// </summary>
         private void SetupPageElements()
         {
             CheckProjectSkills();
             SetupDataGridview();
         }
 
+        /// <summary>
+        /// (JQ)Sets up the data grid view to display projects based on all specializations.
+        /// </summary>
         private void SetupDataGridview()
         {
             ISpecializationService specService = ServiceManager.SpecializationService;
@@ -75,6 +87,9 @@ namespace GUI
             dgv_Searchproject.DataSource = SearchResults;
         }
 
+        /// <summary>
+        /// (JQ)Checks the project skills in the skills checklist based on the consultant's specializations.
+        /// </summary>
         private void CheckProjectSkills()
         {
             foreach (var specialization in ConsultantSpecializations)
@@ -83,6 +98,9 @@ namespace GUI
             }
         }
 
+        /// <summary>
+        /// (JQ)Sets up the skills checklist by populating it with the defined specializations.
+        /// </summary>
         private void SetupSkillsCheckList()
         {
             ISpecializationService specService = ServiceManager.SpecializationService;
@@ -99,6 +117,9 @@ namespace GUI
             }
         }
 
+        /// <summary>
+        /// (JQ)Sets up the data grid view based on the selected skills in the skills checklist.
+        /// </summary>
         private void SetupsDataGridview()
         {
             ISpecializationService specService = ServiceManager.SpecializationService;
@@ -120,6 +141,9 @@ namespace GUI
             dgv_Searchproject.DataSource = SearchResults;
         }
 
+        /// <summary>
+        /// (JQ)Handle button click event for Search button
+        /// </summary>
         private void btnSearch_Click(object sender, EventArgs e)
         {
             SetupsDataGridview();
