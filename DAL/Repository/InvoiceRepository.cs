@@ -33,8 +33,7 @@ namespace DAL.Repository
 
                 Invoice.InvoiceId = dbInvoiced.Invoice_ID;
                 Invoice.ProjectId = (int)dbInvoiced.Project_ID;
-                Invoice.LineID = (int)dbInvoiced.Line_ID;
-                Invoice.TotalPrice = (int)dbInvoiced.Total_Price;
+                Invoice.TotalPrice = (decimal)dbInvoiced.Total_Price;
                 Invoice.InvoiceDate = dbInvoiced.Invoice_Date;
 
                 result.Add(Invoice);
@@ -45,25 +44,22 @@ namespace DAL.Repository
         /// <summary>
         /// Getting a list off all invoices with a specific ProjectID
         /// </summary>
-        public List<IInvoiceModel> GetAllInvoiceProjectID(int projectId)
+        public IInvoiceModel GetInvoiceProjectID(int projectId)
         {
-            List<IInvoiceModel> result = new List<IInvoiceModel>();
 
-            var dbInvoices = DataContext.Invoices.Where(i => i.Project_ID == projectId);
-
-            foreach (var dbInvoiced in dbInvoices)
+            var dbInvoices = DataContext.Invoices.FirstOrDefault(i => i.Project_ID == projectId);
+            if (dbInvoices == null)
             {
-                IInvoiceModel Invoice = new InvoiceModel();
-
-                Invoice.InvoiceId = dbInvoiced.Invoice_ID;
-                Invoice.ProjectId = (int)dbInvoiced.Project_ID;
-                Invoice.LineID = (int)dbInvoiced.Line_ID;
-                Invoice.TotalPrice = (int)dbInvoiced.Total_Price;
-                Invoice.InvoiceDate = dbInvoiced.Invoice_Date;
-
-                result.Add(Invoice);
+                return null;
             }
-            return result;
+            IInvoiceModel Invoice = new InvoiceModel();
+
+            Invoice.InvoiceId = dbInvoices.Invoice_ID;
+            Invoice.ProjectId = (int)dbInvoices.Project_ID;
+            Invoice.TotalPrice = (decimal)dbInvoices.Total_Price;
+            Invoice.InvoiceDate = dbInvoices.Invoice_Date;
+
+            return Invoice;
         }
 
         /// <summary>
@@ -77,11 +73,22 @@ namespace DAL.Repository
 
             result.InvoiceId = dbInvoice.Invoice_ID;
             result.ProjectId = (int)dbInvoice.Project_ID;
-            result.LineID = (int)dbInvoice.Line_ID;
-            result.TotalPrice = (int)dbInvoice.Total_Price;
+            result.TotalPrice = (decimal)dbInvoice.Total_Price;
             result.InvoiceDate = dbInvoice.Invoice_Date;
 
             return result;
+        }
+
+        public void AddInvoice(IInvoiceModel invoice)
+        {
+            var newInovice = new Linq.Invoice();
+
+            newInovice.Project_ID = invoice.ProjectId;
+            newInovice.Total_Price = invoice.TotalPrice;
+            newInovice.Invoice_Date = invoice.InvoiceDate;
+
+            DataContext.Invoices.InsertOnSubmit(newInovice);
+            DataContext.SubmitChanges();
         }
     }
 }
