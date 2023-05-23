@@ -6,9 +6,11 @@ namespace GUI
     public partial class ManageProject : Form
     {
         private int ProjectID;
+
         private IProjectModel? ProjectGet;
         private List<IMessageModel>? MessageGet { get; set; }
         private List<string>? MessageBoardGet { get; set; }
+
         private string UserName;
 
         private readonly IDomainServiceManager ServiceManager;
@@ -24,6 +26,7 @@ namespace GUI
             LoadProjectData();
             LoadMessageData();
             InvolvedUsers();
+            GetTotalInvoice();
         }
 
         private void GetProjectInfo()
@@ -43,7 +46,15 @@ namespace GUI
             tb_ProjectEndDate.Text = ProjectGet.ProjectEndDate.ToString();
             tb_ProjectModifiedDate.Text = ProjectGet.ProjectModifyDate.ToString();
             rtb_Description.Text = ProjectGet.Description;
-            lb_DaysTilEnd.Text = "Project ends in " + (ProjectGet.ProjectEndDate - DateTime.Now).GetValueOrDefault().Days.ToString() + " days";
+            if (ProjectGet.ProjectEndDate > DateTime.Now)
+            {
+                lb_DaysTilEnd.Text = "Project ends in " + (ProjectGet.ProjectEndDate - DateTime.Now).GetValueOrDefault().Days.ToString() + " days";
+            }
+            else
+            {
+                lb_DaysTilEnd.Text = "Project has ended";
+            }
+            GetTotalInvoice();
         }
 
         private void LoadMessageData()
@@ -112,6 +123,7 @@ namespace GUI
             if (ServiceManager.UserService.GetUserFromUsername(UserName).UserType.ToLower() == "consultant")
             {
                 DataInvolvedUseres();
+                LoadConsultantInvoiceBoxes();
 
                 dgv_InvolvedUsers.DataSource = ServiceManager.InviteService.GetAllInvitedProjectID(ProjectGet.ProjectId).Where(i => i.InviteStatus.ToLower() != "declined").ToList(); ;
             }
@@ -136,6 +148,83 @@ namespace GUI
 
             dgv_InvolvedUsers.Columns.Add("InvitedUserSpecializations", "User Specializations");
             dgv_InvolvedUsers.Columns["InvitedUserSpecializations"].DataPropertyName = "InvitedUserSpecializations";
+        }
+
+        //private void CalculateRates()
+        //{
+        //    double hours, rate, total;
+
+        //    try
+        //    {
+        //        hours = Convert.ToInt32(tb_HourlyRate.Text);
+        //        rate = Convert.ToInt32(tb_HoursSpendt.Text);
+
+        //        total = Convert.ToInt32(hours * rate);
+
+        //        tb_TotalInvoice.Text = total.ToString();
+        //    }
+        //    catch
+        //    {
+        //        MessageBox.Show("Felts may only include numbers");
+        //    }
+        //}
+        private void LoadConsultantInvoiceBoxes()
+        {
+            lb_HourlyRate.Visible = true;
+            tb_HourlyRate.Visible = true;
+            tb_HoursSpendt.Visible = true;
+            lb_HoursSpendt.Visible = true;
+            cb_UnlockRate.Visible = true;
+            bt_addHours.Visible = true;
+        }
+
+        private void AddToInvoice()
+        {
+            var getUserID = ServiceManager.UserService.GetUserFromUsername(UserName);
+            var getProjectID = ServiceManager.ProjectService.GetProject(ProjectID);
+
+            ServiceManager.ConsultantLineService.AddConsultantLine(
+                int.Parse(tb_ProjectID.Text),
+                getUserID.ID,
+                decimal.Parse(tb_HourlyRate.Text),
+                int.Parse(tb_HoursSpendt.Text)
+                );
+
+        }
+
+
+        private void GetTotalInvoice()
+        {
+            var userID = ServiceManager.UserService.GetUserFromUsername(UserName).ID;
+            var getuserID = ServiceManager.UserService.GetUserFromUsername(UserName);
+
+            List<IConsultantLineModel> getTotalInvoiced = ServiceManager.ConsultantLineService.GetAllConsultantLinesFromProjectID(ProjectID).Where(i => i.UserID == userID).ToList(); ;
+            
+            decimal result = 0;
+
+            foreach (var ConsultantLine in getTotalInvoiced)
+            {
+                result += (ConsultantLine.HoursTotal * ConsultantLine.HourlyRate);
+            }
+            tb_TotalInvoice.Text = result.ToString();
+        }
+
+        private void bt_addHours_Click(object sender, EventArgs e)
+        {
+            AddToInvoice();
+            GetTotalInvoice();
+        }
+
+        private void cb_UnlockRate_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_UnlockRate.Checked == true)
+            {
+                tb_HourlyRate.Enabled = true;
+            }
+            if (cb_UnlockRate.Checked == false)
+            {
+                tb_HourlyRate.Enabled = false;
+            }
         }
     }
 }

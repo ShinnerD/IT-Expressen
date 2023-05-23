@@ -14,8 +14,7 @@ namespace Interfaces.Models
     {
         DateTime? InvoiceDate { get; set; }
         int InvoiceId { get; set; }
-        int LineID { get; set; }
         int ProjectId { get; set; }
-        int TotalPrice { get; set; }
+        decimal TotalPrice { get; set; }
     }
 }
