@@ -3,6 +3,7 @@ using Interfaces.Models;
 using Interfaces.Services;
 using Microsoft.VisualBasic.Devices;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace GUI.Admin
@@ -455,10 +456,21 @@ namespace GUI.Admin
                 {
                     try
                     {
-                        int userId = int.Parse(dgv_UserSearchResults.SelectedRows[0].Cells["UserId"].Value.ToString());
-                        userService.Delete(userId);
-                        PerformUserSearch();
-                        FeedBackMessage(lbl_FeedbackUserTab, "User successfully deleted.", Color.Green);
+                        var user = dgv_UserSearchResults.SelectedRows[0].DataBoundItem as IUserModel;
+                        int userId = user.ID;
+
+                        if (user.UserType.ToLower() != "consultant")
+                        {
+                            userService.Delete(userId);
+                            PerformUserSearch();
+                            FeedBackMessage(lbl_FeedbackUserTab, "User successfully deleted.", Color.Green);
+                        }
+                        else
+                        {
+                            userService.DeleteConsultantStoredProcedure(user.ID);
+                            PerformUserSearch();
+                            FeedBackMessage(lbl_FeedbackUserTab, "User successfully deleted.", Color.Green);
+                        }
                     }
                     catch (Exception e)
                     {

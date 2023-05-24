@@ -31,7 +31,6 @@
             groupBox1 = new GroupBox();
             bt_decline = new Button();
             bt_AcceptInv = new Button();
-            bt_seeInviteDetails = new Button();
             dgv_ConsultantsInvites = new DataGridView();
             grpBoxProfileInfo = new GroupBox();
             lbl_ReqSkills = new Label();
@@ -62,11 +61,10 @@
             // 
             // groupBox1
             // 
+            groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             groupBox1.Controls.Add(bt_decline);
             groupBox1.Controls.Add(bt_AcceptInv);
-            groupBox1.Controls.Add(bt_seeInviteDetails);
             groupBox1.Controls.Add(dgv_ConsultantsInvites);
-            groupBox1.Dock = DockStyle.Bottom;
             groupBox1.Location = new Point(0, 287);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(694, 346);
@@ -76,6 +74,7 @@
             // 
             // bt_decline
             // 
+            bt_decline.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             bt_decline.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             bt_decline.Location = new Point(110, 312);
             bt_decline.Name = "bt_decline";
@@ -87,6 +86,7 @@
             // 
             // bt_AcceptInv
             // 
+            bt_AcceptInv.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             bt_AcceptInv.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             bt_AcceptInv.Location = new Point(6, 312);
             bt_AcceptInv.Name = "bt_AcceptInv";
@@ -95,17 +95,6 @@
             bt_AcceptInv.Text = "Accept";
             bt_AcceptInv.UseVisualStyleBackColor = true;
             bt_AcceptInv.Click += bt_AcceptInv_Click;
-            // 
-            // bt_seeInviteDetails
-            // 
-            bt_seeInviteDetails.Dock = DockStyle.Right;
-            bt_seeInviteDetails.Location = new Point(590, 310);
-            bt_seeInviteDetails.Name = "bt_seeInviteDetails";
-            bt_seeInviteDetails.Size = new Size(101, 33);
-            bt_seeInviteDetails.TabIndex = 39;
-            bt_seeInviteDetails.Text = "See Details";
-            bt_seeInviteDetails.UseVisualStyleBackColor = true;
-            bt_seeInviteDetails.Click += bt_seeInviteDetails_Click;
             // 
             // dgv_ConsultantsInvites
             // 
@@ -171,7 +160,7 @@
             // 
             // checkedListSkills
             // 
-            checkedListSkills.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            checkedListSkills.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             checkedListSkills.BackColor = SystemColors.Control;
             checkedListSkills.BorderStyle = BorderStyle.None;
             checkedListSkills.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
@@ -195,6 +184,7 @@
             // 
             // rtb_Description
             // 
+            rtb_Description.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             rtb_Description.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             rtb_Description.Location = new Point(12, 156);
             rtb_Description.Name = "rtb_Description";
@@ -289,6 +279,7 @@
             // 
             // tb_ProjectModifiedDate
             // 
+            tb_ProjectModifiedDate.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             tb_ProjectModifiedDate.BackColor = SystemColors.ControlLight;
             tb_ProjectModifiedDate.BorderStyle = BorderStyle.None;
             tb_ProjectModifiedDate.Enabled = false;
@@ -324,6 +315,7 @@
             // 
             // tb_ProjectEndDate
             // 
+            tb_ProjectEndDate.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             tb_ProjectEndDate.BackColor = SystemColors.ControlLight;
             tb_ProjectEndDate.BorderStyle = BorderStyle.None;
             tb_ProjectEndDate.Enabled = false;
@@ -350,6 +342,7 @@
             // 
             // tb_ProjectStartDate
             // 
+            tb_ProjectStartDate.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             tb_ProjectStartDate.BackColor = SystemColors.ControlLight;
             tb_ProjectStartDate.BorderStyle = BorderStyle.None;
             tb_ProjectStartDate.Enabled = false;
@@ -425,7 +418,6 @@
 
         #endregion
         private GroupBox groupBox1;
-        private Button bt_seeInviteDetails;
         private DataGridView dgv_ConsultantsInvites;
         private GroupBox grpBoxProfileInfo;
         private Label label1;

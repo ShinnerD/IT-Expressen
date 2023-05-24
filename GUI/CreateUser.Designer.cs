@@ -91,12 +91,12 @@
             // 
             cb_UserType.DropDownStyle = ComboBoxStyle.DropDownList;
             cb_UserType.FormattingEnabled = true;
-            cb_UserType.Items.AddRange(new object[] { "manager", "consultant" });
+            cb_UserType.Items.AddRange(new object[] { "Consultant", "Manager" });
             cb_UserType.Location = new Point(456, 220);
             cb_UserType.Name = "cb_UserType";
             cb_UserType.Size = new Size(176, 23);
             cb_UserType.TabIndex = 12;
-            cb_UserType.Click += cb_UserType_SelectedValueChanged;
+            cb_UserType.DropDownClosed += cb_UserType_SelectedValueChanged;
             // 
             // clb_Skills
             // 

@@ -123,16 +123,6 @@ namespace GUI
         }
 
         /// <summary>
-        /// (JQ)Handle button click event for ConsultantViewProjects and passes userId to ConsultantViewProjects form.
-        /// </summary>
-        private void bt_ViewProjects_Click(object sender, EventArgs e)
-        {
-            int userId = userModelGet.ID;
-            ConsultantViewProjects viewProjectsForm = new ConsultantViewProjects(ServiceManager, userId);
-            viewProjectsForm.ShowDialog();
-        }
-
-        /// <summary>
         /// (JQ)Handle button click event for searching projects and passes userId to the ConsultantSearchProjects form.
         /// </summary>
         private void bt_SearchProjects_Click(object sender, EventArgs e)

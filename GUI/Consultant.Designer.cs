@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            bt_ViewProjects = new Button();
             bt_SearchProjects = new Button();
             dgv_ConsultantsInvites = new DataGridView();
             groupBox1 = new GroupBox();
@@ -60,18 +59,6 @@
             groupBox1.SuspendLayout();
             grpBoxProfileInfo.SuspendLayout();
             SuspendLayout();
-            // 
-            // bt_ViewProjects
-            // 
-            bt_ViewProjects.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            bt_ViewProjects.Location = new Point(424, 160);
-            bt_ViewProjects.Margin = new Padding(2);
-            bt_ViewProjects.Name = "bt_ViewProjects";
-            bt_ViewProjects.Size = new Size(100, 26);
-            bt_ViewProjects.TabIndex = 35;
-            bt_ViewProjects.Text = "ViewProjects";
-            bt_ViewProjects.UseVisualStyleBackColor = true;
-            bt_ViewProjects.Click += bt_ViewProjects_Click;
             // 
             // bt_SearchProjects
             // 
@@ -416,7 +403,6 @@
             Controls.Add(bt_seeInvites);
             Controls.Add(grpBoxProfileInfo);
             Controls.Add(bt_SearchProjects);
-            Controls.Add(bt_ViewProjects);
             Controls.Add(groupBox1);
             MinimumSize = new Size(655, 600);
             Name = "Consultant";
@@ -430,8 +416,6 @@
         }
 
         #endregion
-
-        private Button bt_ViewProjects;
         private Button bt_SearchProjects;
         private DataGridView dgv_ConsultantsInvites;
         private GroupBox groupBox1;
