@@ -162,12 +162,6 @@ namespace GUI.Admin
                     FeedBackMessage(lbl_FeedBackNewProject, "Invite successfully deleted.", Color.Green);
                     refreshAfterDelete = true;
                 }
-                if (dgv_AcceptedInvites.SelectedRows.Count > 0)
-                {
-                    ServiceManager.InviteService.DeleteInvite(dgv_AcceptedInvites.SelectedRows[0].DataBoundItem as IInvitesModel);
-                    FeedBackMessage(lbl_FeedBackNewProject, "Invite successfully deleted.", Color.Green);
-                    refreshAfterDelete = true;
-                }
                 if (refreshAfterDelete) { SetupPage(); }
             }
             catch (Exception)
