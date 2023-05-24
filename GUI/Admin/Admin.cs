@@ -3,6 +3,7 @@ using Interfaces.Models;
 using Interfaces.Services;
 using Microsoft.VisualBasic.Devices;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace GUI.Admin
@@ -60,6 +61,9 @@ namespace GUI.Admin
 
             dgv_ProjectSearchResults.Columns.Add("ProjectStatus", "Status");
             dgv_ProjectSearchResults.Columns["ProjectStatus"].DataPropertyName = "ProjectStatus";
+
+            dgv_ProjectSearchResults.Columns.Add("SpecializationsString", "Requirements");
+            dgv_ProjectSearchResults.Columns["SpecializationsString"].DataPropertyName = "SpecializationsString";
 
             dgv_ProjectSearchResults.Columns.Add("ProjectStartDate", "Start");
             dgv_ProjectSearchResults.Columns["ProjectStartDate"].DataPropertyName = "ProjectStartDate";
@@ -260,7 +264,7 @@ namespace GUI.Admin
 
             if (radio_AllProjects.Checked)
             {
-                projectsSearchResults = projectService.GetProjectsFromAnySpecializations(allSpecializations).ToList();
+                projectsSearchResults = projectService.GetProjectsFromAnySpecializations(allSpecializations, true).ToList();
             }
             if (radio_InProgress.Checked)
             {
@@ -272,7 +276,7 @@ namespace GUI.Admin
             }
             if (radio_Ended.Checked)
             {
-                projectsSearchResults = projectService.GetProjectsFromAnySpecializations(allSpecializations).Where(x => x.ProjectStatus.ToLower() == "ended").ToList();
+                projectsSearchResults = projectService.GetProjectsFromAnySpecializations(allSpecializations, true).Where(x => x.ProjectStatus.ToLower() == "ended").ToList();
             }
 
             projectsSearchResults = projectsSearchResults.Where(i => i.Title.ToLower().Contains(searchString.ToLower())
@@ -452,10 +456,21 @@ namespace GUI.Admin
                 {
                     try
                     {
-                        int userId = int.Parse(dgv_UserSearchResults.SelectedRows[0].Cells["UserId"].Value.ToString());
-                        userService.Delete(userId);
-                        PerformUserSearch();
-                        FeedBackMessage(lbl_FeedbackUserTab, "User successfully deleted.", Color.Green);
+                        var user = dgv_UserSearchResults.SelectedRows[0].DataBoundItem as IUserModel;
+                        int userId = user.ID;
+
+                        if (user.UserType.ToLower() != "consultant")
+                        {
+                            userService.Delete(userId);
+                            PerformUserSearch();
+                            FeedBackMessage(lbl_FeedbackUserTab, "User successfully deleted.", Color.Green);
+                        }
+                        else
+                        {
+                            userService.DeleteConsultantStoredProcedure(user.ID);
+                            PerformUserSearch();
+                            FeedBackMessage(lbl_FeedbackUserTab, "User successfully deleted.", Color.Green);
+                        }
                     }
                     catch (Exception e)
                     {
@@ -496,9 +511,10 @@ namespace GUI.Admin
         {
             if (dgv_ProjectSearchResults.SelectedRows.Count != 0)
             {
-                AdminProjectEdit EditProjectForm = new AdminProjectEdit(ServiceManager, dgv_ProjectSearchResults.SelectedRows[0].DataBoundItem as IProjectModel);
+                var project = dgv_ProjectSearchResults.SelectedRows[0].DataBoundItem as IProjectModel;
+                AdminProjectEdit EditProjectForm = new AdminProjectEdit(ServiceManager, project);
                 EditProjectForm.ShowDialog();
-                PerformProjectSearch();
+                PerformProjectSearch(project.ProjectId);
             }
         }
 

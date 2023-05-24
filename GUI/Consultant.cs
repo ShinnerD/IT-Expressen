@@ -123,16 +123,6 @@ namespace GUI
         }
 
         /// <summary>
-        /// (JQ)Handle button click event for ConsultantViewProjects and passes userId to ConsultantViewProjects form.
-        /// </summary>
-        private void bt_ViewProjects_Click(object sender, EventArgs e)
-        {
-            int userId = userModelGet.ID;
-            ConsultantViewProjects viewProjectsForm = new ConsultantViewProjects(ServiceManager, userId);
-            viewProjectsForm.ShowDialog();
-        }
-
-        /// <summary>
         /// (JQ)Handle button click event for searching projects and passes userId to the ConsultantSearchProjects form.
         /// </summary>
         private void bt_SearchProjects_Click(object sender, EventArgs e)
@@ -149,7 +139,7 @@ namespace GUI
         {
 
             IInviteService inviteService = invService;
-            invites = inviteService.GetInvitesFromUserId(userModelGet.ID).Where(i => i.InviteStatus.ToLower() == "accepted").ToList();
+            invites = inviteService.GetInvitesFromUserId(userModelGet.ID).Where(i => i.InviteStatus?.ToLower() == "accepted").ToList();
             List<IProjectModel> relatedProjects = new List<IProjectModel>();
 
             foreach (IInvitesModel invite in invites)
@@ -187,12 +177,12 @@ namespace GUI
         {
             if (dgv_ConsultantsInvites.SelectedRows.Count > 0)
             {
-            var selectedProject = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as IInvitesModel;
-            AcceptInviteForm AccInvForm = new AcceptInviteForm(ServiceManager, selectedProject);
-            this.Hide();
-            AccInvForm.ShowDialog();
-            this.Show();
-            LoadInvitesToDGV();
+                var selectedProject = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as IInvitesModel;
+                AcceptInviteForm AccInvForm = new AcceptInviteForm(ServiceManager, selectedProject);
+                this.Hide();
+                AccInvForm.ShowDialog();
+                this.Show();
+                LoadInvitesToDGV();
             }
         }
         private void EditCancel()

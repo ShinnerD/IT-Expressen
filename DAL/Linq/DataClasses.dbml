@@ -112,4 +112,7 @@
       <Association Name="Project_Invoice" Member="Project" ThisKey="Project_ID" OtherKey="Project_ID" Type="Project" IsForeignKey="true" />
     </Type>
   </Table>
+  <Function Name="dbo.UpdateProjectStatusForAll" Method="UpdateProjectStatusForAll">
+    <Return Type="System.Int32" />
+  </Function>
 </Database>

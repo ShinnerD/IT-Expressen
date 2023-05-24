@@ -17,12 +17,16 @@ namespace DAL
 
         public object GetContext()
         {
-            return _dataContext;
+            Monitor.Enter(_dataContext);
+            try { return _dataContext; }
+            finally { Monitor.Exit(_dataContext); }
         }
 
         public void Dispose()
         {
-            _dataContext.Dispose();
+            Monitor.Enter(_dataContext);
+            try { _dataContext.Dispose(); }
+            finally { Monitor.Exit(_dataContext); }
         }
     }
 }

@@ -39,17 +39,23 @@ namespace GUI
             ISpecializationService specService = ServiceManager.SpecializationService;
             dgv_Searchproject.AutoGenerateColumns = false;
 
-            dgv_Searchproject.Columns.Add("ProjectId", "ID");
-            dgv_Searchproject.Columns["ProjectId"].DataPropertyName = "ProjectId";
-
-            dgv_Searchproject.Columns.Add("ManagerUserName", "ManagerUserName");
-            dgv_Searchproject.Columns["ManagerUserName"].DataPropertyName = "ManagerUsername";
-
-            dgv_Searchproject.Columns.Add("Title", "Title");
+            dgv_Searchproject.Columns.Add("Title", "Project");
             dgv_Searchproject.Columns["Title"].DataPropertyName = "Title";
 
             dgv_Searchproject.Columns.Add("ProjectStatus", "Status");
             dgv_Searchproject.Columns["ProjectStatus"].DataPropertyName = "ProjectStatus";
+
+            dgv_Searchproject.Columns.Add("ManagerFullName", "Manager");
+            dgv_Searchproject.Columns["ManagerFullName"].DataPropertyName = "ManagerFullName";
+
+            dgv_Searchproject.Columns.Add("SpecializationsString", "Specializations");
+            dgv_Searchproject.Columns["SpecializationsString"].DataPropertyName = "SpecializationsString";
+
+            dgv_Searchproject.Columns.Add("ProjectStartDate", "Start");
+            dgv_Searchproject.Columns["ProjectStartDate"].DataPropertyName = "ProjectStartDate";
+
+            dgv_Searchproject.Columns.Add("ProjectEndDate", "End");
+            dgv_Searchproject.Columns["ProjectEndDate"].DataPropertyName = "ProjectEndDate";
 
             List<string> allSpecializations = specService.ListDefinedSpecializations();
             projectsSearchResults = projectService.GetProjectsFromAnySpecializations(allSpecializations).OrderBy(i => i.Title).ToList();
@@ -147,6 +153,16 @@ namespace GUI
         private void btnSearch_Click(object sender, EventArgs e)
         {
             SetupsDataGridview();
+        }
+
+        private void dgv_Searchproject_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            var dataGridView = sender as DataGridView;
+            if (dataGridView != null && dataGridView.ColumnCount != 0)
+            {
+                dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                dataGridView.Columns[dataGridView.ColumnCount - 1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
         }
     }
 }

@@ -16,5 +16,6 @@ namespace DAL.Models
         public decimal? TotalInvoicePrice { get; set; }
         public string? ProjectStatus { get; set; }
         public string? Description { get; set; }
+        public string? SpecializationsString { get; set; }
     }
 }

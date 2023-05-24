@@ -46,7 +46,7 @@ namespace GUI
                     userService.AddUser(
                         tb_UserName.Text,
                         tb_Password.Text,
-                        cb_UserType.Text,
+                        cb_UserType.Text.ToLower(),
                         tb_FirstName.Text,
                         tb_LastName.Text,
                         tb_Address.Text,
@@ -84,7 +84,7 @@ namespace GUI
             if (tb_Password.Text == tb_RePassword.Text
                 && tb_Password.Text != string.Empty
                 && tb_UserName.Text != string.Empty
-                && cb_UserType.Text != string.Empty)
+                && cb_UserType.Text.ToLower() != string.Empty)
 
             {
                 return true;
@@ -119,14 +119,14 @@ namespace GUI
                 MessageBox.Show("Failed to retrieve skills from server.");
             }
         }
-        //Locks and unlocks the CheckBoxList depending on what user type is selected in the ComboBox. Also removed any checked boxes in the CheckBoxList if manager is selected /MS
+        //Locks and unlocks the CheckBoxList depending on what user type is selected in the ComboBox. Also removed any checked boxes in the CheckBoxList if other is selected /MS
         private void cb_UserType_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (cb_UserType.Text == "consultant")
+            if (cb_UserType.Text.ToLower() == "consultant")
             {
                 clb_Skills.Enabled = true;
             }
-            if (cb_UserType.Text == "manager")
+            else
             {
                 clb_Skills.Enabled = false;
 

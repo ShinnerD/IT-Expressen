@@ -745,6 +745,7 @@
             Controls.Add(grpBoxProfileInfo);
             MinimumSize = new Size(755, 625);
             Name = "AdminMain";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Admin";
             grpBoxProfileInfo.ResumeLayout(false);
             grpBoxProfileInfo.PerformLayout();

@@ -36,16 +36,22 @@ namespace Interfaces.Repositories
         /// <summary>
         /// Retrieves a List of IProjectModels in which each project require ALL of the provided specializations. /DK
         /// </summary>
-        List<IProjectModel> GetProjectsFromAllSpecializations(List<string> specializations);
+        List<IProjectModel> GetProjectsFromAllSpecializations(List<string> specializations, bool includeEndedProjects = false);
 
         /// <summary>
         /// Retrieves a List of IProjectModels in which each project requires at least one of the specializations specified. /DK
         /// </summary>
-        List<IProjectModel> GetProjectsFromAnySpecializations(List<string> specializations);
+        List<IProjectModel> GetProjectsFromAnySpecializations(List<string> specializations, bool includeEndedProjects = false);
 
         /// <summary>
         /// (JQ)This method searches for projects based on a search term and a user ID.
         /// </summary>
         List<IProjectModel> SearchProjects(string searchTerm, int userId);
+
+        /// <summary>
+        /// Runs a stored procedure on the database. Updates the Project Status column for all rows on the Projects table
+        /// according to the project's start and end date by using the current date.
+        /// </summary>
+        void UpdateProjectStatusForAll();
     }
 }
