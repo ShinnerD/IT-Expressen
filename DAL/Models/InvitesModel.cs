@@ -17,5 +17,7 @@ namespace DAL.Models
         public string? InvitedUserSpecializations { get; set; }
         public string? ProjectTitle { get; set; }
         public string? ManagerName { get; set; }
+        public decimal? ConLineSum { get; set; }
+
     }
 }

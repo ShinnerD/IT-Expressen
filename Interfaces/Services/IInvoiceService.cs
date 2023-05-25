@@ -13,5 +13,7 @@ namespace Interfaces.Services
         IInvoiceModel GetInvoiceFromProjectID(int projectID);
         List<IInvoiceModel> GetAllInvoices();
         IInvoiceModel GetInvoiceID(int invoiceID);
+        void UpdateInvoice(IInvoiceModel invoice);
+
     }
 }

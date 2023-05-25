@@ -17,5 +17,6 @@
         string? InvitedUserSpecializations { get; set; }
         string? ProjectTitle { get; set; }
         string? ManagerName { get; set; }
+        decimal? ConLineSum { get; set; }
     }
 }
