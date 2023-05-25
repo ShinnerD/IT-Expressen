@@ -59,6 +59,18 @@ namespace GUI
             tb_ProjectStartDate.Text = ProjectGet.ProjectStartDate.ToString();
             tb_ProjectEndDate.Text = ProjectGet.ProjectEndDate.ToString();
             rtb_Description.Text = ProjectGet.Description;
+
+            lb_DaysTilEnd.Text = "Days since project end: " + Math.Abs((DateTime.Now - ProjectGet.ProjectEndDate).GetValueOrDefault().Days).ToString();
+
+            if (ProjectGet.ProjectStatus?.ToLower() == "pending")
+            {
+                lb_DaysTilEnd.Text = "Days until project start: " + (ProjectGet.ProjectStartDate - DateTime.Now).GetValueOrDefault().Days.ToString();
+            }
+            if (ProjectGet.ProjectStatus?.ToLower() == "active")
+            {
+                lb_DaysTilEnd.Text = "Days until project end: " + (ProjectGet.ProjectEndDate - DateTime.Now).GetValueOrDefault().Days.ToString();
+            }
+
             dgv_ConsultantList.DataSource = null;
             InviteList = invService.GetAllInvitedProjectID(ProjectGet.ProjectId);
             dgv_ConsultantList.DataSource = InviteList;
@@ -91,12 +103,14 @@ namespace GUI
 
             dgv_ConsultantList.Columns.Add("InviteDate", "Invited Date");
             dgv_ConsultantList.Columns["InviteDate"].DataPropertyName = "InviteDate";
+            dgv_ConsultantList.Columns["InviteDate"].DefaultCellStyle.Format = "dd'/'MM'/'yyyy";
 
             dgv_ConsultantList.Columns.Add("InviteStatus", " Status for invite");
             dgv_ConsultantList.Columns["InviteStatus"].DataPropertyName = "InviteStatus";
 
             dgv_ConsultantList.Columns.Add("AcceptDate", "Accept Date");
             dgv_ConsultantList.Columns["AcceptDate"].DataPropertyName = "AcceptDate";
+            dgv_ConsultantList.Columns["InviteDate"].DefaultCellStyle.Format = "dd'/'MM'/'yyyy";
 
             dgv_ConsultantList.Columns.Add("InvitedUserSpecializations", "Specializations");
             dgv_ConsultantList.Columns["InvitedUserSpecializations"].DataPropertyName = "InvitedUserSpecializations";
@@ -126,7 +140,7 @@ namespace GUI
 
         private void dgv_ConsultantList_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            guiHelper.DataGridViewDataBindingCompleteResize(sender);
+            GuiHelper.DataGridViewDataBindingCompleteResize(sender, e);
         }
     }
 }

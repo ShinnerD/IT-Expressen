@@ -2,6 +2,7 @@
 using DAL.Models;
 using Interfaces.Models;
 using Interfaces.Repositories;
+using System.Text;
 
 namespace DAL.Repository
 {
@@ -31,6 +32,8 @@ namespace DAL.Repository
                 ConLine.HourlyRate = (decimal)line.Hourly_Rate;
                 ConLine.HoursTotal = (int)line.Hours_total;
                 ConLine.InvoiceID = line.Invoice_ID;
+                var consultant = dbcontext.Users.FirstOrDefault(i => i.User_ID == line.User_ID);
+                ConLine.ConsultantName = new StringBuilder(consultant.First_Name).Append(' ').Append(consultant.Last_Name).ToString();
 
                 result.Add(ConLine);
             }
@@ -57,7 +60,7 @@ namespace DAL.Repository
             dbcontext.Consultant_Lines.DeleteAllOnSubmit(targetConsulLineID);
             dbcontext.SubmitChanges();
         }
-        public List<IConsultantLineModel> GetALLContultantLinesFromUserID(int userID)
+        public List<IConsultantLineModel> GetALLConsultantLinesFromUserID(int userID)
         {
             List<IConsultantLineModel> result = new List<IConsultantLineModel>();
 
@@ -73,12 +76,15 @@ namespace DAL.Repository
                 consultantLine.HourlyRate = (Decimal)dtoConsulLine.Hourly_Rate;
                 consultantLine.HoursTotal = (int)dtoConsulLine.Hours_total;
                 consultantLine.InvoiceID = dtoConsulLine.Invoice_ID;
+                var consultant = dbcontext.Users.FirstOrDefault(i => i.User_ID == dtoConsulLine.User_ID);
+                consultantLine.ConsultantName = new StringBuilder(consultant.First_Name).Append(' ').Append(consultant.Last_Name).ToString();
+
 
                 result.Add(consultantLine);
             }
             return result;
         }
-        public List<IConsultantLineModel> GetALLContultantLinesFromProjectID(int projectID)
+        public List<IConsultantLineModel> GetALLConsultantLinesFromProjectID(int projectID)
         {
             List<IConsultantLineModel> result = new List<IConsultantLineModel>();
 
@@ -94,12 +100,14 @@ namespace DAL.Repository
                 consultantLine.HourlyRate = (Decimal)dtoConsulLine.Hourly_Rate;
                 consultantLine.HoursTotal = (int)dtoConsulLine.Hours_total;
                 consultantLine.InvoiceID = dtoConsulLine.Invoice_ID;
+                var consultant = dbcontext.Users.FirstOrDefault(i => i.User_ID == dtoConsulLine.User_ID);
+                consultantLine.ConsultantName = new StringBuilder(consultant.First_Name).Append(' ').Append(consultant.Last_Name).ToString();
 
                 result.Add(consultantLine);
             }
             return result;
         }
-        public List<IConsultantLineModel> GetALLContultantLinesFromInvoiceID(int invoiceID)
+        public List<IConsultantLineModel> GetALLConsultantLinesFromInvoiceID(int invoiceID)
         {
             List<IConsultantLineModel> result = new List<IConsultantLineModel>();
 
@@ -115,6 +123,8 @@ namespace DAL.Repository
                 consultantLine.HourlyRate = (Decimal)dtoConsulLine.Hourly_Rate;
                 consultantLine.HoursTotal = (int)dtoConsulLine.Hours_total;
                 consultantLine.InvoiceID = dtoConsulLine.Invoice_ID;
+                var consultant = dbcontext.Users.FirstOrDefault(i => i.User_ID == dtoConsulLine.User_ID);
+                consultantLine.ConsultantName = new StringBuilder(consultant.First_Name).Append(' ').Append(consultant.Last_Name).ToString();
 
                 result.Add(consultantLine);
             }
