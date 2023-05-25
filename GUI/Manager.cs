@@ -438,5 +438,10 @@ namespace GUI
         {
             guiHelper.ReorderDataGridViewColumnHeaderClickEvent(dgv_Viewproject, e, ProjectList);
         }
+
+        private void bt_AddConsultant_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
