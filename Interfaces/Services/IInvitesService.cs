@@ -32,6 +32,6 @@ namespace Interfaces.Services
         /// <summary>
         /// Deletes an invite from the database.
         /// </summary>
-        void DeleteInvite(IInvitesModel invite);
+        void DeleteInvite(IInvitesModel invite, bool deleteAcceptedInvite = false);
     }
 }

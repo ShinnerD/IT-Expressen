@@ -51,6 +51,12 @@
             lblUserCreationDate = new Label();
             bt_EditProfile = new Button();
             ViewProjectsGrpBox = new GroupBox();
+            bt_AddConsultant = new Button();
+            lbl_ViewProjectsFeedBack = new Label();
+            btn_NewProject = new Button();
+            bt_manageProject = new Button();
+            bt_EditProject = new Button();
+            dgv_Viewproject = new DataGridView();
             NewProjectGrpBox = new GroupBox();
             lbl_FeedBackNewProject = new Label();
             lbl_StartDate = new Label();
@@ -63,15 +69,10 @@
             dtp_NewProjectStartDate = new DateTimePicker();
             btn_NewProjectSave = new Button();
             btn_NewProjectBack = new Button();
-            lbl_ViewProjectsFeedBack = new Label();
-            btn_NewProject = new Button();
-            bt_manageProject = new Button();
-            bt_EditProject = new Button();
-            dgv_Viewproject = new DataGridView();
             grpBoxProfileInfo.SuspendLayout();
             ViewProjectsGrpBox.SuspendLayout();
-            NewProjectGrpBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_Viewproject).BeginInit();
+            NewProjectGrpBox.SuspendLayout();
             SuspendLayout();
             // 
             // label2
@@ -213,7 +214,6 @@
             tb_Lastname.Size = new Size(225, 16);
             tb_Lastname.TabIndex = 2;
             tb_Lastname.TabStop = false;
-            tb_Lastname.TextChanged += tb_Lastname_TextChanged;
             // 
             // tb_Address
             // 
@@ -279,7 +279,7 @@
             bt_FindConsultants.Name = "bt_FindConsultants";
             bt_FindConsultants.Size = new Size(105, 25);
             bt_FindConsultants.TabIndex = 11;
-            bt_FindConsultants.Text = "Find Consultants";
+            bt_FindConsultants.Text = "View Invites";
             bt_FindConsultants.UseVisualStyleBackColor = true;
             bt_FindConsultants.Click += bt_FindConsultants_Click;
             // 
@@ -353,6 +353,7 @@
             // 
             // ViewProjectsGrpBox
             // 
+            ViewProjectsGrpBox.Controls.Add(bt_AddConsultant);
             ViewProjectsGrpBox.Controls.Add(lbl_ViewProjectsFeedBack);
             ViewProjectsGrpBox.Controls.Add(btn_NewProject);
             ViewProjectsGrpBox.Controls.Add(bt_manageProject);
@@ -367,6 +368,94 @@
             ViewProjectsGrpBox.TabIndex = 22;
             ViewProjectsGrpBox.TabStop = false;
             ViewProjectsGrpBox.Text = "Projects";
+            // 
+            // bt_AddConsultant
+            // 
+            bt_AddConsultant.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            bt_AddConsultant.Location = new Point(325, 29);
+            bt_AddConsultant.Name = "bt_AddConsultant";
+            bt_AddConsultant.Size = new Size(105, 25);
+            bt_AddConsultant.TabIndex = 19;
+            bt_AddConsultant.Text = "Find Consultants";
+            bt_AddConsultant.UseVisualStyleBackColor = true;
+            bt_AddConsultant.Click += bt_AddConsultant_Click;
+            // 
+            // lbl_ViewProjectsFeedBack
+            // 
+            lbl_ViewProjectsFeedBack.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            lbl_ViewProjectsFeedBack.AutoSize = true;
+            lbl_ViewProjectsFeedBack.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            lbl_ViewProjectsFeedBack.Location = new Point(12, 358);
+            lbl_ViewProjectsFeedBack.Name = "lbl_ViewProjectsFeedBack";
+            lbl_ViewProjectsFeedBack.Size = new Size(166, 15);
+            lbl_ViewProjectsFeedBack.TabIndex = 16;
+            lbl_ViewProjectsFeedBack.Text = "Feedback label for messages...";
+            lbl_ViewProjectsFeedBack.Visible = false;
+            // 
+            // btn_NewProject
+            // 
+            btn_NewProject.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btn_NewProject.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_NewProject.Location = new Point(587, 30);
+            btn_NewProject.Margin = new Padding(2);
+            btn_NewProject.Name = "btn_NewProject";
+            btn_NewProject.Size = new Size(100, 25);
+            btn_NewProject.TabIndex = 15;
+            btn_NewProject.Text = "New Project";
+            btn_NewProject.UseVisualStyleBackColor = true;
+            btn_NewProject.Click += btn_NewProject_Click;
+            // 
+            // bt_manageProject
+            // 
+            bt_manageProject.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            bt_manageProject.Location = new Point(6, 29);
+            bt_manageProject.Name = "bt_manageProject";
+            bt_manageProject.Size = new Size(100, 25);
+            bt_manageProject.TabIndex = 14;
+            bt_manageProject.Text = "Manage Project";
+            bt_manageProject.UseVisualStyleBackColor = true;
+            bt_manageProject.Click += bt_manageProject_Click;
+            // 
+            // bt_EditProject
+            // 
+            bt_EditProject.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            bt_EditProject.Location = new Point(111, 29);
+            bt_EditProject.Margin = new Padding(2);
+            bt_EditProject.Name = "bt_EditProject";
+            bt_EditProject.Size = new Size(100, 25);
+            bt_EditProject.TabIndex = 13;
+            bt_EditProject.Text = "Edit Project";
+            bt_EditProject.UseVisualStyleBackColor = true;
+            bt_EditProject.Click += bt_EditProject_Click;
+            // 
+            // dgv_Viewproject
+            // 
+            dgv_Viewproject.AllowUserToAddRows = false;
+            dgv_Viewproject.AllowUserToDeleteRows = false;
+            dgv_Viewproject.AllowUserToResizeRows = false;
+            dgv_Viewproject.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgv_Viewproject.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dgv_Viewproject.DefaultCellStyle = dataGridViewCellStyle1;
+            dgv_Viewproject.Location = new Point(3, 58);
+            dgv_Viewproject.Margin = new Padding(2);
+            dgv_Viewproject.MultiSelect = false;
+            dgv_Viewproject.Name = "dgv_Viewproject";
+            dgv_Viewproject.ReadOnly = true;
+            dgv_Viewproject.RowHeadersVisible = false;
+            dgv_Viewproject.RowHeadersWidth = 62;
+            dgv_Viewproject.RowTemplate.Height = 33;
+            dgv_Viewproject.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv_Viewproject.Size = new Size(693, 279);
+            dgv_Viewproject.TabIndex = 10;
+            dgv_Viewproject.ColumnHeaderMouseClick += dgv_Viewproject_ColumnHeaderMouseClick;
+            dgv_Viewproject.SelectionChanged += dgv_Viewproject_SelectionChanged;
             // 
             // NewProjectGrpBox
             // 
@@ -524,89 +613,13 @@
             btn_NewProjectBack.UseVisualStyleBackColor = true;
             btn_NewProjectBack.Click += btn_NewProjectBack_Click;
             // 
-            // lbl_ViewProjectsFeedBack
-            // 
-            lbl_ViewProjectsFeedBack.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            lbl_ViewProjectsFeedBack.AutoSize = true;
-            lbl_ViewProjectsFeedBack.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            lbl_ViewProjectsFeedBack.Location = new Point(12, 358);
-            lbl_ViewProjectsFeedBack.Name = "lbl_ViewProjectsFeedBack";
-            lbl_ViewProjectsFeedBack.Size = new Size(166, 15);
-            lbl_ViewProjectsFeedBack.TabIndex = 16;
-            lbl_ViewProjectsFeedBack.Text = "Feedback label for messages...";
-            lbl_ViewProjectsFeedBack.Visible = false;
-            // 
-            // btn_NewProject
-            // 
-            btn_NewProject.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btn_NewProject.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_NewProject.Location = new Point(587, 30);
-            btn_NewProject.Margin = new Padding(2);
-            btn_NewProject.Name = "btn_NewProject";
-            btn_NewProject.Size = new Size(100, 25);
-            btn_NewProject.TabIndex = 15;
-            btn_NewProject.Text = "New Project";
-            btn_NewProject.UseVisualStyleBackColor = true;
-            btn_NewProject.Click += btn_NewProject_Click;
-            // 
-            // bt_manageProject
-            // 
-            bt_manageProject.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            bt_manageProject.Location = new Point(6, 29);
-            bt_manageProject.Name = "bt_manageProject";
-            bt_manageProject.Size = new Size(100, 25);
-            bt_manageProject.TabIndex = 14;
-            bt_manageProject.Text = "Manage Project";
-            bt_manageProject.UseVisualStyleBackColor = true;
-            bt_manageProject.Click += bt_manageProject_Click;
-            // 
-            // bt_EditProject
-            // 
-            bt_EditProject.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            bt_EditProject.Location = new Point(111, 29);
-            bt_EditProject.Margin = new Padding(2);
-            bt_EditProject.Name = "bt_EditProject";
-            bt_EditProject.Size = new Size(100, 25);
-            bt_EditProject.TabIndex = 13;
-            bt_EditProject.Text = "Edit Project";
-            bt_EditProject.UseVisualStyleBackColor = true;
-            bt_EditProject.Click += bt_EditProject_Click;
-            // 
-            // dgv_Viewproject
-            // 
-            dgv_Viewproject.AllowUserToAddRows = false;
-            dgv_Viewproject.AllowUserToDeleteRows = false;
-            dgv_Viewproject.AllowUserToResizeRows = false;
-            dgv_Viewproject.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dgv_Viewproject.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            dgv_Viewproject.DefaultCellStyle = dataGridViewCellStyle1;
-            dgv_Viewproject.Location = new Point(3, 58);
-            dgv_Viewproject.Margin = new Padding(2);
-            dgv_Viewproject.MultiSelect = false;
-            dgv_Viewproject.Name = "dgv_Viewproject";
-            dgv_Viewproject.ReadOnly = true;
-            dgv_Viewproject.RowHeadersVisible = false;
-            dgv_Viewproject.RowHeadersWidth = 62;
-            dgv_Viewproject.RowTemplate.Height = 33;
-            dgv_Viewproject.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv_Viewproject.Size = new Size(693, 279);
-            dgv_Viewproject.TabIndex = 10;
-            dgv_Viewproject.SelectionChanged += dgv_Viewproject_SelectionChanged;
-            // 
             // Manager
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(699, 539);
-            Controls.Add(NewProjectGrpBox);
             Controls.Add(ViewProjectsGrpBox);
+            Controls.Add(NewProjectGrpBox);
             Controls.Add(grpBoxProfileInfo);
             MinimumSize = new Size(715, 578);
             Name = "Manager";
@@ -616,9 +629,9 @@
             grpBoxProfileInfo.PerformLayout();
             ViewProjectsGrpBox.ResumeLayout(false);
             ViewProjectsGrpBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgv_Viewproject).EndInit();
             NewProjectGrpBox.ResumeLayout(false);
             NewProjectGrpBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgv_Viewproject).EndInit();
             ResumeLayout(false);
         }
 
@@ -662,5 +675,6 @@
         private CheckedListBox checkedListSkills;
         private Label lbl_ReqSkills;
         private Label lbl_ViewProjectsFeedBack;
+        private Button bt_AddConsultant;
     }
 }

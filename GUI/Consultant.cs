@@ -185,6 +185,7 @@ namespace GUI
                 LoadInvitesToDGV();
             }
         }
+
         private void EditCancel()
         {
             bt_EditCancel.Enabled = false;

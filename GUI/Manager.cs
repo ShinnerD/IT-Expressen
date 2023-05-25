@@ -1,4 +1,5 @@
-﻿using Interfaces.Models;
+﻿using DAL.Linq;
+using Interfaces.Models;
 using Interfaces.Services;
 
 namespace GUI
@@ -14,12 +15,15 @@ namespace GUI
         private List<IProjectModel> ProjectList;
         public IProjectModel SelectedProject { get; set; }
 
+        private GuiHelper guiHelper = new GuiHelper();
+
         private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
         public Manager(IDomainServiceManager serviceManager, string username)
         {
             ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
             projectService = ServiceManager.ProjectService;
+            guiHelper.StartingSortedColumnIndex = 0;
             InitializeComponent();
             Username = username;
             GetUser();
@@ -285,6 +289,7 @@ namespace GUI
             ProjectList = null;
             ProjectList = projectService.GetUserProjects(userModel.ID).ToList();
             dgv_Viewproject.DataSource = ProjectList;
+            guiHelper.StartingSortedColumnIndex = 0;
         }
 
         /// <summary>
@@ -415,6 +420,23 @@ namespace GUI
         private void tb_Lastname_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void bt_AddConsultant_Click(object sender, EventArgs e)
+        {
+            if (dgv_Viewproject.SelectedRows.Count > 0)
+            {
+                int clickedProjectId = (dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel).ProjectId;
+                ConsultantAdd invConSul = new ConsultantAdd(ServiceManager, clickedProjectId);
+                invConSul.ShowDialog();
+                invConSul.Dispose();
+            }
+
+        }
+
+        private void dgv_Viewproject_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            guiHelper.ReorderDataGridViewColumnHeaderClickEvent(dgv_Viewproject, e, ProjectList);
         }
     }
 }

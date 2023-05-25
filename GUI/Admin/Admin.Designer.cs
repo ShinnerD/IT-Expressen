@@ -459,6 +459,7 @@
             dgv_UserSearchResults.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv_UserSearchResults.Size = new Size(940, 398);
             dgv_UserSearchResults.TabIndex = 1;
+            dgv_UserSearchResults.ColumnHeaderMouseClick += dgv_UserSearchResults_ColumnHeaderMouseClick;
             dgv_UserSearchResults.DataBindingComplete += dgv_UserSearchResults_DataBindingComplete;
             // 
             // grpBoxUserSearchFilter
@@ -652,6 +653,7 @@
             dgv_ProjectSearchResults.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv_ProjectSearchResults.Size = new Size(940, 400);
             dgv_ProjectSearchResults.TabIndex = 32;
+            dgv_ProjectSearchResults.ColumnHeaderMouseClick += dgv_ProjectSearchResults_ColumnHeaderMouseClick;
             dgv_ProjectSearchResults.DataBindingComplete += dgv_UserSearchResults_DataBindingComplete;
             // 
             // groupBox1

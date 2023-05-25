@@ -12,6 +12,8 @@ namespace GUI
         private int ProjectID { get; set; }
         private IProjectModel ProjectGet;
 
+        private GuiHelper guiHelper;
+
         private List<IInvitesModel> InviteList;
 
         private IInviteService invService;
@@ -21,7 +23,7 @@ namespace GUI
         {
             ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
             invService = ServiceManager.InviteService;
-
+            guiHelper = new GuiHelper();
             ProjectID = projectID;
 
             InitializeComponent();
@@ -58,22 +60,24 @@ namespace GUI
             tb_ProjectEndDate.Text = ProjectGet.ProjectEndDate.ToString();
             rtb_Description.Text = ProjectGet.Description;
             dgv_ConsultantList.DataSource = null;
-            dgv_ConsultantList.DataSource = invService.GetAllInvitedProjectID(ProjectGet.ProjectId);
-        }
+            InviteList = invService.GetAllInvitedProjectID(ProjectGet.ProjectId);
+            dgv_ConsultantList.DataSource = InviteList;
 
-        // Button click event -> see method for results /MS
-        private void bt_AddConsultant_Click(object sender, EventArgs e)
-        {
-            OpenConsultantAdd();
-        }
-
-        //Opens new form and forwards the project ID /MS
-        private void OpenConsultantAdd()
-        {
-            ConsultantAdd invConSul = new ConsultantAdd(ServiceManager, ProjectID);
-            invConSul.ShowDialog();
-            invConSul.Dispose();
-            LoadProjectData();
+            //Try-Catch for getting specializations
+            try
+            {
+                checkedListSkills.Items.Clear();
+                checkedListSkills.Items.AddRange(ServiceManager.SpecializationService.GetProjectSpecializations(selectedProject.ProjectId).ToArray());
+                /// Checks off the skills in the specializations list.
+                for (int i = 0; i < checkedListSkills.Items.Count; i++)
+                {
+                    checkedListSkills.SetItemChecked(i, true);
+                }
+            }
+            catch (Exception)
+            {
+                guiHelper.FeedBackMessage(lbl_FeedBackLabel, "Failed to retrieve list of defined skills.", Color.Red);
+            }
         }
 
         //Datagridview to see all consultants that has been invited to the project //MS
@@ -83,7 +87,7 @@ namespace GUI
             dgv_ConsultantList.StandardTab = true;
 
             dgv_ConsultantList.Columns.Add("InvitedUserFullName", "Full name");
-            dgv_ConsultantList.Columns["InvitedUSerFullName"].DataPropertyName = "InvitedUSerFullName";
+            dgv_ConsultantList.Columns["InvitedUserFullName"].DataPropertyName = "InvitedUserFullName";
 
             dgv_ConsultantList.Columns.Add("InviteDate", "Invited Date");
             dgv_ConsultantList.Columns["InviteDate"].DataPropertyName = "InviteDate";
@@ -96,6 +100,33 @@ namespace GUI
 
             dgv_ConsultantList.Columns.Add("InvitedUserSpecializations", "Specializations");
             dgv_ConsultantList.Columns["InvitedUserSpecializations"].DataPropertyName = "InvitedUserSpecializations";
+        }
+
+        private void btn_RemovePendingInvite_Click(object sender, EventArgs e)
+        {
+            if (dgv_ConsultantList.SelectedRows.Count > 0)
+            {
+                try
+                {
+                    ServiceManager.InviteService.DeleteInvite(dgv_ConsultantList.SelectedRows[0].DataBoundItem as IInvitesModel);
+                    guiHelper.FeedBackMessage(lbl_FeedBackLabel, "Invite successfully removed.", Color.Green);
+                }
+                catch (Exception ex)
+                {
+                    guiHelper.FeedBackMessage(lbl_FeedBackLabel, ex.Message, Color.Red);
+                }
+                LoadProjectData();
+            }
+        }
+
+        private void dgv_ConsultantList_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            guiHelper.ReorderDataGridViewColumnHeaderClickEvent(dgv_ConsultantList, e, InviteList);
+        }
+
+        private void dgv_ConsultantList_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            guiHelper.DataGridViewDataBindingCompleteResize(sender);
         }
     }
 }
