@@ -74,6 +74,9 @@
             // 
             // dgv_ConsultantsInvites
             // 
+            dgv_ConsultantsInvites.AllowUserToAddRows = false;
+            dgv_ConsultantsInvites.AllowUserToDeleteRows = false;
+            dgv_ConsultantsInvites.AllowUserToResizeRows = false;
             dgv_ConsultantsInvites.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgv_ConsultantsInvites.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_ConsultantsInvites.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
