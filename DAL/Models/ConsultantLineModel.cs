@@ -10,5 +10,7 @@ namespace DAL.Models
         public int? InvoiceID { get; set; }
         public decimal HourlyRate { get; set; }
         public int HoursTotal { get; set; }
+        public string? ConsultantName { get; set; }
+        public decimal? LineTotal { get { return HoursTotal * HourlyRate; } }
     }
 }

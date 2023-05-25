@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
@@ -69,6 +69,7 @@
             dtp_NewProjectStartDate = new DateTimePicker();
             btn_NewProjectSave = new Button();
             btn_NewProjectBack = new Button();
+            btn_ViewInvoice = new Button();
             grpBoxProfileInfo.SuspendLayout();
             ViewProjectsGrpBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_Viewproject).BeginInit();
@@ -82,9 +83,9 @@
             label2.Location = new Point(6, 25);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(62, 15);
+            label2.Size = new Size(59, 15);
             label2.TabIndex = 1;
-            label2.Text = "Firstname:";
+            label2.Text = "Firstname";
             // 
             // label3
             // 
@@ -93,9 +94,9 @@
             label3.Location = new Point(28, 77);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(39, 15);
+            label3.Size = new Size(36, 15);
             label3.TabIndex = 2;
-            label3.Text = "Email:";
+            label3.Text = "Email";
             // 
             // label4
             // 
@@ -104,9 +105,9 @@
             label4.Location = new Point(23, 104);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(44, 15);
+            label4.Size = new Size(41, 15);
             label4.TabIndex = 3;
-            label4.Text = "Phone:";
+            label4.Text = "Phone";
             // 
             // label5
             // 
@@ -115,9 +116,9 @@
             label5.Location = new Point(326, 51);
             label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
-            label5.Size = new Size(31, 15);
+            label5.Size = new Size(28, 15);
             label5.TabIndex = 4;
-            label5.Text = "City:";
+            label5.Text = "City";
             // 
             // label6
             // 
@@ -126,9 +127,9 @@
             label6.Location = new Point(305, 25);
             label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
-            label6.Size = new Size(52, 15);
+            label6.Size = new Size(49, 15);
             label6.TabIndex = 5;
-            label6.Text = "Address:";
+            label6.Text = "Address";
             // 
             // label7
             // 
@@ -137,9 +138,9 @@
             label7.Location = new Point(6, 51);
             label7.Margin = new Padding(2, 0, 2, 0);
             label7.Name = "label7";
-            label7.Size = new Size(61, 15);
+            label7.Size = new Size(58, 15);
             label7.TabIndex = 6;
-            label7.Text = "Lastname:";
+            label7.Text = "Lastname";
             // 
             // label8
             // 
@@ -148,9 +149,9 @@
             label8.Location = new Point(305, 77);
             label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
-            label8.Size = new Size(53, 15);
+            label8.Size = new Size(50, 15);
             label8.TabIndex = 7;
-            label8.Text = "Zipcode:";
+            label8.Text = "Zipcode";
             // 
             // label9
             // 
@@ -159,9 +160,9 @@
             label9.Location = new Point(304, 104);
             label9.Margin = new Padding(2, 0, 2, 0);
             label9.Name = "label9";
-            label9.Size = new Size(53, 15);
+            label9.Size = new Size(50, 15);
             label9.TabIndex = 8;
-            label9.Text = "Country:";
+            label9.Text = "Country";
             // 
             // tb_Firstname
             // 
@@ -279,7 +280,7 @@
             bt_FindConsultants.Name = "bt_FindConsultants";
             bt_FindConsultants.Size = new Size(105, 25);
             bt_FindConsultants.TabIndex = 11;
-            bt_FindConsultants.Text = "View Invites";
+            bt_FindConsultants.Text = "Invites";
             bt_FindConsultants.UseVisualStyleBackColor = true;
             bt_FindConsultants.Click += bt_FindConsultants_Click;
             // 
@@ -353,6 +354,7 @@
             // 
             // ViewProjectsGrpBox
             // 
+            ViewProjectsGrpBox.Controls.Add(btn_ViewInvoice);
             ViewProjectsGrpBox.Controls.Add(bt_AddConsultant);
             ViewProjectsGrpBox.Controls.Add(lbl_ViewProjectsFeedBack);
             ViewProjectsGrpBox.Controls.Add(btn_NewProject);
@@ -372,7 +374,7 @@
             // bt_AddConsultant
             // 
             bt_AddConsultant.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            bt_AddConsultant.Location = new Point(325, 29);
+            bt_AddConsultant.Location = new Point(436, 29);
             bt_AddConsultant.Name = "bt_AddConsultant";
             bt_AddConsultant.Size = new Size(105, 25);
             bt_AddConsultant.TabIndex = 19;
@@ -412,7 +414,7 @@
             bt_manageProject.Name = "bt_manageProject";
             bt_manageProject.Size = new Size(100, 25);
             bt_manageProject.TabIndex = 14;
-            bt_manageProject.Text = "Manage Project";
+            bt_manageProject.Text = "Manage";
             bt_manageProject.UseVisualStyleBackColor = true;
             bt_manageProject.Click += bt_manageProject_Click;
             // 
@@ -424,7 +426,7 @@
             bt_EditProject.Name = "bt_EditProject";
             bt_EditProject.Size = new Size(100, 25);
             bt_EditProject.TabIndex = 13;
-            bt_EditProject.Text = "Edit Project";
+            bt_EditProject.Text = "Edit";
             bt_EditProject.UseVisualStyleBackColor = true;
             bt_EditProject.Click += bt_EditProject_Click;
             // 
@@ -435,14 +437,14 @@
             dgv_Viewproject.AllowUserToResizeRows = false;
             dgv_Viewproject.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgv_Viewproject.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            dgv_Viewproject.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dgv_Viewproject.DefaultCellStyle = dataGridViewCellStyle2;
             dgv_Viewproject.Location = new Point(3, 58);
             dgv_Viewproject.Margin = new Padding(2);
             dgv_Viewproject.MultiSelect = false;
@@ -455,6 +457,7 @@
             dgv_Viewproject.Size = new Size(693, 279);
             dgv_Viewproject.TabIndex = 10;
             dgv_Viewproject.ColumnHeaderMouseClick += dgv_Viewproject_ColumnHeaderMouseClick;
+            dgv_Viewproject.DataBindingComplete += dgv_Viewproject_DataBindingComplete;
             dgv_Viewproject.SelectionChanged += dgv_Viewproject_SelectionChanged;
             // 
             // NewProjectGrpBox
@@ -613,6 +616,17 @@
             btn_NewProjectBack.UseVisualStyleBackColor = true;
             btn_NewProjectBack.Click += btn_NewProjectBack_Click;
             // 
+            // btn_ViewInvoice
+            // 
+            btn_ViewInvoice.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_ViewInvoice.Location = new Point(325, 29);
+            btn_ViewInvoice.Name = "btn_ViewInvoice";
+            btn_ViewInvoice.Size = new Size(105, 25);
+            btn_ViewInvoice.TabIndex = 20;
+            btn_ViewInvoice.Text = "Invoice";
+            btn_ViewInvoice.UseVisualStyleBackColor = true;
+            btn_ViewInvoice.Click += btn_ViewInvoice_Click;
+            // 
             // Manager
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -676,5 +690,6 @@
         private Label lbl_ReqSkills;
         private Label lbl_ViewProjectsFeedBack;
         private Button bt_AddConsultant;
+        private Button btn_ViewInvoice;
     }
 }

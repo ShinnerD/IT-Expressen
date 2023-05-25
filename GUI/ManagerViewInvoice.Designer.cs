@@ -1,6 +1,6 @@
-﻿namespace GUI.Admin
+﻿namespace GUI
 {
-    partial class AdminViewInvites
+    partial class ManagerViewInvoice
     {
         /// <summary>
         /// Required designer variable.
@@ -28,14 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             NewProjectGrpBox = new GroupBox();
-            btn_RemoveInvite = new Button();
-            groupBox2 = new GroupBox();
-            dgv_AcceptedInvites = new DataGridView();
+            lbl_TotalCost = new Label();
+            label2 = new Label();
             groupBox1 = new GroupBox();
             dgv_PendingInvites = new DataGridView();
             lbl_EndDateValue = new Label();
@@ -51,19 +48,16 @@
             lbl_ReqSkills = new Label();
             txtBox_ProjectTitle = new TextBox();
             checkedListSkills = new CheckedListBox();
-            btn_AddInviteButton = new Button();
             btn_NewProjectBack = new Button();
             NewProjectGrpBox.SuspendLayout();
-            groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgv_AcceptedInvites).BeginInit();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_PendingInvites).BeginInit();
             SuspendLayout();
             // 
             // NewProjectGrpBox
             // 
-            NewProjectGrpBox.Controls.Add(btn_RemoveInvite);
-            NewProjectGrpBox.Controls.Add(groupBox2);
+            NewProjectGrpBox.Controls.Add(lbl_TotalCost);
+            NewProjectGrpBox.Controls.Add(label2);
             NewProjectGrpBox.Controls.Add(groupBox1);
             NewProjectGrpBox.Controls.Add(lbl_EndDateValue);
             NewProjectGrpBox.Controls.Add(lbl_StartDateValue);
@@ -78,7 +72,6 @@
             NewProjectGrpBox.Controls.Add(lbl_ReqSkills);
             NewProjectGrpBox.Controls.Add(txtBox_ProjectTitle);
             NewProjectGrpBox.Controls.Add(checkedListSkills);
-            NewProjectGrpBox.Controls.Add(btn_AddInviteButton);
             NewProjectGrpBox.Controls.Add(btn_NewProjectBack);
             NewProjectGrpBox.Dock = DockStyle.Fill;
             NewProjectGrpBox.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
@@ -87,73 +80,41 @@
             NewProjectGrpBox.Size = new Size(772, 483);
             NewProjectGrpBox.TabIndex = 24;
             NewProjectGrpBox.TabStop = false;
-            NewProjectGrpBox.Text = "Project Invites";
+            NewProjectGrpBox.Text = "Project Invoice";
             // 
-            // btn_RemoveInvite
+            // lbl_TotalCost
             // 
-            btn_RemoveInvite.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_RemoveInvite.Location = new Point(563, 454);
-            btn_RemoveInvite.Margin = new Padding(2);
-            btn_RemoveInvite.Name = "btn_RemoveInvite";
-            btn_RemoveInvite.Size = new Size(100, 25);
-            btn_RemoveInvite.TabIndex = 4;
-            btn_RemoveInvite.Text = "Remove Invite";
-            btn_RemoveInvite.UseVisualStyleBackColor = true;
-            btn_RemoveInvite.Click += btn_RemoveInvite_Click;
+            lbl_TotalCost.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lbl_TotalCost.AutoSize = true;
+            lbl_TotalCost.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbl_TotalCost.Location = new Point(430, 32);
+            lbl_TotalCost.Margin = new Padding(2, 0, 2, 0);
+            lbl_TotalCost.Name = "lbl_TotalCost";
+            lbl_TotalCost.Size = new Size(43, 17);
+            lbl_TotalCost.TabIndex = 36;
+            lbl_TotalCost.Text = "15000";
             // 
-            // groupBox2
+            // label2
             // 
-            groupBox2.Controls.Add(dgv_AcceptedInvites);
-            groupBox2.Location = new Point(5, 295);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(761, 154);
-            groupBox2.TabIndex = 35;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Accepted";
-            // 
-            // dgv_AcceptedInvites
-            // 
-            dgv_AcceptedInvites.AllowUserToAddRows = false;
-            dgv_AcceptedInvites.AllowUserToDeleteRows = false;
-            dgv_AcceptedInvites.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = Color.WhiteSmoke;
-            dgv_AcceptedInvites.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dgv_AcceptedInvites.BackgroundColor = SystemColors.Control;
-            dgv_AcceptedInvites.BorderStyle = BorderStyle.None;
-            dgv_AcceptedInvites.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dgv_AcceptedInvites.DefaultCellStyle = dataGridViewCellStyle2;
-            dgv_AcceptedInvites.Dock = DockStyle.Fill;
-            dgv_AcceptedInvites.Location = new Point(3, 21);
-            dgv_AcceptedInvites.MultiSelect = false;
-            dgv_AcceptedInvites.Name = "dgv_AcceptedInvites";
-            dgv_AcceptedInvites.ReadOnly = true;
-            dgv_AcceptedInvites.RowHeadersVisible = false;
-            dgv_AcceptedInvites.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dgv_AcceptedInvites.RowTemplate.Height = 25;
-            dgv_AcceptedInvites.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv_AcceptedInvites.Size = new Size(755, 130);
-            dgv_AcceptedInvites.StandardTab = true;
-            dgv_AcceptedInvites.TabIndex = 2;
-            dgv_AcceptedInvites.ColumnHeaderMouseClick += dgv_AcceptedInvites_ColumnHeaderMouseClick;
-            dgv_AcceptedInvites.DataBindingComplete += dgv_DataBindingComplete;
-            dgv_AcceptedInvites.Click += dgv_AcceptedInvites_Click;
+            label2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(357, 32);
+            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(69, 17);
+            label2.TabIndex = 35;
+            label2.Text = "Total Cost:";
             // 
             // groupBox1
             // 
             groupBox1.Controls.Add(dgv_PendingInvites);
             groupBox1.Location = new Point(6, 144);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(761, 148);
+            groupBox1.Size = new Size(761, 304);
             groupBox1.TabIndex = 34;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Pending";
+            groupBox1.Text = "Rates and Hours";
             // 
             // dgv_PendingInvites
             // 
@@ -182,12 +143,11 @@
             dgv_PendingInvites.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dgv_PendingInvites.RowTemplate.Height = 25;
             dgv_PendingInvites.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv_PendingInvites.Size = new Size(755, 124);
+            dgv_PendingInvites.Size = new Size(755, 280);
             dgv_PendingInvites.StandardTab = true;
             dgv_PendingInvites.TabIndex = 1;
             dgv_PendingInvites.ColumnHeaderMouseClick += dgv_PendingInvites_ColumnHeaderMouseClick;
             dgv_PendingInvites.DataBindingComplete += dgv_DataBindingComplete;
-            dgv_PendingInvites.Click += dgv_PendingInvites_Click;
             // 
             // lbl_EndDateValue
             // 
@@ -354,22 +314,10 @@
             checkedListSkills.TabIndex = 5;
             checkedListSkills.TabStop = false;
             // 
-            // btn_AddInviteButton
-            // 
-            btn_AddInviteButton.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_AddInviteButton.Location = new Point(667, 454);
-            btn_AddInviteButton.Margin = new Padding(2);
-            btn_AddInviteButton.Name = "btn_AddInviteButton";
-            btn_AddInviteButton.Size = new Size(100, 25);
-            btn_AddInviteButton.TabIndex = 5;
-            btn_AddInviteButton.Text = "Add Invite";
-            btn_AddInviteButton.UseVisualStyleBackColor = true;
-            btn_AddInviteButton.Click += btn_AddInviteButton_Click;
-            // 
             // btn_NewProjectBack
             // 
             btn_NewProjectBack.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_NewProjectBack.Location = new Point(430, 454);
+            btn_NewProjectBack.Location = new Point(666, 452);
             btn_NewProjectBack.Name = "btn_NewProjectBack";
             btn_NewProjectBack.Size = new Size(100, 25);
             btn_NewProjectBack.TabIndex = 3;
@@ -377,7 +325,7 @@
             btn_NewProjectBack.UseVisualStyleBackColor = true;
             btn_NewProjectBack.Click += btn_NewProjectBack_Click;
             // 
-            // AdminViewInvites
+            // AdminViewInvoice
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -389,13 +337,11 @@
             MaximumSize = new Size(788, 522);
             MinimizeBox = false;
             MinimumSize = new Size(788, 522);
-            Name = "AdminViewInvites";
+            Name = "AdminViewInvoice";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "AdminProjectEdit";
+            Text = "AdminViewInvoice";
             NewProjectGrpBox.ResumeLayout(false);
             NewProjectGrpBox.PerformLayout();
-            groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgv_AcceptedInvites).EndInit();
             groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgv_PendingInvites).EndInit();
             ResumeLayout(false);
@@ -409,7 +355,6 @@
         private Label lbl_ReqSkills;
         private TextBox txtBox_ProjectTitle;
         private CheckedListBox checkedListSkills;
-        private Button btn_AddInviteButton;
         private Button btn_NewProjectBack;
         private Label lbl_ManagerUserName;
         private Label lbl_ManagerFullName;
@@ -421,8 +366,7 @@
         private Label lbl_StartDate;
         private DataGridView dgv_PendingInvites;
         private GroupBox groupBox1;
-        private GroupBox groupBox2;
-        private DataGridView dgv_AcceptedInvites;
-        private Button btn_RemoveInvite;
+        private Label lbl_TotalCost;
+        private Label label2;
     }
 }

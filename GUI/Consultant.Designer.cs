@@ -74,6 +74,9 @@
             // 
             // dgv_ConsultantsInvites
             // 
+            dgv_ConsultantsInvites.AllowUserToAddRows = false;
+            dgv_ConsultantsInvites.AllowUserToDeleteRows = false;
+            dgv_ConsultantsInvites.AllowUserToResizeRows = false;
             dgv_ConsultantsInvites.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgv_ConsultantsInvites.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_ConsultantsInvites.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -84,6 +87,8 @@
             dgv_ConsultantsInvites.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv_ConsultantsInvites.Size = new Size(609, 302);
             dgv_ConsultantsInvites.TabIndex = 37;
+            dgv_ConsultantsInvites.ColumnHeaderMouseClick += dgv_ConsultantsInvites_ColumnHeaderMouseClick;
+            dgv_ConsultantsInvites.DataBindingComplete += dgv_ConsultantsInvites_DataBindingComplete;
             // 
             // groupBox1
             // 
@@ -193,12 +198,12 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(6, 25);
+            label2.Location = new Point(8, 22);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(62, 15);
+            label2.Size = new Size(59, 15);
             label2.TabIndex = 1;
-            label2.Text = "Firstname:";
+            label2.Text = "Firstname";
             // 
             // tb_Firstname
             // 
@@ -217,12 +222,12 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label7.Location = new Point(6, 51);
+            label7.Location = new Point(9, 48);
             label7.Margin = new Padding(2, 0, 2, 0);
             label7.Name = "label7";
-            label7.Size = new Size(61, 15);
+            label7.Size = new Size(58, 15);
             label7.TabIndex = 6;
-            label7.Text = "Lastname:";
+            label7.Text = "Lastname";
             // 
             // tb_Country
             // 
@@ -255,12 +260,12 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label9.Location = new Point(304, 104);
+            label9.Location = new Point(306, 101);
             label9.Margin = new Padding(2, 0, 2, 0);
             label9.Name = "label9";
-            label9.Size = new Size(53, 15);
+            label9.Size = new Size(50, 15);
             label9.TabIndex = 8;
-            label9.Text = "Country:";
+            label9.Text = "Country";
             // 
             // tb_Zipcode
             // 
@@ -280,23 +285,23 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label8.Location = new Point(305, 77);
+            label8.Location = new Point(306, 74);
             label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
-            label8.Size = new Size(53, 15);
+            label8.Size = new Size(50, 15);
             label8.TabIndex = 7;
-            label8.Text = "Zipcode:";
+            label8.Text = "Zipcode";
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(28, 77);
+            label3.Location = new Point(31, 74);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(39, 15);
+            label3.Size = new Size(36, 15);
             label3.TabIndex = 2;
-            label3.Text = "Email:";
+            label3.Text = "Email";
             // 
             // tb_City
             // 
@@ -356,34 +361,34 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(326, 51);
+            label5.Location = new Point(328, 48);
             label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
-            label5.Size = new Size(31, 15);
+            label5.Size = new Size(28, 15);
             label5.TabIndex = 4;
-            label5.Text = "City:";
+            label5.Text = "City";
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(23, 104);
+            label4.Location = new Point(26, 101);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(44, 15);
+            label4.Size = new Size(41, 15);
             label4.TabIndex = 3;
-            label4.Text = "Phone:";
+            label4.Text = "Phone";
             // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.Location = new Point(305, 25);
+            label6.Location = new Point(307, 22);
             label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
-            label6.Size = new Size(52, 15);
+            label6.Size = new Size(49, 15);
             label6.TabIndex = 5;
-            label6.Text = "Address:";
+            label6.Text = "Address";
             // 
             // bt_seeInvites
             // 

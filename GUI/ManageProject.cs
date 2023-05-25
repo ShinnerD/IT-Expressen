@@ -14,6 +14,8 @@ namespace GUI
 
         private string UserName;
 
+        private GuiHelper guiHelper = new GuiHelper();
+
         private readonly IDomainServiceManager ServiceManager;
 
         private List<IInvitesModel> dgvInvites;
@@ -29,7 +31,6 @@ namespace GUI
             LoadProjectData();
             LoadMessageData();
             InvolvedUsers();
-            
         }
 
         private void GetProjectInfo()
@@ -91,40 +92,15 @@ namespace GUI
                         DateTime.Now
                         );
                 }
-                catch
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Message cant be longer then 255 characters");
+                    guiHelper.FeedBackMessage(lb_warning, ex.Message, Color.Red);
                 }
-            }
-        }
-
-        private void bt_send_Click(object sender, EventArgs e)
-        {
-            AddMessage();
-            GetProjectInfo();
-            LoadMessageData();
-        }
-
-        private void rtb_newMessage_TextChanged(object sender, EventArgs e)
-        {
-            lb_TextCounter.Text = rtb_newMessage.Text.Length.ToString() + "/255";
-
-            if (rtb_newMessage.Text.Count() < 255)
-            {
-                lb_warning.Visible = false;
-                lb_TextCounter.ForeColor = Color.Black;
-            }
-            else
-            {
-                lb_warning.Visible = true;
-                lb_TextCounter.ForeColor = Color.Red;
             }
         }
 
         private void InvolvedUsers()
         {
-            
-
             if (ServiceManager.UserService.GetUserFromUsername(UserName).UserType.ToLower() == "consultant")
             {
                 DataInvolvedUseres();
@@ -183,9 +159,7 @@ namespace GUI
                 decimal.Parse(tb_HourlyRate.Text),
                 int.Parse(tb_HoursSpendt.Text)
                 );
-
         }
-
 
         private void GetTotalInvoice()
         {
@@ -201,6 +175,29 @@ namespace GUI
                 result += (ConsultantLine.HoursTotal * ConsultantLine.HourlyRate);
             }
             tb_TotalInvoice.Text = result.ToString();
+        }
+
+        private void bt_send_Click(object sender, EventArgs e)
+        {
+            AddMessage();
+            GetProjectInfo();
+            LoadMessageData();
+        }
+
+        private void rtb_newMessage_TextChanged(object sender, EventArgs e)
+        {
+            lb_TextCounter.Text = rtb_newMessage.Text.Length.ToString() + "/255";
+
+            if (rtb_newMessage.Text.Count() < 255)
+            {
+                lb_warning.Visible = false;
+                lb_TextCounter.ForeColor = Color.Black;
+            }
+            else
+            {
+                lb_warning.Visible = true;
+                lb_TextCounter.ForeColor = Color.Red;
+            }
         }
 
         private void bt_addHours_Click(object sender, EventArgs e)
@@ -219,6 +216,16 @@ namespace GUI
             {
                 tb_HourlyRate.Enabled = false;
             }
+        }
+
+        private void dgv_InvolvedUsers_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            GuiHelper.DataGridViewDataBindingCompleteResize(sender, e);
+        }
+
+        private void dgv_InvolvedUsers_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            guiHelper.ReorderDataGridViewColumnHeaderClickEvent(dgv_InvolvedUsers, e, dgvInvites);
         }
     }
 }

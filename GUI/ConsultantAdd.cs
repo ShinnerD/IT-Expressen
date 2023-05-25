@@ -19,7 +19,7 @@ namespace GUI
 
         private List<string> ProjectSpecializations { get; set; }
 
-        private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+        private GuiHelper guiHelper = new GuiHelper();
 
         //Constructor method loaded with project ID. All relevent data is loaded /MS
         public ConsultantAdd(IDomainServiceManager serviceManager, int projectID)
@@ -43,7 +43,7 @@ namespace GUI
         }
 
         /// <summary>
-        /// Finds the required users according to search params and then sets the datagridview to represent that list.
+        /// Finds the required users according to search parameters and then sets the datagridview to represent that list.
         /// </summary>
         private void LoadSearchResults()
         {
@@ -63,6 +63,8 @@ namespace GUI
             SpecService.FillUserSpecializationsProperty(SearchResults);
 
             dgv_ConsultantList.DataSource = SearchResults.OrderBy(i => i.FullName).ToList();
+
+            guiHelper.StartingSortedColumnIndex = 1;
 
             Cursor = Cursors.Default;
         }
@@ -98,18 +100,12 @@ namespace GUI
 
             dgv_ConsultantList.Columns.Add("FullName", "Consultant");
             dgv_ConsultantList.Columns["FullName"].DataPropertyName = "FullName";
-            dgv_ConsultantList.Columns["FullName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgv_ConsultantList.Columns["FullName"].FillWeight = 100;
 
             dgv_ConsultantList.Columns.Add("Country", "Country");
             dgv_ConsultantList.Columns["Country"].DataPropertyName = "Country";
-            dgv_ConsultantList.Columns["Country"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgv_ConsultantList.Columns["Country"].FillWeight = 100;
 
             dgv_ConsultantList.Columns.Add("Specializations", "Specializations");
             dgv_ConsultantList.Columns["Specializations"].DataPropertyName = "Specializations";
-            dgv_ConsultantList.Columns["Specializations"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgv_ConsultantList.Columns["Specializations"].FillWeight = 90;
         }
 
         //Gets data on projects and specializations /MS
@@ -136,30 +132,13 @@ namespace GUI
                     "Pending");
 
                 string successMessage = "Invite Sent to " + (string)dgv_ConsultantList.CurrentRow.Cells["FullName"].Value;
-                FeedBackMessage(lblFeedback, successMessage, Color.Green);
+                guiHelper.FeedBackMessage(lblFeedback, successMessage, Color.Green);
             }
             catch (Exception e)
             {
-                FeedBackMessage(lblFeedback, e.Message, Color.Red);
+                guiHelper.FeedBackMessage(lblFeedback, e.Message, Color.Red);
             }
 
-        }
-
-        /// <summary>
-        /// Async Task that turns on the visibility of the label provided in the parameters,
-        /// shows the given message in the given color, for the given time. /DK
-        /// </summary>
-        private async Task FeedBackMessage(Label label, string message, Color? color = null, int milliseconds = 5000)
-        {
-            label.Text = message.Trim();
-            label.ForeColor = color ?? Color.Black;
-            label.Visible = true;
-            _cancellationTokenSource.Cancel();
-            _cancellationTokenSource = new CancellationTokenSource();
-            await Task.Delay(milliseconds, _cancellationTokenSource.Token);
-            label.Text = string.Empty;
-            label.ForeColor = Color.Black;
-            label.Visible = false;
         }
 
         // Button click event -> see method for results /MS
@@ -190,7 +169,7 @@ namespace GUI
             }
             catch (Exception)
             {
-                FeedBackMessage(lblFeedback, "Failed to retrieve skills from server.", Color.Red);
+                guiHelper.FeedBackMessage(lblFeedback, "Failed to retrieve skills from server.", Color.Red);
             }
         }
 
@@ -209,13 +188,23 @@ namespace GUI
             }
             catch (Exception)
             {
-                FeedBackMessage(lblFeedback, "Failed to retrieve list of defined skills", Color.Red);
+                guiHelper.FeedBackMessage(lblFeedback, "Failed to retrieve list of defined skills", Color.Red);
             }
         }
 
         private void btn_Search_Click(object sender, EventArgs e)
         {
             LoadSearchResults();
+        }
+
+        private void dgv_ConsultantList_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            GuiHelper.DataGridViewDataBindingCompleteResize(sender, e);
+        }
+
+        private void dgv_ConsultantList_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            guiHelper.ReorderDataGridViewColumnHeaderClickEvent(dgv_ConsultantList, e, SearchResults);
         }
     }
 }
