@@ -2,6 +2,7 @@
 using DAL.Models;
 using Interfaces.Models;
 using Interfaces.Repositories;
+using System.Data.Linq;
 
 ///Writen by Erik
 
@@ -89,6 +90,20 @@ namespace DAL.Repository
 
             DataContext.Invoices.InsertOnSubmit(newInovice);
             DataContext.SubmitChanges();
+        }
+        public void UpdateInvoice(IInvoiceModel invoice)
+        {
+            var dbinvoice = DataContext.Invoices.First(I => I.Invoice_ID == invoice.InvoiceId);
+
+            if(dbinvoice != null && invoice != null)
+            {
+                dbinvoice.Invoice_ID = invoice.InvoiceId;
+                dbinvoice.Project_ID = invoice.ProjectId;
+                dbinvoice.Total_Price = invoice.TotalPrice;
+                dbinvoice.Invoice_Date = invoice.InvoiceDate;
+
+                DataContext.SubmitChanges();
+            }
         }
     }
 }

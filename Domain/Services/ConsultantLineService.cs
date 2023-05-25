@@ -49,9 +49,9 @@ namespace Domain.Services
                 newConsulLine.InvoiceID = newInvoiceID.InvoiceId;
             }
             else
-            {
+            {   
                 newConsulLine.InvoiceID = ServiceManager.InvoiceService.GetInvoiceFromProjectID(projectID).InvoiceId;
-                                        
+
             }
 
             consultantLineRepository.AddConsultantLine(newConsulLine);

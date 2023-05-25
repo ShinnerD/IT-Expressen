@@ -22,5 +22,7 @@ namespace Interfaces.Repositories
         IInvoiceModel GetInvoiceID(int invoiceId);
 
         void AddInvoice(IInvoiceModel invoice);
+
+        void UpdateInvoice(IInvoiceModel invoice);
     }
 }
