@@ -1,13 +1,4 @@
-﻿using Castle.Core.Internal;
-using Interfaces.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace GUI
+﻿namespace GUI
 {
     internal class GuiHelper
     {
@@ -82,6 +73,7 @@ namespace GUI
         /// </summary>
         private List<T> SortData<T>(List<T> list, string column, bool ascending)
         {
+            if (list is null) { return list; }
             return ascending ?
                 list.OrderBy(_ => _.GetType().GetProperty(column)?.GetValue(_)).ToList() :
                 list.OrderByDescending(_ => _.GetType().GetProperty(column)?.GetValue(_)).ToList();
