@@ -17,8 +17,6 @@ namespace GUI
 
         private GuiHelper guiHelper = new GuiHelper();
 
-        private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
-
         public Manager(IDomainServiceManager serviceManager, string username)
         {
             ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
@@ -43,7 +41,7 @@ namespace GUI
             }
             catch (Exception)
             {
-                FeedBackMessage(lbl_ViewProjectsFeedBack, "Unable to retrieve projects.", Color.Red);
+                guiHelper.FeedBackMessage(lbl_ViewProjectsFeedBack, "Unable to retrieve projects.", Color.Red);
             }
             finally
             {
@@ -52,16 +50,17 @@ namespace GUI
 
                 dgv_Viewproject.Columns.Add("Title", "Project Name");
                 dgv_Viewproject.Columns["Title"].DataPropertyName = "Title";
-                dgv_Viewproject.Columns["Title"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
                 dgv_Viewproject.Columns.Add("Status", "Status");
                 dgv_Viewproject.Columns["Status"].DataPropertyName = "ProjectStatus";
 
                 dgv_Viewproject.Columns.Add("Start", "Start");
                 dgv_Viewproject.Columns["Start"].DataPropertyName = "ProjectStartDate";
+                dgv_Viewproject.Columns["Start"].DefaultCellStyle.Format = "dd'/'MM'/'yyyy";
 
                 dgv_Viewproject.Columns.Add("End", "End");
                 dgv_Viewproject.Columns["End"].DataPropertyName = "ProjectEndDate";
+                dgv_Viewproject.Columns["End"].DefaultCellStyle.Format = "dd'/'MM'/'yyyy";
 
                 dgv_Viewproject.Columns.Add("Invoiced", "Invoiced");
                 dgv_Viewproject.Columns["Invoiced"].DataPropertyName = "TotalInvoicePrice";
@@ -160,7 +159,7 @@ namespace GUI
         {
             if (bt_EditProfile.Text == "Edit Profile")
             {
-                UnlockProfileForEditing(grpBoxProfileInfo, true);
+                GuiHelper.UnlockProfileForEditing(grpBoxProfileInfo, true);
                 bt_EditProfile.Text = "Save Changes";
                 bt_EditProfileCancel.Enabled = true;
                 bt_EditProfileCancel.Visible = true;
@@ -170,7 +169,7 @@ namespace GUI
                 UpdateUserModel();
                 IUserService userService = ServiceManager.UserService;
                 userService.UpdateUser(userModel);
-                UnlockProfileForEditing(grpBoxProfileInfo, false);
+                GuiHelper.UnlockProfileForEditing(grpBoxProfileInfo, false);
                 bt_EditProfileCancel.Enabled = false;
                 bt_EditProfileCancel.Visible = false;
                 bt_EditProfile.Text = "Edit Profile";
@@ -190,36 +189,6 @@ namespace GUI
             userModel.NameCity = tb_City.Text;
             userModel.ZipCode = tb_Zipcode.Text;
             userModel.Country = tb_Country.Text;
-        }
-
-        /// <summary>
-        /// Unlocks the textboxes in the user profile section of the form and changes the edit button to reflect the ability
-        /// to save the changes you make to your profile. /DK
-        /// </summary>
-        private void UnlockProfileForEditing(Control control, bool unlock)
-        {
-            if (control is TextBox)
-            {
-                control.Enabled = unlock;
-                control.TabStop = unlock;
-                if (unlock)
-                {
-                    control.BackColor = SystemColors.Window;
-                }
-                else
-                {
-                    control.BackColor = SystemColors.ControlLight;
-                }
-            }
-            if (control.HasChildren)
-            {
-                // Recursively call this method for all controls inside the control passed in the parameter.
-                // Ex. all controls inside another group box.
-                foreach (Control childControl in control.Controls)
-                {
-                    UnlockProfileForEditing(childControl, unlock);
-                }
-            }
         }
 
         /// <summary>
@@ -253,24 +222,6 @@ namespace GUI
             {
                 checkedListSkills.Items.Add(item);
             }
-        }
-
-        /// <summary>
-        /// Async Task that turns on the visibility of the label provided in the parameters,
-        /// shows the given message in the given color, for the given time. /DK
-        /// </summary>
-        private async Task FeedBackMessage(Label label, string message, Color? color = null, int milliseconds = 5000)
-        {
-            label.Text = message;
-            label.ForeColor = color ?? Color.Black;
-            label.Visible = true;
-            _cancellationTokenSource.Cancel();
-            _cancellationTokenSource = new CancellationTokenSource();
-
-            await Task.Delay(milliseconds, _cancellationTokenSource.Token);
-            label.Text = string.Empty;
-            label.ForeColor = Color.Black;
-            label.Visible = false;
         }
 
         /// <summary>
@@ -312,7 +263,7 @@ namespace GUI
             }
             catch (Exception e)
             {
-                FeedBackMessage(lbl_FeedBackNewProject, e.Message, Color.Red);
+                guiHelper.FeedBackMessage(lbl_FeedBackNewProject, e.Message, Color.Red);
             }
         }
 
@@ -345,7 +296,7 @@ namespace GUI
             }
             catch (Exception e)
             {
-                FeedBackMessage(lbl_FeedBackNewProject, e.Message, Color.Red);
+                guiHelper.FeedBackMessage(lbl_FeedBackNewProject, e.Message, Color.Red);
             }
         }
 
@@ -385,7 +336,7 @@ namespace GUI
             bt_EditProfileCancel.Enabled = false;
             bt_EditProfileCancel.Visible = false;
             bt_EditProfile.Text = "Edit Profile";
-            UnlockProfileForEditing(grpBoxProfileInfo, false);
+            GuiHelper.UnlockProfileForEditing(grpBoxProfileInfo, false);
             SetUpTB();
         }
 
@@ -439,9 +390,20 @@ namespace GUI
             guiHelper.ReorderDataGridViewColumnHeaderClickEvent(dgv_Viewproject, e, ProjectList);
         }
 
-        private void bt_AddConsultant_Click_1(object sender, EventArgs e)
+        private void dgv_Viewproject_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
+            GuiHelper.DataGridViewDataBindingCompleteResize(sender, e);
+        }
 
+        private void btn_ViewInvoice_Click(object sender, EventArgs e)
+        {
+            if (dgv_Viewproject.SelectedRows.Count > 0)
+            {
+                IProjectModel clickedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;
+                ManagerViewInvoice viewInvoice = new ManagerViewInvoice(ServiceManager, clickedProject);
+                viewInvoice.ShowDialog();
+                viewInvoice.Dispose();
+            }
         }
     }
 }

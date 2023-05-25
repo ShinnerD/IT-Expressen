@@ -28,610 +28,625 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.tb_Firstname = new System.Windows.Forms.TextBox();
-            this.tb_Email = new System.Windows.Forms.TextBox();
-            this.tb_Phonenumber = new System.Windows.Forms.TextBox();
-            this.tb_Lastname = new System.Windows.Forms.TextBox();
-            this.tb_Address = new System.Windows.Forms.TextBox();
-            this.tb_City = new System.Windows.Forms.TextBox();
-            this.tb_Zipcode = new System.Windows.Forms.TextBox();
-            this.tb_Country = new System.Windows.Forms.TextBox();
-            this.bt_FindConsultants = new System.Windows.Forms.Button();
-            this.grpBoxProfileInfo = new System.Windows.Forms.GroupBox();
-            this.bt_EditProfileCancel = new System.Windows.Forms.Button();
-            this.lblUserCreationDate = new System.Windows.Forms.Label();
-            this.bt_EditProfile = new System.Windows.Forms.Button();
-            this.ViewProjectsGrpBox = new System.Windows.Forms.GroupBox();
-            this.bt_AddConsultant = new System.Windows.Forms.Button();
-            this.lbl_ViewProjectsFeedBack = new System.Windows.Forms.Label();
-            this.btn_NewProject = new System.Windows.Forms.Button();
-            this.bt_manageProject = new System.Windows.Forms.Button();
-            this.bt_EditProject = new System.Windows.Forms.Button();
-            this.dgv_Viewproject = new System.Windows.Forms.DataGridView();
-            this.NewProjectGrpBox = new System.Windows.Forms.GroupBox();
-            this.lbl_FeedBackNewProject = new System.Windows.Forms.Label();
-            this.lbl_StartDate = new System.Windows.Forms.Label();
-            this.lbl_EndDate = new System.Windows.Forms.Label();
-            this.lbl_ReqSkills = new System.Windows.Forms.Label();
-            this.txtBox_ProjectTitle = new System.Windows.Forms.TextBox();
-            this.txtBox_ProjectDescription = new System.Windows.Forms.TextBox();
-            this.checkedListSkills = new System.Windows.Forms.CheckedListBox();
-            this.dtp_NewProjectEndDate = new System.Windows.Forms.DateTimePicker();
-            this.dtp_NewProjectStartDate = new System.Windows.Forms.DateTimePicker();
-            this.btn_NewProjectSave = new System.Windows.Forms.Button();
-            this.btn_NewProjectBack = new System.Windows.Forms.Button();
-            this.grpBoxProfileInfo.SuspendLayout();
-            this.ViewProjectsGrpBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_Viewproject)).BeginInit();
-            this.NewProjectGrpBox.SuspendLayout();
-            this.SuspendLayout();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            label2 = new Label();
+            label3 = new Label();
+            label4 = new Label();
+            label5 = new Label();
+            label6 = new Label();
+            label7 = new Label();
+            label8 = new Label();
+            label9 = new Label();
+            tb_Firstname = new TextBox();
+            tb_Email = new TextBox();
+            tb_Phonenumber = new TextBox();
+            tb_Lastname = new TextBox();
+            tb_Address = new TextBox();
+            tb_City = new TextBox();
+            tb_Zipcode = new TextBox();
+            tb_Country = new TextBox();
+            bt_FindConsultants = new Button();
+            grpBoxProfileInfo = new GroupBox();
+            bt_EditProfileCancel = new Button();
+            lblUserCreationDate = new Label();
+            bt_EditProfile = new Button();
+            ViewProjectsGrpBox = new GroupBox();
+            bt_AddConsultant = new Button();
+            lbl_ViewProjectsFeedBack = new Label();
+            btn_NewProject = new Button();
+            bt_manageProject = new Button();
+            bt_EditProject = new Button();
+            dgv_Viewproject = new DataGridView();
+            NewProjectGrpBox = new GroupBox();
+            lbl_FeedBackNewProject = new Label();
+            lbl_StartDate = new Label();
+            lbl_EndDate = new Label();
+            lbl_ReqSkills = new Label();
+            txtBox_ProjectTitle = new TextBox();
+            txtBox_ProjectDescription = new TextBox();
+            checkedListSkills = new CheckedListBox();
+            dtp_NewProjectEndDate = new DateTimePicker();
+            dtp_NewProjectStartDate = new DateTimePicker();
+            btn_NewProjectSave = new Button();
+            btn_NewProjectBack = new Button();
+            btn_ViewInvoice = new Button();
+            grpBoxProfileInfo.SuspendLayout();
+            ViewProjectsGrpBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgv_Viewproject).BeginInit();
+            NewProjectGrpBox.SuspendLayout();
+            SuspendLayout();
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(6, 25);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(62, 15);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Firstname:";
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(6, 25);
+            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(59, 15);
+            label2.TabIndex = 1;
+            label2.Text = "Firstname";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(28, 77);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(39, 15);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Email:";
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(28, 77);
+            label3.Margin = new Padding(2, 0, 2, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(36, 15);
+            label3.TabIndex = 2;
+            label3.Text = "Email";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(23, 104);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(44, 15);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Phone:";
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Location = new Point(23, 104);
+            label4.Margin = new Padding(2, 0, 2, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(41, 15);
+            label4.TabIndex = 3;
+            label4.Text = "Phone";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(326, 51);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(31, 15);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "City:";
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Location = new Point(326, 51);
+            label5.Margin = new Padding(2, 0, 2, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(28, 15);
+            label5.TabIndex = 4;
+            label5.Text = "City";
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(305, 25);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 15);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Address:";
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.Location = new Point(305, 25);
+            label6.Margin = new Padding(2, 0, 2, 0);
+            label6.Name = "label6";
+            label6.Size = new Size(49, 15);
+            label6.TabIndex = 5;
+            label6.Text = "Address";
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(6, 51);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(61, 15);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "Lastname:";
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.Location = new Point(6, 51);
+            label7.Margin = new Padding(2, 0, 2, 0);
+            label7.Name = "label7";
+            label7.Size = new Size(58, 15);
+            label7.TabIndex = 6;
+            label7.Text = "Lastname";
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(305, 77);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(53, 15);
-            this.label8.TabIndex = 7;
-            this.label8.Text = "Zipcode:";
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label8.Location = new Point(305, 77);
+            label8.Margin = new Padding(2, 0, 2, 0);
+            label8.Name = "label8";
+            label8.Size = new Size(50, 15);
+            label8.TabIndex = 7;
+            label8.Text = "Zipcode";
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(304, 104);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(53, 15);
-            this.label9.TabIndex = 8;
-            this.label9.Text = "Country:";
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label9.Location = new Point(304, 104);
+            label9.Margin = new Padding(2, 0, 2, 0);
+            label9.Name = "label9";
+            label9.Size = new Size(50, 15);
+            label9.TabIndex = 8;
+            label9.Text = "Country";
             // 
             // tb_Firstname
             // 
-            this.tb_Firstname.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.tb_Firstname.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb_Firstname.Enabled = false;
-            this.tb_Firstname.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tb_Firstname.Location = new System.Drawing.Point(71, 22);
-            this.tb_Firstname.Margin = new System.Windows.Forms.Padding(2);
-            this.tb_Firstname.Name = "tb_Firstname";
-            this.tb_Firstname.Size = new System.Drawing.Size(225, 16);
-            this.tb_Firstname.TabIndex = 1;
-            this.tb_Firstname.TabStop = false;
+            tb_Firstname.BackColor = SystemColors.ControlLight;
+            tb_Firstname.BorderStyle = BorderStyle.None;
+            tb_Firstname.Enabled = false;
+            tb_Firstname.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            tb_Firstname.Location = new Point(71, 22);
+            tb_Firstname.Margin = new Padding(2);
+            tb_Firstname.Name = "tb_Firstname";
+            tb_Firstname.Size = new Size(225, 16);
+            tb_Firstname.TabIndex = 1;
+            tb_Firstname.TabStop = false;
             // 
             // tb_Email
             // 
-            this.tb_Email.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.tb_Email.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb_Email.Enabled = false;
-            this.tb_Email.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tb_Email.Location = new System.Drawing.Point(71, 74);
-            this.tb_Email.Margin = new System.Windows.Forms.Padding(2);
-            this.tb_Email.Name = "tb_Email";
-            this.tb_Email.Size = new System.Drawing.Size(225, 16);
-            this.tb_Email.TabIndex = 3;
-            this.tb_Email.TabStop = false;
+            tb_Email.BackColor = SystemColors.ControlLight;
+            tb_Email.BorderStyle = BorderStyle.None;
+            tb_Email.Enabled = false;
+            tb_Email.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            tb_Email.Location = new Point(71, 74);
+            tb_Email.Margin = new Padding(2);
+            tb_Email.Name = "tb_Email";
+            tb_Email.Size = new Size(225, 16);
+            tb_Email.TabIndex = 3;
+            tb_Email.TabStop = false;
             // 
             // tb_Phonenumber
             // 
-            this.tb_Phonenumber.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.tb_Phonenumber.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb_Phonenumber.Enabled = false;
-            this.tb_Phonenumber.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tb_Phonenumber.Location = new System.Drawing.Point(71, 101);
-            this.tb_Phonenumber.Margin = new System.Windows.Forms.Padding(2);
-            this.tb_Phonenumber.Name = "tb_Phonenumber";
-            this.tb_Phonenumber.Size = new System.Drawing.Size(225, 16);
-            this.tb_Phonenumber.TabIndex = 4;
-            this.tb_Phonenumber.TabStop = false;
+            tb_Phonenumber.BackColor = SystemColors.ControlLight;
+            tb_Phonenumber.BorderStyle = BorderStyle.None;
+            tb_Phonenumber.Enabled = false;
+            tb_Phonenumber.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            tb_Phonenumber.Location = new Point(71, 101);
+            tb_Phonenumber.Margin = new Padding(2);
+            tb_Phonenumber.Name = "tb_Phonenumber";
+            tb_Phonenumber.Size = new Size(225, 16);
+            tb_Phonenumber.TabIndex = 4;
+            tb_Phonenumber.TabStop = false;
             // 
             // tb_Lastname
             // 
-            this.tb_Lastname.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.tb_Lastname.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb_Lastname.Enabled = false;
-            this.tb_Lastname.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tb_Lastname.Location = new System.Drawing.Point(71, 48);
-            this.tb_Lastname.Margin = new System.Windows.Forms.Padding(2);
-            this.tb_Lastname.Name = "tb_Lastname";
-            this.tb_Lastname.Size = new System.Drawing.Size(225, 16);
-            this.tb_Lastname.TabIndex = 2;
-            this.tb_Lastname.TabStop = false;
+            tb_Lastname.BackColor = SystemColors.ControlLight;
+            tb_Lastname.BorderStyle = BorderStyle.None;
+            tb_Lastname.Enabled = false;
+            tb_Lastname.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            tb_Lastname.Location = new Point(71, 48);
+            tb_Lastname.Margin = new Padding(2);
+            tb_Lastname.Name = "tb_Lastname";
+            tb_Lastname.Size = new Size(225, 16);
+            tb_Lastname.TabIndex = 2;
+            tb_Lastname.TabStop = false;
             // 
             // tb_Address
             // 
-            this.tb_Address.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tb_Address.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.tb_Address.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb_Address.Enabled = false;
-            this.tb_Address.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tb_Address.Location = new System.Drawing.Point(360, 22);
-            this.tb_Address.Margin = new System.Windows.Forms.Padding(2);
-            this.tb_Address.Name = "tb_Address";
-            this.tb_Address.Size = new System.Drawing.Size(328, 16);
-            this.tb_Address.TabIndex = 5;
-            this.tb_Address.TabStop = false;
+            tb_Address.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tb_Address.BackColor = SystemColors.ControlLight;
+            tb_Address.BorderStyle = BorderStyle.None;
+            tb_Address.Enabled = false;
+            tb_Address.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            tb_Address.Location = new Point(360, 22);
+            tb_Address.Margin = new Padding(2);
+            tb_Address.Name = "tb_Address";
+            tb_Address.Size = new Size(328, 16);
+            tb_Address.TabIndex = 5;
+            tb_Address.TabStop = false;
             // 
             // tb_City
             // 
-            this.tb_City.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tb_City.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.tb_City.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb_City.Enabled = false;
-            this.tb_City.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tb_City.Location = new System.Drawing.Point(360, 49);
-            this.tb_City.Margin = new System.Windows.Forms.Padding(2);
-            this.tb_City.Name = "tb_City";
-            this.tb_City.Size = new System.Drawing.Size(328, 16);
-            this.tb_City.TabIndex = 6;
-            this.tb_City.TabStop = false;
+            tb_City.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tb_City.BackColor = SystemColors.ControlLight;
+            tb_City.BorderStyle = BorderStyle.None;
+            tb_City.Enabled = false;
+            tb_City.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            tb_City.Location = new Point(360, 49);
+            tb_City.Margin = new Padding(2);
+            tb_City.Name = "tb_City";
+            tb_City.Size = new Size(328, 16);
+            tb_City.TabIndex = 6;
+            tb_City.TabStop = false;
             // 
             // tb_Zipcode
             // 
-            this.tb_Zipcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tb_Zipcode.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.tb_Zipcode.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb_Zipcode.Enabled = false;
-            this.tb_Zipcode.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tb_Zipcode.Location = new System.Drawing.Point(360, 74);
-            this.tb_Zipcode.Margin = new System.Windows.Forms.Padding(2);
-            this.tb_Zipcode.Name = "tb_Zipcode";
-            this.tb_Zipcode.Size = new System.Drawing.Size(328, 16);
-            this.tb_Zipcode.TabIndex = 7;
-            this.tb_Zipcode.TabStop = false;
+            tb_Zipcode.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tb_Zipcode.BackColor = SystemColors.ControlLight;
+            tb_Zipcode.BorderStyle = BorderStyle.None;
+            tb_Zipcode.Enabled = false;
+            tb_Zipcode.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            tb_Zipcode.Location = new Point(360, 74);
+            tb_Zipcode.Margin = new Padding(2);
+            tb_Zipcode.Name = "tb_Zipcode";
+            tb_Zipcode.Size = new Size(328, 16);
+            tb_Zipcode.TabIndex = 7;
+            tb_Zipcode.TabStop = false;
             // 
             // tb_Country
             // 
-            this.tb_Country.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tb_Country.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.tb_Country.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb_Country.Enabled = false;
-            this.tb_Country.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tb_Country.Location = new System.Drawing.Point(360, 101);
-            this.tb_Country.Margin = new System.Windows.Forms.Padding(2);
-            this.tb_Country.Name = "tb_Country";
-            this.tb_Country.Size = new System.Drawing.Size(328, 16);
-            this.tb_Country.TabIndex = 8;
-            this.tb_Country.TabStop = false;
+            tb_Country.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tb_Country.BackColor = SystemColors.ControlLight;
+            tb_Country.BorderStyle = BorderStyle.None;
+            tb_Country.Enabled = false;
+            tb_Country.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            tb_Country.Location = new Point(360, 101);
+            tb_Country.Margin = new Padding(2);
+            tb_Country.Name = "tb_Country";
+            tb_Country.Size = new Size(328, 16);
+            tb_Country.TabIndex = 8;
+            tb_Country.TabStop = false;
             // 
             // bt_FindConsultants
             // 
-            this.bt_FindConsultants.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.bt_FindConsultants.Location = new System.Drawing.Point(215, 29);
-            this.bt_FindConsultants.Margin = new System.Windows.Forms.Padding(2);
-            this.bt_FindConsultants.Name = "bt_FindConsultants";
-            this.bt_FindConsultants.Size = new System.Drawing.Size(105, 25);
-            this.bt_FindConsultants.TabIndex = 11;
-            this.bt_FindConsultants.Text = "View Invites";
-            this.bt_FindConsultants.UseVisualStyleBackColor = true;
+            bt_FindConsultants.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            bt_FindConsultants.Location = new Point(215, 29);
+            bt_FindConsultants.Margin = new Padding(2);
+            bt_FindConsultants.Name = "bt_FindConsultants";
+            bt_FindConsultants.Size = new Size(105, 25);
+            bt_FindConsultants.TabIndex = 11;
+            bt_FindConsultants.Text = "Invites";
+            bt_FindConsultants.UseVisualStyleBackColor = true;
+            bt_FindConsultants.Click += bt_FindConsultants_Click;
             // 
             // grpBoxProfileInfo
             // 
-            this.grpBoxProfileInfo.Controls.Add(this.bt_EditProfileCancel);
-            this.grpBoxProfileInfo.Controls.Add(this.lblUserCreationDate);
-            this.grpBoxProfileInfo.Controls.Add(this.bt_EditProfile);
-            this.grpBoxProfileInfo.Controls.Add(this.label2);
-            this.grpBoxProfileInfo.Controls.Add(this.tb_Firstname);
-            this.grpBoxProfileInfo.Controls.Add(this.label7);
-            this.grpBoxProfileInfo.Controls.Add(this.tb_Country);
-            this.grpBoxProfileInfo.Controls.Add(this.tb_Lastname);
-            this.grpBoxProfileInfo.Controls.Add(this.label9);
-            this.grpBoxProfileInfo.Controls.Add(this.tb_Zipcode);
-            this.grpBoxProfileInfo.Controls.Add(this.label8);
-            this.grpBoxProfileInfo.Controls.Add(this.label3);
-            this.grpBoxProfileInfo.Controls.Add(this.tb_City);
-            this.grpBoxProfileInfo.Controls.Add(this.tb_Email);
-            this.grpBoxProfileInfo.Controls.Add(this.tb_Address);
-            this.grpBoxProfileInfo.Controls.Add(this.tb_Phonenumber);
-            this.grpBoxProfileInfo.Controls.Add(this.label5);
-            this.grpBoxProfileInfo.Controls.Add(this.label4);
-            this.grpBoxProfileInfo.Controls.Add(this.label6);
-            this.grpBoxProfileInfo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.grpBoxProfileInfo.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.grpBoxProfileInfo.Location = new System.Drawing.Point(0, 0);
-            this.grpBoxProfileInfo.Name = "grpBoxProfileInfo";
-            this.grpBoxProfileInfo.Size = new System.Drawing.Size(699, 157);
-            this.grpBoxProfileInfo.TabIndex = 21;
-            this.grpBoxProfileInfo.TabStop = false;
-            this.grpBoxProfileInfo.Text = "User Name";
+            grpBoxProfileInfo.Controls.Add(bt_EditProfileCancel);
+            grpBoxProfileInfo.Controls.Add(lblUserCreationDate);
+            grpBoxProfileInfo.Controls.Add(bt_EditProfile);
+            grpBoxProfileInfo.Controls.Add(label2);
+            grpBoxProfileInfo.Controls.Add(tb_Firstname);
+            grpBoxProfileInfo.Controls.Add(label7);
+            grpBoxProfileInfo.Controls.Add(tb_Country);
+            grpBoxProfileInfo.Controls.Add(tb_Lastname);
+            grpBoxProfileInfo.Controls.Add(label9);
+            grpBoxProfileInfo.Controls.Add(tb_Zipcode);
+            grpBoxProfileInfo.Controls.Add(label8);
+            grpBoxProfileInfo.Controls.Add(label3);
+            grpBoxProfileInfo.Controls.Add(tb_City);
+            grpBoxProfileInfo.Controls.Add(tb_Email);
+            grpBoxProfileInfo.Controls.Add(tb_Address);
+            grpBoxProfileInfo.Controls.Add(tb_Phonenumber);
+            grpBoxProfileInfo.Controls.Add(label5);
+            grpBoxProfileInfo.Controls.Add(label4);
+            grpBoxProfileInfo.Controls.Add(label6);
+            grpBoxProfileInfo.Dock = DockStyle.Top;
+            grpBoxProfileInfo.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            grpBoxProfileInfo.Location = new Point(0, 0);
+            grpBoxProfileInfo.Name = "grpBoxProfileInfo";
+            grpBoxProfileInfo.Size = new Size(699, 157);
+            grpBoxProfileInfo.TabIndex = 21;
+            grpBoxProfileInfo.TabStop = false;
+            grpBoxProfileInfo.Text = "User Name";
             // 
             // bt_EditProfileCancel
             // 
-            this.bt_EditProfileCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.bt_EditProfileCancel.Enabled = false;
-            this.bt_EditProfileCancel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.bt_EditProfileCancel.Location = new System.Drawing.Point(484, 126);
-            this.bt_EditProfileCancel.Margin = new System.Windows.Forms.Padding(2);
-            this.bt_EditProfileCancel.Name = "bt_EditProfileCancel";
-            this.bt_EditProfileCancel.Size = new System.Drawing.Size(100, 25);
-            this.bt_EditProfileCancel.TabIndex = 9;
-            this.bt_EditProfileCancel.Text = "Cancel";
-            this.bt_EditProfileCancel.UseVisualStyleBackColor = true;
-            this.bt_EditProfileCancel.Visible = false;
+            bt_EditProfileCancel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            bt_EditProfileCancel.Enabled = false;
+            bt_EditProfileCancel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            bt_EditProfileCancel.Location = new Point(484, 126);
+            bt_EditProfileCancel.Margin = new Padding(2);
+            bt_EditProfileCancel.Name = "bt_EditProfileCancel";
+            bt_EditProfileCancel.Size = new Size(100, 25);
+            bt_EditProfileCancel.TabIndex = 9;
+            bt_EditProfileCancel.Text = "Cancel";
+            bt_EditProfileCancel.UseVisualStyleBackColor = true;
+            bt_EditProfileCancel.Visible = false;
+            bt_EditProfileCancel.Click += bt_EditProfileCancel_Click;
             // 
             // lblUserCreationDate
             // 
-            this.lblUserCreationDate.AutoSize = true;
-            this.lblUserCreationDate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
-            this.lblUserCreationDate.Location = new System.Drawing.Point(219, 129);
-            this.lblUserCreationDate.Name = "lblUserCreationDate";
-            this.lblUserCreationDate.Size = new System.Drawing.Size(186, 17);
-            this.lblUserCreationDate.TabIndex = 100;
-            this.lblUserCreationDate.Text = "You\'ve been a user for 154 days";
+            lblUserCreationDate.AutoSize = true;
+            lblUserCreationDate.Font = new Font("Segoe UI", 9.75F, FontStyle.Italic, GraphicsUnit.Point);
+            lblUserCreationDate.Location = new Point(219, 129);
+            lblUserCreationDate.Name = "lblUserCreationDate";
+            lblUserCreationDate.Size = new Size(186, 17);
+            lblUserCreationDate.TabIndex = 100;
+            lblUserCreationDate.Text = "You've been a user for 154 days";
             // 
             // bt_EditProfile
             // 
-            this.bt_EditProfile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.bt_EditProfile.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.bt_EditProfile.Location = new System.Drawing.Point(588, 126);
-            this.bt_EditProfile.Margin = new System.Windows.Forms.Padding(2);
-            this.bt_EditProfile.Name = "bt_EditProfile";
-            this.bt_EditProfile.Size = new System.Drawing.Size(100, 25);
-            this.bt_EditProfile.TabIndex = 9;
-            this.bt_EditProfile.Text = "Edit Profile";
-            this.bt_EditProfile.UseVisualStyleBackColor = true;
+            bt_EditProfile.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            bt_EditProfile.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            bt_EditProfile.Location = new Point(588, 126);
+            bt_EditProfile.Margin = new Padding(2);
+            bt_EditProfile.Name = "bt_EditProfile";
+            bt_EditProfile.Size = new Size(100, 25);
+            bt_EditProfile.TabIndex = 9;
+            bt_EditProfile.Text = "Edit Profile";
+            bt_EditProfile.UseVisualStyleBackColor = true;
+            bt_EditProfile.Click += bt_EditProfile_Click;
             // 
             // ViewProjectsGrpBox
             // 
-            this.ViewProjectsGrpBox.Controls.Add(this.bt_AddConsultant);
-            this.ViewProjectsGrpBox.Controls.Add(this.lbl_ViewProjectsFeedBack);
-            this.ViewProjectsGrpBox.Controls.Add(this.btn_NewProject);
-            this.ViewProjectsGrpBox.Controls.Add(this.bt_manageProject);
-            this.ViewProjectsGrpBox.Controls.Add(this.bt_EditProject);
-            this.ViewProjectsGrpBox.Controls.Add(this.dgv_Viewproject);
-            this.ViewProjectsGrpBox.Controls.Add(this.bt_FindConsultants);
-            this.ViewProjectsGrpBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ViewProjectsGrpBox.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ViewProjectsGrpBox.Location = new System.Drawing.Point(0, 157);
-            this.ViewProjectsGrpBox.Name = "ViewProjectsGrpBox";
-            this.ViewProjectsGrpBox.Size = new System.Drawing.Size(699, 382);
-            this.ViewProjectsGrpBox.TabIndex = 22;
-            this.ViewProjectsGrpBox.TabStop = false;
-            this.ViewProjectsGrpBox.Text = "Projects";
+            ViewProjectsGrpBox.Controls.Add(btn_ViewInvoice);
+            ViewProjectsGrpBox.Controls.Add(bt_AddConsultant);
+            ViewProjectsGrpBox.Controls.Add(lbl_ViewProjectsFeedBack);
+            ViewProjectsGrpBox.Controls.Add(btn_NewProject);
+            ViewProjectsGrpBox.Controls.Add(bt_manageProject);
+            ViewProjectsGrpBox.Controls.Add(bt_EditProject);
+            ViewProjectsGrpBox.Controls.Add(dgv_Viewproject);
+            ViewProjectsGrpBox.Controls.Add(bt_FindConsultants);
+            ViewProjectsGrpBox.Dock = DockStyle.Fill;
+            ViewProjectsGrpBox.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            ViewProjectsGrpBox.Location = new Point(0, 157);
+            ViewProjectsGrpBox.Name = "ViewProjectsGrpBox";
+            ViewProjectsGrpBox.Size = new Size(699, 382);
+            ViewProjectsGrpBox.TabIndex = 22;
+            ViewProjectsGrpBox.TabStop = false;
+            ViewProjectsGrpBox.Text = "Projects";
             // 
             // bt_AddConsultant
             // 
-            this.bt_AddConsultant.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.bt_AddConsultant.Location = new System.Drawing.Point(325, 29);
-            this.bt_AddConsultant.Name = "bt_AddConsultant";
-            this.bt_AddConsultant.Size = new System.Drawing.Size(105, 25);
-            this.bt_AddConsultant.TabIndex = 19;
-            this.bt_AddConsultant.Text = "Find Consultants";
-            this.bt_AddConsultant.UseVisualStyleBackColor = true;
-            this.bt_AddConsultant.Click += new System.EventHandler(this.bt_AddConsultant_Click_1);
+            bt_AddConsultant.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            bt_AddConsultant.Location = new Point(436, 29);
+            bt_AddConsultant.Name = "bt_AddConsultant";
+            bt_AddConsultant.Size = new Size(105, 25);
+            bt_AddConsultant.TabIndex = 19;
+            bt_AddConsultant.Text = "Find Consultants";
+            bt_AddConsultant.UseVisualStyleBackColor = true;
+            bt_AddConsultant.Click += bt_AddConsultant_Click;
             // 
             // lbl_ViewProjectsFeedBack
             // 
-            this.lbl_ViewProjectsFeedBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lbl_ViewProjectsFeedBack.AutoSize = true;
-            this.lbl_ViewProjectsFeedBack.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbl_ViewProjectsFeedBack.Location = new System.Drawing.Point(12, 358);
-            this.lbl_ViewProjectsFeedBack.Name = "lbl_ViewProjectsFeedBack";
-            this.lbl_ViewProjectsFeedBack.Size = new System.Drawing.Size(166, 15);
-            this.lbl_ViewProjectsFeedBack.TabIndex = 16;
-            this.lbl_ViewProjectsFeedBack.Text = "Feedback label for messages...";
-            this.lbl_ViewProjectsFeedBack.Visible = false;
+            lbl_ViewProjectsFeedBack.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            lbl_ViewProjectsFeedBack.AutoSize = true;
+            lbl_ViewProjectsFeedBack.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            lbl_ViewProjectsFeedBack.Location = new Point(12, 358);
+            lbl_ViewProjectsFeedBack.Name = "lbl_ViewProjectsFeedBack";
+            lbl_ViewProjectsFeedBack.Size = new Size(166, 15);
+            lbl_ViewProjectsFeedBack.TabIndex = 16;
+            lbl_ViewProjectsFeedBack.Text = "Feedback label for messages...";
+            lbl_ViewProjectsFeedBack.Visible = false;
             // 
             // btn_NewProject
             // 
-            this.btn_NewProject.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_NewProject.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btn_NewProject.Location = new System.Drawing.Point(587, 30);
-            this.btn_NewProject.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_NewProject.Name = "btn_NewProject";
-            this.btn_NewProject.Size = new System.Drawing.Size(100, 25);
-            this.btn_NewProject.TabIndex = 15;
-            this.btn_NewProject.Text = "New Project";
-            this.btn_NewProject.UseVisualStyleBackColor = true;
+            btn_NewProject.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btn_NewProject.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_NewProject.Location = new Point(587, 30);
+            btn_NewProject.Margin = new Padding(2);
+            btn_NewProject.Name = "btn_NewProject";
+            btn_NewProject.Size = new Size(100, 25);
+            btn_NewProject.TabIndex = 15;
+            btn_NewProject.Text = "New Project";
+            btn_NewProject.UseVisualStyleBackColor = true;
+            btn_NewProject.Click += btn_NewProject_Click;
             // 
             // bt_manageProject
             // 
-            this.bt_manageProject.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.bt_manageProject.Location = new System.Drawing.Point(6, 29);
-            this.bt_manageProject.Name = "bt_manageProject";
-            this.bt_manageProject.Size = new System.Drawing.Size(100, 25);
-            this.bt_manageProject.TabIndex = 14;
-            this.bt_manageProject.Text = "Manage Project";
-            this.bt_manageProject.UseVisualStyleBackColor = true;
+            bt_manageProject.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            bt_manageProject.Location = new Point(6, 29);
+            bt_manageProject.Name = "bt_manageProject";
+            bt_manageProject.Size = new Size(100, 25);
+            bt_manageProject.TabIndex = 14;
+            bt_manageProject.Text = "Manage";
+            bt_manageProject.UseVisualStyleBackColor = true;
+            bt_manageProject.Click += bt_manageProject_Click;
             // 
             // bt_EditProject
             // 
-            this.bt_EditProject.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.bt_EditProject.Location = new System.Drawing.Point(111, 29);
-            this.bt_EditProject.Margin = new System.Windows.Forms.Padding(2);
-            this.bt_EditProject.Name = "bt_EditProject";
-            this.bt_EditProject.Size = new System.Drawing.Size(100, 25);
-            this.bt_EditProject.TabIndex = 13;
-            this.bt_EditProject.Text = "Edit Project";
-            this.bt_EditProject.UseVisualStyleBackColor = true;
+            bt_EditProject.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            bt_EditProject.Location = new Point(111, 29);
+            bt_EditProject.Margin = new Padding(2);
+            bt_EditProject.Name = "bt_EditProject";
+            bt_EditProject.Size = new Size(100, 25);
+            bt_EditProject.TabIndex = 13;
+            bt_EditProject.Text = "Edit";
+            bt_EditProject.UseVisualStyleBackColor = true;
+            bt_EditProject.Click += bt_EditProject_Click;
             // 
             // dgv_Viewproject
             // 
-            this.dgv_Viewproject.AllowUserToAddRows = false;
-            this.dgv_Viewproject.AllowUserToDeleteRows = false;
-            this.dgv_Viewproject.AllowUserToResizeRows = false;
-            this.dgv_Viewproject.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgv_Viewproject.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_Viewproject.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgv_Viewproject.Location = new System.Drawing.Point(3, 58);
-            this.dgv_Viewproject.Margin = new System.Windows.Forms.Padding(2);
-            this.dgv_Viewproject.MultiSelect = false;
-            this.dgv_Viewproject.Name = "dgv_Viewproject";
-            this.dgv_Viewproject.ReadOnly = true;
-            this.dgv_Viewproject.RowHeadersVisible = false;
-            this.dgv_Viewproject.RowHeadersWidth = 62;
-            this.dgv_Viewproject.RowTemplate.Height = 33;
-            this.dgv_Viewproject.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_Viewproject.Size = new System.Drawing.Size(693, 279);
-            this.dgv_Viewproject.TabIndex = 10;
+            dgv_Viewproject.AllowUserToAddRows = false;
+            dgv_Viewproject.AllowUserToDeleteRows = false;
+            dgv_Viewproject.AllowUserToResizeRows = false;
+            dgv_Viewproject.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgv_Viewproject.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dgv_Viewproject.DefaultCellStyle = dataGridViewCellStyle2;
+            dgv_Viewproject.Location = new Point(3, 58);
+            dgv_Viewproject.Margin = new Padding(2);
+            dgv_Viewproject.MultiSelect = false;
+            dgv_Viewproject.Name = "dgv_Viewproject";
+            dgv_Viewproject.ReadOnly = true;
+            dgv_Viewproject.RowHeadersVisible = false;
+            dgv_Viewproject.RowHeadersWidth = 62;
+            dgv_Viewproject.RowTemplate.Height = 33;
+            dgv_Viewproject.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv_Viewproject.Size = new Size(693, 279);
+            dgv_Viewproject.TabIndex = 10;
+            dgv_Viewproject.ColumnHeaderMouseClick += dgv_Viewproject_ColumnHeaderMouseClick;
+            dgv_Viewproject.DataBindingComplete += dgv_Viewproject_DataBindingComplete;
+            dgv_Viewproject.SelectionChanged += dgv_Viewproject_SelectionChanged;
             // 
             // NewProjectGrpBox
             // 
-            this.NewProjectGrpBox.Controls.Add(this.lbl_FeedBackNewProject);
-            this.NewProjectGrpBox.Controls.Add(this.lbl_StartDate);
-            this.NewProjectGrpBox.Controls.Add(this.lbl_EndDate);
-            this.NewProjectGrpBox.Controls.Add(this.lbl_ReqSkills);
-            this.NewProjectGrpBox.Controls.Add(this.txtBox_ProjectTitle);
-            this.NewProjectGrpBox.Controls.Add(this.txtBox_ProjectDescription);
-            this.NewProjectGrpBox.Controls.Add(this.checkedListSkills);
-            this.NewProjectGrpBox.Controls.Add(this.dtp_NewProjectEndDate);
-            this.NewProjectGrpBox.Controls.Add(this.dtp_NewProjectStartDate);
-            this.NewProjectGrpBox.Controls.Add(this.btn_NewProjectSave);
-            this.NewProjectGrpBox.Controls.Add(this.btn_NewProjectBack);
-            this.NewProjectGrpBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.NewProjectGrpBox.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.NewProjectGrpBox.Location = new System.Drawing.Point(0, 157);
-            this.NewProjectGrpBox.Name = "NewProjectGrpBox";
-            this.NewProjectGrpBox.Size = new System.Drawing.Size(699, 382);
-            this.NewProjectGrpBox.TabIndex = 23;
-            this.NewProjectGrpBox.TabStop = false;
-            this.NewProjectGrpBox.Text = "New Project";
-            this.NewProjectGrpBox.Visible = false;
+            NewProjectGrpBox.Controls.Add(lbl_FeedBackNewProject);
+            NewProjectGrpBox.Controls.Add(lbl_StartDate);
+            NewProjectGrpBox.Controls.Add(lbl_EndDate);
+            NewProjectGrpBox.Controls.Add(lbl_ReqSkills);
+            NewProjectGrpBox.Controls.Add(txtBox_ProjectTitle);
+            NewProjectGrpBox.Controls.Add(txtBox_ProjectDescription);
+            NewProjectGrpBox.Controls.Add(checkedListSkills);
+            NewProjectGrpBox.Controls.Add(dtp_NewProjectEndDate);
+            NewProjectGrpBox.Controls.Add(dtp_NewProjectStartDate);
+            NewProjectGrpBox.Controls.Add(btn_NewProjectSave);
+            NewProjectGrpBox.Controls.Add(btn_NewProjectBack);
+            NewProjectGrpBox.Dock = DockStyle.Fill;
+            NewProjectGrpBox.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            NewProjectGrpBox.Location = new Point(0, 157);
+            NewProjectGrpBox.Name = "NewProjectGrpBox";
+            NewProjectGrpBox.Size = new Size(699, 382);
+            NewProjectGrpBox.TabIndex = 23;
+            NewProjectGrpBox.TabStop = false;
+            NewProjectGrpBox.Text = "New Project";
+            NewProjectGrpBox.Visible = false;
+            NewProjectGrpBox.VisibleChanged += NewProjectGrpBox_VisibleChanged;
             // 
             // lbl_FeedBackNewProject
             // 
-            this.lbl_FeedBackNewProject.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lbl_FeedBackNewProject.AutoSize = true;
-            this.lbl_FeedBackNewProject.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbl_FeedBackNewProject.Location = new System.Drawing.Point(23, 352);
-            this.lbl_FeedBackNewProject.Name = "lbl_FeedBackNewProject";
-            this.lbl_FeedBackNewProject.Size = new System.Drawing.Size(163, 15);
-            this.lbl_FeedBackNewProject.TabIndex = 16;
-            this.lbl_FeedBackNewProject.Text = "Feedback messages go here...";
-            this.lbl_FeedBackNewProject.Visible = false;
+            lbl_FeedBackNewProject.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            lbl_FeedBackNewProject.AutoSize = true;
+            lbl_FeedBackNewProject.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            lbl_FeedBackNewProject.Location = new Point(23, 352);
+            lbl_FeedBackNewProject.Name = "lbl_FeedBackNewProject";
+            lbl_FeedBackNewProject.Size = new Size(163, 15);
+            lbl_FeedBackNewProject.TabIndex = 16;
+            lbl_FeedBackNewProject.Text = "Feedback messages go here...";
+            lbl_FeedBackNewProject.Visible = false;
             // 
             // lbl_StartDate
             // 
-            this.lbl_StartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbl_StartDate.AutoSize = true;
-            this.lbl_StartDate.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbl_StartDate.Location = new System.Drawing.Point(429, 39);
-            this.lbl_StartDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbl_StartDate.Name = "lbl_StartDate";
-            this.lbl_StartDate.Size = new System.Drawing.Size(68, 17);
-            this.lbl_StartDate.TabIndex = 20;
-            this.lbl_StartDate.Text = "Start date";
+            lbl_StartDate.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lbl_StartDate.AutoSize = true;
+            lbl_StartDate.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_StartDate.Location = new Point(429, 39);
+            lbl_StartDate.Margin = new Padding(2, 0, 2, 0);
+            lbl_StartDate.Name = "lbl_StartDate";
+            lbl_StartDate.Size = new Size(68, 17);
+            lbl_StartDate.TabIndex = 20;
+            lbl_StartDate.Text = "Start date";
             // 
             // lbl_EndDate
             // 
-            this.lbl_EndDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbl_EndDate.AutoSize = true;
-            this.lbl_EndDate.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbl_EndDate.Location = new System.Drawing.Point(429, 89);
-            this.lbl_EndDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbl_EndDate.Name = "lbl_EndDate";
-            this.lbl_EndDate.Size = new System.Drawing.Size(62, 17);
-            this.lbl_EndDate.TabIndex = 22;
-            this.lbl_EndDate.Text = "End date";
+            lbl_EndDate.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lbl_EndDate.AutoSize = true;
+            lbl_EndDate.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_EndDate.Location = new Point(429, 89);
+            lbl_EndDate.Margin = new Padding(2, 0, 2, 0);
+            lbl_EndDate.Name = "lbl_EndDate";
+            lbl_EndDate.Size = new Size(62, 17);
+            lbl_EndDate.TabIndex = 22;
+            lbl_EndDate.Text = "End date";
             // 
             // lbl_ReqSkills
             // 
-            this.lbl_ReqSkills.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbl_ReqSkills.AutoSize = true;
-            this.lbl_ReqSkills.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbl_ReqSkills.Location = new System.Drawing.Point(429, 154);
-            this.lbl_ReqSkills.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbl_ReqSkills.Name = "lbl_ReqSkills";
-            this.lbl_ReqSkills.Size = new System.Drawing.Size(95, 17);
-            this.lbl_ReqSkills.TabIndex = 25;
-            this.lbl_ReqSkills.Text = "Required Skills";
+            lbl_ReqSkills.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lbl_ReqSkills.AutoSize = true;
+            lbl_ReqSkills.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_ReqSkills.Location = new Point(429, 154);
+            lbl_ReqSkills.Margin = new Padding(2, 0, 2, 0);
+            lbl_ReqSkills.Name = "lbl_ReqSkills";
+            lbl_ReqSkills.Size = new Size(95, 17);
+            lbl_ReqSkills.TabIndex = 25;
+            lbl_ReqSkills.Text = "Required Skills";
             // 
             // txtBox_ProjectTitle
             // 
-            this.txtBox_ProjectTitle.BackColor = System.Drawing.SystemColors.Window;
-            this.txtBox_ProjectTitle.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtBox_ProjectTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtBox_ProjectTitle.Location = new System.Drawing.Point(23, 84);
-            this.txtBox_ProjectTitle.Margin = new System.Windows.Forms.Padding(2);
-            this.txtBox_ProjectTitle.MaxLength = 255;
-            this.txtBox_ProjectTitle.Name = "txtBox_ProjectTitle";
-            this.txtBox_ProjectTitle.PlaceholderText = "Title";
-            this.txtBox_ProjectTitle.Size = new System.Drawing.Size(360, 22);
-            this.txtBox_ProjectTitle.TabIndex = 17;
-            this.txtBox_ProjectTitle.TabStop = false;
+            txtBox_ProjectTitle.BackColor = SystemColors.Window;
+            txtBox_ProjectTitle.BorderStyle = BorderStyle.None;
+            txtBox_ProjectTitle.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtBox_ProjectTitle.Location = new Point(23, 84);
+            txtBox_ProjectTitle.Margin = new Padding(2);
+            txtBox_ProjectTitle.MaxLength = 255;
+            txtBox_ProjectTitle.Name = "txtBox_ProjectTitle";
+            txtBox_ProjectTitle.PlaceholderText = "Title";
+            txtBox_ProjectTitle.Size = new Size(360, 22);
+            txtBox_ProjectTitle.TabIndex = 17;
+            txtBox_ProjectTitle.TabStop = false;
             // 
             // txtBox_ProjectDescription
             // 
-            this.txtBox_ProjectDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBox_ProjectDescription.BackColor = System.Drawing.SystemColors.Window;
-            this.txtBox_ProjectDescription.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtBox_ProjectDescription.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtBox_ProjectDescription.Location = new System.Drawing.Point(23, 132);
-            this.txtBox_ProjectDescription.Margin = new System.Windows.Forms.Padding(2);
-            this.txtBox_ProjectDescription.Multiline = true;
-            this.txtBox_ProjectDescription.Name = "txtBox_ProjectDescription";
-            this.txtBox_ProjectDescription.PlaceholderText = "Descrition";
-            this.txtBox_ProjectDescription.Size = new System.Drawing.Size(360, 187);
-            this.txtBox_ProjectDescription.TabIndex = 19;
-            this.txtBox_ProjectDescription.TabStop = false;
+            txtBox_ProjectDescription.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtBox_ProjectDescription.BackColor = SystemColors.Window;
+            txtBox_ProjectDescription.BorderStyle = BorderStyle.None;
+            txtBox_ProjectDescription.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            txtBox_ProjectDescription.Location = new Point(23, 132);
+            txtBox_ProjectDescription.Margin = new Padding(2);
+            txtBox_ProjectDescription.Multiline = true;
+            txtBox_ProjectDescription.Name = "txtBox_ProjectDescription";
+            txtBox_ProjectDescription.PlaceholderText = "Descrition";
+            txtBox_ProjectDescription.Size = new Size(360, 187);
+            txtBox_ProjectDescription.TabIndex = 19;
+            txtBox_ProjectDescription.TabStop = false;
             // 
             // checkedListSkills
             // 
-            this.checkedListSkills.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkedListSkills.BackColor = System.Drawing.SystemColors.Control;
-            this.checkedListSkills.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.checkedListSkills.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.checkedListSkills.FormattingEnabled = true;
-            this.checkedListSkills.Location = new System.Drawing.Point(429, 174);
-            this.checkedListSkills.MultiColumn = true;
-            this.checkedListSkills.Name = "checkedListSkills";
-            this.checkedListSkills.Size = new System.Drawing.Size(258, 126);
-            this.checkedListSkills.TabIndex = 24;
+            checkedListSkills.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            checkedListSkills.BackColor = SystemColors.Control;
+            checkedListSkills.BorderStyle = BorderStyle.None;
+            checkedListSkills.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            checkedListSkills.FormattingEnabled = true;
+            checkedListSkills.Location = new Point(429, 174);
+            checkedListSkills.MultiColumn = true;
+            checkedListSkills.Name = "checkedListSkills";
+            checkedListSkills.Size = new Size(258, 126);
+            checkedListSkills.TabIndex = 24;
             // 
             // dtp_NewProjectEndDate
             // 
-            this.dtp_NewProjectEndDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtp_NewProjectEndDate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.dtp_NewProjectEndDate.Location = new System.Drawing.Point(429, 109);
-            this.dtp_NewProjectEndDate.Name = "dtp_NewProjectEndDate";
-            this.dtp_NewProjectEndDate.Size = new System.Drawing.Size(170, 25);
-            this.dtp_NewProjectEndDate.TabIndex = 23;
+            dtp_NewProjectEndDate.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            dtp_NewProjectEndDate.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            dtp_NewProjectEndDate.Location = new Point(429, 109);
+            dtp_NewProjectEndDate.Name = "dtp_NewProjectEndDate";
+            dtp_NewProjectEndDate.Size = new Size(170, 25);
+            dtp_NewProjectEndDate.TabIndex = 23;
             // 
             // dtp_NewProjectStartDate
             // 
-            this.dtp_NewProjectStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtp_NewProjectStartDate.CustomFormat = "dd/MM/yy";
-            this.dtp_NewProjectStartDate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.dtp_NewProjectStartDate.Location = new System.Drawing.Point(429, 58);
-            this.dtp_NewProjectStartDate.Name = "dtp_NewProjectStartDate";
-            this.dtp_NewProjectStartDate.Size = new System.Drawing.Size(170, 25);
-            this.dtp_NewProjectStartDate.TabIndex = 21;
+            dtp_NewProjectStartDate.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            dtp_NewProjectStartDate.CustomFormat = "dd/MM/yy";
+            dtp_NewProjectStartDate.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            dtp_NewProjectStartDate.Location = new Point(429, 58);
+            dtp_NewProjectStartDate.Name = "dtp_NewProjectStartDate";
+            dtp_NewProjectStartDate.Size = new Size(170, 25);
+            dtp_NewProjectStartDate.TabIndex = 21;
             // 
             // btn_NewProjectSave
             // 
-            this.btn_NewProjectSave.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btn_NewProjectSave.Location = new System.Drawing.Point(129, 30);
-            this.btn_NewProjectSave.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_NewProjectSave.Name = "btn_NewProjectSave";
-            this.btn_NewProjectSave.Size = new System.Drawing.Size(100, 25);
-            this.btn_NewProjectSave.TabIndex = 15;
-            this.btn_NewProjectSave.Text = "Save Project";
-            this.btn_NewProjectSave.UseVisualStyleBackColor = true;
+            btn_NewProjectSave.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_NewProjectSave.Location = new Point(129, 30);
+            btn_NewProjectSave.Margin = new Padding(2);
+            btn_NewProjectSave.Name = "btn_NewProjectSave";
+            btn_NewProjectSave.Size = new Size(100, 25);
+            btn_NewProjectSave.TabIndex = 15;
+            btn_NewProjectSave.Text = "Save Project";
+            btn_NewProjectSave.UseVisualStyleBackColor = true;
+            btn_NewProjectSave.Click += btn_NewProjectSave_Click;
             // 
             // btn_NewProjectBack
             // 
-            this.btn_NewProjectBack.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btn_NewProjectBack.Location = new System.Drawing.Point(6, 30);
-            this.btn_NewProjectBack.Name = "btn_NewProjectBack";
-            this.btn_NewProjectBack.Size = new System.Drawing.Size(100, 25);
-            this.btn_NewProjectBack.TabIndex = 14;
-            this.btn_NewProjectBack.Text = "Back";
-            this.btn_NewProjectBack.UseVisualStyleBackColor = true;
+            btn_NewProjectBack.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_NewProjectBack.Location = new Point(6, 30);
+            btn_NewProjectBack.Name = "btn_NewProjectBack";
+            btn_NewProjectBack.Size = new Size(100, 25);
+            btn_NewProjectBack.TabIndex = 14;
+            btn_NewProjectBack.Text = "Back";
+            btn_NewProjectBack.UseVisualStyleBackColor = true;
+            btn_NewProjectBack.Click += btn_NewProjectBack_Click;
+            // 
+            // btn_ViewInvoice
+            // 
+            btn_ViewInvoice.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_ViewInvoice.Location = new Point(325, 29);
+            btn_ViewInvoice.Name = "btn_ViewInvoice";
+            btn_ViewInvoice.Size = new Size(105, 25);
+            btn_ViewInvoice.TabIndex = 20;
+            btn_ViewInvoice.Text = "Invoice";
+            btn_ViewInvoice.UseVisualStyleBackColor = true;
+            btn_ViewInvoice.Click += btn_ViewInvoice_Click;
             // 
             // Manager
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(699, 539);
-            this.Controls.Add(this.ViewProjectsGrpBox);
-            this.Controls.Add(this.NewProjectGrpBox);
-            this.Controls.Add(this.grpBoxProfileInfo);
-            this.MinimumSize = new System.Drawing.Size(715, 578);
-            this.Name = "Manager";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Manager";
-            this.grpBoxProfileInfo.ResumeLayout(false);
-            this.grpBoxProfileInfo.PerformLayout();
-            this.ViewProjectsGrpBox.ResumeLayout(false);
-            this.ViewProjectsGrpBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_Viewproject)).EndInit();
-            this.NewProjectGrpBox.ResumeLayout(false);
-            this.NewProjectGrpBox.PerformLayout();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(699, 539);
+            Controls.Add(ViewProjectsGrpBox);
+            Controls.Add(NewProjectGrpBox);
+            Controls.Add(grpBoxProfileInfo);
+            MinimumSize = new Size(715, 578);
+            Name = "Manager";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Manager";
+            grpBoxProfileInfo.ResumeLayout(false);
+            grpBoxProfileInfo.PerformLayout();
+            ViewProjectsGrpBox.ResumeLayout(false);
+            ViewProjectsGrpBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgv_Viewproject).EndInit();
+            NewProjectGrpBox.ResumeLayout(false);
+            NewProjectGrpBox.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion
@@ -675,5 +690,6 @@
         private Label lbl_ReqSkills;
         private Label lbl_ViewProjectsFeedBack;
         private Button bt_AddConsultant;
+        private Button btn_ViewInvoice;
     }
 }

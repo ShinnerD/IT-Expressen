@@ -32,6 +32,7 @@ namespace DAL.Repository
                 Message.UserID = (int)dbMessage.User_ID;
                 Message.Message = dbMessage.Message;
                 Message.MessageDate = (DateTime)dbMessage.Message_Date;
+                Message.UserName = dbContext.Users.FirstOrDefault(i => i.User_ID == dbMessage.User_ID)?.User_name;
 
                 result.Add(Message);
             }
@@ -56,6 +57,7 @@ namespace DAL.Repository
                 Message.UserID = (int)dtoMessage.User_ID;
                 Message.Message = dtoMessage.Message;
                 Message.MessageDate = (DateTime)dtoMessage.Message_Date;
+                Message.UserName = dbContext.Users.FirstOrDefault(i => i.User_ID == dtoMessage.User_ID)?.User_name;
 
                 result.Add(Message);
             }

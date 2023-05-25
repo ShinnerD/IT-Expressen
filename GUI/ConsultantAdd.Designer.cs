@@ -68,6 +68,8 @@
             dgv_ConsultantList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv_ConsultantList.Size = new Size(770, 308);
             dgv_ConsultantList.TabIndex = 0;
+            dgv_ConsultantList.ColumnHeaderMouseClick += dgv_ConsultantList_ColumnHeaderMouseClick;
+            dgv_ConsultantList.DataBindingComplete += dgv_ConsultantList_DataBindingComplete;
             // 
             // bt_AddConcultant
             // 

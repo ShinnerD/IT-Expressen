@@ -1,13 +1,4 @@
-﻿using Castle.Core.Internal;
-using Interfaces.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace GUI
+﻿namespace GUI
 {
     internal class GuiHelper
     {
@@ -15,6 +6,36 @@ namespace GUI
         private bool sortingDirection;
 
         private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+
+        /// <summary>
+        /// Recursive method that unlocks all textboxes inside the Control specified in the parameters.
+        /// Use the boolean 'unlock' to set the lock or unlock state.
+        /// </summary>
+        public static void UnlockProfileForEditing(Control control, bool unlock)
+        {
+            if (control is TextBox)
+            {
+                control.Enabled = unlock;
+                control.TabStop = unlock;
+                if (unlock)
+                {
+                    control.BackColor = SystemColors.Window;
+                }
+                else
+                {
+                    control.BackColor = SystemColors.ControlLight;
+                }
+            }
+            if (control.HasChildren)
+            {
+                // Recursively call this method for all controls inside the control passed in the parameter.
+                // Ex. all controls inside another group box.
+                foreach (Control childControl in control.Controls)
+                {
+                    UnlockProfileForEditing(childControl, unlock);
+                }
+            }
+        }
 
         /// <summary>
         /// Async Task that turns on the visibility of the label provided in the parameters,
@@ -52,6 +73,7 @@ namespace GUI
         /// </summary>
         private List<T> SortData<T>(List<T> list, string column, bool ascending)
         {
+            if (list is null) { return list; }
             return ascending ?
                 list.OrderBy(_ => _.GetType().GetProperty(column)?.GetValue(_)).ToList() :
                 list.OrderByDescending(_ => _.GetType().GetProperty(column)?.GetValue(_)).ToList();
@@ -60,15 +82,17 @@ namespace GUI
         /// <summary>
         /// Auto-sizes the datagridview columns to look nice after the data binding complete event. /DK
         /// </summary>
-        public void DataGridViewDataBindingCompleteResize(object sender)
+        public static void DataGridViewDataBindingCompleteResize(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            var dataGridView = sender as DataGridView;
-            if (dataGridView != null && dataGridView.ColumnCount != 0)
+            if (sender is DataGridView dataGridView && dataGridView.ColumnCount != 0)
             {
                 dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                dataGridView.Columns[dataGridView.ColumnCount - 1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                foreach (DataGridViewColumn Column in dataGridView.Columns)
+                {
+                    Column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                }
+                dataGridView.ClearSelection();
             }
-            dataGridView.ClearSelection();
         }
     }
 }

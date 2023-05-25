@@ -223,7 +223,7 @@ namespace DAL.Repository
         {
             List<int> targetSpecIds = dbContext.Specialisations.Where(i => specializations.Contains(i.Specialisation1)).Select(i => i.Spec_Id).ToList();
 
-            if (targetSpecIds.Count == 0) return new List<IUserModel>();
+            if (!targetSpecIds.Any()) return new List<IUserModel>();
 
             var dtoUsers = dbContext.Users.Where(u => u.User_Type == "consultant" 
                 && u.Active_Status == true 
@@ -241,11 +241,11 @@ namespace DAL.Repository
 
             if (!targetSpecIds.Any()) return new List<IUserModel>();
 
-            var dtoUsers = dbContext.Users.Where(u => u.User_Type.ToLower() == "consultant" 
-                && u.Active_Status == true).
-                Where(u => targetSpecIds.All(i => u.Specialisations_Lines.Select(x => x.Spec_Id).Contains(i))).ToList(); //<-- Potential issue in logic
+            var dtoUsers = dbContext.Users.Where(user => user.User_Type.ToLower() == "consultant"
+                && user.Active_Status == true).ToList();
+            var specificUsers = dtoUsers.Where(user => targetSpecIds.All(i => user.Specialisations_Lines.Any(x => x.Spec_Id == i))).ToList();
 
-            return TransferAllUserProperties(dtoUsers);
+            return TransferAllUserProperties(specificUsers);
         }
 
         /// <summary>

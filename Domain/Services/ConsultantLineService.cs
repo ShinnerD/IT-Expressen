@@ -5,7 +5,6 @@ using Interfaces.Services;
 
 namespace Domain.Services
 {
-
     public class ConsultantLineService : IConsultantLineService
     {
         private readonly IDomainServiceManager ServiceManager;
@@ -19,17 +18,17 @@ namespace Domain.Services
 
         public List<IConsultantLineModel> GetAllConsultantLinesFromProjectID(int projectID)
         {
-            return consultantLineRepository.GetALLContultantLinesFromProjectID(projectID).ToList();
+            return consultantLineRepository.GetALLConsultantLinesFromProjectID(projectID).ToList();
         }
 
         public List<IConsultantLineModel> GetAllConsultantLinesFromUserID(int userID)
         {
-            return consultantLineRepository.GetALLContultantLinesFromUserID(userID).ToList();
+            return consultantLineRepository.GetALLConsultantLinesFromUserID(userID).ToList();
         }
 
         public List<IConsultantLineModel> GetAllConsultantLinesFromInvoiceID(int invoiceID)
         {
-            return consultantLineRepository.GetALLContultantLinesFromInvoiceID(invoiceID);
+            return consultantLineRepository.GetALLConsultantLinesFromInvoiceID(invoiceID);
         }
 
         public void AddConsultantLine(int projectID, int userID, decimal HourlyRate, int HoursTotal)
@@ -49,9 +48,8 @@ namespace Domain.Services
                 newConsulLine.InvoiceID = newInvoiceID.InvoiceId;
             }
             else
-            {   
+            {
                 newConsulLine.InvoiceID = ServiceManager.InvoiceService.GetInvoiceFromProjectID(projectID).InvoiceId;
-
             }
 
             consultantLineRepository.AddConsultantLine(newConsulLine);
