@@ -82,6 +82,7 @@ namespace GUI
         /// </summary>
         private List<T> SortData<T>(List<T> list, string column, bool ascending)
         {
+            if (list is null) { return list; }
             return ascending ?
                 list.OrderBy(_ => _.GetType().GetProperty(column)?.GetValue(_)).ToList() :
                 list.OrderByDescending(_ => _.GetType().GetProperty(column)?.GetValue(_)).ToList();
