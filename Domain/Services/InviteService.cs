@@ -16,6 +16,10 @@ namespace Domain.Services
             InvRepo = new InvitesRepository(dataContextManager);
         }
 
+        public InviteService()
+        {
+        }
+
         /// <summary>
         /// Returns a list of all invites in the database.
         /// </summary>
