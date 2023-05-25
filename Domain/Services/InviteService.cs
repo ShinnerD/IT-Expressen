@@ -70,10 +70,16 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Deletes an invite from the database.
+        /// Deletes an invite from the database. Prevents deletion of accepted invites unless the boolean deleteAccetedInvite is explicitly
+        /// set to true when calling the method. This is for admin privileges atm. /DK
         /// </summary>
-        public void DeleteInvite(IInvitesModel invite)
+        public void DeleteInvite(IInvitesModel invite, bool deleteAcceptedInvite = false)
         {
+            if (invite.InviteStatus?.ToLower() == "accepted" && !deleteAcceptedInvite)
+            {
+                throw new ArgumentException("Can't remove an already accepted invite.");
+            }
+
             InvRepo.DeleteInvite(invite.ProjectId, invite.UserId);
         }
 

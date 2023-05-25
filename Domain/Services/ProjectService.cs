@@ -122,6 +122,8 @@ namespace Domain.Services
             List<string> specsToBeRemoved = new List<string>();
             List<string> specsToBeAdded = new List<string>();
 
+            project.ProjectModifyDate = DateTime.Now;
+
             foreach (var currentSpec in currentProjectSpecializations)
             {
                 if (!specializations.Contains(currentSpec))

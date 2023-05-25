@@ -1,16 +1,6 @@
-﻿using Domain.Services;
-using Interfaces.Models;
+﻿using Interfaces.Models;
 using Interfaces.Services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace GUI.Admin
 {
@@ -105,7 +95,7 @@ namespace GUI.Admin
             {
                 dgv_PendingInvites.DataSource = null;
                 dgv_PendingInvites.DataSource = ServiceManager.InviteService.GetAllInvitedProjectID(ProjectForEdit.ProjectId)
-                    .Where(i =>  i.InviteStatus?.ToLower() == "pending").ToList();
+                    .Where(i => i.InviteStatus?.ToLower() == "pending").ToList();
             }
             catch (Exception)
             {
@@ -115,9 +105,9 @@ namespace GUI.Admin
             //Try-Catch for getting accepted invites.
             //try
             //{
-                dgv_AcceptedInvites.DataSource = null;
-                dgv_AcceptedInvites.DataSource = ServiceManager.InviteService.GetAllInvitedProjectID(ProjectForEdit.ProjectId)
-                    .Where(i => i.InviteStatus?.ToLower() == "accepted").ToList();
+            dgv_AcceptedInvites.DataSource = null;
+            dgv_AcceptedInvites.DataSource = ServiceManager.InviteService.GetAllInvitedProjectID(ProjectForEdit.ProjectId)
+                .Where(i => i.InviteStatus?.ToLower() == "accepted").ToList();
             //}
             //catch (Exception)
             //{
@@ -158,13 +148,7 @@ namespace GUI.Admin
                 bool refreshAfterDelete = false;
                 if (dgv_PendingInvites.SelectedRows.Count > 0)
                 {
-                    ServiceManager.InviteService.DeleteInvite(dgv_PendingInvites.SelectedRows[0].DataBoundItem as IInvitesModel);
-                    FeedBackMessage(lbl_FeedBackNewProject, "Invite successfully deleted.", Color.Green);
-                    refreshAfterDelete = true;
-                }
-                if (dgv_AcceptedInvites.SelectedRows.Count > 0)
-                {
-                    ServiceManager.InviteService.DeleteInvite(dgv_AcceptedInvites.SelectedRows[0].DataBoundItem as IInvitesModel);
+                    ServiceManager.InviteService.DeleteInvite(dgv_PendingInvites.SelectedRows[0].DataBoundItem as IInvitesModel, true);
                     FeedBackMessage(lbl_FeedBackNewProject, "Invite successfully deleted.", Color.Green);
                     refreshAfterDelete = true;
                 }

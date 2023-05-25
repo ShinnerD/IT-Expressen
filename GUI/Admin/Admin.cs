@@ -4,6 +4,7 @@ using Interfaces.Services;
 using Microsoft.VisualBasic.Devices;
 using System.Data;
 using System.Diagnostics.Eventing.Reader;
+using System.DirectoryServices;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace GUI.Admin
@@ -21,6 +22,11 @@ namespace GUI.Admin
 
         private List<IUserModel> usersSearchResults;
         private List<IProjectModel> projectsSearchResults;
+
+        private bool sortUsersAscending;
+        private int previousUserSortDirection = 1;
+        private bool sortProjectsAscending = false;
+        private int previousProjectSortDirection;
 
         private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
@@ -239,6 +245,7 @@ namespace GUI.Admin
                     .OrderBy(o => o.UserName).ToList();
 
             dgv_UserSearchResults.DataSource = usersSearchResults;
+            previousUserSortDirection = 1;
 
             if (!string.IsNullOrWhiteSpace(userName))
             {
@@ -525,6 +532,44 @@ namespace GUI.Admin
                 AdminViewInvites ViewInvitesForm = new AdminViewInvites(ServiceManager, dgv_ProjectSearchResults.SelectedRows[0].DataBoundItem as IProjectModel);
                 ViewInvitesForm.ShowDialog();
             }
+        }
+
+        private void dgv_UserSearchResults_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            string columnPropertyName = dgv_UserSearchResults.Columns[e.ColumnIndex].DataPropertyName;
+
+            if (e.ColumnIndex == previousUserSortDirection) { sortUsersAscending ^= true; }
+            dgv_UserSearchResults.DataSource =
+                SortData((List<IUserModel>)dgv_UserSearchResults.DataSource, columnPropertyName, sortUsersAscending);
+
+            previousUserSortDirection = e.ColumnIndex;
+        }
+
+        private void dgv_ProjectSearchResults_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            string columnPropertyName = dgv_ProjectSearchResults.Columns[e.ColumnIndex].DataPropertyName;
+
+            if (e.ColumnIndex == previousProjectSortDirection) { sortProjectsAscending ^= true; }
+            dgv_ProjectSearchResults.DataSource =
+                SortData((List<IProjectModel>)dgv_ProjectSearchResults.DataSource, columnPropertyName, sortProjectsAscending);
+
+            previousProjectSortDirection = e.ColumnIndex;
+        }
+
+        /// <summary>
+        /// Allows sorting for the Datagridviews according to a boolean that switches when the columns get clicked. /DK
+        /// </summary>
+        private List<IUserModel> SortData(List<IUserModel> list, string column, bool ascending)
+        {
+            return ascending ?
+                list.OrderBy(_ => _.GetType().GetProperty(column)?.GetValue(_)).ToList() :
+                list.OrderByDescending(_ => _.GetType().GetProperty(column)?.GetValue(_)).ToList();
+        }
+        private List<IProjectModel> SortData(List<IProjectModel> list, string column, bool ascending)
+        {
+            return ascending ?
+                list.OrderBy(_ => _.GetType().GetProperty(column)?.GetValue(_)).ToList() :
+                list.OrderByDescending(_ => _.GetType().GetProperty(column)?.GetValue(_)).ToList();
         }
     }
 }
