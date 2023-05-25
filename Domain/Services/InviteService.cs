@@ -112,11 +112,11 @@ namespace Domain.Services
         /// </summary>
         private void AssignDomainProperties(IInvitesModel invite)
         {
-                var invitedUser = DomainServiceManager.UserService.GetUserFromID(invite.UserId);
-                var invitedToProject = DomainServiceManager.ProjectService.GetProject(invite.ProjectId);
-                var invitedUserInvoiceSum = DomainServiceManager.ConsultantLineService.GetAllConsultantLinesFromUserID(invite.UserId).Where(x  => x.ProjectID == invite.ProjectId).ToList();
+            var invitedUser = DomainServiceManager.UserService.GetUserFromID(invite.UserId);
+            var invitedToProject = DomainServiceManager.ProjectService.GetProject(invite.ProjectId);
+            var invitedUserInvoiceSum = DomainServiceManager.ConsultantLineService.GetAllConsultantLinesFromUserID(invite.UserId).Where(x => x.ProjectID == invite.ProjectId).ToList();
 
-                DomainServiceManager.SpecializationService.FillUserSpecializationsProperty(new List<IUserModel>() { invitedUser });
+            DomainServiceManager.SpecializationService.FillUserSpecializationsProperty(new List<IUserModel>() { invitedUser });
 
             if (invitedUser != null && invitedToProject != null)
             {
@@ -127,15 +127,13 @@ namespace Domain.Services
                 invite.ManagerName = invitedToProject.ManagerFullName;
 
                 decimal? result = 0;
-               
+
                 foreach (var ConLine in invitedUserInvoiceSum)
                 {
                     result = result + (ConLine.HourlyRate * ConLine.HoursTotal);
-
-                    
                 }
                 invite.ConLineSum = result;
-            }   
+            }
         }
     }
 }

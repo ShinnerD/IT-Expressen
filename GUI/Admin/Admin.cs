@@ -1,11 +1,6 @@
-﻿using Domain.Services;
-using Interfaces.Models;
+﻿using Interfaces.Models;
 using Interfaces.Services;
-using Microsoft.VisualBasic.Devices;
 using System.Data;
-using System.Diagnostics.Eventing.Reader;
-using System.DirectoryServices;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace GUI.Admin
 {

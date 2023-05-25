@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Interfaces.Models
+﻿namespace Interfaces.Models
 {
-
     /// <summary>
     /// written by Erik. Model too  Specialisation that have atrributes that is relavent too the case and project. the model that couples with the Interface Repo Invoice and the Domain Model Invoice.
     /// </summary>
