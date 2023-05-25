@@ -1,4 +1,5 @@
-﻿using Interfaces.Models;
+﻿using Domain.Services;
+using Interfaces.Models;
 using Interfaces.Services;
 
 namespace GUI
@@ -15,6 +16,8 @@ namespace GUI
 
         private readonly IDomainServiceManager ServiceManager;
 
+        private List<IInvitesModel> dgvInvites;
+
         public ManageProject(IDomainServiceManager serviceManager, int projectId, string userName)
         {
             ServiceManager = serviceManager;
@@ -26,7 +29,7 @@ namespace GUI
             LoadProjectData();
             LoadMessageData();
             InvolvedUsers();
-            GetTotalInvoice();
+            
         }
 
         private void GetProjectInfo()
@@ -120,18 +123,24 @@ namespace GUI
 
         private void InvolvedUsers()
         {
+            
+
             if (ServiceManager.UserService.GetUserFromUsername(UserName).UserType.ToLower() == "consultant")
             {
                 DataInvolvedUseres();
                 LoadConsultantInvoiceBoxes();
+                GetTotalInvoice();
+                dgvInvites = ServiceManager.InviteService.GetAllInvitedProjectID(ProjectGet.ProjectId).Where(i => i.InviteStatus.ToLower() != "declined").ToList();
 
-                dgv_InvolvedUsers.DataSource = ServiceManager.InviteService.GetAllInvitedProjectID(ProjectGet.ProjectId).Where(i => i.InviteStatus.ToLower() != "declined").ToList(); ;
+                dgv_InvolvedUsers.DataSource = dgvInvites;
+                dgv_InvolvedUsers.Columns["ConLineSum"].Visible = false;
             }
             else
             {
+                dgvInvites = ServiceManager.InviteService.GetAllInvitedProjectID(ProjectGet.ProjectId).ToList();
                 DataInvolvedUseres();
-
-                dgv_InvolvedUsers.DataSource = ServiceManager.InviteService.GetAllInvitedProjectID(ProjectGet.ProjectId).ToList(); ;
+                dgv_InvolvedUsers.DataSource = dgvInvites;
+                tb_TotalInvoice.Text = dgvInvites.Select(i => i.ConLineSum).Sum().ToString();
             }
         }
 
@@ -148,26 +157,11 @@ namespace GUI
 
             dgv_InvolvedUsers.Columns.Add("InvitedUserSpecializations", "User Specializations");
             dgv_InvolvedUsers.Columns["InvitedUserSpecializations"].DataPropertyName = "InvitedUserSpecializations";
+
+            dgv_InvolvedUsers.Columns.Add("ConLineSum", "Invoiced");
+            dgv_InvolvedUsers.Columns["ConLineSum"].DataPropertyName = "ConLineSum";
         }
 
-        //private void CalculateRates()
-        //{
-        //    double hours, rate, total;
-
-        //    try
-        //    {
-        //        hours = Convert.ToInt32(tb_HourlyRate.Text);
-        //        rate = Convert.ToInt32(tb_HoursSpendt.Text);
-
-        //        total = Convert.ToInt32(hours * rate);
-
-        //        tb_TotalInvoice.Text = total.ToString();
-        //    }
-        //    catch
-        //    {
-        //        MessageBox.Show("Felts may only include numbers");
-        //    }
-        //}
         private void LoadConsultantInvoiceBoxes()
         {
             lb_HourlyRate.Visible = true;

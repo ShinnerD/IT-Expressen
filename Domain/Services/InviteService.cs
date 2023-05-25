@@ -108,6 +108,8 @@ namespace Domain.Services
         {
                 var invitedUser = DomainServiceManager.UserService.GetUserFromID(invite.UserId);
                 var invitedToProject = DomainServiceManager.ProjectService.GetProject(invite.ProjectId);
+                var invitedUserInvoiceSum = DomainServiceManager.ConsultantLineService.GetAllConsultantLinesFromUserID(invite.UserId).Where(x  => x.ProjectID == invite.ProjectId).ToList();
+
                 DomainServiceManager.SpecializationService.FillUserSpecializationsProperty(new List<IUserModel>() { invitedUser });
 
             if (invitedUser != null && invitedToProject != null)
@@ -117,7 +119,17 @@ namespace Domain.Services
                 invite.InvitedUserSpecializations = invitedUser.Specializations;
                 invite.ProjectTitle = invitedToProject.Title;
                 invite.ManagerName = invitedToProject.ManagerFullName;
-            }
+
+                decimal? result = 0;
+               
+                foreach (var ConLine in invitedUserInvoiceSum)
+                {
+                    result = result + (ConLine.HourlyRate * ConLine.HoursTotal);
+
+                    
+                }
+                invite.ConLineSum = result;
+            }   
         }
     }
 }
