@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Interfaces.Models
+﻿namespace Interfaces.Models
 {
     public interface IConsultantLineModel
     {
@@ -14,6 +8,7 @@ namespace Interfaces.Models
         int ProjectID { get; set; }
         int UserID { get; set; }
         int? InvoiceID { get; set; }
-
+        string? ConsultantName { get; set; }
+        decimal? LineTotal { get; }
     }
 }
