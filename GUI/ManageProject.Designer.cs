@@ -68,6 +68,7 @@
             // 
             // grpBoxProfileInfo
             // 
+            grpBoxProfileInfo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             grpBoxProfileInfo.Controls.Add(cb_UnlockRate);
             grpBoxProfileInfo.Controls.Add(bt_addHours);
             grpBoxProfileInfo.Controls.Add(tb_HoursSpendt);
@@ -95,7 +96,6 @@
             grpBoxProfileInfo.Controls.Add(label5);
             grpBoxProfileInfo.Controls.Add(label4);
             grpBoxProfileInfo.Controls.Add(label6);
-            grpBoxProfileInfo.Dock = DockStyle.Top;
             grpBoxProfileInfo.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             grpBoxProfileInfo.Location = new Point(0, 0);
             grpBoxProfileInfo.Name = "grpBoxProfileInfo";
@@ -193,6 +193,7 @@
             // 
             // rtb_Description
             // 
+            rtb_Description.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             rtb_Description.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             rtb_Description.Location = new Point(680, 48);
             rtb_Description.Name = "rtb_Description";
@@ -431,6 +432,7 @@
             // 
             // rtb_Message
             // 
+            rtb_Message.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             rtb_Message.Location = new Point(26, 199);
             rtb_Message.Name = "rtb_Message";
             rtb_Message.ReadOnly = true;
@@ -440,6 +442,7 @@
             // 
             // rtb_newMessage
             // 
+            rtb_newMessage.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             rtb_newMessage.Location = new Point(26, 394);
             rtb_newMessage.Name = "rtb_newMessage";
             rtb_newMessage.Size = new Size(648, 96);
@@ -449,6 +452,7 @@
             // 
             // bt_send
             // 
+            bt_send.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             bt_send.Location = new Point(599, 504);
             bt_send.Name = "bt_send";
             bt_send.Size = new Size(75, 23);
@@ -459,17 +463,19 @@
             // 
             // lb_TextCounter
             // 
-            lb_TextCounter.AutoSize = true;
+            lb_TextCounter.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lb_TextCounter.BackColor = SystemColors.Window;
             lb_TextCounter.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lb_TextCounter.Location = new Point(599, 475);
+            lb_TextCounter.Location = new Point(599, 472);
             lb_TextCounter.Name = "lb_TextCounter";
-            lb_TextCounter.Size = new Size(40, 15);
+            lb_TextCounter.Size = new Size(72, 15);
             lb_TextCounter.TabIndex = 27;
             lb_TextCounter.Text = "0/255";
+            lb_TextCounter.TextAlign = ContentAlignment.MiddleRight;
             // 
             // dgv_InvolvedUsers
             // 
+            dgv_InvolvedUsers.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgv_InvolvedUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_InvolvedUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_InvolvedUsers.Location = new Point(680, 199);
@@ -481,6 +487,7 @@
             // 
             // lb_warning
             // 
+            lb_warning.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lb_warning.AutoSize = true;
             lb_warning.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lb_warning.Location = new Point(285, 506);
@@ -495,7 +502,6 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            AutoSize = true;
             ClientSize = new Size(957, 539);
             Controls.Add(lb_warning);
             Controls.Add(dgv_InvolvedUsers);
@@ -504,8 +510,11 @@
             Controls.Add(rtb_newMessage);
             Controls.Add(rtb_Message);
             Controls.Add(grpBoxProfileInfo);
+            MinimumSize = new Size(973, 578);
             Name = "ManageProject";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "ManageProject";
+            TransparencyKey = Color.FromArgb(64, 64, 0);
             grpBoxProfileInfo.ResumeLayout(false);
             grpBoxProfileInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_InvolvedUsers).EndInit();

@@ -43,7 +43,7 @@
             checkedListProjReq = new CheckedListBox();
             grpBoxSearchResult = new GroupBox();
             lblFeedback = new Label();
-            toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            toolTip1 = new ToolTip(components);
             ((System.ComponentModel.ISupportInitialize)dgv_ConsultantList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)userServiceBindingSource).BeginInit();
             grpBoxSpecFilter.SuspendLayout();
@@ -106,8 +106,7 @@
             checkedListSkills.Name = "checkedListSkills";
             checkedListSkills.Size = new Size(485, 114);
             checkedListSkills.TabIndex = 27;
-            toolTip1.SetToolTip(this.checkedListSkills, "Here you can push the button of your Specialization.\r\n\r\nIf your Specialization is" +
-        " not here contact admin: Adm@mail.com");
+            toolTip1.SetToolTip(checkedListSkills, "Here you can push the button of your Specialization.\r\n\r\nIf your Specialization is not here contact admin: Adm@mail.com");
             // 
             // grpBoxSpecFilter
             // 
@@ -234,6 +233,7 @@
             MinimizeBox = false;
             MinimumSize = new Size(816, 557);
             Name = "ConsultantAdd";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "ConsultantAdd";
             ((System.ComponentModel.ISupportInitialize)dgv_ConsultantList).EndInit();
             ((System.ComponentModel.ISupportInitialize)userServiceBindingSource).EndInit();

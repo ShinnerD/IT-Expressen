@@ -151,13 +151,16 @@ namespace GUI
             //await Task.Delay(3000);
             try
             {
+                ServiceManager.ProjectService.UpdateAllProjectStatus(); //<-- Execution of stored procedure to update project status column.
+                                                                                                          //Piggybacking on this task as a temporary solution. /DK
                 var anyUser = userService.GetAllUsers();
                 if (anyUser.Count > 0)
                 {
                     lb_connectionTest.Invoke((MethodInvoker)(() => lb_connectionTest.Text = "OK!"));
+                    lb_FeedbackLabel.Invoke((MethodInvoker)(() => lb_FeedbackLabel.Text = "Connection Established"));
                     pb_ConnectionStatus.Image = img_RedGreen.Images[1];
                 }
-                else 
+                else
                 {
                     lb_connectionTest.Invoke((MethodInvoker)(() => lb_connectionTest.Text = "No connection!"));
                     pb_ConnectionStatus.Image = img_RedGreen.Images[0];

@@ -154,6 +154,13 @@ namespace DAL.Linq
 				return this.GetTable<Invoice>();
 			}
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.UpdateProjectStatusForAll")]
+		public int UpdateProjectStatusForAll()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((int)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Project_Message_Line")]

@@ -87,16 +87,6 @@ namespace GUI
             dgv_ConsultantsInvites.Columns["ProjectId"].DataPropertyName = "ProjectId";
         }
 
-        private void bt_seeInviteDetails_Click(object sender, EventArgs e)
-        {
-            var selectedProject = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as IInvitesModel;
-            AcceptInviteForm AccInvForm = new AcceptInviteForm(ServiceManager, selectedProject);
-            this.Hide();
-            AccInvForm.ShowDialog();
-            this.Show();
-            LoadInvitesToDGV();
-        }
-
         private void dgv_ConsultantsInvites_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             GetProjectInfo();

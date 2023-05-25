@@ -199,7 +199,7 @@ namespace GUI
             var getuserID = ServiceManager.UserService.GetUserFromUsername(UserName);
 
             List<IConsultantLineModel> getTotalInvoiced = ServiceManager.ConsultantLineService.GetAllConsultantLinesFromProjectID(ProjectID).Where(i => i.UserID == userID).ToList(); ;
-            
+
             decimal result = 0;
 
             foreach (var ConsultantLine in getTotalInvoiced)

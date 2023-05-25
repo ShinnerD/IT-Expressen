@@ -2,6 +2,7 @@
 using DAL.Models;
 using Interfaces.Models;
 using Interfaces.Repositories;
+using System.Text;
 
 namespace DAL.Repository
 {
@@ -75,11 +76,9 @@ namespace DAL.Repository
         /// </summary>
         public IProjectModel GetProject(int projectId)
         {
-            var targetProject = dbContext.Projects.FirstOrDefault(i => i.Project_ID == projectId);
+            var targetProject = dbContext.Projects.Where(i => i.Project_ID == projectId);
 
-            List<Linq.Project> dtoResult = new List<Linq.Project> { targetProject };
-
-            var resultList = TransferAllProjectProperties(dtoResult);
+            var resultList = TransferAllProjectProperties(targetProject);
 
             if (resultList.Count <= 0)
             {
@@ -94,7 +93,7 @@ namespace DAL.Repository
         /// </summary>
         public List<IProjectModel> GetUserProjects(int userId)
         {
-            var targetProjects = dbContext.Projects.Where(i => i.User_ID == userId).ToList();
+            var targetProjects = dbContext.Projects.Where(i => i.User_ID == userId);
 
             List<IProjectModel> result = TransferAllProjectProperties(targetProjects);
 
@@ -104,11 +103,21 @@ namespace DAL.Repository
         /// <summary>
         /// Retrieves a List of IProjectModels in which each project require ALL of the provided specializations. /DK
         /// </summary>
-        public List<IProjectModel> GetProjectsFromAllSpecializations(List<string> specializations)
+        public List<IProjectModel> GetProjectsFromAllSpecializations(List<string> specializations, bool includeEndedProjects = false)
         {
+            IQueryable<Project>? dtoProjects;
+
             List<int> targetSpecIds = dbContext.Specialisations.Where(i => specializations.Contains(i.Specialisation1)).Select(i => i.Spec_Id).ToList();
 
-            var dtoProjects = dbContext.Projects.Where(i => targetSpecIds.All(v => i.Projects_Specialisation_Lines.Select(x => x.Spec_Id).Contains(v))).ToList();
+            if (!includeEndedProjects)
+            {
+                dtoProjects = dbContext.Projects.Where(i => i.Project_Status != "ended" &&
+                    targetSpecIds.All(v => i.Projects_Specialisation_Lines.Select(x => x.Spec_Id).Contains(v)));
+            }
+            else
+            {
+                dtoProjects = dbContext.Projects.Where(i => targetSpecIds.All(v => i.Projects_Specialisation_Lines.Select(x => x.Spec_Id).Contains(v)));
+            }
 
             List<IProjectModel> result = TransferAllProjectProperties(dtoProjects);
 
@@ -118,16 +127,29 @@ namespace DAL.Repository
         /// <summary>
         /// Retrieves a List of IProjectModels in which each project requires at least one of the specializations specified. /DK
         /// </summary>
-        public List<IProjectModel> GetProjectsFromAnySpecializations(List<string> specializations)
+        public List<IProjectModel> GetProjectsFromAnySpecializations(List<string> specializations, bool includeEndedProjects = false)
         {
             List<int> targetSpecIds = dbContext.Specialisations.Where(i => specializations.Contains(i.Specialisation1)).Select(i => i.Spec_Id).ToList();
 
-            if (targetSpecIds.Count == 0) return new List<IProjectModel>();
+            IQueryable<Project>? dtoProjects;
 
-            var dtoProjects = dbContext.Projects.Where(i => i.Projects_Specialisation_Lines.Count == 0
-                || i.Projects_Specialisation_Lines.Any(x => targetSpecIds.Contains(x.Spec_Id)));
+            if (!targetSpecIds.Any()) return new List<IProjectModel>();
 
-            List<IProjectModel> result = TransferAllProjectProperties(dtoProjects.ToList());
+            //If told not to include ended projects only the projects with status not fitting "ended" is included. (false by default).
+            if (!includeEndedProjects)
+            {
+                dtoProjects = dbContext.Projects.Where(i => i.Projects_Specialisation_Lines.Count == 0 && i.Project_Status.ToLower() != "ended"
+                    || i.Project_Status.ToLower() != "ended" && i.Projects_Specialisation_Lines.Any(x => targetSpecIds.Contains(x.Spec_Id)));
+            }
+
+            //Otherwise we include ended projects.
+            else
+            {
+                dtoProjects = dbContext.Projects.Where(i => i.Projects_Specialisation_Lines.Count == 0
+                    || i.Projects_Specialisation_Lines.Any(x => targetSpecIds.Contains(x.Spec_Id)));
+            }
+
+            List<IProjectModel> result = TransferAllProjectProperties(dtoProjects);
 
             return result;
         }
@@ -135,9 +157,17 @@ namespace DAL.Repository
         /// <summary>
         /// Private repository class method. Transfers the properties of database dto objects to ProjectModels. /DK
         /// </summary>
-        private List<IProjectModel> TransferAllProjectProperties(List<Linq.Project> dtoProjects)
+        private List<IProjectModel> TransferAllProjectProperties(IQueryable<Linq.Project>? dtoProjects)
         {
             List<IProjectModel> result = new List<IProjectModel>();
+
+            if (dtoProjects is null) { return result; }
+
+            var projectIds = dtoProjects
+                .Where(p => p.Project_Status.ToLower() != "deleted")
+                .Select(p => p.Project_ID).ToList();
+
+            var specializations = dbContext.Projects_Specialisation_Lines.Where(i => projectIds.Contains(i.Project_ID)).ToList();
 
             foreach (var dtoProject in dtoProjects)
             {
@@ -154,6 +184,20 @@ namespace DAL.Repository
                     projectModel.ProjectModifyDate = dtoProject.Project_Modify_Date;
                     projectModel.TotalInvoicePrice = dtoProject.Total_Invoice_Price;
                     projectModel.ProjectStatus = dtoProject.Project_Status;
+
+                    var projectSpecializations = specializations.Where(i => i.Project_ID == dtoProject.Project_ID).ToList();
+
+                    var manager = dtoProject.User;
+
+                    if (manager != null)
+                    {
+                        projectModel.ManagerFullName = new StringBuilder(manager.First_Name).Append(' ').Append(manager.Last_Name).ToString();
+                        projectModel.ManagerUserName = manager.User_name;
+                    }
+                    if (projectSpecializations.Any())
+                    {
+                        projectModel.SpecializationsString = new StringBuilder().AppendJoin(", ", projectSpecializations.Select(i => i.Specialisation.Specialisation1)).ToString();
+                    }
 
                     result.Add(projectModel);
                 }
@@ -182,17 +226,32 @@ namespace DAL.Repository
         {
             var targetUser = dbContext.Users.FirstOrDefault(i => i.User_ID == userId);
 
-            List<Linq.Project> dtoProjects = new List<Linq.Project>();
-
             if (targetUser != null)
             {
-                dtoProjects = dbContext.Projects.Where(i => i.User_ID == userId 
-                    && i.Title.ToLower().Contains(searchTerm.ToLower())).ToList();
+                var dtoProjects = dbContext.Projects.Where(i => i.User_ID == userId
+                    && i.Title.ToLower().Contains(searchTerm.ToLower()));
+
+                List<IProjectModel> result = TransferAllProjectProperties(dtoProjects);
+
+                return result;
             }
+            return new List<IProjectModel>();
+        }
 
-            List<IProjectModel> result = TransferAllProjectProperties(dtoProjects);
-
-            return result;
+        /// <summary>
+        /// Updates the Project Status for ALL projects in the Projects table.
+        /// Stored Procedure to be executed on program launch. /DK
+        /// </summary>
+        public void UpdateProjectStatusForAll()
+        {
+            try
+            {
+                dbContext.UpdateProjectStatusForAll();
+            }
+            catch (Exception)
+            {
+                throw new Exception("Server failed to update project status'.");
+            }
         }
     }
 }

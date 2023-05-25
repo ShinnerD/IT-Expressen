@@ -256,7 +256,7 @@ namespace DAL.Repository
         {
             using (SqlConnection connection = new SqlConnection(DbConnectionString.ConnectionString))
             {
-                using (SqlCommand command = new SqlCommand("TestProcedure", connection))
+                using (SqlCommand command = new SqlCommand("DeleteInvitesAndConsulent", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
@@ -267,11 +267,10 @@ namespace DAL.Repository
                     {
                         connection.Open();
                         command.ExecuteNonQuery();
-                        Console.WriteLine("Stored procedure executed successfully.");
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("An error occurred: " + ex.Message);
+                        throw ex;
                     }
                 }
             }
