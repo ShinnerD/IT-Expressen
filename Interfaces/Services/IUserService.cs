@@ -63,7 +63,6 @@ namespace Interfaces.Services
         public List<IUserModel> GetUsersWithAllSpecializations(List<string> specializations);
 
         public void DeleteConsultantStoredProcedure(int userID);
-
         /// <summary>
         /// Delete a User from the Database./Erik
         /// </summary>

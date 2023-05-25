@@ -20,7 +20,7 @@ namespace GUI.Admin
 
         private IProjectModel ProjectForEdit;
 
-        private GuiHelper guiHelper = new GuiHelper();
+        private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
         public AdminProjectEdit(IDomainServiceManager serviceManager, IProjectModel projectForEdit)
         {
@@ -55,7 +55,7 @@ namespace GUI.Admin
             }
             catch (Exception)
             {
-                guiHelper.FeedBackMessage(lbl_FeedBackNewProject, "Failed to retrieve list of defined skills", Color.Red);
+                FeedBackMessage(lbl_FeedBackNewProject, "Failed to retrieve list of defined skills", Color.Red);
             }
         }
 
@@ -75,12 +75,27 @@ namespace GUI.Admin
 
                 ServiceManager.ProjectService.UpdateProject(ProjectForEdit, reqSkills);
 
-                guiHelper.FeedBackMessage(lbl_FeedBackNewProject, "Project updated successfully.", Color.Green);
+                FeedBackMessage(lbl_FeedBackNewProject, "Project updated successfully.", Color.Green);
             }
             catch (Exception e)
             {
-                guiHelper.FeedBackMessage(lbl_FeedBackNewProject, e.Message, Color.Red);
+                FeedBackMessage(lbl_FeedBackNewProject, e.Message, Color.Red);
             }
+        }
+
+
+        private async Task FeedBackMessage(Label label, string message, Color? color = null, int milliseconds = 5000)
+        {
+            label.Text = message;
+            label.ForeColor = color ?? Color.Black;
+            label.Visible = true;
+            _cancellationTokenSource.Cancel();
+            _cancellationTokenSource = new CancellationTokenSource();
+
+            await Task.Delay(milliseconds, _cancellationTokenSource.Token);
+            label.Text = string.Empty;
+            label.ForeColor = Color.Black;
+            label.Visible = false;
         }
 
         private void btn_NewProjectBack_Click(object sender, EventArgs e)

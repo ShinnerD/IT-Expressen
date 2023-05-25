@@ -14,20 +14,21 @@ namespace GUI
 
         private string Username;
 
-        private IUserModel userModelGet;
+        public IUserModel userModelGet;
 
         private List<IInvitesModel> invites;
 
-        private List<IProjectModel> ProjectList = new List<IProjectModel>();
+        private List<IProjectModel> ProjectList;
 
-        private GuiHelper guiHelper = new();
+        private IProjectService projectService;
+
+
 
         public Consultant(IDomainServiceManager domainServiceManager, string username)
         {
             ServiceManager = domainServiceManager ?? throw new ArgumentNullException(nameof(domainServiceManager));
             invService = domainServiceManager.InviteService;
             userServiceGet = domainServiceManager.UserService;
-            guiHelper.StartingSortedColumnIndex = 1;
 
             InitializeComponent();
             Username = username;
@@ -66,7 +67,7 @@ namespace GUI
         {
             if (bt_Edit.Text == "Edit Profile")
             {
-                GuiHelper.UnlockProfileForEditing(grpBoxProfileInfo, true);
+                UnlockProfileForEditing(grpBoxProfileInfo, true);
                 bt_Edit.Text = "Save Changes";
                 bt_EditCancel.Enabled = true;
                 bt_EditCancel.Visible = true;
@@ -76,7 +77,7 @@ namespace GUI
                 UpdateUserModel();
                 IUserService userService = userServiceGet;
                 userService.UpdateUser(userModelGet);
-                GuiHelper.UnlockProfileForEditing(grpBoxProfileInfo, false);
+                UnlockProfileForEditing(grpBoxProfileInfo, false);
                 bt_EditCancel.Enabled = false;
                 bt_EditCancel.Visible = false;
                 bt_Edit.Text = "Edit Profile";
@@ -95,6 +96,32 @@ namespace GUI
             userModelGet.Country = tb_Country.Text;
         }
 
+        private void UnlockProfileForEditing(Control control, bool unlock)
+        {
+            if (control is TextBox)
+            {
+                control.Enabled = unlock;
+                control.TabStop = unlock;
+                if (unlock)
+                {
+                    control.BackColor = SystemColors.Window;
+                }
+                else
+                {
+                    control.BackColor = SystemColors.ControlLight;
+                }
+            }
+            if (control.HasChildren)
+            {
+                // Recursively call this method for all controls inside the control passed in the parameter.
+                // Ex. all controls inside another group box.
+                foreach (Control childControl in control.Controls)
+                {
+                    UnlockProfileForEditing(childControl, unlock);
+                }
+            }
+        }
+
         /// <summary>
         /// (JQ)Handle button click event for searching projects and passes userId to the ConsultantSearchProjects form.
         /// </summary>
@@ -110,18 +137,17 @@ namespace GUI
         /// </summary>
         private void LoadInvitesToDGV()
         {
-            dgv_ConsultantsInvites.DataSource = null;
-            ProjectList.Clear();
 
             IInviteService inviteService = invService;
             invites = inviteService.GetInvitesFromUserId(userModelGet.ID).Where(i => i.InviteStatus?.ToLower() == "accepted").ToList();
+            List<IProjectModel> relatedProjects = new List<IProjectModel>();
 
             foreach (IInvitesModel invite in invites)
             {
-                ProjectList.Add(ServiceManager.ProjectService.GetProject(invite.ProjectId));
+                relatedProjects.Add(ServiceManager.ProjectService.GetProject(invite.ProjectId));
+
             }
-            dgv_ConsultantsInvites.DataSource = ProjectList;
-            guiHelper.StartingSortedColumnIndex = 1;
+            dgv_ConsultantsInvites.DataSource = relatedProjects;
         }
 
         private void DataGridInitialSetup()
@@ -134,17 +160,16 @@ namespace GUI
 
             dgv_ConsultantsInvites.Columns.Add("Title", "Project Name");
             dgv_ConsultantsInvites.Columns["Title"].DataPropertyName = "Title";
+            dgv_ConsultantsInvites.Columns["Title"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             dgv_ConsultantsInvites.Columns.Add("Status", "Status");
             dgv_ConsultantsInvites.Columns["Status"].DataPropertyName = "ProjectStatus";
 
             dgv_ConsultantsInvites.Columns.Add("Start", "Start");
             dgv_ConsultantsInvites.Columns["Start"].DataPropertyName = "ProjectStartDate";
-            dgv_ConsultantsInvites.Columns["Start"].DefaultCellStyle.Format = "dd'/'MM'/'yyyy";
 
             dgv_ConsultantsInvites.Columns.Add("End", "End");
             dgv_ConsultantsInvites.Columns["End"].DataPropertyName = "ProjectEndDate";
-            dgv_ConsultantsInvites.Columns["End"].DefaultCellStyle.Format = "dd'/'MM'/'yyyy";
         }
 
         //Opens the form to accept the selected invitation, then refreshes the datagridview /MS
@@ -166,7 +191,7 @@ namespace GUI
             bt_EditCancel.Enabled = false;
             bt_EditCancel.Visible = false;
             bt_Edit.Text = "Edit Profile";
-            GuiHelper.UnlockProfileForEditing(grpBoxProfileInfo, false);
+            UnlockProfileForEditing(grpBoxProfileInfo, false);
             SetUpTB();
         }
 
@@ -182,38 +207,22 @@ namespace GUI
 
         private void bt_seeInvites_Click(object sender, EventArgs e)
         {
-            if (dgv_ConsultantsInvites.SelectedRows.Count > 0)
-            {
-                var userName = userModelGet.UserName;
-                ConsultantInvites seeInv = new ConsultantInvites(ServiceManager, userName);
-                this.Hide();
-                seeInv.ShowDialog();
-                this.Show();
-                LoadInvitesToDGV();
-            }
+            var userName = userModelGet.UserName;
+            ConsultantInvites seeInv = new ConsultantInvites(ServiceManager, userName);
+            this.Hide();
+            seeInv.ShowDialog();
+            this.Show();
+            LoadInvitesToDGV();
         }
 
         private void bt_seeProjects_Click(object sender, EventArgs e)
         {
-            if (dgv_ConsultantsInvites.SelectedRows.Count > 0)
-            {
-                var selectedProject = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as ProjectModel;
-                ManageProject AccInvForm = new ManageProject(ServiceManager, selectedProject.ProjectId, Username);
-                this.Hide();
-                AccInvForm.ShowDialog();
-                this.Show();
-                LoadInvitesToDGV();
-            }
-        }
-
-        private void dgv_ConsultantsInvites_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            GuiHelper.DataGridViewDataBindingCompleteResize(sender, e);
-        }
-
-        private void dgv_ConsultantsInvites_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            guiHelper.ReorderDataGridViewColumnHeaderClickEvent(dgv_ConsultantsInvites, e, ProjectList);
+            var selectedProject = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as ProjectModel;
+            ManageProject AccInvForm = new ManageProject(ServiceManager, selectedProject.ProjectId, Username);
+            this.Hide();
+            AccInvForm.ShowDialog();
+            this.Show();
+            LoadInvitesToDGV();
         }
     }
 }

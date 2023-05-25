@@ -141,7 +141,6 @@
             dgv_AcceptedInvites.Size = new Size(755, 130);
             dgv_AcceptedInvites.StandardTab = true;
             dgv_AcceptedInvites.TabIndex = 2;
-            dgv_AcceptedInvites.ColumnHeaderMouseClick += dgv_AcceptedInvites_ColumnHeaderMouseClick;
             dgv_AcceptedInvites.DataBindingComplete += dgv_DataBindingComplete;
             dgv_AcceptedInvites.Click += dgv_AcceptedInvites_Click;
             // 
@@ -185,7 +184,6 @@
             dgv_PendingInvites.Size = new Size(755, 124);
             dgv_PendingInvites.StandardTab = true;
             dgv_PendingInvites.TabIndex = 1;
-            dgv_PendingInvites.ColumnHeaderMouseClick += dgv_PendingInvites_ColumnHeaderMouseClick;
             dgv_PendingInvites.DataBindingComplete += dgv_DataBindingComplete;
             dgv_PendingInvites.Click += dgv_PendingInvites_Click;
             // 

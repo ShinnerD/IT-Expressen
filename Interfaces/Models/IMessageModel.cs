@@ -1,4 +1,6 @@
-﻿namespace Interfaces.Models
+﻿using Interfaces.Repositories;
+
+namespace Interfaces.Models
 {
     public interface IMessageModel
     {

@@ -13,8 +13,7 @@ namespace Domain.Services
         private readonly ISpecializationRepository specRepo;
         private readonly IDomainServiceManager serviceManager;
 
-        public SpecializationService(IDomainServiceManager domainServiceManager, IDataContextManager dataContextManager)
-        {
+        public SpecializationService(IDomainServiceManager domainServiceManager, IDataContextManager dataContextManager) { 
             serviceManager = domainServiceManager;
             specRepo = new SpecializationRepository(dataContextManager);
         }
@@ -23,7 +22,7 @@ namespace Domain.Services
         /// List of strings representing the current Specializations/Skills in the Database. /DK
         /// </summary>
         public List<string> ListDefinedSpecializations()
-        {
+        {                            
             return specRepo.GetCurrentSpecializationsList().OrderBy(i => i).ToList();
         }
 
@@ -62,7 +61,7 @@ namespace Domain.Services
         /// <summary>
         /// Removes the specializations provided from the project in the database. /DK
         /// </summary>
-        public void RemoveFromProject(int projectId, List<string> specializations)
+        public void RemoveFromProject(int projectId, List<string> specializations) 
         {
             specRepo.RemoveFromProject(projectId, specializations);
         }
@@ -103,4 +102,5 @@ namespace Domain.Services
             }
         }
     }
+
 }

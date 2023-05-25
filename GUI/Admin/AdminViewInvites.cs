@@ -10,11 +10,7 @@ namespace GUI.Admin
 
         private IProjectModel ProjectForEdit;
 
-        private List<IInvitesModel> PendingInvites;
-        private List<IInvitesModel> AcceptedInvites;
-
-        private GuiHelper pendingGuiHelper = new GuiHelper();
-        private GuiHelper acceptedGuiHelper = new GuiHelper();
+        private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
         public AdminViewInvites(IDomainServiceManager serviceManager, IProjectModel projectForEdit)
         {
@@ -23,6 +19,17 @@ namespace GUI.Admin
             InitializeComponent();
             SetDataGridViewColumns();
             SetupPage();
+        }
+
+        private void dgv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            var dataGridView = sender as DataGridView;
+            if (dataGridView != null && dataGridView.ColumnCount != 0)
+            {
+                dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                dataGridView.Columns[dataGridView.ColumnCount - 1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+            dataGridView.ClearSelection();
         }
 
         private void SetDataGridViewColumns()
@@ -80,34 +87,46 @@ namespace GUI.Admin
             }
             catch (Exception)
             {
-                pendingGuiHelper.FeedBackMessage(lbl_FeedBackNewProject, "Failed to retrieve list of defined skills", Color.Red);
+                FeedBackMessage(lbl_FeedBackNewProject, "Failed to retrieve list of defined skills", Color.Red);
             }
 
             //Try-Catch for getting pending invites.
             try
             {
                 dgv_PendingInvites.DataSource = null;
-                PendingInvites = ServiceManager.InviteService.GetAllInvitedProjectID(ProjectForEdit.ProjectId)
+                dgv_PendingInvites.DataSource = ServiceManager.InviteService.GetAllInvitedProjectID(ProjectForEdit.ProjectId)
                     .Where(i => i.InviteStatus?.ToLower() == "pending").ToList();
-                dgv_PendingInvites.DataSource = PendingInvites;
             }
             catch (Exception)
             {
-                pendingGuiHelper.FeedBackMessage(lbl_FeedBackNewProject, "Failed to retrieve list pending invites", Color.Red);
+                FeedBackMessage(lbl_FeedBackNewProject, "Failed to retrieve list pending invites", Color.Red);
             }
 
-            //Try - Catch for getting accepted invites.
-            try
-            {
-                dgv_AcceptedInvites.DataSource = null;
-                AcceptedInvites = ServiceManager.InviteService.GetAllInvitedProjectID(ProjectForEdit.ProjectId)
+            //Try-Catch for getting accepted invites.
+            //try
+            //{
+            dgv_AcceptedInvites.DataSource = null;
+            dgv_AcceptedInvites.DataSource = ServiceManager.InviteService.GetAllInvitedProjectID(ProjectForEdit.ProjectId)
                 .Where(i => i.InviteStatus?.ToLower() == "accepted").ToList();
-                dgv_AcceptedInvites.DataSource = AcceptedInvites;
-            }
-            catch (Exception)
-            {
-                pendingGuiHelper.FeedBackMessage(lbl_FeedBackNewProject, "Failed to retrieve list accepted invites", Color.Red);
-            }
+            //}
+            //catch (Exception)
+            //{
+            //    FeedBackMessage(lbl_FeedBackNewProject, "Failed to retrieve list accepted invites", Color.Red);
+            //}
+        }
+
+        private async Task FeedBackMessage(Label label, string message, Color? color = null, int milliseconds = 5000)
+        {
+            label.Text = message;
+            label.ForeColor = color ?? Color.Black;
+            label.Visible = true;
+            _cancellationTokenSource.Cancel();
+            _cancellationTokenSource = new CancellationTokenSource();
+
+            await Task.Delay(milliseconds, _cancellationTokenSource.Token);
+            label.Text = string.Empty;
+            label.ForeColor = Color.Black;
+            label.Visible = false;
         }
 
         private void btn_NewProjectBack_Click(object sender, EventArgs e)
@@ -130,14 +149,14 @@ namespace GUI.Admin
                 if (dgv_PendingInvites.SelectedRows.Count > 0)
                 {
                     ServiceManager.InviteService.DeleteInvite(dgv_PendingInvites.SelectedRows[0].DataBoundItem as IInvitesModel, true);
-                    pendingGuiHelper.FeedBackMessage(lbl_FeedBackNewProject, "Invite successfully deleted.", Color.Green);
+                    FeedBackMessage(lbl_FeedBackNewProject, "Invite successfully deleted.", Color.Green);
                     refreshAfterDelete = true;
                 }
                 if (refreshAfterDelete) { SetupPage(); }
             }
             catch (Exception)
             {
-                pendingGuiHelper.FeedBackMessage(lbl_FeedBackNewProject, "Failed to delete invite.", Color.Red);
+                FeedBackMessage(lbl_FeedBackNewProject, "Failed to delete invite.", Color.Red);
             }
         }
 
@@ -149,21 +168,6 @@ namespace GUI.Admin
         private void dgv_AcceptedInvites_Click(object sender, EventArgs e)
         {
             dgv_PendingInvites.ClearSelection();
-        }
-
-        private void dgv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            GuiHelper.DataGridViewDataBindingCompleteResize(sender, e);
-        }
-
-        private void dgv_PendingInvites_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            pendingGuiHelper.ReorderDataGridViewColumnHeaderClickEvent(dgv_PendingInvites, e, PendingInvites);
-        }
-
-        private void dgv_AcceptedInvites_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            acceptedGuiHelper.ReorderDataGridViewColumnHeaderClickEvent(dgv_AcceptedInvites, e, AcceptedInvites);
         }
     }
 }

@@ -51,9 +51,9 @@ namespace Interfaces.Repositories
         void UpdateUser(IUserModel user);
 
         public void DeleteConsultantStoredProcedure(int userID);
-
         /// <summary>
         /// Deletes a user in the database. /Erik
         /// </summary>
+
     }
 }

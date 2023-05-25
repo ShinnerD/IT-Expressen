@@ -5,6 +5,8 @@ using Interfaces.Services;
 
 namespace Domain.Services
 {
+
+
     public class UserService : IUserService
     {
         private readonly IUserRepository userRepo;
@@ -141,7 +143,6 @@ namespace Domain.Services
         {
             userRepo.UpdateUser(user);
         }
-
         /// <summary>
         /// Delete a Consulent from data base with the specifik UserID /Erik
         /// </summary>

@@ -10,10 +10,10 @@ namespace Interfaces.Repositories
 
         List<IConsultantLineModel> GetAllConsultantLines();
 
-        List<IConsultantLineModel> GetALLConsultantLinesFromProjectID(int projectID);
+        List<IConsultantLineModel> GetALLContultantLinesFromProjectID(int projectID);
 
-        List<IConsultantLineModel> GetALLConsultantLinesFromUserID(int userID);
+        List<IConsultantLineModel> GetALLContultantLinesFromUserID(int userID);
 
-        List<IConsultantLineModel> GetALLConsultantLinesFromInvoiceID(int invoiceID);
+        List<IConsultantLineModel> GetALLContultantLinesFromInvoiceID(int invoiceID);
     }
 }

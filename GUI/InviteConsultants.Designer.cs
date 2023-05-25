@@ -85,7 +85,7 @@
             btn_RemovePendingInvite.Name = "btn_RemovePendingInvite";
             btn_RemovePendingInvite.Size = new Size(105, 25);
             btn_RemovePendingInvite.TabIndex = 18;
-            btn_RemovePendingInvite.Text = "Remove Invite";
+            btn_RemovePendingInvite.Text = "Rescind Invite";
             btn_RemovePendingInvite.UseVisualStyleBackColor = true;
             btn_RemovePendingInvite.Click += btn_RemovePendingInvite_Click;
             // 

@@ -53,11 +53,9 @@ namespace GUI
 
             dgv_Searchproject.Columns.Add("ProjectStartDate", "Start");
             dgv_Searchproject.Columns["ProjectStartDate"].DataPropertyName = "ProjectStartDate";
-            dgv_Searchproject.Columns["ProjectStartDate"].DefaultCellStyle.Format = "dd'/'MM'/'yyyy";
 
             dgv_Searchproject.Columns.Add("ProjectEndDate", "End");
             dgv_Searchproject.Columns["ProjectEndDate"].DataPropertyName = "ProjectEndDate";
-            dgv_Searchproject.Columns["ProjectEndDate"].DefaultCellStyle.Format = "dd'/'MM'/'yyyy";
 
             List<string> allSpecializations = specService.ListDefinedSpecializations();
             projectsSearchResults = projectService.GetProjectsFromAnySpecializations(allSpecializations).OrderBy(i => i.Title).ToList();
@@ -159,7 +157,12 @@ namespace GUI
 
         private void dgv_Searchproject_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            GuiHelper.DataGridViewDataBindingCompleteResize(sender, e);
+            var dataGridView = sender as DataGridView;
+            if (dataGridView != null && dataGridView.ColumnCount != 0)
+            {
+                dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                dataGridView.Columns[dataGridView.ColumnCount - 1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
         }
     }
 }

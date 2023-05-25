@@ -146,12 +146,12 @@
             // 
             lb_HoursSpendt.AutoSize = true;
             lb_HoursSpendt.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            lb_HoursSpendt.Location = new Point(344, 150);
+            lb_HoursSpendt.Location = new Point(338, 150);
             lb_HoursSpendt.Margin = new Padding(2, 0, 2, 0);
             lb_HoursSpendt.Name = "lb_HoursSpendt";
-            lb_HoursSpendt.Size = new Size(71, 15);
+            lb_HoursSpendt.Size = new Size(81, 15);
             lb_HoursSpendt.TabIndex = 106;
-            lb_HoursSpendt.Text = "Hours spent";
+            lb_HoursSpendt.Text = "Hours spendt:";
             lb_HoursSpendt.Visible = false;
             // 
             // tb_HourlyRate
@@ -172,12 +172,12 @@
             // 
             lb_HourlyRate.AutoSize = true;
             lb_HourlyRate.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            lb_HourlyRate.Location = new Point(15, 150);
+            lb_HourlyRate.Location = new Point(5, 149);
             lb_HourlyRate.Margin = new Padding(2, 0, 2, 0);
             lb_HourlyRate.Name = "lb_HourlyRate";
-            lb_HourlyRate.Size = new Size(66, 15);
+            lb_HourlyRate.Size = new Size(69, 15);
             lb_HourlyRate.TabIndex = 103;
-            lb_HourlyRate.Text = "Hourly rate";
+            lb_HourlyRate.Text = "Hourly rate:";
             lb_HourlyRate.Visible = false;
             // 
             // label1
@@ -187,9 +187,9 @@
             label1.Location = new Point(678, 23);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(67, 15);
+            label1.Size = new Size(70, 15);
             label1.TabIndex = 102;
-            label1.Text = "Description";
+            label1.Text = "Description:";
             // 
             // rtb_Description
             // 
@@ -242,7 +242,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(26, 22);
+            label2.Location = new Point(26, 25);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
             label2.Size = new Size(58, 15);
@@ -266,12 +266,12 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label7.Location = new Point(52, 48);
+            label7.Location = new Point(52, 51);
             label7.Margin = new Padding(2, 0, 2, 0);
             label7.Name = "label7";
-            label7.Size = new Size(29, 15);
+            label7.Size = new Size(32, 15);
             label7.TabIndex = 6;
-            label7.Text = "Title";
+            label7.Text = "Title:";
             // 
             // tb_TotalInvoice
             // 
@@ -303,12 +303,12 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label9.Location = new Point(335, 102);
+            label9.Location = new Point(336, 102);
             label9.Margin = new Padding(2, 0, 2, 0);
             label9.Name = "label9";
-            label9.Size = new Size(80, 15);
+            label9.Size = new Size(83, 15);
             label9.TabIndex = 8;
-            label9.Text = "Total invoiced";
+            label9.Text = "Total invoiced:";
             // 
             // tb_ProjectModifiedDate
             // 
@@ -327,23 +327,23 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label8.Location = new Point(336, 74);
+            label8.Location = new Point(297, 77);
             label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
-            label8.Size = new Size(79, 15);
+            label8.Size = new Size(122, 15);
             label8.TabIndex = 7;
-            label8.Text = "Last Modified";
+            label8.Text = "Project Last Modified:";
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(39, 74);
+            label3.Location = new Point(39, 77);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(42, 15);
+            label3.Size = new Size(45, 15);
             label3.TabIndex = 2;
-            label3.Text = "Owner";
+            label3.Text = "Owner:";
             // 
             // tb_ProjectEndDate
             // 
@@ -401,51 +401,51 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(361, 48);
+            label5.Location = new Point(325, 51);
             label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
-            label5.Size = new Size(54, 15);
+            label5.Size = new Size(94, 15);
             label5.TabIndex = 4;
-            label5.Text = "End Date";
+            label5.Text = "Project End Date";
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(42, 101);
+            label4.Location = new Point(5, 101);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(39, 15);
+            label4.Size = new Size(82, 15);
             label4.TabIndex = 3;
-            label4.Text = "Status";
+            label4.Text = "Project Status:";
             // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.Location = new Point(357, 22);
+            label6.Location = new Point(318, 25);
             label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
-            label6.Size = new Size(58, 15);
+            label6.Size = new Size(101, 15);
             label6.TabIndex = 5;
-            label6.Text = "Start Date";
+            label6.Text = "Project Start Date:";
             // 
             // rtb_Message
             // 
             rtb_Message.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            rtb_Message.Location = new Point(5, 199);
+            rtb_Message.Location = new Point(26, 199);
             rtb_Message.Name = "rtb_Message";
             rtb_Message.ReadOnly = true;
-            rtb_Message.Size = new Size(524, 189);
+            rtb_Message.Size = new Size(648, 189);
             rtb_Message.TabIndex = 24;
             rtb_Message.Text = "";
             // 
             // rtb_newMessage
             // 
             rtb_newMessage.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            rtb_newMessage.Location = new Point(5, 391);
+            rtb_newMessage.Location = new Point(26, 394);
             rtb_newMessage.Name = "rtb_newMessage";
-            rtb_newMessage.Size = new Size(524, 96);
+            rtb_newMessage.Size = new Size(648, 96);
             rtb_newMessage.TabIndex = 25;
             rtb_newMessage.Text = "";
             rtb_newMessage.TextChanged += rtb_newMessage_TextChanged;
@@ -453,7 +453,7 @@
             // bt_send
             // 
             bt_send.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            bt_send.Location = new Point(454, 508);
+            bt_send.Location = new Point(599, 504);
             bt_send.Name = "bt_send";
             bt_send.Size = new Size(75, 23);
             bt_send.TabIndex = 26;
@@ -466,7 +466,7 @@
             lb_TextCounter.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lb_TextCounter.BackColor = SystemColors.Window;
             lb_TextCounter.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lb_TextCounter.Location = new Point(455, 470);
+            lb_TextCounter.Location = new Point(599, 472);
             lb_TextCounter.Name = "lb_TextCounter";
             lb_TextCounter.Size = new Size(72, 15);
             lb_TextCounter.TabIndex = 27;
@@ -475,31 +475,25 @@
             // 
             // dgv_InvolvedUsers
             // 
-            dgv_InvolvedUsers.AllowUserToAddRows = false;
-            dgv_InvolvedUsers.AllowUserToDeleteRows = false;
-            dgv_InvolvedUsers.AllowUserToResizeRows = false;
             dgv_InvolvedUsers.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgv_InvolvedUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_InvolvedUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_InvolvedUsers.Location = new Point(535, 199);
+            dgv_InvolvedUsers.Location = new Point(680, 199);
             dgv_InvolvedUsers.Name = "dgv_InvolvedUsers";
-            dgv_InvolvedUsers.ReadOnly = true;
             dgv_InvolvedUsers.RowHeadersVisible = false;
             dgv_InvolvedUsers.RowTemplate.Height = 25;
-            dgv_InvolvedUsers.Size = new Size(410, 328);
+            dgv_InvolvedUsers.Size = new Size(265, 328);
             dgv_InvolvedUsers.TabIndex = 28;
-            dgv_InvolvedUsers.ColumnHeaderMouseClick += dgv_InvolvedUsers_ColumnHeaderMouseClick;
-            dgv_InvolvedUsers.DataBindingComplete += dgv_InvolvedUsers_DataBindingComplete;
             // 
             // lb_warning
             // 
             lb_warning.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lb_warning.AutoSize = true;
-            lb_warning.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lb_warning.Location = new Point(5, 510);
+            lb_warning.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lb_warning.Location = new Point(285, 506);
             lb_warning.Margin = new Padding(2, 0, 2, 0);
             lb_warning.Name = "lb_warning";
-            lb_warning.Size = new Size(298, 17);
+            lb_warning.Size = new Size(309, 17);
             lb_warning.TabIndex = 29;
             lb_warning.Text = "A message can be no longer then 255 characters!";
             lb_warning.Visible = false;

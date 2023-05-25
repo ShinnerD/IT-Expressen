@@ -1,13 +1,18 @@
-﻿using Interfaces.Models;
+﻿using Domain.Services;
+using Interfaces.Models;
 using Interfaces.Services;
+using Microsoft.VisualBasic.Devices;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
+using System.DirectoryServices;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace GUI.Admin
 {
     public partial class AdminMain : Form
     {
         private IUserModel adminUser;
-        public string? CreatedUserName { get; set; }
+        public string CreatedUserName { get; set; }
 
         private readonly IDomainServiceManager ServiceManager;
 
@@ -15,18 +20,19 @@ namespace GUI.Admin
         private IProjectService projectService;
         private ISpecializationService specializationService;
 
-        private List<IUserModel>? usersSearchResults;
-        private List<IProjectModel>? projectsSearchResults;
+        private List<IUserModel> usersSearchResults;
+        private List<IProjectModel> projectsSearchResults;
 
-        private GuiHelper userGuiHelper = new GuiHelper();
-        private GuiHelper projectGuiHelper = new GuiHelper();
+        private bool sortUsersAscending;
+        private int previousUserSortDirection = 1;
+        private bool sortProjectsAscending = false;
+        private int previousProjectSortDirection;
+
+        private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
         public AdminMain(IDomainServiceManager serviceManager, string username)
         {
             ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
-
-            userGuiHelper.StartingSortedColumnIndex = 1;
-            projectGuiHelper.StartingSortedColumnIndex = 1;
 
             userService = serviceManager.UserService;
             projectService = serviceManager.ProjectService;
@@ -156,6 +162,36 @@ namespace GUI.Admin
         }
 
         /// <summary>
+        /// Unlocks the textboxes in the user profile section of the form and changes the edit button to reflect the ability
+        /// to save the changes you make to your profile. /DK
+        /// </summary>
+        private void UnlockProfileForEditing(Control control, bool unlock)
+        {
+            if (control is TextBox)
+            {
+                control.Enabled = unlock;
+                control.TabStop = unlock;
+                if (unlock)
+                {
+                    control.BackColor = SystemColors.Window;
+                }
+                else
+                {
+                    control.BackColor = SystemColors.ControlLight;
+                }
+            }
+            if (control.HasChildren)
+            {
+                // Recursively call this method for all controls inside the control passed in the parameter.
+                // Ex. all controls inside another group box.
+                foreach (Control childControl in control.Controls)
+                {
+                    UnlockProfileForEditing(childControl, unlock);
+                }
+            }
+        }
+
+        /// <summary>
         /// Changes the Edit Profile button to either activate or deactivate the controls, so the user
         /// can edit their profile info. Calls a save on the data if the user wants to save changes.
         /// </summary>
@@ -163,7 +199,7 @@ namespace GUI.Admin
         {
             if (bt_EditProfile.Text == "Edit Profile")
             {
-                GuiHelper.UnlockProfileForEditing(grpBoxProfileInfo, true);
+                UnlockProfileForEditing(grpBoxProfileInfo, true);
                 bt_EditProfile.Text = "Save Changes";
                 bt_EditProfileCancel.Enabled = true;
                 bt_EditProfileCancel.Visible = true;
@@ -172,7 +208,7 @@ namespace GUI.Admin
             {
                 UpdateUserModel();
                 userService.UpdateUser(adminUser);
-                GuiHelper.UnlockProfileForEditing(grpBoxProfileInfo, false);
+                UnlockProfileForEditing(grpBoxProfileInfo, false);
                 bt_EditProfileCancel.Enabled = false;
                 bt_EditProfileCancel.Visible = false;
                 bt_EditProfile.Text = "Edit Profile";
@@ -209,7 +245,7 @@ namespace GUI.Admin
                     .OrderBy(o => o.UserName).ToList();
 
             dgv_UserSearchResults.DataSource = usersSearchResults;
-            userGuiHelper.StartingSortedColumnIndex = 1;
+            previousUserSortDirection = 1;
 
             if (!string.IsNullOrWhiteSpace(userName))
             {
@@ -256,7 +292,6 @@ namespace GUI.Admin
                 .OrderBy(o => o.Title).ToList();
 
             dgv_ProjectSearchResults.DataSource = projectsSearchResults;
-            projectGuiHelper.StartingSortedColumnIndex = 1;
 
             if (selectThisProjectAfterSearch != 0)
             {
@@ -275,7 +310,12 @@ namespace GUI.Admin
         /// </summary>
         private void dgv_UserSearchResults_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            GuiHelper.DataGridViewDataBindingCompleteResize(sender, e);
+            var dataGridView = sender as DataGridView;
+            if (dataGridView != null && dataGridView.ColumnCount != 0)
+            {
+                dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                dataGridView.Columns[dataGridView.ColumnCount - 1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
         }
 
         /// <summary>
@@ -297,7 +337,7 @@ namespace GUI.Admin
             }
             if (userType.ToLower() == "admin")
             {
-                userGuiHelper.FeedBackMessage(lbl_FeedbackUserTab, "Admin's can't edit other Admins.", Color.Red);
+                FeedBackMessage(lbl_FeedbackUserTab, "Admin's can't edit other Admins.", Color.Red);
             }
         }
 
@@ -322,66 +362,21 @@ namespace GUI.Admin
         }
 
         /// <summary>
-        /// Deletes the User when the admin presses the delete user button. Shows a dialog box for confirmation.
-        /// Provides an error message if it didn't succeed. Provides a success message if it did succeed.
+        /// Async Task that turns on the visibility of the label provided in the parameters,
+        /// shows the given message in the given color, for the given time. /DK
         /// </summary>
-        private void DeleteUser()
+        private async Task FeedBackMessage(Label label, string message, Color? color = null, int milliseconds = 5000)
         {
-            if (dgv_UserSearchResults.SelectedRows.Count > 0)
-            {
-                var confirmation = MessageBox.Show(this, "Are you sure you want to delete this user?", "Delete User", MessageBoxButtons.OKCancel);
-                if (confirmation == DialogResult.OK)
-                {
-                    try
-                    {
-                        var user = dgv_UserSearchResults.SelectedRows[0].DataBoundItem as IUserModel;
-                        int userId = user.ID;
+            label.Text = message;
+            label.ForeColor = color ?? Color.Black;
+            label.Visible = true;
+            _cancellationTokenSource.Cancel();
+            _cancellationTokenSource = new CancellationTokenSource();
 
-                        if (user.UserType.ToLower() != "consultant")
-                        {
-                            userService.Delete(userId);
-                            PerformUserSearch();
-                            userGuiHelper.FeedBackMessage(lbl_FeedbackUserTab, "User successfully deleted.", Color.Green);
-                        }
-                        else
-                        {
-                            userService.DeleteConsultantStoredProcedure(user.ID);
-                            PerformUserSearch();
-                            userGuiHelper.FeedBackMessage(lbl_FeedbackUserTab, "User successfully deleted.", Color.Green);
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        userGuiHelper.FeedBackMessage(lbl_FeedbackUserTab, e.Message, Color.Red);
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Calls for the deletion of a project when the delete project button is pressed. /DK
-        /// </summary>
-        private void DeleteProject()
-        {
-            if (dgv_ProjectSearchResults.SelectedRows.Count > 0)
-            {
-                var confirmation = MessageBox.Show(this, "Are you sure you want to delete this project?", "Delete Project", MessageBoxButtons.OKCancel);
-                if (confirmation == DialogResult.OK)
-                {
-                    try
-                    {
-                        int projectId = int.Parse(dgv_ProjectSearchResults.SelectedRows[0].Cells["ProjectId"].Value.ToString());
-                        projectService.DeleteProject(projectId);
-                        PerformProjectSearch();
-
-                        userGuiHelper.FeedBackMessage(lbl_FeedbackUserTab, "Project successfully deleted.", Color.Green);
-                    }
-                    catch (Exception e)
-                    {
-                        userGuiHelper.FeedBackMessage(lbl_FeedbackUserTab, e.Message, Color.Red);
-                    }
-                }
-            }
+            await Task.Delay(milliseconds, _cancellationTokenSource.Token);
+            label.Text = string.Empty;
+            label.ForeColor = Color.Black;
+            label.Visible = false;
         }
 
         private void bt_EditProfileCancel_Click(object sender, EventArgs e)
@@ -389,7 +384,7 @@ namespace GUI.Admin
             bt_EditProfileCancel.Enabled = false;
             bt_EditProfileCancel.Visible = false;
             bt_EditProfile.Text = "Edit Profile";
-            GuiHelper.UnlockProfileForEditing(grpBoxProfileInfo, false);
+            UnlockProfileForEditing(grpBoxProfileInfo, false);
             SetUpTB();
         }
 
@@ -455,9 +450,68 @@ namespace GUI.Admin
             DeleteUser();
         }
 
+        /// <summary>
+        /// Deletes the User when the admin presses the delete user button. Shows a dialog box for confirmation.
+        /// Provides an error message if it didn't succeed. Provides a success message if it did succeed.
+        /// </summary>
+        private void DeleteUser()
+        {
+            if (dgv_UserSearchResults.SelectedRows.Count > 0)
+            {
+                var confirmation = MessageBox.Show(this, "Are you sure you want to delete this user?", "Delete User", MessageBoxButtons.OKCancel);
+                if (confirmation == DialogResult.OK)
+                {
+                    try
+                    {
+                        var user = dgv_UserSearchResults.SelectedRows[0].DataBoundItem as IUserModel;
+                        int userId = user.ID;
+
+                        if (user.UserType.ToLower() != "consultant")
+                        {
+                            userService.Delete(userId);
+                            PerformUserSearch();
+                            FeedBackMessage(lbl_FeedbackUserTab, "User successfully deleted.", Color.Green);
+                        }
+                        else
+                        {
+                            userService.DeleteConsultantStoredProcedure(user.ID);
+                            PerformUserSearch();
+                            FeedBackMessage(lbl_FeedbackUserTab, "User successfully deleted.", Color.Green);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        FeedBackMessage(lbl_FeedbackUserTab, e.Message, Color.Red);
+                    }
+                }
+            }
+        }
+
         private void btn_DeleteProject_Click(object sender, EventArgs e)
         {
             DeleteProject();
+        }
+
+        private void DeleteProject()
+        {
+            if (dgv_ProjectSearchResults.SelectedRows.Count > 0)
+            {
+                var confirmation = MessageBox.Show(this, "Are you sure you want to delete this project?", "Delete Project", MessageBoxButtons.OKCancel);
+                if (confirmation == DialogResult.OK)
+                {
+                    try
+                    {
+                        int projectId = int.Parse(dgv_ProjectSearchResults.SelectedRows[0].Cells["ProjectId"].Value.ToString());
+                        projectService.DeleteProject(projectId);
+                        PerformProjectSearch();
+                        FeedBackMessage(lbl_FeedbackUserTab, "Project successfully deleted.", Color.Green);
+                    }
+                    catch (Exception e)
+                    {
+                        FeedBackMessage(lbl_FeedbackUserTab, e.Message, Color.Red);
+                    }
+                }
+            }
         }
 
         private void btn_DetailsEdit_Click(object sender, EventArgs e)
@@ -482,31 +536,40 @@ namespace GUI.Admin
 
         private void dgv_UserSearchResults_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            userGuiHelper.ReorderDataGridViewColumnHeaderClickEvent(dgv_UserSearchResults, e, usersSearchResults);
+            string columnPropertyName = dgv_UserSearchResults.Columns[e.ColumnIndex].DataPropertyName;
+
+            if (e.ColumnIndex == previousUserSortDirection) { sortUsersAscending ^= true; }
+            dgv_UserSearchResults.DataSource =
+                SortData((List<IUserModel>)dgv_UserSearchResults.DataSource, columnPropertyName, sortUsersAscending);
+
+            previousUserSortDirection = e.ColumnIndex;
         }
 
         private void dgv_ProjectSearchResults_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            projectGuiHelper.ReorderDataGridViewColumnHeaderClickEvent(dgv_ProjectSearchResults, e, projectsSearchResults);
+            string columnPropertyName = dgv_ProjectSearchResults.Columns[e.ColumnIndex].DataPropertyName;
+
+            if (e.ColumnIndex == previousProjectSortDirection) { sortProjectsAscending ^= true; }
+            dgv_ProjectSearchResults.DataSource =
+                SortData((List<IProjectModel>)dgv_ProjectSearchResults.DataSource, columnPropertyName, sortProjectsAscending);
+
+            previousProjectSortDirection = e.ColumnIndex;
         }
 
-        private void txtBox_UserSearchParams_KeyDown(object sender, KeyEventArgs e)
+        /// <summary>
+        /// Allows sorting for the Datagridviews according to a boolean that switches when the columns get clicked. /DK
+        /// </summary>
+        private List<IUserModel> SortData(List<IUserModel> list, string column, bool ascending)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                PerformUserSearch();
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-            }
+            return ascending ?
+                list.OrderBy(_ => _.GetType().GetProperty(column)?.GetValue(_)).ToList() :
+                list.OrderByDescending(_ => _.GetType().GetProperty(column)?.GetValue(_)).ToList();
         }
-
-        private void btn_InvoiceDetails_Click(object sender, EventArgs e)
+        private List<IProjectModel> SortData(List<IProjectModel> list, string column, bool ascending)
         {
-            if (dgv_ProjectSearchResults.SelectedRows.Count != 0)
-            {
-                AdminViewInvoice ViewInvoiceForm = new AdminViewInvoice(ServiceManager, dgv_ProjectSearchResults.SelectedRows[0].DataBoundItem as IProjectModel);
-                ViewInvoiceForm.ShowDialog();
-            }
+            return ascending ?
+                list.OrderBy(_ => _.GetType().GetProperty(column)?.GetValue(_)).ToList() :
+                list.OrderByDescending(_ => _.GetType().GetProperty(column)?.GetValue(_)).ToList();
         }
     }
 }

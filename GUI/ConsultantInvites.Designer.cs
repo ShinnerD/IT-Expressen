@@ -75,7 +75,7 @@
             // bt_decline
             // 
             bt_decline.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            bt_decline.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            bt_decline.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             bt_decline.Location = new Point(110, 312);
             bt_decline.Name = "bt_decline";
             bt_decline.Size = new Size(98, 27);
@@ -87,7 +87,7 @@
             // bt_AcceptInv
             // 
             bt_AcceptInv.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            bt_AcceptInv.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            bt_AcceptInv.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             bt_AcceptInv.Location = new Point(6, 312);
             bt_AcceptInv.Name = "bt_AcceptInv";
             bt_AcceptInv.Size = new Size(98, 27);
@@ -113,8 +113,6 @@
             dgv_ConsultantsInvites.Size = new Size(688, 291);
             dgv_ConsultantsInvites.TabIndex = 37;
             dgv_ConsultantsInvites.CellClick += dgv_ConsultantsInvites_CellClick;
-            dgv_ConsultantsInvites.ColumnHeaderMouseClick += dgv_ConsultantsInvites_ColumnHeaderMouseClick;
-            dgv_ConsultantsInvites.DataBindingComplete += dgv_ConsultantsInvites_DataBindingComplete;
             // 
             // grpBoxProfileInfo
             // 
@@ -150,12 +148,13 @@
             // 
             // lbl_ReqSkills
             // 
+            lbl_ReqSkills.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lbl_ReqSkills.AutoSize = true;
-            lbl_ReqSkills.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            lbl_ReqSkills.Location = new Point(344, 138);
+            lbl_ReqSkills.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_ReqSkills.Location = new Point(424, 136);
             lbl_ReqSkills.Margin = new Padding(2, 0, 2, 0);
             lbl_ReqSkills.Name = "lbl_ReqSkills";
-            lbl_ReqSkills.Size = new Size(83, 15);
+            lbl_ReqSkills.Size = new Size(95, 17);
             lbl_ReqSkills.TabIndex = 104;
             lbl_ReqSkills.Text = "Required Skills";
             // 
@@ -185,6 +184,7 @@
             // 
             // rtb_Description
             // 
+            rtb_Description.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             rtb_Description.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             rtb_Description.Location = new Point(12, 156);
             rtb_Description.Name = "rtb_Description";
@@ -260,9 +260,9 @@
             label7.Location = new Point(52, 51);
             label7.Margin = new Padding(2, 0, 2, 0);
             label7.Name = "label7";
-            label7.Size = new Size(29, 15);
+            label7.Size = new Size(32, 15);
             label7.TabIndex = 6;
-            label7.Text = "Title";
+            label7.Text = "Title:";
             // 
             // tb_ProjectTitle
             // 
@@ -295,12 +295,12 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label8.Location = new Point(341, 77);
+            label8.Location = new Point(305, 77);
             label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
-            label8.Size = new Size(79, 15);
+            label8.Size = new Size(122, 15);
             label8.TabIndex = 7;
-            label8.Text = "Last Modified";
+            label8.Text = "Project Last Modified:";
             // 
             // label3
             // 
@@ -309,9 +309,9 @@
             label3.Location = new Point(39, 77);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(42, 15);
+            label3.Size = new Size(45, 15);
             label3.TabIndex = 2;
-            label3.Text = "Owner";
+            label3.Text = "Owner:";
             // 
             // tb_ProjectEndDate
             // 
@@ -371,34 +371,34 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(366, 51);
+            label5.Location = new Point(333, 51);
             label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
-            label5.Size = new Size(54, 15);
+            label5.Size = new Size(94, 15);
             label5.TabIndex = 4;
-            label5.Text = "End Date";
+            label5.Text = "Project End Date";
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(42, 101);
+            label4.Location = new Point(5, 101);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(39, 15);
+            label4.Size = new Size(82, 15);
             label4.TabIndex = 3;
-            label4.Text = "Status";
+            label4.Text = "Project Status:";
             // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.Location = new Point(362, 25);
+            label6.Location = new Point(326, 25);
             label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
-            label6.Size = new Size(58, 15);
+            label6.Size = new Size(101, 15);
             label6.TabIndex = 5;
-            label6.Text = "Start Date";
+            label6.Text = "Project Start Date:";
             // 
             // ConsultantInvites
             // 
@@ -407,9 +407,7 @@
             ClientSize = new Size(694, 633);
             Controls.Add(grpBoxProfileInfo);
             Controls.Add(groupBox1);
-            MinimumSize = new Size(710, 672);
             Name = "ConsultantInvites";
-            StartPosition = FormStartPosition.CenterScreen;
             Text = "ConsultantInvites";
             groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgv_ConsultantsInvites).EndInit();

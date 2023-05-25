@@ -1,17 +1,19 @@
-﻿using Interfaces.Repositories;
+﻿using DAL.Linq;
+using Interfaces.Repositories;
 using Interfaces.Services;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Domain.Services
 {
     public class DomainServiceManager : IDomainServiceManager
     {
-        private readonly IUserService UserService;
-        private readonly IProjectService ProjectService;
-        private readonly IInviteService InviteService;
-        private readonly ISpecializationService SpecializationService;
-        private readonly IMessageService MessageService;
-        private readonly IConsultantLineService ConsultantLineService;
-        private readonly IInvoiceService InvoiceService;
+        readonly IUserService UserService;
+        readonly IProjectService ProjectService;
+        readonly IInviteService InviteService;
+        readonly ISpecializationService SpecializationService;
+        readonly IMessageService MessageService;
+        readonly IConsultantLineService ConsultantLineService;
+        readonly IInvoiceService InvoiceService;
 
         public DomainServiceManager()
         {
@@ -39,5 +41,6 @@ namespace Domain.Services
         IConsultantLineService IDomainServiceManager.ConsultantLineService => ConsultantLineService;
 
         IInvoiceService IDomainServiceManager.InvoiceService => InvoiceService;
+
     }
 }

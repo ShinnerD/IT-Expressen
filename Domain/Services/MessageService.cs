@@ -21,7 +21,7 @@ namespace Domain.Services
         /// </summary>
         public List<IMessageModel> GetAllMessageFromProjectID(int projectID)
         {
-            return MessageRepository.GetAllMessageFromProjectID(projectID).OrderByDescending(i => i.MessageDate).ToList();
+            return AssignDomainProperties(MessageRepository.GetAllMessageFromProjectID(projectID).OrderByDescending(i => i.MessageDate).ToList());
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Domain.Services
         /// </summary>
         public List<IMessageModel> GetAllMessageFromUserID(int userId)
         {
-            return MessageRepository.GetAllMessageFromUserId(userId).OrderByDescending(i => i.MessageDate).ToList();
+            return AssignDomainProperties(MessageRepository.GetAllMessageFromUserId(userId).OrderByDescending(i => i.MessageDate).ToList());
         }
 
         /// <summary>
@@ -45,6 +45,29 @@ namespace Domain.Services
             newMessage.MessageDate = messageDate;
 
             MessageRepository.AddMessage(newMessage);
+        }
+
+        /// <summary>
+        /// Private Service Class Method that assigns additional properties for the IMessageModel
+        /// that needs to the fetched in other repositories.
+        /// </summary>
+        private List<IMessageModel> AssignDomainProperties(List<IMessageModel> messageList)
+        {
+            foreach (var message in messageList)
+            {
+                AssignDomainProperties(message);
+            }
+            return messageList;
+        }
+
+        /// <summary>
+        /// Private Service Class Method that assigns additional properties for the IMessageModel
+        /// that needs to the fetched in other repositories.
+        /// </summary>
+        private void AssignDomainProperties(IMessageModel message)
+        {
+            var user = ServiceManager.UserService.GetUserFromID(message.UserID);
+            message.UserName = user.UserName;
         }
     }
 }

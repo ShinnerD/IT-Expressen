@@ -22,12 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="ManagerViewInvoice.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Admin\AdminViewInvoice.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Admin\AdminViewInvites.cs">
       <SubType>Form</SubType>
     </Compile>

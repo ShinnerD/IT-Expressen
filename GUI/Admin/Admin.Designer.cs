@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             grpBoxProfileInfo = new GroupBox();
             bt_EditProfileCancel = new Button();
             lblUserCreationDate = new Label();
@@ -69,7 +69,7 @@
             btn_ViewInvites = new Button();
             btn_DetailsEdit = new Button();
             lbl_FeedbackProjectTab = new Label();
-            btn_InvoiceDetails = new Button();
+            btn_NewProject = new Button();
             btn_EditProject = new Button();
             btn_DeleteProject = new Button();
             dgv_ProjectSearchResults = new DataGridView();
@@ -152,9 +152,9 @@
             label2.Location = new Point(6, 25);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(59, 15);
+            label2.Size = new Size(62, 15);
             label2.TabIndex = 1;
-            label2.Text = "Firstname";
+            label2.Text = "Firstname:";
             // 
             // bt_EditProfile
             // 
@@ -189,9 +189,9 @@
             label7.Location = new Point(6, 51);
             label7.Margin = new Padding(2, 0, 2, 0);
             label7.Name = "label7";
-            label7.Size = new Size(58, 15);
+            label7.Size = new Size(61, 15);
             label7.TabIndex = 6;
-            label7.Text = "Lastname";
+            label7.Text = "Lastname:";
             // 
             // tb_Country
             // 
@@ -227,9 +227,9 @@
             label9.Location = new Point(304, 104);
             label9.Margin = new Padding(2, 0, 2, 0);
             label9.Name = "label9";
-            label9.Size = new Size(50, 15);
+            label9.Size = new Size(53, 15);
             label9.TabIndex = 8;
-            label9.Text = "Country";
+            label9.Text = "Country:";
             // 
             // tb_Zipcode
             // 
@@ -252,9 +252,9 @@
             label8.Location = new Point(305, 77);
             label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
-            label8.Size = new Size(50, 15);
+            label8.Size = new Size(53, 15);
             label8.TabIndex = 7;
-            label8.Text = "Zipcode";
+            label8.Text = "Zipcode:";
             // 
             // label3
             // 
@@ -263,9 +263,9 @@
             label3.Location = new Point(28, 77);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(36, 15);
+            label3.Size = new Size(39, 15);
             label3.TabIndex = 2;
-            label3.Text = "Email";
+            label3.Text = "Email:";
             // 
             // tb_City
             // 
@@ -328,9 +328,9 @@
             label5.Location = new Point(326, 51);
             label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
-            label5.Size = new Size(28, 15);
+            label5.Size = new Size(31, 15);
             label5.TabIndex = 4;
-            label5.Text = "City";
+            label5.Text = "City:";
             // 
             // label4
             // 
@@ -339,9 +339,9 @@
             label4.Location = new Point(23, 104);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(41, 15);
+            label4.Size = new Size(44, 15);
             label4.TabIndex = 3;
-            label4.Text = "Phone";
+            label4.Text = "Phone:";
             // 
             // label6
             // 
@@ -350,9 +350,9 @@
             label6.Location = new Point(305, 25);
             label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
-            label6.Size = new Size(49, 15);
+            label6.Size = new Size(52, 15);
             label6.TabIndex = 5;
-            label6.Text = "Address";
+            label6.Text = "Address:";
             // 
             // tabControl
             // 
@@ -396,7 +396,7 @@
             // 
             btn_NewUser.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btn_NewUser.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_NewUser.Location = new Point(670, 470);
+            btn_NewUser.Location = new Point(587, 469);
             btn_NewUser.Margin = new Padding(2);
             btn_NewUser.Name = "btn_NewUser";
             btn_NewUser.Size = new Size(107, 25);
@@ -409,7 +409,7 @@
             // 
             btn_DeleteUser.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btn_DeleteUser.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_DeleteUser.Location = new Point(835, 470);
+            btn_DeleteUser.Location = new Point(837, 469);
             btn_DeleteUser.Margin = new Padding(2);
             btn_DeleteUser.Name = "btn_DeleteUser";
             btn_DeleteUser.Size = new Size(100, 25);
@@ -422,7 +422,7 @@
             // 
             btn_EditUser.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btn_EditUser.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_EditUser.Location = new Point(566, 470);
+            btn_EditUser.Location = new Point(483, 468);
             btn_EditUser.Margin = new Padding(2);
             btn_EditUser.Name = "btn_EditUser";
             btn_EditUser.Size = new Size(100, 25);
@@ -436,19 +436,19 @@
             dgv_UserSearchResults.AllowUserToAddRows = false;
             dgv_UserSearchResults.AllowUserToDeleteRows = false;
             dgv_UserSearchResults.AllowUserToResizeRows = false;
-            dataGridViewCellStyle7.BackColor = Color.WhiteSmoke;
-            dgv_UserSearchResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.BackColor = Color.WhiteSmoke;
+            dgv_UserSearchResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dgv_UserSearchResults.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgv_UserSearchResults.BackgroundColor = SystemColors.Control;
             dgv_UserSearchResults.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = SystemColors.Control;
-            dataGridViewCellStyle8.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle8.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
-            dgv_UserSearchResults.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Control;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dgv_UserSearchResults.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dgv_UserSearchResults.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_UserSearchResults.Location = new Point(0, 63);
             dgv_UserSearchResults.MultiSelect = false;
@@ -530,7 +530,6 @@
             txtBox_UserSearchParams.PlaceholderText = "ID, Username, Full Name";
             txtBox_UserSearchParams.Size = new Size(283, 23);
             txtBox_UserSearchParams.TabIndex = 0;
-            txtBox_UserSearchParams.KeyDown += txtBox_UserSearchParams_KeyDown;
             // 
             // tabPage_Projects
             // 
@@ -538,7 +537,7 @@
             tabPage_Projects.Controls.Add(btn_ViewInvites);
             tabPage_Projects.Controls.Add(btn_DetailsEdit);
             tabPage_Projects.Controls.Add(lbl_FeedbackProjectTab);
-            tabPage_Projects.Controls.Add(btn_InvoiceDetails);
+            tabPage_Projects.Controls.Add(btn_NewProject);
             tabPage_Projects.Controls.Add(btn_EditProject);
             tabPage_Projects.Controls.Add(btn_DeleteProject);
             tabPage_Projects.Controls.Add(dgv_ProjectSearchResults);
@@ -587,18 +586,17 @@
             lbl_FeedbackProjectTab.Text = "FeedBack Label Message";
             lbl_FeedbackProjectTab.Visible = false;
             // 
-            // btn_InvoiceDetails
+            // btn_NewProject
             // 
-            btn_InvoiceDetails.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btn_InvoiceDetails.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_InvoiceDetails.Location = new Point(698, 468);
-            btn_InvoiceDetails.Margin = new Padding(2);
-            btn_InvoiceDetails.Name = "btn_InvoiceDetails";
-            btn_InvoiceDetails.Size = new Size(107, 25);
-            btn_InvoiceDetails.TabIndex = 35;
-            btn_InvoiceDetails.Text = "Invoice Details";
-            btn_InvoiceDetails.UseVisualStyleBackColor = true;
-            btn_InvoiceDetails.Click += btn_InvoiceDetails_Click;
+            btn_NewProject.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btn_NewProject.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_NewProject.Location = new Point(698, 468);
+            btn_NewProject.Margin = new Padding(2);
+            btn_NewProject.Name = "btn_NewProject";
+            btn_NewProject.Size = new Size(107, 25);
+            btn_NewProject.TabIndex = 35;
+            btn_NewProject.Text = "Invoice Details";
+            btn_NewProject.UseVisualStyleBackColor = true;
             // 
             // btn_EditProject
             // 
@@ -631,19 +629,19 @@
             dgv_ProjectSearchResults.AllowUserToAddRows = false;
             dgv_ProjectSearchResults.AllowUserToDeleteRows = false;
             dgv_ProjectSearchResults.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.BackColor = Color.WhiteSmoke;
-            dgv_ProjectSearchResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle3.BackColor = Color.WhiteSmoke;
+            dgv_ProjectSearchResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             dgv_ProjectSearchResults.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgv_ProjectSearchResults.BackgroundColor = SystemColors.Control;
             dgv_ProjectSearchResults.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = SystemColors.Control;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
-            dgv_ProjectSearchResults.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Control;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            dgv_ProjectSearchResults.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             dgv_ProjectSearchResults.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_ProjectSearchResults.Location = new Point(0, 63);
             dgv_ProjectSearchResults.MultiSelect = false;
@@ -810,7 +808,7 @@
         private RadioButton radio_Pending;
         private Button btn_SearchProjects;
         private TextBox txtBox_ProjectSearchParams;
-        private Button btn_InvoiceDetails;
+        private Button btn_NewProject;
         private Button btn_EditProject;
         private Button btn_DeleteProject;
         private Label lbl_FeedbackUserTab;
