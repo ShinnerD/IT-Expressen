@@ -8,6 +8,6 @@
         DateTime? InvoiceDate { get; set; }
         int InvoiceId { get; set; }
         int ProjectId { get; set; }
-        decimal TotalPrice { get; set; }
+        decimal? TotalPrice { get; set; }
     }
 }

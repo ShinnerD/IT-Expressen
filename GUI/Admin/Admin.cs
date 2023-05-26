@@ -283,22 +283,30 @@ namespace GUI.Admin
         /// </summary>
         private void OpenUserProfile(string userName, string userType)
         {
-            if (userType.ToLower() == "manager")
+            try
             {
-                Manager manager = new Manager(ServiceManager, userName);
-                manager.ShowDialog();
-                PerformUserSearch(userName);
+                if (userType.ToLower() == "manager")
+                {
+                    Manager manager = new Manager(ServiceManager, userName);
+                    manager.ShowDialog();
+                    PerformUserSearch(userName);
+                }
+                if (userType.ToLower() == "consultant")
+                {
+                    Consultant consultant = new Consultant(ServiceManager, userName);
+                    consultant.ShowDialog();
+                    PerformUserSearch(userName);
+                }
+                if (userType.ToLower() == "admin")
+                {
+                    userGuiHelper.FeedBackMessage(lbl_FeedbackUserTab, "Admin's can't edit other Admins.", Color.Red);
+                }
             }
-            if (userType.ToLower() == "consultant")
+            catch (Exception ex)
             {
-                Consultant consultant = new Consultant(ServiceManager, userName);
-                consultant.ShowDialog();
-                PerformUserSearch(userName);
+                MessageBox.Show("An exception occurred.\n" + ex.Message);
             }
-            if (userType.ToLower() == "admin")
-            {
-                userGuiHelper.FeedBackMessage(lbl_FeedbackUserTab, "Admin's can't edit other Admins.", Color.Red);
-            }
+            finally { this.Show(); }
         }
 
         /// <summary>

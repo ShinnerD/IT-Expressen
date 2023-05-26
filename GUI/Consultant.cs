@@ -111,15 +111,7 @@ namespace GUI
         private void LoadInvitesToDGV()
         {
             dgv_ConsultantsInvites.DataSource = null;
-            ProjectList.Clear();
-
-            IInviteService inviteService = invService;
-            invites = inviteService.GetInvitesFromUserId(userModelGet.ID).Where(i => i.InviteStatus?.ToLower() == "accepted").ToList();
-
-            foreach (IInvitesModel invite in invites)
-            {
-                ProjectList.Add(ServiceManager.ProjectService.GetProject(invite.ProjectId));
-            }
+            ProjectList = ServiceManager.ProjectService.GetConsultantProjects(userModelGet);
             dgv_ConsultantsInvites.DataSource = ProjectList;
             guiHelper.StartingSortedColumnIndex = 1;
         }
@@ -182,15 +174,12 @@ namespace GUI
 
         private void bt_seeInvites_Click(object sender, EventArgs e)
         {
-            if (dgv_ConsultantsInvites.SelectedRows.Count > 0)
-            {
-                var userName = userModelGet.UserName;
-                ConsultantInvites seeInv = new ConsultantInvites(ServiceManager, userName);
-                this.Hide();
-                seeInv.ShowDialog();
-                this.Show();
-                LoadInvitesToDGV();
-            }
+            var userName = userModelGet.UserName;
+            ConsultantInvites seeInv = new ConsultantInvites(ServiceManager, userName);
+            this.Hide();
+            seeInv.ShowDialog();
+            this.Show();
+            LoadInvitesToDGV();
         }
 
         private void bt_seeProjects_Click(object sender, EventArgs e)

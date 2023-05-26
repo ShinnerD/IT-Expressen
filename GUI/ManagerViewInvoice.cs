@@ -9,6 +9,7 @@ namespace GUI
         private readonly IDomainServiceManager ServiceManager;
 
         private IProjectModel ProjectForEdit;
+        private IInvoiceModel Invoice;
 
         private GuiHelper guiHelper = new GuiHelper();
 
@@ -133,6 +134,27 @@ namespace GUI
         private void dgv_PendingInvites_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             guiHelper.ReorderDataGridViewColumnHeaderClickEvent(dgv_PendingInvites, e, consultantLines);
+        }
+
+        private void btn_FinalizeInvoice_Click(object sender, EventArgs e)
+        {
+            //Get the Invoice so you can call an update on it.
+            try { Invoice = ServiceManager.InvoiceService.GetInvoiceFromProjectID(ProjectForEdit.ProjectId); }
+            catch (Exception) { guiHelper.FeedBackMessage(lbl_FeedBackNewProject, "Problem retrieving Invoice.", Color.Red); }
+            if (Invoice is null)
+            {
+                guiHelper.FeedBackMessage(lbl_FeedBackNewProject, "No invoice found for project since no payments required.", Color.Red);
+            }
+            //Call an update on the invoice to finalize it.
+            else
+            {
+                try
+                {
+                    ServiceManager.InvoiceService.UpdateInvoice(Invoice);
+                    guiHelper.FeedBackMessage(lbl_FeedBackNewProject, "Invoice has been finalized for this project.", Color.Green, 10000);
+                }
+                catch (Exception ex) { guiHelper.FeedBackMessage(lbl_FeedBackNewProject, ex.Message, Color.Red); }
+            }
         }
     }
 }

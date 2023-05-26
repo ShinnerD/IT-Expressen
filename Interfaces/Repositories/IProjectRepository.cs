@@ -53,5 +53,10 @@ namespace Interfaces.Repositories
         /// according to the project's start and end date by using the current date.
         /// </summary>
         void UpdateProjectStatusForAll();
+
+        /// <summary>
+        /// Retrieves a list of projects from the database with Project IDs matching the integers from the provided list.
+        /// </summary>
+        List<IProjectModel> GetProjectsFromIdList(List<int> targetProjectIds);
     }
 }

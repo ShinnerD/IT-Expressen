@@ -175,6 +175,18 @@ namespace Domain.Services
         }
 
         /// <summary>
+        /// Retrieves a list of projects connected to the consultant specified in the parameters.
+        /// These are projects the consultant has accepted invites to.
+        /// </summary>
+        public List<IProjectModel> GetConsultantProjects(IUserModel consultant)
+        {
+            var targetProjectIds = _domainServiceManager.InviteService.GetInvitesFromUserId(consultant.ID)
+                .Where(i => i.InviteStatus.ToLower() == "accepted").Select(i => i.ProjectId).ToList();
+
+            return _projectRepo.GetProjectsFromIdList(targetProjectIds);
+        } 
+
+        /// <summary>
         /// Searches Projects based on a search term. /JQ
         /// </summary>
         public List<IProjectModel> SearchProjects(string searchTerm, int userId)

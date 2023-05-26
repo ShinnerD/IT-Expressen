@@ -11,7 +11,7 @@ namespace DAL.Models
     {
         public int InvoiceId { get; set; }
         public int ProjectId { get; set; }
-        public decimal TotalPrice { get; set; }
+        public decimal? TotalPrice { get; set; }
         public DateTime? InvoiceDate { get; set; }
     }
 }

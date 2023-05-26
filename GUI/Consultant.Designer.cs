@@ -82,6 +82,7 @@
             dgv_ConsultantsInvites.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_ConsultantsInvites.Location = new Point(3, 19);
             dgv_ConsultantsInvites.Name = "dgv_ConsultantsInvites";
+            dgv_ConsultantsInvites.ReadOnly = true;
             dgv_ConsultantsInvites.RowHeadersVisible = false;
             dgv_ConsultantsInvites.RowTemplate.Height = 25;
             dgv_ConsultantsInvites.SelectionMode = DataGridViewSelectionMode.FullRowSelect;

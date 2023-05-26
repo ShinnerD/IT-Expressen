@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             NewProjectGrpBox = new GroupBox();
             lbl_TotalCost = new Label();
             label2 = new Label();
@@ -49,6 +49,7 @@
             txtBox_ProjectTitle = new TextBox();
             checkedListSkills = new CheckedListBox();
             btn_NewProjectBack = new Button();
+            btn_FinalizeInvoice = new Button();
             NewProjectGrpBox.SuspendLayout();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_PendingInvites).BeginInit();
@@ -56,6 +57,7 @@
             // 
             // NewProjectGrpBox
             // 
+            NewProjectGrpBox.Controls.Add(btn_FinalizeInvoice);
             NewProjectGrpBox.Controls.Add(lbl_TotalCost);
             NewProjectGrpBox.Controls.Add(label2);
             NewProjectGrpBox.Controls.Add(groupBox1);
@@ -121,19 +123,19 @@
             dgv_PendingInvites.AllowUserToAddRows = false;
             dgv_PendingInvites.AllowUserToDeleteRows = false;
             dgv_PendingInvites.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = Color.WhiteSmoke;
-            dgv_PendingInvites.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.BackColor = Color.WhiteSmoke;
+            dgv_PendingInvites.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             dgv_PendingInvites.BackgroundColor = SystemColors.Control;
             dgv_PendingInvites.BorderStyle = BorderStyle.None;
             dgv_PendingInvites.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dgv_PendingInvites.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = SystemColors.Window;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle6.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            dgv_PendingInvites.DefaultCellStyle = dataGridViewCellStyle6;
             dgv_PendingInvites.Dock = DockStyle.Fill;
             dgv_PendingInvites.Location = new Point(3, 21);
             dgv_PendingInvites.MultiSelect = false;
@@ -317,13 +319,24 @@
             // btn_NewProjectBack
             // 
             btn_NewProjectBack.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_NewProjectBack.Location = new Point(666, 452);
+            btn_NewProjectBack.Location = new Point(511, 454);
             btn_NewProjectBack.Name = "btn_NewProjectBack";
             btn_NewProjectBack.Size = new Size(100, 25);
             btn_NewProjectBack.TabIndex = 3;
             btn_NewProjectBack.Text = "Back";
             btn_NewProjectBack.UseVisualStyleBackColor = true;
             btn_NewProjectBack.Click += btn_NewProjectBack_Click;
+            // 
+            // btn_FinalizeInvoice
+            // 
+            btn_FinalizeInvoice.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_FinalizeInvoice.Location = new Point(666, 454);
+            btn_FinalizeInvoice.Name = "btn_FinalizeInvoice";
+            btn_FinalizeInvoice.Size = new Size(100, 25);
+            btn_FinalizeInvoice.TabIndex = 37;
+            btn_FinalizeInvoice.Text = "Finalize Invoice";
+            btn_FinalizeInvoice.UseVisualStyleBackColor = true;
+            btn_FinalizeInvoice.Click += btn_FinalizeInvoice_Click;
             // 
             // ManagerViewInvoice
             // 
@@ -368,5 +381,6 @@
         private GroupBox groupBox1;
         private Label lbl_TotalCost;
         private Label label2;
+        private Button btn_FinalizeInvoice;
     }
 }

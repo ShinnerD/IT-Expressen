@@ -169,6 +169,7 @@
             checkedListSkills.Location = new Point(351, 156);
             checkedListSkills.MultiColumn = true;
             checkedListSkills.Name = "checkedListSkills";
+            checkedListSkills.SelectionMode = SelectionMode.None;
             checkedListSkills.Size = new Size(331, 126);
             checkedListSkills.TabIndex = 103;
             // 

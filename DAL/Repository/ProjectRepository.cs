@@ -31,7 +31,6 @@ namespace DAL.Repository
             dtoProject.Project_End_Date = newProject.ProjectEndDate;
             dtoProject.Project_Modify_Date = newProject.ProjectModifyDate;
             dtoProject.Project_Status = newProject.ProjectStatus;
-            dtoProject.Total_Invoice_Price = newProject.TotalInvoicePrice;
 
             dbContext.Projects.InsertOnSubmit(dtoProject);
             dbContext.SubmitChanges();
@@ -168,6 +167,7 @@ namespace DAL.Repository
                 .Select(p => p.Project_ID).ToList();
 
             var specializations = dbContext.Projects_Specialisation_Lines.Where(i => projectIds.Contains(i.Project_ID)).ToList();
+            var invoices = dbContext.Invoices.Where(i => projectIds.Contains(i.Project_ID.GetValueOrDefault())).ToList();
 
             foreach (var dtoProject in dtoProjects)
             {
@@ -182,7 +182,7 @@ namespace DAL.Repository
                     projectModel.ProjectStartDate = dtoProject.Project_Start_Date;
                     projectModel.ProjectEndDate = dtoProject.Project_End_Date;
                     projectModel.ProjectModifyDate = dtoProject.Project_Modify_Date;
-                    projectModel.TotalInvoicePrice = dtoProject.Total_Invoice_Price;
+                    projectModel.TotalInvoicePrice = invoices.FirstOrDefault(i => i.Project_ID == dtoProject.Project_ID)?.Total_Price;
                     projectModel.ProjectStatus = dtoProject.Project_Status;
 
                     var projectSpecializations = specializations.Where(i => i.Project_ID == dtoProject.Project_ID).ToList();
@@ -252,6 +252,11 @@ namespace DAL.Repository
             {
                 throw new Exception("Server failed to update project status'.");
             }
+        }
+
+        public List<IProjectModel> GetProjectsFromIdList(List<int> targetProjectIds)
+        {
+            return TransferAllProjectProperties(dbContext.Projects.Where(i => targetProjectIds.Contains(i.Project_ID)));
         }
     }
 }
