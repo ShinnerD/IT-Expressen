@@ -42,8 +42,8 @@ namespace DAL.Repository
                 user.ZipCode = dto.Zip_Code;
                 user.PhoneNumber = dto.Phone_Number;
                 user.Country = dto.Country;
-                user.ActiveStatus = (bool?)dto.Active_Status;
-                user.CreationDate = (DateTime?)dto.Creation_Date;
+                user.ActiveStatus = dto.Active_Status;
+                user.CreationDate = dto.Creation_Date;
                 user.UserType = dto.User_Type;
 
                 result.Add(user);

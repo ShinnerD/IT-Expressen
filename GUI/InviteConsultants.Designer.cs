@@ -422,7 +422,7 @@
             MinimumSize = new Size(793, 599);
             Name = "InviteConsultants";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "InviteConsultants";
+            Text = "Invites";
             ((System.ComponentModel.ISupportInitialize)dgv_ConsultantList).EndInit();
             grpBoxProfileInfo.ResumeLayout(false);
             grpBoxProfileInfo.PerformLayout();

@@ -520,7 +520,7 @@
             MinimumSize = new Size(973, 578);
             Name = "ManageProject";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "ManageProject";
+            Text = "Project Messages and Members";
             TransparencyKey = Color.FromArgb(64, 64, 0);
             grpBoxProfileInfo.ResumeLayout(false);
             grpBoxProfileInfo.PerformLayout();

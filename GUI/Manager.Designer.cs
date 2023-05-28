@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
@@ -51,6 +51,7 @@
             lblUserCreationDate = new Label();
             bt_EditProfile = new Button();
             ViewProjectsGrpBox = new GroupBox();
+            btn_ViewInvoice = new Button();
             bt_AddConsultant = new Button();
             lbl_ViewProjectsFeedBack = new Label();
             btn_NewProject = new Button();
@@ -69,7 +70,6 @@
             dtp_NewProjectStartDate = new DateTimePicker();
             btn_NewProjectSave = new Button();
             btn_NewProjectBack = new Button();
-            btn_ViewInvoice = new Button();
             grpBoxProfileInfo.SuspendLayout();
             ViewProjectsGrpBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_Viewproject).BeginInit();
@@ -371,6 +371,17 @@
             ViewProjectsGrpBox.TabStop = false;
             ViewProjectsGrpBox.Text = "Projects";
             // 
+            // btn_ViewInvoice
+            // 
+            btn_ViewInvoice.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_ViewInvoice.Location = new Point(325, 29);
+            btn_ViewInvoice.Name = "btn_ViewInvoice";
+            btn_ViewInvoice.Size = new Size(105, 25);
+            btn_ViewInvoice.TabIndex = 20;
+            btn_ViewInvoice.Text = "Invoice";
+            btn_ViewInvoice.UseVisualStyleBackColor = true;
+            btn_ViewInvoice.Click += btn_ViewInvoice_Click;
+            // 
             // bt_AddConsultant
             // 
             bt_AddConsultant.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
@@ -437,14 +448,14 @@
             dgv_Viewproject.AllowUserToResizeRows = false;
             dgv_Viewproject.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgv_Viewproject.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dgv_Viewproject.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dgv_Viewproject.DefaultCellStyle = dataGridViewCellStyle1;
             dgv_Viewproject.Location = new Point(3, 58);
             dgv_Viewproject.Margin = new Padding(2);
             dgv_Viewproject.MultiSelect = false;
@@ -616,29 +627,18 @@
             btn_NewProjectBack.UseVisualStyleBackColor = true;
             btn_NewProjectBack.Click += btn_NewProjectBack_Click;
             // 
-            // btn_ViewInvoice
-            // 
-            btn_ViewInvoice.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_ViewInvoice.Location = new Point(325, 29);
-            btn_ViewInvoice.Name = "btn_ViewInvoice";
-            btn_ViewInvoice.Size = new Size(105, 25);
-            btn_ViewInvoice.TabIndex = 20;
-            btn_ViewInvoice.Text = "Invoice";
-            btn_ViewInvoice.UseVisualStyleBackColor = true;
-            btn_ViewInvoice.Click += btn_ViewInvoice_Click;
-            // 
             // Manager
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(699, 539);
-            Controls.Add(ViewProjectsGrpBox);
             Controls.Add(NewProjectGrpBox);
+            Controls.Add(ViewProjectsGrpBox);
             Controls.Add(grpBoxProfileInfo);
             MinimumSize = new Size(715, 578);
             Name = "Manager";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Manager";
+            Text = "Manager Profile";
             grpBoxProfileInfo.ResumeLayout(false);
             grpBoxProfileInfo.PerformLayout();
             ViewProjectsGrpBox.ResumeLayout(false);

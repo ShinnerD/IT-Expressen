@@ -8,9 +8,10 @@ namespace GUI
     public partial class CreateUser : Form
     {
         private readonly IDomainServiceManager ServiceManager;
-        private List<IUserModel> allUsers { get; set; }
         private IUserService userService;
         bool isAdmin = false;
+
+        private GuiHelper guiHelper = new GuiHelper();
 
         AdminMain AdminForm;
 
@@ -20,7 +21,6 @@ namespace GUI
             userService = ServiceManager.UserService;
 
             InitializeComponent();
-            LoadUserData();
             SetupSkillsCheckList();
         }
 
@@ -33,9 +33,9 @@ namespace GUI
             isAdmin = IsAdminCreatingUser;
 
             InitializeComponent();
-            LoadUserData();
             SetupSkillsCheckList();
         }
+
         //Creates a new user according to the parameters defined in the IUserService. 
         public void CreateNewUser()
         {
@@ -73,9 +73,9 @@ namespace GUI
                     MessageBox.Show("Please fill out the form and check if both passwords are the same");
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Username is already in use");
+                guiHelper.FeedBackMessage(lbl_FeedBackLabel, ex.Message, Color.Red);
             }
         }
         //Makes sure the two passwords are the same and critical textboxes arent left empty //MS
@@ -91,17 +91,13 @@ namespace GUI
             }
             return false;
         }
-        //Initialize user data //MS
-        private void LoadUserData()
-        {
-            var UserService = ServiceManager.UserService;
-            var OneUsers = UserService.GetUserFromUsername(tb_UserName.Text);
-        }
+
         // Button click event -> see method for results /MS
         private void bt_CreateUser_Click(object sender, EventArgs e)
         {
             CreateNewUser();
         }
+
         //Creates the CheckListBox used for specialization according to data from the database  //MS
         private void SetupSkillsCheckList()
         {
@@ -119,6 +115,7 @@ namespace GUI
                 MessageBox.Show("Failed to retrieve skills from server.");
             }
         }
+
         //Locks and unlocks the CheckBoxList depending on what user type is selected in the ComboBox. Also removed any checked boxes in the CheckBoxList if other is selected /MS
         private void cb_UserType_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -134,34 +131,40 @@ namespace GUI
                     clb_Skills.SetItemChecked(i, false);
             }
         }
+
         // Button click event -> Close current form /MS
         private void bt_back_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
         //After the User is created, the user is forwarded the the correct form, defined by their user type //MS
         private void forwardUserToProfile()
         {
             var user = userService.GetUserFromUsername(tb_UserName.Text);
             if (user.UserType == "manager")
             {
-                this.Close();
                 GUI.Manager a = new Manager(ServiceManager, user.UserName);
-                a.Show();
+                this.Hide();
+                a.ShowDialog();
+                this.Close();
             }
             if (user.UserType == "consultant")
             {
-                this.Hide();
                 GUI.Consultant a = new Consultant(ServiceManager, user.UserName);
-                a.Show();
+                this.Hide();
+                a.ShowDialog();
+                this.Close();
             }
             if (user.UserType == "admin")
             {
                 this.Hide();
                 AdminMain a = new AdminMain(ServiceManager, user.UserName);
-                a.Show();
+                a.ShowDialog();
+                this.Close();
             }
         }
+
         //Adds selected skills to specialization and links to a specefik user /MS
         private List<string> FindCheckedSkills()
         {

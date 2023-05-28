@@ -1,4 +1,5 @@
-﻿using DAL.Repository;
+﻿using DAL.Linq;
+using DAL.Repository;
 using Interfaces.Models;
 using Interfaces.Repositories;
 using Interfaces.Services;
@@ -67,6 +68,33 @@ namespace Domain.Services
             specRepo.RemoveFromProject(projectId, specializations);
         }
 
+
+        /// <summary>
+        /// Updates the user specializations in the database by checking for differences between the specializations provided
+        /// and those present in the database. Adds and removes according to the differences.
+        /// </summary>
+        public void UpdateUserSpecializations(IUserModel user, List<string> specializations)
+        {
+            if (user.UserType.ToLower() != "consultant") { throw new Exception("User is not a consultant and has no specializations."); }
+
+            var currentUserSpecializations = serviceManager.SpecializationService.GetUserSpecializations(user.ID) 
+                ?? throw new Exception("Can't locate specified user."); 
+
+            List<string> specsToBeRemoved = currentUserSpecializations.Where(i => !specializations.Contains(i)).ToList();
+            List<string> specsToBeAdded = specializations.Where(i => !currentUserSpecializations.Contains(i)).ToList();
+
+            try
+            {
+                serviceManager.SpecializationService.RemoveSpecializationsFromUser(user.ID, specsToBeRemoved);
+                serviceManager.SpecializationService.AddSpecializationsToUser(user.ID, specsToBeAdded);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Failed to update user specializations.");
+            }
+        }
+
+
         /// <summary>
         /// Adds the List of string representing specializations to the user with the given User Id to the database. /MS
         /// </summary>
@@ -78,7 +106,7 @@ namespace Domain.Services
         /// <summary>
         /// Removes the given list of string specializations to the user. /DK
         /// </summary>
-        public void RemoveSpecializationsFromUser(int userId, string specializations)
+        public void RemoveSpecializationsFromUser(int userId, List<string> specializations)
         {
             specRepo.RemoveSpecializationsFromUser(userId, specializations);
         }

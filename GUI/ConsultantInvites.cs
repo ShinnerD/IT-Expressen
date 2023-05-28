@@ -22,7 +22,6 @@ namespace GUI
             DataGridInitialSetup();
             SetupSkillsCheckList();
             LoadInvitesToDGV();
-            dgv_ConsultantsInvites.Rows[0].Cells[0].Selected = false;
         }
 
         private void GetUser()
@@ -71,7 +70,7 @@ namespace GUI
             invites = inviteService.GetInvitesFromUserId(userModelGet.ID);
             dgv_ConsultantsInvites.DataSource = null;
             dgv_ConsultantsInvites.DataSource = invites;
-            dgv_ConsultantsInvites.Rows[0].Cells[0].Selected = false;
+            dgv_ConsultantsInvites.ClearSelection();
         }
 
         private void DataGridInitialSetup()

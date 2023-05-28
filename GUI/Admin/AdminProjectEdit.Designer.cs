@@ -284,7 +284,7 @@
             MinimumSize = new Size(788, 522);
             Name = "AdminProjectEdit";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "AdminProjectEdit";
+            Text = "Edit Project";
             NewProjectGrpBox.ResumeLayout(false);
             NewProjectGrpBox.PerformLayout();
             ResumeLayout(false);

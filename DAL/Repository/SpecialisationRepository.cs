@@ -96,7 +96,7 @@ namespace DAL.Repository
         /// </summary>
         public void AddSpecializationsToUser(int UserID, List<string> specializations)
         {
-            if (specializations != null)
+            if (specializations.Any())
             {
                 List<Linq.Specialisations_Line> newSpecLineRows = new List<Linq.Specialisations_Line>();
 
@@ -118,10 +118,10 @@ namespace DAL.Repository
         /// <summary>
         /// Removes the given list of string specializations to the user. /DK
         /// </summary>
-        public void RemoveSpecializationsFromUser(int userId, string specializations)
+        public void RemoveSpecializationsFromUser(int userId, List<string> specializations)
         {
             var targetSpecIds = dbContext.Specialisations.Where(i => specializations.Contains(i.Specialisation1)).Select(x => x.Spec_Id).ToList();
-            var targetSpecLines = dbContext.Users.First(i => i.User_ID == userId).Specialisations_Lines.Where(x => targetSpecIds.Contains(x.Spec_Id)).ToList();
+            var targetSpecLines = dbContext.Specialisations_Lines.Where(x => x.User_Id == userId && targetSpecIds.Contains(x.Spec_Id)).ToList();
 
             dbContext.Specialisations_Lines.DeleteAllOnSubmit(targetSpecLines);
             dbContext.SubmitChanges();

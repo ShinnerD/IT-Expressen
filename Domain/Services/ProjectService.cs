@@ -119,25 +119,11 @@ namespace Domain.Services
 
             var currentProjectSpecializations = _domainServiceManager.SpecializationService.GetProjectSpecializations(project.ProjectId);
 
-            List<string> specsToBeRemoved = new List<string>();
-            List<string> specsToBeAdded = new List<string>();
+            List<string> specsToBeRemoved = currentProjectSpecializations.Where(i => !specializations.Contains(i)).ToList();
+            List<string> specsToBeAdded = specializations.Where(i => !currentProjectSpecializations.Contains(i)).ToList();
 
             project.ProjectModifyDate = DateTime.Now;
 
-            foreach (var currentSpec in currentProjectSpecializations)
-            {
-                if (!specializations.Contains(currentSpec))
-                {
-                    specsToBeRemoved.Add(currentSpec);
-                }
-            }
-            foreach (var newSpec in specializations)
-            {
-                if (!currentProjectSpecializations.Contains(newSpec))
-                {
-                    specsToBeAdded.Add(newSpec);
-                }
-            }
             try
             {
                 _domainServiceManager.SpecializationService.RemoveFromProject(project.ProjectId, specsToBeRemoved);

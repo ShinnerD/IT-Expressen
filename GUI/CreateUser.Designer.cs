@@ -74,6 +74,7 @@
             tb_Email = new TextBox();
             tb_Address = new TextBox();
             tb_PhoneNumber = new TextBox();
+            lbl_FeedBackLabel = new Label();
             grpBoxProfileInfo.SuspendLayout();
             SuspendLayout();
             // 
@@ -468,6 +469,18 @@
             tb_PhoneNumber.Size = new Size(225, 16);
             tb_PhoneNumber.TabIndex = 7;
             // 
+            // lbl_FeedBackLabel
+            // 
+            lbl_FeedBackLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            lbl_FeedBackLabel.AutoSize = true;
+            lbl_FeedBackLabel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            lbl_FeedBackLabel.Location = new Point(3, 430);
+            lbl_FeedBackLabel.Name = "lbl_FeedBackLabel";
+            lbl_FeedBackLabel.Size = new Size(166, 15);
+            lbl_FeedBackLabel.TabIndex = 33;
+            lbl_FeedBackLabel.Text = "Feedback label for messages...";
+            lbl_FeedBackLabel.Visible = false;
+            // 
             // CreateUser
             // 
             AcceptButton = bt_CreateUser;
@@ -475,6 +488,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = bt_back;
             ClientSize = new Size(652, 452);
+            Controls.Add(lbl_FeedBackLabel);
             Controls.Add(grpBoxProfileInfo);
             Controls.Add(bt_back);
             Controls.Add(label15);
@@ -489,7 +503,7 @@
             MinimumSize = new Size(668, 491);
             Name = "CreateUser";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "CreateUser";
+            Text = "New Account";
             grpBoxProfileInfo.ResumeLayout(false);
             grpBoxProfileInfo.PerformLayout();
             ResumeLayout(false);
@@ -542,5 +556,6 @@
         private TextBox tb_Password;
         private TextBox tb_RePassword;
         private Label label11;
+        private Label lbl_FeedBackLabel;
     }
 }
