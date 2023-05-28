@@ -16,7 +16,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// A list of string representing specializations defined in the database. /DK
+        /// A list of string representing specializations defined in the database. /Dennis Kempf
         /// </summary>
         public List<string> GetCurrentSpecializationsList()
         {
@@ -24,7 +24,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Returns a List of strings representing all the chosen specializations for a project. /DK
+        /// Returns a List of strings representing all the chosen specializations for a project. /Dennis Kempf
         /// </summary>
         public List<string> GetProjectSpecializations(int projectId)
         {
@@ -32,7 +32,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Returns a list of strings representing the specializations associated with the user specified in the parameters. /DK
+        /// Returns a list of strings representing the specializations associated with the user specified in the parameters. /Dennis Kempf
         /// </summary>
         public List<string> GetUserSpecializations(int userId)
         {
@@ -40,7 +40,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// An int representing the generated identifier ID for a specialization in the database. /DK
+        /// An int representing the generated identifier ID for a specialization in the database. /Dennis Kempf
         /// </summary>
         public int GetSpecializationID(string specialization)
         {
@@ -48,7 +48,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// A String representing the specialization with the provided spec Id /DK
+        /// A String representing the specialization with the provided spec Id /Dennis Kempf
         /// </summary>
         public string GetSpecializationString(int specId)
         {
@@ -56,7 +56,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Adds the given list of string specializations to the project in the database. /DK
+        /// Adds the given list of string specializations to the project in the database. /Dennis Kempf
         /// </summary>
         public void AddToProject(int projectId, List<string> specializations)
         {
@@ -80,7 +80,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Removes the given list of string specializations from the project in the database. /DK
+        /// Removes the given list of string specializations from the project in the database. /Dennis Kempf
         /// </summary>
         public void RemoveFromProject(int projectId, List<string> specializations)
         {
@@ -116,7 +116,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Removes the given list of string specializations to the user. /DK
+        /// Removes the given list of string specializations to the user. /Dennis Kempf
         /// </summary>
         public void RemoveSpecializationsFromUser(int userId, List<string> specializations)
         {

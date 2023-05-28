@@ -39,7 +39,7 @@
 
         /// <summary>
         /// Async Task that turns on the visibility of the label provided in the parameters,
-        /// shows the given message in the given color, for the given time. /DK
+        /// shows the given message in the given color, for the given time. /Dennis Kempf
         /// </summary>
         public async Task FeedBackMessage(Label label, string message, Color? color = null, int milliseconds = 5000)
         {
@@ -69,7 +69,7 @@
         }
 
         /// <summary>
-        /// Allows sorting for the DataGridViews according to a boolean that switches when the columns get clicked. /DK
+        /// Allows sorting for the DataGridViews according to a boolean that switches when the columns get clicked. /Dennis Kempf
         /// </summary>
         private List<T> SortData<T>(List<T> list, string column, bool ascending)
         {
@@ -80,7 +80,7 @@
         }
 
         /// <summary>
-        /// Auto-sizes the datagridview columns to look nice after the data binding complete event. /DK
+        /// Auto-sizes the datagridview columns to look nice after the data binding complete event. /Dennis Kempf
         /// </summary>
         public static void DataGridViewDataBindingCompleteResize(object sender, DataGridViewBindingCompleteEventArgs e)
         {

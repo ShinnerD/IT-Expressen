@@ -75,7 +75,7 @@ namespace Domain.Services
 
         /// <summary>
         /// Deletes an invite from the database. Prevents deletion of accepted invites unless the boolean deleteAccetedInvite is explicitly
-        /// set to true when calling the method. This is for admin privileges atm. /DK
+        /// set to true when calling the method. This is for admin privileges atm. /Dennis Kempf
         /// </summary>
         public void DeleteInvite(IInvitesModel invite, bool deleteAcceptedInvite = false)
         {

@@ -13,6 +13,9 @@ namespace Tests
     [TestClass]
     public class InviteTests
     {
+        /// <summary>
+        /// Invitation service test. /Erik
+        /// </summary>
         [TestMethod]
         public void SendInvitation_WithValidProjectId_ReturnsTrue()
         {

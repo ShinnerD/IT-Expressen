@@ -99,7 +99,7 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Deletes a user from the database. /DK
+        /// Deletes a user from the database. /Dennis Kempf
         /// </summary>
         public void Delete(int userId)
         {
@@ -121,7 +121,7 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Returns a list of Users that have any of the specializations provided in the list specified in the parameters. /DK
+        /// Returns a list of Users that have any of the specializations provided in the list specified in the parameters. /Dennis Kempf
         /// </summary>
         public List<IUserModel> GetUsersWithAnySpecializations(List<string> specializations)
         {
@@ -129,7 +129,7 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Returns a list of Users that have all of the specializations provided in the list specified in the parameters. /DK
+        /// Returns a list of Users that have all of the specializations provided in the list specified in the parameters. /Dennis Kempf
         /// </summary>
         public List<IUserModel> GetUsersWithAllSpecializations(List<string> specializations)
         {
@@ -138,7 +138,7 @@ namespace Domain.Services
 
         /// <summary>
         /// Updates a user in the database with any changes that might be in the IUserModel provided in the parameter.
-        /// The Provided IUserModel must be a valid user from the database. /DK
+        /// The Provided IUserModel must be a valid user from the database. /Dennis Kempf
         /// </summary>
         public void UpdateUser(IUserModel user)
         {

@@ -18,7 +18,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Adds a project with all the details required in the parameter of the method to the database. /DK
+        /// Adds a project with all the details required in the parameter of the method to the database. /Dennis Kempf
         /// </summary>
         public void CreateProject(IProjectModel newProject, List<string> specializations)
         {
@@ -39,7 +39,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Updates an existing project in the database to match the IProjectModel provided in the parameters. /DK
+        /// Updates an existing project in the database to match the IProjectModel provided in the parameters. /Dennis Kempf
         /// </summary>
         public void UpdateProject(IProjectModel project)
         {
@@ -71,7 +71,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Returns an IProjectModel for the project matching the provided Project Id. /DK
+        /// Returns an IProjectModel for the project matching the provided Project Id. /Dennis Kempf
         /// </summary>
         public IProjectModel GetProject(int projectId)
         {
@@ -88,7 +88,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Returns a List of IProjectModels with projects related to the User Id provided. /DK
+        /// Returns a List of IProjectModels with projects related to the User Id provided. /Dennis Kempf
         /// </summary>
         public List<IProjectModel> GetUserProjects(int userId)
         {
@@ -100,7 +100,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Retrieves a List of IProjectModels in which each project require ALL of the provided specializations. /DK
+        /// Retrieves a List of IProjectModels in which each project require ALL of the provided specializations. /Dennis Kempf
         /// </summary>
         public List<IProjectModel> GetProjectsFromAllSpecializations(List<string> specializations, bool includeEndedProjects = false)
         {
@@ -124,7 +124,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Retrieves a List of IProjectModels in which each project requires at least one of the specializations specified. /DK
+        /// Retrieves a List of IProjectModels in which each project requires at least one of the specializations specified. /Dennis Kempf
         /// </summary>
         public List<IProjectModel> GetProjectsFromAnySpecializations(List<string> specializations, bool includeEndedProjects = false)
         {
@@ -154,7 +154,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Private repository class method. Transfers the properties of database dto objects to ProjectModels. /DK
+        /// Private repository class method. Transfers the properties of database dto objects to ProjectModels. /Dennis Kempf
         /// </summary>
         private List<IProjectModel> TransferAllProjectProperties(IQueryable<Linq.Project>? dtoProjects)
         {
@@ -240,7 +240,7 @@ namespace DAL.Repository
 
         /// <summary>
         /// Updates the Project Status for ALL projects in the Projects table.
-        /// Stored Procedure to be executed on program launch. /DK
+        /// Stored Procedure to be executed on program launch. /Dennis Kempf
         /// </summary>
         public void UpdateProjectStatusForAll()
         {

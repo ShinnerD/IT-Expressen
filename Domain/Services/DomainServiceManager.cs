@@ -3,6 +3,10 @@ using Interfaces.Services;
 
 namespace Domain.Services
 {
+    /// <summary>
+    /// Domain Service Manager. Instantiates domain layer services and grabs the instance of the database data context and passes it down,
+    /// so that all services act on the same data context. /Dennis Kempf
+    /// </summary>
     public class DomainServiceManager : IDomainServiceManager
     {
         private readonly IUserService UserService;

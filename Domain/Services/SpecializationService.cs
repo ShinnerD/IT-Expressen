@@ -7,7 +7,7 @@ using Interfaces.Services;
 namespace Domain.Services
 {
     /// <summary>
-    /// Service class that has methods for retrieving and manipulating skills/specializations. /DK
+    /// Service class that has methods for retrieving and manipulating skills/specializations. /Dennis Kempf
     /// </summary>
     public class SpecializationService : ISpecializationService
     {
@@ -21,7 +21,7 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// List of strings representing the current Specializations/Skills in the Database. /DK
+        /// List of strings representing the current Specializations/Skills in the Database. /Dennis Kempf
         /// </summary>
         public List<string> ListDefinedSpecializations()
         {
@@ -29,7 +29,7 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Returns a List of strings representing all specializations chosen for a project with the provided id. /DK
+        /// Returns a List of strings representing all specializations chosen for a project with the provided id. /Dennis Kempf
         /// </summary>
         public List<string> GetProjectSpecializations(int projectId)
         {
@@ -37,7 +37,7 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Returns an int representing the specialization ID matching the specialization in string form provided in the parameters. /DK
+        /// Returns an int representing the specialization ID matching the specialization in string form provided in the parameters. /Dennis Kempf
         /// </summary>
         public int GetId(string specialization)
         {
@@ -45,7 +45,7 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Returns a string representing the specialization which matches the provided ID in the database. /DK
+        /// Returns a string representing the specialization which matches the provided ID in the database. /Dennis Kempf
         /// </summary>
         public string GetString(int specId)
         {
@@ -53,7 +53,7 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Adds the specializations provided to the project in the database. /DK
+        /// Adds the specializations provided to the project in the database. /Dennis Kempf
         /// </summary>
         public void AddToProject(int projectId, List<string> specializations)
         {
@@ -61,7 +61,7 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Removes the specializations provided from the project in the database. /DK
+        /// Removes the specializations provided from the project in the database. /Dennis Kempf
         /// </summary>
         public void RemoveFromProject(int projectId, List<string> specializations)
         {
@@ -104,7 +104,7 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Removes the given list of string specializations to the user. /DK
+        /// Removes the given list of string specializations to the user. /Dennis Kempf
         /// </summary>
         public void RemoveSpecializationsFromUser(int userId, List<string> specializations)
         {
@@ -112,7 +112,7 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Returns a list of strings representing the specializations associated with the user specified in the parameters. /DK
+        /// Returns a list of strings representing the specializations associated with the user specified in the parameters. /Dennis Kempf
         /// </summary>
         public List<string> GetUserSpecializations(int userId)
         {

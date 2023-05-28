@@ -103,7 +103,7 @@ namespace DAL.Repository
         public void AddInvite(IInvitesModel inviteModel)
         {
             //Check to make sure the invite isn't a duplicate <-- check works in database as well, but code fails if it his SubmitChanges and
-            //the failed invite stays in memory and doesn't get cleared. /DK
+            //the failed invite stays in memory and doesn't get cleared. /Dennis Kempf
             ///  Don't remove the check for duplicate entries in this method. "For some reason" the session gets completely
             ///  locked from adding new invites if one fails because of duplicate keys. So the check is there to make sure
             ///  you never reach .SubmitChanges() if there already is a duplicate value. This prevents the locked state.

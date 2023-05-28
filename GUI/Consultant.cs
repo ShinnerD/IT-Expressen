@@ -58,7 +58,7 @@ namespace GUI
         }
 
         /// <summary>
-        /// Changes the form to allow editing of the consultants profile and specializations. /DK
+        /// Changes the form to allow editing of the consultants profile and specializations. /Dennis Kempf
         /// </summary>
         private void ChangeEditProfileState()
         {
@@ -87,7 +87,7 @@ namespace GUI
 
         /// <summary>
         /// Gets called when you click the "Save Changes" button - tries to update the user profile via the domain layer.
-        /// displays an error message via the feedback label if not successful. /DK
+        /// displays an error message via the feedback label if not successful. /Dennis Kempf
         /// </summary>
         private void SaveProfileChanges()
         {

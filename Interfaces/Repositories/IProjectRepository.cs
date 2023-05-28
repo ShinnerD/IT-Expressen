@@ -9,37 +9,37 @@ namespace Interfaces.Repositories
     public interface IProjectRepository
     {
         /// <summary>
-        /// Adds a project with all the details required in the parameter of the method to the database. /DK
+        /// Adds a project with all the details required in the parameter of the method to the database. /Dennis Kempf
         /// </summary>
         void CreateProject(IProjectModel newProject, List<string> specializations);
 
         /// <summary>
-        /// Updates an existing project in the database to match the IProjectModel provided in the parameters. /DK
+        /// Updates an existing project in the database to match the IProjectModel provided in the parameters. /Dennis Kempf
         /// </summary>
         void UpdateProject(IProjectModel project);
 
         /// <summary>
-        /// Deletes the project specified by setting its status to 'deleted' in the database. Recoverable. /DK
+        /// Deletes the project specified by setting its status to 'deleted' in the database. Recoverable. /Dennis Kempf
         /// </summary>
         void DeleteProject(int projectId);
 
         /// <summary>
-        /// Returns an IProjectModel for the project matching the provided Project Id. /DK
+        /// Returns an IProjectModel for the project matching the provided Project Id. /Dennis Kempf
         /// </summary>
         IProjectModel GetProject(int projectId);
 
         /// <summary>
-        /// Returns a List of IProjectModels with projects related to the User Id provided. /DK
+        /// Returns a List of IProjectModels with projects related to the User Id provided. /Dennis Kempf
         /// </summary>
         List<IProjectModel> GetUserProjects(int userId);
 
         /// <summary>
-        /// Retrieves a List of IProjectModels in which each project require ALL of the provided specializations. /DK
+        /// Retrieves a List of IProjectModels in which each project require ALL of the provided specializations. /Dennis Kempf
         /// </summary>
         List<IProjectModel> GetProjectsFromAllSpecializations(List<string> specializations, bool includeEndedProjects = false);
 
         /// <summary>
-        /// Retrieves a List of IProjectModels in which each project requires at least one of the specializations specified. /DK
+        /// Retrieves a List of IProjectModels in which each project requires at least one of the specializations specified. /Dennis Kempf
         /// </summary>
         List<IProjectModel> GetProjectsFromAnySpecializations(List<string> specializations, bool includeEndedProjects = false);
 
