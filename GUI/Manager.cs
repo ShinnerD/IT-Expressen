@@ -167,13 +167,20 @@ namespace GUI
             }
             else
             {
-                UpdateUserModel();
-                IUserService userService = ServiceManager.UserService;
-                userService.UpdateUser(userModel);
-                GuiHelper.UnlockProfileForEditing(grpBoxProfileInfo, false);
-                bt_EditProfileCancel.Enabled = false;
-                bt_EditProfileCancel.Visible = false;
-                bt_EditProfile.Text = "Edit Profile";
+                try
+                {
+                    UpdateUserModel();
+                    IUserService userService = ServiceManager.UserService;
+                    userService.UpdateUser(userModel);
+                    GuiHelper.UnlockProfileForEditing(grpBoxProfileInfo, false);
+                    bt_EditProfileCancel.Enabled = false;
+                    bt_EditProfileCancel.Visible = false;
+                    bt_EditProfile.Text = "Edit Profile";
+                }
+                catch (Exception ex)
+                {
+                    guiHelper.FeedBackMessage(lbl_ViewProjectsFeedBack, ex.Message, Color.Red);
+                }
             }
         }
 

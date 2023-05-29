@@ -8,7 +8,7 @@ using DAL.Linq;
 namespace Tests
 {
     /// <summary>
-    /// First attempt at trying to use the Moq Framework to mock classes that not being tested by using their abstract interfaces.
+    /// First attempt at trying to use the Moq Framework to mock classes that are not being tested by using their abstract interfaces.
     /// These tests are for the UpdateUserSpecializations method in the SpecializationService Class. 
     /// Tests various exceptions and that the method updates specializations for a user as expected. /Dennis Kempf
     /// </summary>
