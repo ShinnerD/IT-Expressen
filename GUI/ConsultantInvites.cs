@@ -125,7 +125,7 @@ namespace GUI
             {
                 IProjectService projectService = ServiceManager.ProjectService;
 
-                var targetProject = (int)dgv_ConsultantsInvites.SelectedCells[3].Value;
+                var targetProject = (int)dgv_ConsultantsInvites.SelectedCells[0].Value;
 
                 var selectedProject = ServiceManager.ProjectService.GetProject(targetProject);
 
@@ -147,7 +147,7 @@ namespace GUI
         {
             if (dgv_ConsultantsInvites.SelectedRows.Count > 0)
             {
-                var targetProject = (int)dgv_ConsultantsInvites.SelectedCells[3].Value;
+                var targetProject = (int)dgv_ConsultantsInvites.SelectedCells[0].Value;
                 var selectedProject = ServiceManager.ProjectService.GetProject(targetProject);
 
                 var selectedInvite = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as IInvitesModel;

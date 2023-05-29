@@ -7,12 +7,12 @@ namespace Domain.Services
 {
     public class InvoiceService : IInvoiceService
     {
-        private readonly IDomainServiceManager ServerManager;
+        private readonly IDomainServiceManager ServiceManager;
         private readonly IInvoiceRepository InvoiceRepository;
 
         public InvoiceService(IDomainServiceManager serverManager, IDataContextManager dataContextManger)
         {
-            ServerManager = serverManager;
+            ServiceManager = serverManager;
             InvoiceRepository = new InvoiceRepository(dataContextManger);
         }
 
@@ -44,7 +44,24 @@ namespace Domain.Services
 
         public void UpdateInvoice(IInvoiceModel invoice)
         {
-            InvoiceRepository.UpdateInvoice(invoice);
+            //Error checks - is the invoice update consistent with the state of the project?
+            IProjectModel? targetProject = ServiceManager.ProjectService.GetProject(invoice.ProjectId);
+            if (targetProject.ProjectStatus?.ToLower() != "ended") { throw new Exception("You can't finalize an invoice for an ongoing or pending project."); }
+            
+            try
+            {
+                //Calculate the final invoice total.
+                var invoiceLines = ServiceManager.ConsultantLineService.GetAllConsultantLinesFromProjectID(invoice.ProjectId);
+                invoice.TotalPrice = invoiceLines.Sum(i => i.LineTotal);
+
+                //Set the date and Update the Invoice with the relevant information in the database.
+                invoice.InvoiceDate = DateTime.Now;
+                InvoiceRepository.UpdateInvoice(invoice);
+            }
+            catch (Exception)
+            {
+                throw new Exception("There was an error updating the Invoice.");
+            }
         }
     }
 }

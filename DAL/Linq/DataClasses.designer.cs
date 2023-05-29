@@ -421,8 +421,6 @@ namespace DAL.Linq
 		
 		private System.Nullable<System.DateTime> _Project_Modify_Date;
 		
-		private System.Nullable<decimal> _Total_Invoice_Price;
-		
 		private string _Project_Status;
 		
 		private string _Description;
@@ -455,8 +453,6 @@ namespace DAL.Linq
     partial void OnProject_End_DateChanged();
     partial void OnProject_Modify_DateChanging(System.Nullable<System.DateTime> value);
     partial void OnProject_Modify_DateChanged();
-    partial void OnTotal_Invoice_PriceChanging(System.Nullable<decimal> value);
-    partial void OnTotal_Invoice_PriceChanged();
     partial void OnProject_StatusChanging(string value);
     partial void OnProject_StatusChanged();
     partial void OnDescriptionChanging(string value);
@@ -594,26 +590,6 @@ namespace DAL.Linq
 					this._Project_Modify_Date = value;
 					this.SendPropertyChanged("Project_Modify_Date");
 					this.OnProject_Modify_DateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Total_Invoice_Price", DbType="Money")]
-		public System.Nullable<decimal> Total_Invoice_Price
-		{
-			get
-			{
-				return this._Total_Invoice_Price;
-			}
-			set
-			{
-				if ((this._Total_Invoice_Price != value))
-				{
-					this.OnTotal_Invoice_PriceChanging(value);
-					this.SendPropertyChanging();
-					this._Total_Invoice_Price = value;
-					this.SendPropertyChanged("Total_Invoice_Price");
-					this.OnTotal_Invoice_PriceChanged();
 				}
 			}
 		}

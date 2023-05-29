@@ -52,5 +52,11 @@ namespace Interfaces.Services
         /// This method searches for projects based on a search term and a user ID. /JQ
         /// </summary>
         List<IProjectModel> SearchProjects(string searchTerm, int userId);
+
+        /// <summary>
+        /// Retrieves a list of projects connected to the consultant specified in the parameters.
+        /// These are projects the consultant has accepted invites to.
+        /// </summary>
+        List<IProjectModel> GetConsultantProjects(IUserModel consultant);
     }
 }

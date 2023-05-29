@@ -18,7 +18,6 @@
       <Column Name="Project_Start_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Project_End_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Project_Modify_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Total_Invoice_Price" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="Project_Status" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
       <Column Name="Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="Project_Project_Message_Line" Member="Project_Message_Lines" ThisKey="Project_ID" OtherKey="Project_ID" Type="Project_Message_Line" />
