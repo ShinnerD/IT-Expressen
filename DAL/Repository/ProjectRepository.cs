@@ -18,7 +18,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Adds a project with all the details required in the parameter of the method to the database. /DK
+        /// Adds a project with all the details required in the parameter of the method to the database. /Dennis Kempf
         /// </summary>
         public void CreateProject(IProjectModel newProject, List<string> specializations)
         {
@@ -31,7 +31,6 @@ namespace DAL.Repository
             dtoProject.Project_End_Date = newProject.ProjectEndDate;
             dtoProject.Project_Modify_Date = newProject.ProjectModifyDate;
             dtoProject.Project_Status = newProject.ProjectStatus;
-            dtoProject.Total_Invoice_Price = newProject.TotalInvoicePrice;
 
             dbContext.Projects.InsertOnSubmit(dtoProject);
             dbContext.SubmitChanges();
@@ -40,7 +39,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Updates an existing project in the database to match the IProjectModel provided in the parameters. /DK
+        /// Updates an existing project in the database to match the IProjectModel provided in the parameters. /Dennis Kempf
         /// </summary>
         public void UpdateProject(IProjectModel project)
         {
@@ -72,7 +71,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Returns an IProjectModel for the project matching the provided Project Id. /DK
+        /// Returns an IProjectModel for the project matching the provided Project Id. /Dennis Kempf
         /// </summary>
         public IProjectModel GetProject(int projectId)
         {
@@ -89,7 +88,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Returns a List of IProjectModels with projects related to the User Id provided. /DK
+        /// Returns a List of IProjectModels with projects related to the User Id provided. /Dennis Kempf
         /// </summary>
         public List<IProjectModel> GetUserProjects(int userId)
         {
@@ -101,7 +100,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Retrieves a List of IProjectModels in which each project require ALL of the provided specializations. /DK
+        /// Retrieves a List of IProjectModels in which each project require ALL of the provided specializations. /Dennis Kempf
         /// </summary>
         public List<IProjectModel> GetProjectsFromAllSpecializations(List<string> specializations, bool includeEndedProjects = false)
         {
@@ -125,7 +124,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Retrieves a List of IProjectModels in which each project requires at least one of the specializations specified. /DK
+        /// Retrieves a List of IProjectModels in which each project requires at least one of the specializations specified. /Dennis Kempf
         /// </summary>
         public List<IProjectModel> GetProjectsFromAnySpecializations(List<string> specializations, bool includeEndedProjects = false)
         {
@@ -155,7 +154,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Private repository class method. Transfers the properties of database dto objects to ProjectModels. /DK
+        /// Private repository class method. Transfers the properties of database dto objects to ProjectModels. /Dennis Kempf
         /// </summary>
         private List<IProjectModel> TransferAllProjectProperties(IQueryable<Linq.Project>? dtoProjects)
         {
@@ -168,6 +167,7 @@ namespace DAL.Repository
                 .Select(p => p.Project_ID).ToList();
 
             var specializations = dbContext.Projects_Specialisation_Lines.Where(i => projectIds.Contains(i.Project_ID)).ToList();
+            var invoices = dbContext.Invoices.Where(i => projectIds.Contains(i.Project_ID.GetValueOrDefault())).ToList();
 
             foreach (var dtoProject in dtoProjects)
             {
@@ -182,7 +182,7 @@ namespace DAL.Repository
                     projectModel.ProjectStartDate = dtoProject.Project_Start_Date;
                     projectModel.ProjectEndDate = dtoProject.Project_End_Date;
                     projectModel.ProjectModifyDate = dtoProject.Project_Modify_Date;
-                    projectModel.TotalInvoicePrice = dtoProject.Total_Invoice_Price;
+                    projectModel.TotalInvoicePrice = invoices.FirstOrDefault(i => i.Project_ID == dtoProject.Project_ID)?.Total_Price;
                     projectModel.ProjectStatus = dtoProject.Project_Status;
 
                     var projectSpecializations = specializations.Where(i => i.Project_ID == dtoProject.Project_ID).ToList();
@@ -240,7 +240,7 @@ namespace DAL.Repository
 
         /// <summary>
         /// Updates the Project Status for ALL projects in the Projects table.
-        /// Stored Procedure to be executed on program launch. /DK
+        /// Stored Procedure to be executed on program launch. /Dennis Kempf
         /// </summary>
         public void UpdateProjectStatusForAll()
         {
@@ -252,6 +252,11 @@ namespace DAL.Repository
             {
                 throw new Exception("Server failed to update project status'.");
             }
+        }
+
+        public List<IProjectModel> GetProjectsFromIdList(List<int> targetProjectIds)
+        {
+            return TransferAllProjectProperties(dbContext.Projects.Where(i => targetProjectIds.Contains(i.Project_ID)));
         }
     }
 }

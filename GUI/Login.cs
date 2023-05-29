@@ -152,7 +152,7 @@ namespace GUI
             try
             {
                 ServiceManager.ProjectService.UpdateAllProjectStatus(); //<-- Execution of stored procedure to update project status column.
-                                                                                                          //Piggybacking on this task as a temporary solution. /DK
+                                                                                                          //Piggybacking on this task as a temporary solution. /Dennis Kempf
                 var anyUser = userService.GetAllUsers();
                 if (anyUser.Count > 0)
                 {

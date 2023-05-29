@@ -2,6 +2,7 @@
 using Interfaces.Models;
 using Interfaces.Repositories;
 using Interfaces.Services;
+using System.Net.Mail;
 
 namespace Domain.Services
 {
@@ -69,19 +70,21 @@ namespace Domain.Services
         {
             IUserModel newUser = new DAL.Models.UserModel();
 
-            newUser.UserName = UserName;
+            newUser.UserName = UserName.Trim();
             newUser.Password = Password;
             newUser.UserType = UserType;
-            newUser.FirstName = FirstName;
-            newUser.LastName = LastName;
-            newUser.Address = Address;
-            newUser.NameCity = City;
-            newUser.ZipCode = ZipCode;
-            newUser.Country = Country;
-            newUser.PhoneNumber = PhoneNumber;
-            newUser.EMail = Email;
+            newUser.FirstName = FirstName.Trim();
+            newUser.LastName = LastName.Trim();
+            newUser.Address = Address.Trim();
+            newUser.NameCity = City.Trim();
+            newUser.ZipCode = ZipCode.Trim();
+            newUser.Country = Country.Trim();
+            newUser.PhoneNumber = PhoneNumber.Trim();
+            newUser.EMail = Email.Trim();
             newUser.ActiveStatus = true;
             newUser.CreationDate = DateTime.Now;
+
+            CheckUserValidity(newUser);
 
             userRepo.AddUser(newUser, specializations);
         }
@@ -96,7 +99,7 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Deletes a user from the database. /DK
+        /// Deletes a user from the database. /Dennis Kempf
         /// </summary>
         public void Delete(int userId)
         {
@@ -118,7 +121,7 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Returns a list of Users that have any of the specializations provided in the list specified in the parameters. /DK
+        /// Returns a list of Users that have any of the specializations provided in the list specified in the parameters. /Dennis Kempf
         /// </summary>
         public List<IUserModel> GetUsersWithAnySpecializations(List<string> specializations)
         {
@@ -126,7 +129,7 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Returns a list of Users that have all of the specializations provided in the list specified in the parameters. /DK
+        /// Returns a list of Users that have all of the specializations provided in the list specified in the parameters. /Dennis Kempf
         /// </summary>
         public List<IUserModel> GetUsersWithAllSpecializations(List<string> specializations)
         {
@@ -135,10 +138,11 @@ namespace Domain.Services
 
         /// <summary>
         /// Updates a user in the database with any changes that might be in the IUserModel provided in the parameter.
-        /// The Provided IUserModel must be a valid user from the database. /DK
+        /// The Provided IUserModel must be a valid user from the database. /Dennis Kempf
         /// </summary>
         public void UpdateUser(IUserModel user)
         {
+            CheckUserValidity(user);
             userRepo.UpdateUser(user);
         }
 
@@ -149,5 +153,35 @@ namespace Domain.Services
         {
             userRepo.DeleteConsultantStoredProcedure(userID);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void CheckUserValidity(IUserModel user)
+        {
+            //Checks for user model valid properties before any user creation or user update.
+            if (user is null) { throw new Exception("Must provide a non null user model for validation"); }
+            if (string.IsNullOrWhiteSpace(user.UserName)) { throw new Exception("You're username can't be empty or blank space."); }
+            if (user.UserName.Contains(' ')) { throw new Exception("Username can't contain spaces."); }
+            if (string.IsNullOrWhiteSpace(user.Password)) { throw new Exception("Please provide a password."); }
+            if (string.IsNullOrWhiteSpace(user.FirstName) || string.IsNullOrWhiteSpace(user.LastName)) { throw new Exception("Please provide your first '&' last name."); }
+
+            //Using the inbuilt mail address class to check for a valid email address. 
+            try
+            {
+                var userEmail = new MailAddress(user.EMail);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Please provide a valid email address.");
+            }
+
+            //Check if phone number contains only numbers
+            if (!user.PhoneNumber.All(char.IsAsciiDigit)) { throw new Exception("Please provide only numbers as your phone number."); }
+            
+            //No further checks for address, country, city or zip-code. Add these later if needed.
+        }
+
+
     }
 }

@@ -33,6 +33,13 @@ namespace Domain.Services
 
         public void AddConsultantLine(int projectID, int userID, decimal HourlyRate, int HoursTotal)
         {
+            //Error Check if Project is still only pending
+            var Project = ServiceManager.ProjectService.GetProject(projectID);
+            if (Project.ProjectStatus.ToLower() == "pending")
+            {
+                throw new Exception("Can't add hours to a pending project. Wait for project to start.");
+            }
+
             IConsultantLineModel newConsulLine = new DAL.Models.ConsultantLineModel();
 
             newConsulLine.ProjectID = projectID;
@@ -40,16 +47,18 @@ namespace Domain.Services
             newConsulLine.HourlyRate = HourlyRate;
             newConsulLine.HoursTotal = HoursTotal;
 
-            if (ServiceManager.InvoiceService.GetInvoiceFromProjectID(projectID) == null)
+            var Invoice = ServiceManager.InvoiceService.GetInvoiceFromProjectID(projectID);
+
+            if (Invoice == null)
             {
                 ServiceManager.InvoiceService.AddInvoice(projectID, 0, DateTime.Now);
-                var newInvoiceID = ServiceManager.InvoiceService.GetInvoiceFromProjectID(projectID);
+                var newInvoiceID = ServiceManager.InvoiceService.GetInvoiceFromProjectID(projectID).InvoiceId;
 
-                newConsulLine.InvoiceID = newInvoiceID.InvoiceId;
+                newConsulLine.InvoiceID = newInvoiceID;
             }
             else
             {
-                newConsulLine.InvoiceID = ServiceManager.InvoiceService.GetInvoiceFromProjectID(projectID).InvoiceId;
+                newConsulLine.InvoiceID = Invoice.InvoiceId;
             }
 
             consultantLineRepository.AddConsultantLine(newConsulLine);

@@ -23,7 +23,7 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Creates a new Project in the Database related to the given user. /DK
+        /// Creates a new Project in the Database related to the given user. /Dennis Kempf
         /// </summary>
         public void CreateProject(int userId, string title, string description, DateTime startDate, DateTime endDate, List<string> specializations)
         {
@@ -92,7 +92,7 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Returns an List of IProjectModels related to the Manager specified in the method parameters. Ordered by Title. /DK
+        /// Returns an List of IProjectModels related to the Manager specified in the method parameters. Ordered by Title. /Dennis Kempf
         /// </summary>
         public List<IProjectModel> GetUserProjects(int userId)
         {
@@ -100,7 +100,7 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Returns an IProjectModel for the Project specified in the method parameters. /DK
+        /// Returns an IProjectModel for the Project specified in the method parameters. /Dennis Kempf
         /// </summary>
         public IProjectModel GetProject(int projectId)
         {
@@ -109,7 +109,7 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Updates the Project in the database. The provided IProjectModel must be an existing project in the database. /DK
+        /// Updates the Project in the database. The provided IProjectModel must be an existing project in the database. /Dennis Kempf
         /// </summary>
         public void UpdateProject(IProjectModel project, List<string> specializations)
         {
@@ -119,25 +119,11 @@ namespace Domain.Services
 
             var currentProjectSpecializations = _domainServiceManager.SpecializationService.GetProjectSpecializations(project.ProjectId);
 
-            List<string> specsToBeRemoved = new List<string>();
-            List<string> specsToBeAdded = new List<string>();
+            List<string> specsToBeRemoved = currentProjectSpecializations.Where(i => !specializations.Contains(i)).ToList();
+            List<string> specsToBeAdded = specializations.Where(i => !currentProjectSpecializations.Contains(i)).ToList();
 
             project.ProjectModifyDate = DateTime.Now;
 
-            foreach (var currentSpec in currentProjectSpecializations)
-            {
-                if (!specializations.Contains(currentSpec))
-                {
-                    specsToBeRemoved.Add(currentSpec);
-                }
-            }
-            foreach (var newSpec in specializations)
-            {
-                if (!currentProjectSpecializations.Contains(newSpec))
-                {
-                    specsToBeAdded.Add(newSpec);
-                }
-            }
             try
             {
                 _domainServiceManager.SpecializationService.RemoveFromProject(project.ProjectId, specsToBeRemoved);
@@ -151,7 +137,7 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Deletes the project specified by setting its status to 'deleted' in the database. Recoverable. /DK
+        /// Deletes the project specified by setting its status to 'deleted' in the database. Recoverable. /Dennis Kempf
         /// </summary>
         public void DeleteProject(int projectId)
         {
@@ -159,7 +145,7 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Retrieves a List of IProjectModels in which each project require ALL of the provided specializations. Ordered by Title. /DK
+        /// Retrieves a List of IProjectModels in which each project require ALL of the provided specializations. Ordered by Title. /Dennis Kempf
         /// </summary>
         public List<IProjectModel> GetProjectsFromAllSpecializations(List<string> specializations, bool includeEndedProjects = false)
         {
@@ -167,12 +153,24 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Retrieves a List of IProjectModels in which each project requires at least one of the specializations specified. Ordered by Title. /DK
+        /// Retrieves a List of IProjectModels in which each project requires at least one of the specializations specified. Ordered by Title. /Dennis Kempf
         /// </summary>
         public List<IProjectModel> GetProjectsFromAnySpecializations(List<string> specializations, bool includeEndedProjects = false)
         {
             return _projectRepo.GetProjectsFromAnySpecializations(specializations, includeEndedProjects).OrderBy(i => i.Title).ToList();
         }
+
+        /// <summary>
+        /// Retrieves a list of projects connected to the consultant specified in the parameters.
+        /// These are projects the consultant has accepted invites to.
+        /// </summary>
+        public List<IProjectModel> GetConsultantProjects(IUserModel consultant)
+        {
+            var targetProjectIds = _domainServiceManager.InviteService.GetInvitesFromUserId(consultant.ID)
+                .Where(i => i.InviteStatus.ToLower() == "accepted").Select(i => i.ProjectId).ToList();
+
+            return _projectRepo.GetProjectsFromIdList(targetProjectIds);
+        } 
 
         /// <summary>
         /// Searches Projects based on a search term. /JQ
@@ -184,7 +182,7 @@ namespace Domain.Services
 
         /// <summary>
         /// Updates the Project Status for ALL projects in the Projects table.
-        /// Stored Procedure to be executed on program launch. /DK
+        /// Stored Procedure to be executed on program launch. /Dennis Kempf
         /// </summary>
         public void UpdateAllProjectStatus()
         {

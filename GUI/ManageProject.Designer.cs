@@ -108,11 +108,11 @@
             // 
             cb_UnlockRate.AutoSize = true;
             cb_UnlockRate.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            cb_UnlockRate.Location = new Point(88, 174);
+            cb_UnlockRate.Location = new Point(69, 128);
             cb_UnlockRate.Name = "cb_UnlockRate";
-            cb_UnlockRate.Size = new Size(128, 19);
+            cb_UnlockRate.Size = new Size(171, 19);
             cb_UnlockRate.TabIndex = 108;
-            cb_UnlockRate.Text = "Unlock Hourly Rate";
+            cb_UnlockRate.Text = "Add Hourly Rate and Hours";
             cb_UnlockRate.UseVisualStyleBackColor = true;
             cb_UnlockRate.Visible = false;
             cb_UnlockRate.CheckedChanged += cb_UnlockRate_CheckedChanged;
@@ -120,7 +120,7 @@
             // bt_addHours
             // 
             bt_addHours.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            bt_addHours.Location = new Point(564, 170);
+            bt_addHours.Location = new Point(307, 157);
             bt_addHours.Name = "bt_addHours";
             bt_addHours.Size = new Size(110, 23);
             bt_addHours.TabIndex = 107;
@@ -133,11 +133,12 @@
             // 
             tb_HoursSpendt.BackColor = SystemColors.ControlLight;
             tb_HoursSpendt.BorderStyle = BorderStyle.None;
+            tb_HoursSpendt.Enabled = false;
             tb_HoursSpendt.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            tb_HoursSpendt.Location = new Point(423, 149);
+            tb_HoursSpendt.Location = new Point(88, 170);
             tb_HoursSpendt.Margin = new Padding(2);
             tb_HoursSpendt.Name = "tb_HoursSpendt";
-            tb_HoursSpendt.Size = new Size(251, 16);
+            tb_HoursSpendt.Size = new Size(208, 16);
             tb_HoursSpendt.TabIndex = 105;
             tb_HoursSpendt.TabStop = false;
             tb_HoursSpendt.Visible = false;
@@ -146,7 +147,7 @@
             // 
             lb_HoursSpendt.AutoSize = true;
             lb_HoursSpendt.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            lb_HoursSpendt.Location = new Point(344, 150);
+            lb_HoursSpendt.Location = new Point(13, 170);
             lb_HoursSpendt.Margin = new Padding(2, 0, 2, 0);
             lb_HoursSpendt.Name = "lb_HoursSpendt";
             lb_HoursSpendt.Size = new Size(71, 15);
@@ -220,7 +221,7 @@
             // 
             lb_DaysTilEnd.AutoSize = true;
             lb_DaysTilEnd.Font = new Font("Segoe UI", 9.75F, FontStyle.Italic, GraphicsUnit.Point);
-            lb_DaysTilEnd.Location = new Point(257, 173);
+            lb_DaysTilEnd.Location = new Point(454, 147);
             lb_DaysTilEnd.Name = "lb_DaysTilEnd";
             lb_DaysTilEnd.Size = new Size(186, 17);
             lb_DaysTilEnd.TabIndex = 100;
@@ -519,7 +520,7 @@
             MinimumSize = new Size(973, 578);
             Name = "ManageProject";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "ManageProject";
+            Text = "Project Messages and Members";
             TransparencyKey = Color.FromArgb(64, 64, 0);
             grpBoxProfileInfo.ResumeLayout(false);
             grpBoxProfileInfo.PerformLayout();

@@ -153,7 +153,7 @@ namespace GUI
             this.Close();
         }
 
-        //Sets up the selection of skills at the initialization of the window /DK
+        //Sets up the selection of skills at the initialization of the window /Dennis Kempf
         private void SetupSkillsCheckList()
         {
             try

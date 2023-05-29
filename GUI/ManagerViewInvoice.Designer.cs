@@ -31,6 +31,7 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             NewProjectGrpBox = new GroupBox();
+            btn_FinalizeInvoice = new Button();
             lbl_TotalCost = new Label();
             label2 = new Label();
             groupBox1 = new GroupBox();
@@ -56,6 +57,7 @@
             // 
             // NewProjectGrpBox
             // 
+            NewProjectGrpBox.Controls.Add(btn_FinalizeInvoice);
             NewProjectGrpBox.Controls.Add(lbl_TotalCost);
             NewProjectGrpBox.Controls.Add(label2);
             NewProjectGrpBox.Controls.Add(groupBox1);
@@ -81,6 +83,17 @@
             NewProjectGrpBox.TabIndex = 24;
             NewProjectGrpBox.TabStop = false;
             NewProjectGrpBox.Text = "Project Invoice";
+            // 
+            // btn_FinalizeInvoice
+            // 
+            btn_FinalizeInvoice.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_FinalizeInvoice.Location = new Point(666, 454);
+            btn_FinalizeInvoice.Name = "btn_FinalizeInvoice";
+            btn_FinalizeInvoice.Size = new Size(100, 25);
+            btn_FinalizeInvoice.TabIndex = 37;
+            btn_FinalizeInvoice.Text = "Finalize Invoice";
+            btn_FinalizeInvoice.UseVisualStyleBackColor = true;
+            btn_FinalizeInvoice.Click += btn_FinalizeInvoice_Click;
             // 
             // lbl_TotalCost
             // 
@@ -317,7 +330,7 @@
             // btn_NewProjectBack
             // 
             btn_NewProjectBack.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_NewProjectBack.Location = new Point(666, 452);
+            btn_NewProjectBack.Location = new Point(511, 454);
             btn_NewProjectBack.Name = "btn_NewProjectBack";
             btn_NewProjectBack.Size = new Size(100, 25);
             btn_NewProjectBack.TabIndex = 3;
@@ -339,7 +352,7 @@
             MinimumSize = new Size(788, 522);
             Name = "ManagerViewInvoice";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "AdminViewInvoice";
+            Text = "Invoices";
             NewProjectGrpBox.ResumeLayout(false);
             NewProjectGrpBox.PerformLayout();
             groupBox1.ResumeLayout(false);
@@ -368,5 +381,6 @@
         private GroupBox groupBox1;
         private Label lbl_TotalCost;
         private Label label2;
+        private Button btn_FinalizeInvoice;
     }
 }

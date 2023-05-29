@@ -21,22 +21,8 @@ namespace DAL.Repository
         /// </summary>
         public List<IInvitesModel> GetAllInvites()
         {
-            List<IInvitesModel> result = new List<IInvitesModel>();
-
             var dbInvites = DataContext.Invites;
-            foreach (var dbInvite in dbInvites)
-            {
-                IInvitesModel Invite = new InvitesModel();
-
-                Invite.ProjectId = dbInvite.Project_ID;
-                Invite.UserId = dbInvite.User_ID;
-                Invite.InviteDate = dbInvite.Invite_Date;
-                Invite.InviteStatus = dbInvite.Invite_status;
-                Invite.AcceptDate = dbInvite.Accept_date;
-
-                result.Add(Invite);
-            }
-            return result;
+            return TransferAllInviteProperties(dbInvites);
         }
 
         /// <summary>
@@ -44,23 +30,8 @@ namespace DAL.Repository
         /// </summary>
         public List<IInvitesModel> GetAllInviteProjectID(int projectid)
         {
-            List<IInvitesModel> result = new List<IInvitesModel>();
-
             var dbInvites = DataContext.Invites.Where(i => i.Project_ID == projectid);
-
-            foreach (var dbInvite in dbInvites)
-            {
-                IInvitesModel Invite = new InvitesModel();
-
-                Invite.ProjectId = dbInvite.Project_ID;
-                Invite.UserId = dbInvite.User_ID;
-                Invite.InviteDate = dbInvite.Invite_Date;
-                Invite.InviteStatus = dbInvite.Invite_status;
-                Invite.AcceptDate = dbInvite.Accept_date;
-
-                result.Add(Invite);
-            }
-            return result;
+            return TransferAllInviteProperties(dbInvites);
         }
 
         /// <summary>
@@ -104,23 +75,8 @@ namespace DAL.Repository
         /// </summary>
         public List<IInvitesModel> GetAllInviteUserId(int UserId)
         {
-            List<IInvitesModel> result = new List<IInvitesModel>();
-
             var dbInvites = DataContext.Invites.Where(i => i.User_ID == UserId);
-
-            foreach (var dbinvite in dbInvites)
-            {
-                IInvitesModel invite = new InvitesModel();
-
-                invite.ProjectId = dbinvite.Project_ID;
-                invite.UserId = dbinvite.User_ID;
-                invite.InviteDate = dbinvite.Invite_Date;
-                invite.InviteStatus = dbinvite.Invite_status;
-                invite.AcceptDate = dbinvite.Accept_date;
-
-                result.Add(invite);
-            }
-            return result;
+            return TransferAllInviteProperties(dbInvites);
         }
 
         /// <summary>
@@ -147,7 +103,7 @@ namespace DAL.Repository
         public void AddInvite(IInvitesModel inviteModel)
         {
             //Check to make sure the invite isn't a duplicate <-- check works in database as well, but code fails if it his SubmitChanges and
-            //the failed invite stays in memory and doesn't get cleared. /DK
+            //the failed invite stays in memory and doesn't get cleared. /Dennis Kempf
             ///  Don't remove the check for duplicate entries in this method. "For some reason" the session gets completely
             ///  locked from adding new invites if one fails because of duplicate keys. So the check is there to make sure
             ///  you never reach .SubmitChanges() if there already is a duplicate value. This prevents the locked state.
@@ -196,6 +152,56 @@ namespace DAL.Repository
                 DataContext.Invites.DeleteOnSubmit(dbInvite);
                 DataContext.SubmitChanges();
             }
+        }
+
+
+        private List<IInvitesModel> TransferAllInviteProperties(IQueryable<Linq.Invite>? dtoInvites)
+        {
+            List<IInvitesModel> result = new List<IInvitesModel>();
+
+            if (dtoInvites is null) { return result; }
+
+            var relatedProjectIds = dtoInvites.Select(i => i.Project_ID).ToList();
+            var relatedUserIds = dtoInvites.Select(i => i.User_ID).ToList();
+
+            var relatedProjects = DataContext.Projects.Where(i => relatedProjectIds.Contains(i.Project_ID)).ToList();
+            var relatedUsers = DataContext.Users.Where(i => relatedUserIds.Contains(i.User_ID)).ToList();
+
+            foreach (var dto in dtoInvites)
+            {
+                IInvitesModel Invite = new InvitesModel();
+
+                Invite.ProjectId = dto.Project_ID;
+                Invite.UserId = dto.Project_ID;
+                Invite.InviteDate = dto.Invite_Date;
+                Invite.InviteStatus = dto.Invite_status;
+                Invite.AcceptDate = dto.Accept_date;
+
+                var invitedUser = relatedUsers.FirstOrDefault(i => i.User_ID == dto.User_ID);
+                if (invitedUser != null)
+                {
+                    Invite.InvitedUserName = invitedUser.User_name;
+                    Invite.InvitedUserFullName = invitedUser.First_Name + " " + invitedUser.Last_Name;
+                    Invite.InvitedUserSpecializations = string
+                        .Join(", ", invitedUser.Specialisations_Lines
+                        .Select(i => i.Specialisation.Specialisation1)
+                        .OrderBy(i => i).ToArray());
+                }
+                var invitedProject = relatedProjects.FirstOrDefault(i => i.Project_ID == dto.Project_ID);
+                if (invitedProject != null)
+                {
+                    Invite.ProjectTitle = invitedProject.Title;
+                    Invite.ManagerName = invitedProject.User.First_Name + " " + invitedProject.User.Last_Name;
+                }
+
+                Invite.ConLineSum = dto.Project.Consultant_Lines
+                    .Where(i => i.User_ID == dto.User_ID)
+                    .Select(i => i.Hours_total * i.Hourly_Rate)
+                    .Sum();
+
+                result.Add(Invite);
+            }
+            return result;
         }
     }
 }

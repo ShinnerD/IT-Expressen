@@ -26,7 +26,7 @@ namespace Domain.Services
         /// <returns></returns>
         public List<IInvitesModel> GetAllInvites()
         {
-            return AssignDomainProperties(InvRepo.GetAllInvites());
+            return InvRepo.GetAllInvites();
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Domain.Services
         /// </summary>
         public List<IInvitesModel> GetAllInvitedProjectID(int ProjectID)
         {
-            return AssignDomainProperties(InvRepo.GetAllInviteProjectID(ProjectID));
+            return InvRepo.GetAllInviteProjectID(ProjectID);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Domain.Services
         /// </summary>
         public List<IInvitesModel> GetInvitesFromUserId(int id)
         {
-            return AssignDomainProperties(InvRepo.GetAllInviteUserId(id));
+            return InvRepo.GetAllInviteUserId(id);
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace Domain.Services
 
         /// <summary>
         /// Deletes an invite from the database. Prevents deletion of accepted invites unless the boolean deleteAccetedInvite is explicitly
-        /// set to true when calling the method. This is for admin privileges atm. /DK
+        /// set to true when calling the method. This is for admin privileges atm. /Dennis Kempf
         /// </summary>
         public void DeleteInvite(IInvitesModel invite, bool deleteAcceptedInvite = false)
         {
@@ -85,59 +85,6 @@ namespace Domain.Services
             }
 
             InvRepo.DeleteInvite(invite.ProjectId, invite.UserId);
-        }
-
-        /// <summary>
-        /// Private Service Class method that fills additional properties on the IInviteModels that needs to
-        /// fetched from other repositories than the InvitesRepository.
-        /// </summary>
-        private List<IInvitesModel> AssignDomainProperties(List<IInvitesModel> inviteList)
-        {
-            List<IInvitesModel> invalidInvites = new List<IInvitesModel>();
-
-            foreach (var invite in inviteList)
-            {
-                AssignDomainProperties(invite);
-
-                //Check to see if an active (undeleted) project is connected to the invite, if there isn't (I.e. the project title is null)
-                //then the invite is added to a list that subtracted from the result before returning the result.
-                if (invite.ProjectTitle == null)
-                {
-                    invalidInvites.Add(invite);
-                }
-            }
-
-            return inviteList.Except(invalidInvites).ToList();
-        }
-
-        /// <summary>
-        /// Private Service Class method that fills additional properties on the IInviteModels that needs to
-        /// fetched from other repositories than the InvitesRepository.
-        /// </summary>
-        private void AssignDomainProperties(IInvitesModel invite)
-        {
-            var invitedUser = DomainServiceManager.UserService.GetUserFromID(invite.UserId);
-            var invitedToProject = DomainServiceManager.ProjectService.GetProject(invite.ProjectId);
-            var invitedUserInvoiceSum = DomainServiceManager.ConsultantLineService.GetAllConsultantLinesFromUserID(invite.UserId).Where(x => x.ProjectID == invite.ProjectId).ToList();
-
-            DomainServiceManager.SpecializationService.FillUserSpecializationsProperty(new List<IUserModel>() { invitedUser });
-
-            if (invitedUser != null && invitedToProject != null)
-            {
-                invite.InvitedUserName = invitedUser.UserName;
-                invite.InvitedUserFullName = invitedUser.FullName;
-                invite.InvitedUserSpecializations = invitedUser.Specializations;
-                invite.ProjectTitle = invitedToProject.Title;
-                invite.ManagerName = invitedToProject.ManagerFullName;
-
-                decimal? result = 0;
-
-                foreach (var ConLine in invitedUserInvoiceSum)
-                {
-                    result = result + (ConLine.HourlyRate * ConLine.HoursTotal);
-                }
-                invite.ConLineSum = result;
-            }
         }
     }
 }

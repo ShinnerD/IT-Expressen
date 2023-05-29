@@ -62,8 +62,9 @@ namespace GUI
                 dgv_Viewproject.Columns["End"].DataPropertyName = "ProjectEndDate";
                 dgv_Viewproject.Columns["End"].DefaultCellStyle.Format = "dd'/'MM'/'yyyy";
 
-                dgv_Viewproject.Columns.Add("Invoiced", "Invoiced");
+                dgv_Viewproject.Columns.Add("Invoiced", "Invoice Total");
                 dgv_Viewproject.Columns["Invoiced"].DataPropertyName = "TotalInvoicePrice";
+                dgv_Viewproject.Columns["Invoiced"].DefaultCellStyle.Format = "F2";
 
                 dgv_Viewproject.DataSource = ProjectList;
             }
@@ -96,9 +97,9 @@ namespace GUI
         }
 
         /// <summary>
-        /// Changes the Form into editing the currently selected project from the projects list. /DK
+        /// Changes the Form into editing the currently selected project from the projects list. /Dennis Kempf
         /// </summary>
-        private void ManageSelectedProject()
+        private void EditSelectedProject()
         {
             if (SelectedProject != null)
             {
@@ -107,7 +108,7 @@ namespace GUI
         }
 
         /// <summary>
-        /// Sets the form to Edit Selected Project "mode." /DK
+        /// Sets the form to Edit Selected Project "mode." /Dennis Kempf
         /// </summary>
         /// <param name="selectedProject"></param>
         private void EditProjectDetails(IProjectModel selectedProject)
@@ -177,7 +178,7 @@ namespace GUI
         }
 
         /// <summary>
-        /// Updates the page-wide userModel with the new information in the textboxes /DK
+        /// Updates the page-wide userModel with the new information in the textboxes /Dennis Kempf
         /// </summary>
         private void UpdateUserModel()
         {
@@ -199,9 +200,6 @@ namespace GUI
             if (dgv_Viewproject.SelectedRows.Count > 0)
             {
                 SelectedProject = dgv_Viewproject.SelectedRows[0].DataBoundItem as IProjectModel;
-            }
-            if (SelectedProject != null)
-            {
                 ManageProject ManProject = new GUI.ManageProject(ServiceManager, SelectedProject.ProjectId, Username);
                 this.Hide();
                 ManProject.ShowDialog();
@@ -355,7 +353,7 @@ namespace GUI
         public void bt_EditProject_Click(object sender, EventArgs e)
         {
             NewProjectGrpBox.Text = "Update Project";
-            ManageSelectedProject();
+            EditSelectedProject();
         }
 
         private void bt_FindConsultants_Click(object sender, EventArgs e)
@@ -403,6 +401,7 @@ namespace GUI
                 ManagerViewInvoice viewInvoice = new ManagerViewInvoice(ServiceManager, clickedProject);
                 viewInvoice.ShowDialog();
                 viewInvoice.Dispose();
+                BackToViewProjects();
             }
         }
     }

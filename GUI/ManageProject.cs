@@ -150,15 +150,21 @@ namespace GUI
 
         private void AddToInvoice()
         {
-            var getUserID = ServiceManager.UserService.GetUserFromUsername(UserName);
-            var getProjectID = ServiceManager.ProjectService.GetProject(ProjectID);
+            try
+            {
+                var getUserID = ServiceManager.UserService.GetUserFromUsername(UserName);
 
-            ServiceManager.ConsultantLineService.AddConsultantLine(
-                int.Parse(tb_ProjectID.Text),
-                getUserID.ID,
-                decimal.Parse(tb_HourlyRate.Text),
-                int.Parse(tb_HoursSpendt.Text)
-                );
+                ServiceManager.ConsultantLineService.AddConsultantLine(
+                    int.Parse(tb_ProjectID.Text),
+                    getUserID.ID,
+                    decimal.Parse(tb_HourlyRate.Text),
+                    int.Parse(tb_HoursSpendt.Text)
+                    );
+            }
+            catch (Exception e)
+            {
+                guiHelper.FeedBackMessage(lb_warning, e.Message, Color.Red);
+            }
         }
 
         private void GetTotalInvoice()
@@ -211,9 +217,11 @@ namespace GUI
             if (cb_UnlockRate.Checked == true)
             {
                 tb_HourlyRate.Enabled = true;
+                tb_HoursSpendt.Enabled = true;
             }
             if (cb_UnlockRate.Checked == false)
             {
+                tb_HoursSpendt.Enabled = false;
                 tb_HourlyRate.Enabled = false;
             }
         }

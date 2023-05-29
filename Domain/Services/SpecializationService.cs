@@ -1,4 +1,5 @@
-﻿using DAL.Repository;
+﻿using DAL.Linq;
+using DAL.Repository;
 using Interfaces.Models;
 using Interfaces.Repositories;
 using Interfaces.Services;
@@ -6,7 +7,7 @@ using Interfaces.Services;
 namespace Domain.Services
 {
     /// <summary>
-    /// Service class that has methods for retrieving and manipulating skills/specializations. /DK
+    /// Service class that has methods for retrieving and manipulating skills/specializations. /Dennis Kempf
     /// </summary>
     public class SpecializationService : ISpecializationService
     {
@@ -20,7 +21,7 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// List of strings representing the current Specializations/Skills in the Database. /DK
+        /// List of strings representing the current Specializations/Skills in the Database. /Dennis Kempf
         /// </summary>
         public List<string> ListDefinedSpecializations()
         {
@@ -28,7 +29,7 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Returns a List of strings representing all specializations chosen for a project with the provided id. /DK
+        /// Returns a List of strings representing all specializations chosen for a project with the provided id. /Dennis Kempf
         /// </summary>
         public List<string> GetProjectSpecializations(int projectId)
         {
@@ -36,7 +37,7 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Returns an int representing the specialization ID matching the specialization in string form provided in the parameters. /DK
+        /// Returns an int representing the specialization ID matching the specialization in string form provided in the parameters. /Dennis Kempf
         /// </summary>
         public int GetId(string specialization)
         {
@@ -44,7 +45,7 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Returns a string representing the specialization which matches the provided ID in the database. /DK
+        /// Returns a string representing the specialization which matches the provided ID in the database. /Dennis Kempf
         /// </summary>
         public string GetString(int specId)
         {
@@ -52,7 +53,7 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Adds the specializations provided to the project in the database. /DK
+        /// Adds the specializations provided to the project in the database. /Dennis Kempf
         /// </summary>
         public void AddToProject(int projectId, List<string> specializations)
         {
@@ -60,12 +61,39 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Removes the specializations provided from the project in the database. /DK
+        /// Removes the specializations provided from the project in the database. /Dennis Kempf
         /// </summary>
         public void RemoveFromProject(int projectId, List<string> specializations)
         {
             specRepo.RemoveFromProject(projectId, specializations);
         }
+
+
+        /// <summary>
+        /// Updates the user specializations in the database by checking for differences between the specializations provided
+        /// and those present in the database. Adds and removes according to the differences.
+        /// </summary>
+        public void UpdateUserSpecializations(IUserModel user, List<string> specializations)
+        {
+            if (user.UserType.ToLower() != "consultant") { throw new Exception("User is not a consultant and has no specializations."); }
+
+            var currentUserSpecializations = serviceManager.SpecializationService.GetUserSpecializations(user.ID) 
+                ?? throw new Exception("Can't locate specified user."); 
+
+            List<string> specsToBeRemoved = currentUserSpecializations.Where(i => !specializations.Contains(i)).ToList();
+            List<string> specsToBeAdded = specializations.Where(i => !currentUserSpecializations.Contains(i)).ToList();
+
+            try
+            {
+                serviceManager.SpecializationService.RemoveSpecializationsFromUser(user.ID, specsToBeRemoved);
+                serviceManager.SpecializationService.AddSpecializationsToUser(user.ID, specsToBeAdded);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Failed to update user specializations.");
+            }
+        }
+
 
         /// <summary>
         /// Adds the List of string representing specializations to the user with the given User Id to the database. /MS
@@ -76,15 +104,15 @@ namespace Domain.Services
         }
 
         /// <summary>
-        /// Removes the given list of string specializations to the user. /DK
+        /// Removes the given list of string specializations to the user. /Dennis Kempf
         /// </summary>
-        public void RemoveSpecializationsFromUser(int userId, string specializations)
+        public void RemoveSpecializationsFromUser(int userId, List<string> specializations)
         {
             specRepo.RemoveSpecializationsFromUser(userId, specializations);
         }
 
         /// <summary>
-        /// Returns a list of strings representing the specializations associated with the user specified in the parameters. /DK
+        /// Returns a list of strings representing the specializations associated with the user specified in the parameters. /Dennis Kempf
         /// </summary>
         public List<string> GetUserSpecializations(int userId)
         {

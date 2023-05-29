@@ -22,7 +22,6 @@ namespace GUI
             DataGridInitialSetup();
             SetupSkillsCheckList();
             LoadInvitesToDGV();
-            dgv_ConsultantsInvites.Rows[0].Cells[0].Selected = false;
         }
 
         private void GetUser()
@@ -71,7 +70,7 @@ namespace GUI
             invites = inviteService.GetInvitesFromUserId(userModelGet.ID);
             dgv_ConsultantsInvites.DataSource = null;
             dgv_ConsultantsInvites.DataSource = invites;
-            dgv_ConsultantsInvites.Rows[0].Cells[0].Selected = false;
+            dgv_ConsultantsInvites.ClearSelection();
         }
 
         private void DataGridInitialSetup()
@@ -125,7 +124,7 @@ namespace GUI
             {
                 IProjectService projectService = ServiceManager.ProjectService;
 
-                var targetProject = (int)dgv_ConsultantsInvites.SelectedCells[3].Value;
+                var targetProject = (int)dgv_ConsultantsInvites.SelectedCells[0].Value;
 
                 var selectedProject = ServiceManager.ProjectService.GetProject(targetProject);
 
@@ -147,7 +146,7 @@ namespace GUI
         {
             if (dgv_ConsultantsInvites.SelectedRows.Count > 0)
             {
-                var targetProject = (int)dgv_ConsultantsInvites.SelectedCells[3].Value;
+                var targetProject = (int)dgv_ConsultantsInvites.SelectedCells[0].Value;
                 var selectedProject = ServiceManager.ProjectService.GetProject(targetProject);
 
                 var selectedInvite = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as IInvitesModel;
