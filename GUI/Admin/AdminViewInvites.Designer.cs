@@ -391,7 +391,7 @@
             MinimumSize = new Size(788, 522);
             Name = "AdminViewInvites";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "AdminProjectEdit";
+            Text = "Invites";
             NewProjectGrpBox.ResumeLayout(false);
             NewProjectGrpBox.PerformLayout();
             groupBox2.ResumeLayout(false);

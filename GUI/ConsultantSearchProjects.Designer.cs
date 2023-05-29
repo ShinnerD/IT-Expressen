@@ -56,6 +56,7 @@
             dgv_Searchproject.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv_Searchproject.Size = new Size(776, 437);
             dgv_Searchproject.TabIndex = 0;
+            dgv_Searchproject.ColumnHeaderMouseClick += dgv_Searchproject_ColumnHeaderMouseClick;
             dgv_Searchproject.DataBindingComplete += dgv_Searchproject_DataBindingComplete;
             // 
             // checkedListSkills
@@ -116,7 +117,7 @@
             MinimumSize = new Size(800, 600);
             Name = "ConsultantSearchProjects";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "ConsultantSearchProjects";
+            Text = "Project Search";
             ((System.ComponentModel.ISupportInitialize)dgv_Searchproject).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox2.ResumeLayout(false);

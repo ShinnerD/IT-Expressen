@@ -11,6 +11,8 @@ namespace GUI
         private IUserService userService;
         private List<IProjectModel> projectsSearchResults;
 
+        private GuiHelper guiHelper = new GuiHelper();
+
         public List<string> ConsultantSpecializations { get; set; }
         private List<IProjectModel> SearchResults { get; set; }
         public IUserModel Consultant { get; private set; }
@@ -21,6 +23,7 @@ namespace GUI
             ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
             projectService = ServiceManager.ProjectService;
             userService = ServiceManager.UserService;
+            guiHelper.StartingSortedColumnIndex = 0;
 
             InitializeComponent();
             SetUpUserDataGridView();
@@ -160,6 +163,11 @@ namespace GUI
         private void dgv_Searchproject_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             GuiHelper.DataGridViewDataBindingCompleteResize(sender, e);
+        }
+
+        private void dgv_Searchproject_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            guiHelper.ReorderDataGridViewColumnHeaderClickEvent(dgv_Searchproject, e, SearchResults);
         }
     }
 }

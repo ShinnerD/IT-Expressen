@@ -411,7 +411,7 @@
             MinimumSize = new Size(710, 672);
             Name = "ConsultantInvites";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "ConsultantInvites";
+            Text = "Invites";
             groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgv_ConsultantsInvites).EndInit();
             grpBoxProfileInfo.ResumeLayout(false);

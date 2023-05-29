@@ -339,7 +339,7 @@
             MinimumSize = new Size(788, 522);
             Name = "AdminViewInvoice";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "AdminViewInvoice";
+            Text = "Invoice";
             NewProjectGrpBox.ResumeLayout(false);
             NewProjectGrpBox.PerformLayout();
             groupBox1.ResumeLayout(false);

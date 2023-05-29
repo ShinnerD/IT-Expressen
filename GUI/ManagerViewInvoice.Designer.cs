@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             NewProjectGrpBox = new GroupBox();
+            btn_FinalizeInvoice = new Button();
             lbl_TotalCost = new Label();
             label2 = new Label();
             groupBox1 = new GroupBox();
@@ -49,7 +50,6 @@
             txtBox_ProjectTitle = new TextBox();
             checkedListSkills = new CheckedListBox();
             btn_NewProjectBack = new Button();
-            btn_FinalizeInvoice = new Button();
             NewProjectGrpBox.SuspendLayout();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_PendingInvites).BeginInit();
@@ -83,6 +83,17 @@
             NewProjectGrpBox.TabIndex = 24;
             NewProjectGrpBox.TabStop = false;
             NewProjectGrpBox.Text = "Project Invoice";
+            // 
+            // btn_FinalizeInvoice
+            // 
+            btn_FinalizeInvoice.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_FinalizeInvoice.Location = new Point(666, 454);
+            btn_FinalizeInvoice.Name = "btn_FinalizeInvoice";
+            btn_FinalizeInvoice.Size = new Size(100, 25);
+            btn_FinalizeInvoice.TabIndex = 37;
+            btn_FinalizeInvoice.Text = "Finalize Invoice";
+            btn_FinalizeInvoice.UseVisualStyleBackColor = true;
+            btn_FinalizeInvoice.Click += btn_FinalizeInvoice_Click;
             // 
             // lbl_TotalCost
             // 
@@ -123,19 +134,19 @@
             dgv_PendingInvites.AllowUserToAddRows = false;
             dgv_PendingInvites.AllowUserToDeleteRows = false;
             dgv_PendingInvites.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.BackColor = Color.WhiteSmoke;
-            dgv_PendingInvites.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = Color.WhiteSmoke;
+            dgv_PendingInvites.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dgv_PendingInvites.BackgroundColor = SystemColors.Control;
             dgv_PendingInvites.BorderStyle = BorderStyle.None;
             dgv_PendingInvites.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = SystemColors.Window;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            dgv_PendingInvites.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dgv_PendingInvites.DefaultCellStyle = dataGridViewCellStyle2;
             dgv_PendingInvites.Dock = DockStyle.Fill;
             dgv_PendingInvites.Location = new Point(3, 21);
             dgv_PendingInvites.MultiSelect = false;
@@ -327,17 +338,6 @@
             btn_NewProjectBack.UseVisualStyleBackColor = true;
             btn_NewProjectBack.Click += btn_NewProjectBack_Click;
             // 
-            // btn_FinalizeInvoice
-            // 
-            btn_FinalizeInvoice.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_FinalizeInvoice.Location = new Point(666, 454);
-            btn_FinalizeInvoice.Name = "btn_FinalizeInvoice";
-            btn_FinalizeInvoice.Size = new Size(100, 25);
-            btn_FinalizeInvoice.TabIndex = 37;
-            btn_FinalizeInvoice.Text = "Finalize Invoice";
-            btn_FinalizeInvoice.UseVisualStyleBackColor = true;
-            btn_FinalizeInvoice.Click += btn_FinalizeInvoice_Click;
-            // 
             // ManagerViewInvoice
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -352,7 +352,7 @@
             MinimumSize = new Size(788, 522);
             Name = "ManagerViewInvoice";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "AdminViewInvoice";
+            Text = "Invoices";
             NewProjectGrpBox.ResumeLayout(false);
             NewProjectGrpBox.PerformLayout();
             groupBox1.ResumeLayout(false);

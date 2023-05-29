@@ -97,7 +97,7 @@ namespace GUI
         }
 
         /// <summary>
-        /// Changes the Form into editing the currently selected project from the projects list. /DK
+        /// Changes the Form into editing the currently selected project from the projects list. /Dennis Kempf
         /// </summary>
         private void EditSelectedProject()
         {
@@ -108,7 +108,7 @@ namespace GUI
         }
 
         /// <summary>
-        /// Sets the form to Edit Selected Project "mode." /DK
+        /// Sets the form to Edit Selected Project "mode." /Dennis Kempf
         /// </summary>
         /// <param name="selectedProject"></param>
         private void EditProjectDetails(IProjectModel selectedProject)
@@ -178,7 +178,7 @@ namespace GUI
         }
 
         /// <summary>
-        /// Updates the page-wide userModel with the new information in the textboxes /DK
+        /// Updates the page-wide userModel with the new information in the textboxes /Dennis Kempf
         /// </summary>
         private void UpdateUserModel()
         {

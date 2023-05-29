@@ -141,7 +141,7 @@ namespace GUI.Admin
         }
 
         /// <summary>
-        /// Updates the page-wide UserModel with the new information in the textboxes /DK
+        /// Updates the page-wide UserModel with the new information in the textboxes /Dennis Kempf
         /// </summary>
         private void UpdateUserModel()
         {
@@ -180,7 +180,7 @@ namespace GUI.Admin
         }
 
         /// <summary>
-        /// Searches and Filters Users based on text in search field and selected Radio Buttons. /DK
+        /// Searches and Filters Users based on text in search field and selected Radio Buttons. /Dennis Kempf
         /// </summary>
         private void PerformUserSearch(string userName = "")
         {
@@ -224,7 +224,7 @@ namespace GUI.Admin
         }
 
         /// <summary>
-        /// Searches and Filters Projects based on text in search field and selected Radio Buttons. /DK
+        /// Searches and Filters Projects based on text in search field and selected Radio Buttons. /Dennis Kempf
         /// </summary>
         private void PerformProjectSearch(int selectThisProjectAfterSearch = 0)
         {
@@ -271,7 +271,7 @@ namespace GUI.Admin
         }
 
         /// <summary>
-        /// Redraws and resizes the datagridview after the databinding has been completed. Works with window resizing. /DK
+        /// Redraws and resizes the datagridview after the databinding has been completed. Works with window resizing. /Dennis Kempf
         /// </summary>
         private void dgv_UserSearchResults_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
@@ -367,7 +367,7 @@ namespace GUI.Admin
         }
 
         /// <summary>
-        /// Calls for the deletion of a project when the delete project button is pressed. /DK
+        /// Calls for the deletion of a project when the delete project button is pressed. /Dennis Kempf
         /// </summary>
         private void DeleteProject()
         {

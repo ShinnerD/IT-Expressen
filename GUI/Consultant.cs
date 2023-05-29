@@ -6,8 +6,6 @@ namespace GUI
 {
     public partial class Consultant : Form
     {
-        private IInviteService invService;
-
         private IUserService userServiceGet;
 
         private readonly IDomainServiceManager ServiceManager;
@@ -16,8 +14,6 @@ namespace GUI
 
         private IUserModel userModelGet;
 
-        private List<IInvitesModel> invites;
-
         private List<IProjectModel> ProjectList = new List<IProjectModel>();
 
         private GuiHelper guiHelper = new();
@@ -25,7 +21,6 @@ namespace GUI
         public Consultant(IDomainServiceManager domainServiceManager, string username)
         {
             ServiceManager = domainServiceManager ?? throw new ArgumentNullException(nameof(domainServiceManager));
-            invService = domainServiceManager.InviteService;
             userServiceGet = domainServiceManager.UserService;
             guiHelper.StartingSortedColumnIndex = 1;
 
@@ -62,24 +57,58 @@ namespace GUI
             lblUserCreationDate.Text = "You've been a user for " + (DateTime.Now - userModelGet.CreationDate).GetValueOrDefault().Days.ToString() + " days";
         }
 
+        /// <summary>
+        /// Changes the form to allow editing of the consultants profile and specializations. /Dennis Kempf
+        /// </summary>
         private void ChangeEditProfileState()
         {
             if (bt_Edit.Text == "Edit Profile")
             {
+                //Setup the elements needed to edit the profile.
+                checkedListSkills.Items.Clear();
+                var userSpecs = ServiceManager.SpecializationService.GetUserSpecializations(userModelGet.ID);
+                checkedListSkills.Items.AddRange(ServiceManager.SpecializationService.ListDefinedSpecializations().ToArray());
+                foreach (var skill in userSpecs)
+                {
+                    checkedListSkills.SetItemChecked(checkedListSkills.FindStringExact(skill), true);
+                }
                 GuiHelper.UnlockProfileForEditing(grpBoxProfileInfo, true);
                 bt_Edit.Text = "Save Changes";
                 bt_EditCancel.Enabled = true;
                 bt_EditCancel.Visible = true;
+                grpBoxProjects.Visible = false;
+                grpBoxSpecializations.Visible = true;
             }
             else
+            {
+                SaveProfileChanges();
+            }
+        }
+
+        /// <summary>
+        /// Gets called when you click the "Save Changes" button - tries to update the user profile via the domain layer.
+        /// displays an error message via the feedback label if not successful. /Dennis Kempf
+        /// </summary>
+        private void SaveProfileChanges()
+        {
+            try
             {
                 UpdateUserModel();
                 IUserService userService = userServiceGet;
                 userService.UpdateUser(userModelGet);
+                List<string> specializations = checkedListSkills.CheckedItems.Cast<string>().ToList();
+                ServiceManager.SpecializationService.UpdateUserSpecializations(userModelGet, specializations);
                 GuiHelper.UnlockProfileForEditing(grpBoxProfileInfo, false);
                 bt_EditCancel.Enabled = false;
                 bt_EditCancel.Visible = false;
                 bt_Edit.Text = "Edit Profile";
+                grpBoxSpecializations.Visible = false;
+                grpBoxProjects.Visible = true;
+                guiHelper.FeedBackMessage(lbl_FeedBackLabel, "Profile updated successfully.", Color.Green);
+            }
+            catch (Exception ex)
+            {
+                guiHelper.FeedBackMessage(lbl_FeedBackLabel, ex.Message, Color.Red);
             }
         }
 
@@ -159,6 +188,8 @@ namespace GUI
             bt_EditCancel.Visible = false;
             bt_Edit.Text = "Edit Profile";
             GuiHelper.UnlockProfileForEditing(grpBoxProfileInfo, false);
+            grpBoxSpecializations.Visible = false;
+            grpBoxProjects.Visible = true;
             SetUpTB();
         }
 

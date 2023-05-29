@@ -236,7 +236,7 @@
             MinimumSize = new Size(816, 557);
             Name = "ConsultantAdd";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "ConsultantAdd";
+            Text = "Find Consultants";
             ((System.ComponentModel.ISupportInitialize)dgv_ConsultantList).EndInit();
             ((System.ComponentModel.ISupportInitialize)userServiceBindingSource).EndInit();
             grpBoxSpecFilter.ResumeLayout(false);

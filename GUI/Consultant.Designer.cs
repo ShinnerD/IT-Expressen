@@ -30,7 +30,7 @@
         {
             bt_SearchProjects = new Button();
             dgv_ConsultantsInvites = new DataGridView();
-            groupBox1 = new GroupBox();
+            grpBoxProjects = new GroupBox();
             bt_seeProjects = new Button();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             grpBoxProfileInfo = new GroupBox();
@@ -55,9 +55,13 @@
             label4 = new Label();
             label6 = new Label();
             bt_seeInvites = new Button();
+            grpBoxSpecializations = new GroupBox();
+            checkedListSkills = new CheckedListBox();
+            lbl_FeedBackLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)dgv_ConsultantsInvites).BeginInit();
-            groupBox1.SuspendLayout();
+            grpBoxProjects.SuspendLayout();
             grpBoxProfileInfo.SuspendLayout();
+            grpBoxSpecializations.SuspendLayout();
             SuspendLayout();
             // 
             // bt_SearchProjects
@@ -68,7 +72,7 @@
             bt_SearchProjects.Name = "bt_SearchProjects";
             bt_SearchProjects.Size = new Size(100, 26);
             bt_SearchProjects.TabIndex = 36;
-            bt_SearchProjects.Text = "SearchProjects";
+            bt_SearchProjects.Text = "Search Projects";
             bt_SearchProjects.UseVisualStyleBackColor = true;
             bt_SearchProjects.Click += bt_SearchProjects_Click;
             // 
@@ -91,17 +95,17 @@
             dgv_ConsultantsInvites.ColumnHeaderMouseClick += dgv_ConsultantsInvites_ColumnHeaderMouseClick;
             dgv_ConsultantsInvites.DataBindingComplete += dgv_ConsultantsInvites_DataBindingComplete;
             // 
-            // groupBox1
+            // grpBoxProjects
             // 
-            groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            groupBox1.Controls.Add(bt_seeProjects);
-            groupBox1.Controls.Add(dgv_ConsultantsInvites);
-            groupBox1.Location = new Point(12, 194);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(615, 356);
-            groupBox1.TabIndex = 40;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "My Projects";
+            grpBoxProjects.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            grpBoxProjects.Controls.Add(bt_seeProjects);
+            grpBoxProjects.Controls.Add(dgv_ConsultantsInvites);
+            grpBoxProjects.Location = new Point(12, 194);
+            grpBoxProjects.Name = "grpBoxProjects";
+            grpBoxProjects.Size = new Size(615, 356);
+            grpBoxProjects.TabIndex = 40;
+            grpBoxProjects.TabStop = false;
+            grpBoxProjects.Text = "My Projects";
             // 
             // bt_seeProjects
             // 
@@ -393,38 +397,79 @@
             // 
             // bt_seeInvites
             // 
-            bt_seeInvites.Location = new Point(15, 163);
+            bt_seeInvites.Location = new Point(424, 160);
             bt_seeInvites.Name = "bt_seeInvites";
-            bt_seeInvites.Size = new Size(125, 23);
+            bt_seeInvites.Size = new Size(100, 26);
             bt_seeInvites.TabIndex = 42;
-            bt_seeInvites.Text = "See Invites";
+            bt_seeInvites.Text = "Invites";
             bt_seeInvites.UseVisualStyleBackColor = true;
             bt_seeInvites.Click += bt_seeInvites_Click;
+            // 
+            // grpBoxSpecializations
+            // 
+            grpBoxSpecializations.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            grpBoxSpecializations.Controls.Add(checkedListSkills);
+            grpBoxSpecializations.Location = new Point(12, 194);
+            grpBoxSpecializations.Name = "grpBoxSpecializations";
+            grpBoxSpecializations.Size = new Size(615, 356);
+            grpBoxSpecializations.TabIndex = 43;
+            grpBoxSpecializations.TabStop = false;
+            grpBoxSpecializations.Text = "My Specializations";
+            grpBoxSpecializations.Visible = false;
+            // 
+            // checkedListSkills
+            // 
+            checkedListSkills.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            checkedListSkills.BackColor = SystemColors.Control;
+            checkedListSkills.BorderStyle = BorderStyle.None;
+            checkedListSkills.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            checkedListSkills.FormattingEnabled = true;
+            checkedListSkills.Location = new Point(14, 22);
+            checkedListSkills.MultiColumn = true;
+            checkedListSkills.Name = "checkedListSkills";
+            checkedListSkills.Size = new Size(595, 324);
+            checkedListSkills.TabIndex = 44;
+            // 
+            // lbl_FeedBackLabel
+            // 
+            lbl_FeedBackLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            lbl_FeedBackLabel.AutoSize = true;
+            lbl_FeedBackLabel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            lbl_FeedBackLabel.Location = new Point(9, 166);
+            lbl_FeedBackLabel.Name = "lbl_FeedBackLabel";
+            lbl_FeedBackLabel.Size = new Size(166, 15);
+            lbl_FeedBackLabel.TabIndex = 45;
+            lbl_FeedBackLabel.Text = "Feedback label for messages...";
+            lbl_FeedBackLabel.Visible = false;
             // 
             // Consultant
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(639, 561);
+            Controls.Add(lbl_FeedBackLabel);
+            Controls.Add(grpBoxSpecializations);
+            Controls.Add(grpBoxProjects);
             Controls.Add(bt_seeInvites);
             Controls.Add(grpBoxProfileInfo);
             Controls.Add(bt_SearchProjects);
-            Controls.Add(groupBox1);
             MinimumSize = new Size(655, 600);
             Name = "Consultant";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Consultant";
+            Text = "Consultant Profile";
             ((System.ComponentModel.ISupportInitialize)dgv_ConsultantsInvites).EndInit();
-            groupBox1.ResumeLayout(false);
+            grpBoxProjects.ResumeLayout(false);
             grpBoxProfileInfo.ResumeLayout(false);
             grpBoxProfileInfo.PerformLayout();
+            grpBoxSpecializations.ResumeLayout(false);
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
         private Button bt_SearchProjects;
         private DataGridView dgv_ConsultantsInvites;
-        private GroupBox groupBox1;
+        private GroupBox grpBoxProjects;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private GroupBox grpBoxProfileInfo;
         private Button bt_EditCanceltest;
@@ -450,5 +495,8 @@
         private Button bt_Edit;
         private Button bt_seeInvites;
         private Button bt_seeProjects;
+        private GroupBox grpBoxSpecializations;
+        private CheckedListBox checkedListSkills;
+        private Label lbl_FeedBackLabel;
     }
 }
