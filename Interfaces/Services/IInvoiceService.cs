@@ -4,6 +4,7 @@ namespace Interfaces.Services
 {
     public interface IInvoiceService
     {
+
         void AddInvoice(int projectID, decimal totalPrice, DateTime invoiceDate);
 
         IInvoiceModel GetInvoiceFromProjectID(int projectID);

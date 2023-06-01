@@ -1,5 +1,8 @@
 ﻿namespace Interfaces.Models
 {
+    /// <summary>
+    /// Interface used to connect to ConsultantLineModel
+    /// </summary>
     public interface IConsultantLineModel
     {
         decimal HourlyRate { get; set; }

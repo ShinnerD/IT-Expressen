@@ -1,5 +1,8 @@
 ﻿namespace Interfaces.Models
 {
+    /// <summary>
+    /// Interface used to connect to MessageModel
+    /// </summary>
     public interface IMessageModel
     {
         int MessageID { get; set; }

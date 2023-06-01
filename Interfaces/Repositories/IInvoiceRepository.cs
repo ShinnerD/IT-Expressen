@@ -21,8 +21,16 @@ namespace Interfaces.Repositories
         /// </summary>
         IInvoiceModel GetInvoiceID(int invoiceId);
 
+        /// <summary>
+        /// Enable the system to add an invoice to the invoice table on the database //MS
+        /// </summary>
+        /// <param name="invoice"></param>
         void AddInvoice(IInvoiceModel invoice);
 
+        /// <summary>
+        /// Enable the system to update an invoice to the invoice table on the database //MS
+        /// </summary>
+        /// <param name="invoice"></param>
         void UpdateInvoice(IInvoiceModel invoice);
     }
 }

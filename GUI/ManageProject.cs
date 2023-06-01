@@ -6,6 +6,9 @@ namespace GUI
 {
     public partial class ManageProject : Form
     {
+        /// <summary>
+        /// Initializeing og the service/models need for the form /MS
+        /// </summary>
         private int ProjectID;
 
         private IProjectModel? ProjectGet;
@@ -19,7 +22,12 @@ namespace GUI
         private readonly IDomainServiceManager ServiceManager;
 
         private List<IInvitesModel> dgvInvites;
-
+        /// <summary>
+        /// Initializes needed methods and data
+        /// </summary>
+        /// <param name="serviceManager"></param>
+        /// <param name="projectId"></param>
+        /// <param name="userName"></param>
         public ManageProject(IDomainServiceManager serviceManager, int projectId, string userName)
         {
             ServiceManager = serviceManager;
@@ -32,13 +40,18 @@ namespace GUI
             LoadMessageData();
             InvolvedUsers();
         }
-
+        /// <summary>
+        /// Gets the correct data from the database //MS
+        /// </summary>
         private void GetProjectInfo()
         {
             ProjectGet = ServiceManager.ProjectService.GetProject(ProjectID);
             MessageGet = ServiceManager.MessageService.GetAllMessageFromProjectID(ProjectID);
         }
 
+        /// <summary>
+        /// Loads the textbox in the top of the page, with the users profile. Forwared from the login page /MS
+        /// </summary>
         private void LoadProjectData()
         {
             grpBoxProfileInfo.Text = ProjectGet.Title;
@@ -60,7 +73,9 @@ namespace GUI
             }
             GetTotalInvoice();
         }
-
+        /// <summary>
+        /// Gets all messages to the related project and sets it up in the right format with full name and date.
+        /// </summary>
         private void LoadMessageData()
         {
             MessageBoardGet = new List<string>();
@@ -76,7 +91,9 @@ namespace GUI
             rtb_Message.Text = String.Join(Environment.NewLine, MessageBoardGet);
             rtb_newMessage.Text = "";
         }
-
+        /// <summary>
+        /// Adds message to the database with a check to make sure its not null og empty. /MS
+        /// </summary>
         public void AddMessage()
         {
             if (!string.IsNullOrEmpty(rtb_newMessage.Text))
@@ -98,7 +115,10 @@ namespace GUI
                 }
             }
         }
-
+        /// <summary>
+        /// Diffrent loads depending on what user type is forwarded to the form. Gives consultants the option to add hours to invoice.
+        /// Gives Managers (and admins) a diffrent datagridview, so they are able to see the amount every involved consultant have invoiced /MS
+        /// </summary>       
         private void InvolvedUsers()
         {
             if (ServiceManager.UserService.GetUserFromUsername(UserName).UserType.ToLower() == "consultant")
@@ -119,7 +139,9 @@ namespace GUI
                 tb_TotalInvoice.Text = dgvInvites.Select(i => i.ConLineSum).Sum().ToString();
             }
         }
-
+        /// <summary>
+        /// Creates and designs the datagridview after a set of rules, so only usefull information is shown, and not the entire model. /MS
+        /// </summary>
         private void DataInvolvedUseres()
         {
             dgv_InvolvedUsers.AutoGenerateColumns = false;
@@ -137,7 +159,9 @@ namespace GUI
             dgv_InvolvedUsers.Columns.Add("ConLineSum", "Invoiced");
             dgv_InvolvedUsers.Columns["ConLineSum"].DataPropertyName = "ConLineSum";
         }
-
+        /// <summary>
+        /// Method to load textbox for the a specefik userType /MS
+        /// </summary>
         private void LoadConsultantInvoiceBoxes()
         {
             lb_HourlyRate.Visible = true;
@@ -147,7 +171,9 @@ namespace GUI
             cb_UnlockRate.Visible = true;
             bt_addHours.Visible = true;
         }
-
+        /// <summary>
+        /// Method to add the amount invoiced from a consultant to the database /MS
+        /// </summary>
         private void AddToInvoice()
         {
             try
@@ -166,7 +192,9 @@ namespace GUI
                 guiHelper.FeedBackMessage(lb_warning, e.Message, Color.Red);
             }
         }
-
+        /// <summary>
+        /// Simple method to let consultants able to see the total amount they have invoiced on a the selected project /MS
+        /// </summary>
         private void GetTotalInvoice()
         {
             var userID = ServiceManager.UserService.GetUserFromUsername(UserName).ID;
@@ -182,14 +210,22 @@ namespace GUI
             }
             tb_TotalInvoice.Text = result.ToString();
         }
-
+        /// <summary>
+        /// Button click event -> see method for results /MS
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bt_send_Click(object sender, EventArgs e)
         {
             AddMessage();
             GetProjectInfo();
             LoadMessageData();
         }
-
+        /// <summary>
+        /// Counter to indicate if the message is to long /MS
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void rtb_newMessage_TextChanged(object sender, EventArgs e)
         {
             lb_TextCounter.Text = rtb_newMessage.Text.Length.ToString() + "/255";
@@ -205,13 +241,21 @@ namespace GUI
                 lb_TextCounter.ForeColor = Color.Red;
             }
         }
-
+        /// <summary>
+        /// Button click event -> see method for results /MS
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bt_addHours_Click(object sender, EventArgs e)
         {
             AddToInvoice();
             GetTotalInvoice();
         }
-
+        /// <summary>
+        /// Unlock the textbox to be able to add hours and rate to invoice /MS
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cb_UnlockRate_CheckedChanged(object sender, EventArgs e)
         {
             if (cb_UnlockRate.Checked == true)
