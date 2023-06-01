@@ -1,5 +1,8 @@
 ﻿namespace Interfaces.Models
 {
+    /// <summary>
+    /// Interface used to connect to UserModel //MS
+    /// </summary>
     public interface IUserModel
     {
         int ID { get; set; }

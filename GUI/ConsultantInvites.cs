@@ -5,6 +5,9 @@ namespace GUI
 {
     public partial class ConsultantInvites : Form
     {
+        /// <summary>
+        /// Initializeing og the service/models need for the form /MS
+        /// </summary>
         private readonly IDomainServiceManager ServiceManager;
         private string Username { get; set; }
         private IUserModel userModelGet { get; set; }
@@ -12,7 +15,11 @@ namespace GUI
         private List<IInvitesModel> invites;
 
         private GuiHelper guiHelper = new GuiHelper();
-
+        /// <summary>
+        /// Initializes needed methods and data
+        /// </summary>
+        /// <param name="serviceManager"></param>
+        /// <param name="userName"></param>
         public ConsultantInvites(IDomainServiceManager serviceManager, string userName)
         {
             InitializeComponent();
@@ -23,13 +30,17 @@ namespace GUI
             SetupSkillsCheckList();
             LoadInvitesToDGV();
         }
-
+        /// <summary>
+        /// Initializes needed methods and data
+        /// </summary>
         private void GetUser()
         {
             IUserService userService = ServiceManager.UserService;
             userModelGet = userService.GetUserFromUsername(Username);
         }
-
+        /// <summary>
+        /// Finds the project from what ever item is selected in the datagridview and loads it into the textboxes on top of the form. Also preforms a data start/end check, to change lable accordingly /MS
+        /// </summary>
         private void GetProjectInfo()
         {
             var targetProject = (int)dgv_ConsultantsInvites.SelectedCells[0].Value;
@@ -57,13 +68,15 @@ namespace GUI
 
             for (int i = 0; i < checkedListSkills.Items.Count; i++)
                 checkedListSkills.SetItemChecked(i, false);
-
+            // Loads the specializations for the selected item //MS
             foreach (var specialization in ServiceManager.SpecializationService.GetProjectSpecializations(selectedProject.ProjectId))
             {
                 checkedListSkills.SetItemChecked(checkedListSkills.FindStringExact(specialization), true);
             }
         }
-
+        /// <summary>
+        /// Fills the datagridview with data from the inviteService //MS
+        /// </summary>
         private void LoadInvitesToDGV()
         {
             IInviteService inviteService = ServiceManager.InviteService;
@@ -72,7 +85,9 @@ namespace GUI
             dgv_ConsultantsInvites.DataSource = invites;
             dgv_ConsultantsInvites.ClearSelection();
         }
-
+        /// <summary>
+        /// Configs the datagridview, so only needed columns are shown //MS
+        /// </summary>
         private void DataGridInitialSetup()
         {
             dgv_ConsultantsInvites.AutoGenerateColumns = false;
@@ -96,7 +111,11 @@ namespace GUI
             dgv_ConsultantsInvites.Columns["AcceptDate"].DataPropertyName = "AcceptDate";
             dgv_ConsultantsInvites.Columns["AcceptDate"].DefaultCellStyle.Format = "dd'/'MM'/'yyyy";
         }
-
+        /// <summary>
+        /// Select event from the dgv, that loads the textboxes //MS
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgv_ConsultantsInvites_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex > -1)
@@ -105,7 +124,9 @@ namespace GUI
                 StartDateCheck();
             }
         }
-
+        /// <summary>
+        /// Loads the specializations list, according to the what have been created on the database //MS
+        /// </summary>
         private void SetupSkillsCheckList()
         {
             checkedListSkills.Items.Clear();
@@ -117,7 +138,9 @@ namespace GUI
                 checkedListSkills.Items.Add(item);
             }
         }
-
+        /// <summary>
+        /// Method of action, if an invite is accepted //MS
+        /// </summary>
         private void Accept()
         {
             if (dgv_ConsultantsInvites.SelectedRows.Count > 0)
@@ -141,7 +164,9 @@ namespace GUI
                 LoadInvitesToDGV();
             }
         }
-
+        /// <summary>
+        /// Method of action, if an invite is declined
+        /// </summary>
         private void Declined()
         {
             if (dgv_ConsultantsInvites.SelectedRows.Count > 0)
@@ -161,7 +186,9 @@ namespace GUI
                 LoadInvitesToDGV();
             }
         }
-
+        /// <summary>
+        /// Disables the ability to accppet/decline invites if todays date > end date of the projekt. Buttons gets disabled //MS
+        /// </summary>
         private void StartDateCheck()
         {
             var targetProject = (int)dgv_ConsultantsInvites.SelectedCells[0].Value;
@@ -179,12 +206,20 @@ namespace GUI
                 bt_decline.Enabled = true;
             }
         }
-
+        /// <summary>
+        /// Button click event -> see method for results /MS
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bt_AcceptInv_Click(object sender, EventArgs e)
         {
             Accept();
         }
-
+        /// <summary>
+        ///  Button click event -> see method for results /MS
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bt_decline_Click(object sender, EventArgs e)
         {
             Declined();

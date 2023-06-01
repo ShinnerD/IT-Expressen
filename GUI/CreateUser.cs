@@ -7,6 +7,9 @@ namespace GUI
 {
     public partial class CreateUser : Form
     {
+        /// <summary>
+        /// Initializeing og the service/models need for the form /MS
+        /// </summary>
         private readonly IDomainServiceManager ServiceManager;
         private IUserService userService;
         bool isAdmin = false;
@@ -14,7 +17,11 @@ namespace GUI
         private GuiHelper guiHelper = new GuiHelper();
 
         AdminMain AdminForm;
-
+        /// <summary>
+        /// Initializes needed methods and data
+        /// </summary>
+        /// <param name="serviceManager"></param>
+        /// <exception cref="ArgumentNullException"></exception>
         public CreateUser(IDomainServiceManager serviceManager)
         {
             ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
@@ -23,7 +30,13 @@ namespace GUI
             InitializeComponent();
             SetupSkillsCheckList();
         }
-
+        /// <summary>
+        /// Initializes needed methods and data
+        /// </summary>
+        /// <param name="serviceManager"></param>
+        /// <param name="adminForm"></param>
+        /// <param name="IsAdminCreatingUser"></param>
+        /// <exception cref="ArgumentNullException"></exception>
         public CreateUser(IDomainServiceManager serviceManager, AdminMain adminForm, bool IsAdminCreatingUser)
         {
             ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
@@ -36,7 +49,9 @@ namespace GUI
             SetupSkillsCheckList();
         }
 
-        //Creates a new user according to the parameters defined in the IUserService. 
+        /// <summary>
+        /// Creates a new user according to the parameters defined in the IUserService. /MS
+        /// </summary>
         public void CreateNewUser()
         {
             try
@@ -78,7 +93,10 @@ namespace GUI
                 guiHelper.FeedBackMessage(lbl_FeedBackLabel, ex.Message, Color.Red);
             }
         }
-        //Makes sure the two passwords are the same and critical textboxes arent left empty //MS
+        /// <summary>
+        /// Makes sure the two passwords are the same and critical textboxes arent left empty //MS
+        /// </summary>
+        /// <returns></returns>
         private bool NoInputErrors()
         {
             if (tb_Password.Text == tb_RePassword.Text
@@ -92,13 +110,19 @@ namespace GUI
             return false;
         }
 
-        // Button click event -> see method for results /MS
+        /// <summary>
+        /// Button click event -> see method for results /MS
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bt_CreateUser_Click(object sender, EventArgs e)
         {
             CreateNewUser();
         }
 
-        //Creates the CheckListBox used for specialization according to data from the database  //MS
+        /// <summary>
+        /// Creates the CheckListBox used for specialization according to data from the database  //MS
+        /// </summary>
         private void SetupSkillsCheckList()
         {
             clb_Skills.Enabled = false;
@@ -116,7 +140,11 @@ namespace GUI
             }
         }
 
-        //Locks and unlocks the CheckBoxList depending on what user type is selected in the ComboBox. Also removed any checked boxes in the CheckBoxList if other is selected /MS
+        /// <summary>
+        /// Locks and unlocks the CheckBoxList depending on what user type is selected in the ComboBox. Also removed any checked boxes in the CheckBoxList if other is selected /MS
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cb_UserType_SelectedValueChanged(object sender, EventArgs e)
         {
             if (cb_UserType.Text.ToLower() == "consultant")
@@ -132,13 +160,19 @@ namespace GUI
             }
         }
 
-        // Button click event -> Close current form /MS
+        /// <summary>
+        /// Button click event -> Close current form /MS
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bt_back_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        //After the User is created, the user is forwarded the the correct form, defined by their user type //MS
+        /// <summary>
+        /// After the User is created, the user is forwarded the the correct form, defined by their user type //MS
+        /// </summary>
         private void forwardUserToProfile()
         {
             var user = userService.GetUserFromUsername(tb_UserName.Text);
@@ -165,7 +199,10 @@ namespace GUI
             }
         }
 
-        //Adds selected skills to specialization and links to a specefik user /MS
+        /// <summary>
+        /// Adds selected skills to specialization and links to a specefik user /MS
+        /// </summary>
+        /// <returns></returns>
         private List<string> FindCheckedSkills()
         {
             List<string> result = new List<string>();

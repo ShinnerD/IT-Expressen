@@ -79,7 +79,10 @@ namespace DAL.Repository
 
             return result;
         }
-
+        /// <summary>
+        /// Enable the system to add an invoice to the invoice table on the database //MS
+        /// </summary>
+        /// <param name="invoice"></param>
         public void AddInvoice(IInvoiceModel invoice)
         {
             var newInovice = new Linq.Invoice();
@@ -91,6 +94,10 @@ namespace DAL.Repository
             DataContext.Invoices.InsertOnSubmit(newInovice);
             DataContext.SubmitChanges();
         }
+        /// <summary>
+        /// Enable the system to update an invoice to the invoice table on the database //MS
+        /// </summary>
+        /// <param name="invoice"></param>
         public void UpdateInvoice(IInvoiceModel invoice)
         {
             var dbinvoice = DataContext.Invoices.First(I => I.Invoice_ID == invoice.InvoiceId);

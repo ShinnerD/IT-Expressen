@@ -5,17 +5,17 @@ namespace Interfaces.Services
     public interface IInviteService
     {
         /// <summary>
-        /// Returns a list of all invites in the database.
+        /// Returns a list of all invites from the database. //MS
         /// </summary>
         List<IInvitesModel> GetAllInvites();
 
         /// <summary>
-        /// Returns a list of all invites related to a specific project Id.
+        /// Returns a list of all invites related to a specific project Id. //MS
         /// </summary>
         List<IInvitesModel> GetAllInvitedProjectID(int ProjectID);
 
         /// <summary>
-        /// Getting a list off all invites with a specific UserId
+        /// Getting a list off all invites with a specific UserId //MS
         /// </summary>
         List<IInvitesModel> GetInvitesFromUserId(int id);
 

@@ -2,6 +2,7 @@
 {
     public interface IDomainServiceManager
     {
+
         IUserService UserService { get; }
         IProjectService ProjectService { get; }
         IInviteService InviteService { get; }

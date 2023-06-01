@@ -5,6 +5,7 @@ using Interfaces.Services;
 
 namespace Domain.Services
 {
+
     public class ConsultantLineService : IConsultantLineService
     {
         private readonly IDomainServiceManager ServiceManager;
@@ -15,22 +16,41 @@ namespace Domain.Services
             ServiceManager = serviceManager;
             consultantLineRepository = new ConsultantLineRepository(dataContextManager);
         }
-
+        /// <summary>
+        /// Retrives a list of all entitys contained in the ConsultantLine table, where the sendt Project ID matches //MS
+        /// </summary>
+        /// <param name="projectID"></param>
+        /// <returns></returns>
         public List<IConsultantLineModel> GetAllConsultantLinesFromProjectID(int projectID)
         {
             return consultantLineRepository.GetALLConsultantLinesFromProjectID(projectID).ToList();
         }
-
+        /// <summary>
+        /// Retrives a list of all entitys contained in the ConsultantLine table, where the sendt User ID matches //MS
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns></returns>
         public List<IConsultantLineModel> GetAllConsultantLinesFromUserID(int userID)
         {
             return consultantLineRepository.GetALLConsultantLinesFromUserID(userID).ToList();
         }
-
+        /// <summary>
+        /// Retrives a list of all entitys contained in the ConsultantLine table, where the sendt Invoice ID matches //MS
+        /// </summary>
+        /// <param name="invoiceID"></param>
+        /// <returns></returns>
         public List<IConsultantLineModel> GetAllConsultantLinesFromInvoiceID(int invoiceID)
         {
             return consultantLineRepository.GetALLConsultantLinesFromInvoiceID(invoiceID);
         }
-
+        /// <summary>
+        /// Enables the use to add a new line to the ConsultantLine table, given the requiered parameters //MS
+        /// </summary>
+        /// <param name="projectID"></param>
+        /// <param name="userID"></param>
+        /// <param name="HourlyRate"></param>
+        /// <param name="HoursTotal"></param>
+        /// <exception cref="Exception"></exception>
         public void AddConsultantLine(int projectID, int userID, decimal HourlyRate, int HoursTotal)
         {
             //Error Check if Project is still only pending

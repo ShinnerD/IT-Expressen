@@ -6,7 +6,9 @@ using System.Text;
 
 namespace DAL.Repository
 {
-
+    /// <summary>
+    /// Repository to retrive any data related tot the ConsultantLine table //MS
+    /// </summary>
 
     public class ConsultantLineRepository : IConsultantLineRepository
     {
@@ -16,7 +18,10 @@ namespace DAL.Repository
         {
             dbcontext = dataContext.GetContext() as DataClassesDataContext ?? throw new ArgumentNullException(nameof(dataContext));
         }
-
+        /// <summary>
+        /// Retrives a list of all entitys contained in the ConsultantLine table //MS
+        /// </summary>
+        /// <returns></returns>
         public List<IConsultantLineModel> GetAllConsultantLines()
         {
             List<IConsultantLineModel> result = new List<IConsultantLineModel>();
@@ -39,6 +44,10 @@ namespace DAL.Repository
             }
             return result;
         }
+        /// <summary>
+        /// Enables the use to add a new line to the ConsultantLine table //MS
+        /// </summary>
+        /// <param name="ConsulModel"></param>
         public void AddConsultantLine(IConsultantLineModel ConsulModel)
         {
 
@@ -53,6 +62,11 @@ namespace DAL.Repository
             dbcontext.Consultant_Lines.InsertOnSubmit(newConsultantLine);
             dbcontext.SubmitChanges();
         }
+        /// <summary>
+        /// Give the option to delete a line from the ConsultantLine table //MS
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="projectID"></param>
         public void DeleteConsultantLine(int userID, int projectID)
         {
             var targetConsulLineID = dbcontext.Consultant_Lines.Where(i => i.User_ID == userID && i.Project_ID == projectID);
@@ -60,6 +74,11 @@ namespace DAL.Repository
             dbcontext.Consultant_Lines.DeleteAllOnSubmit(targetConsulLineID);
             dbcontext.SubmitChanges();
         }
+        /// <summary>
+        /// Retrives a list of all entitys contained in the ConsultantLine table, where the sendt User ID matches //MS
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns></returns>
         public List<IConsultantLineModel> GetALLConsultantLinesFromUserID(int userID)
         {
             List<IConsultantLineModel> result = new List<IConsultantLineModel>();
@@ -84,6 +103,11 @@ namespace DAL.Repository
             }
             return result;
         }
+        /// <summary>
+        /// Retrives a list of all entitys contained in the ConsultantLine table, where the sendt Project ID matches //MS
+        /// </summary>
+        /// <param name="projectID"></param>
+        /// <returns></returns>
         public List<IConsultantLineModel> GetALLConsultantLinesFromProjectID(int projectID)
         {
             List<IConsultantLineModel> result = new List<IConsultantLineModel>();
@@ -107,6 +131,11 @@ namespace DAL.Repository
             }
             return result;
         }
+        /// <summary>
+        /// Retrives a list of all entitys contained in the ConsultantLine table, where the sendt Invoice ID matches //MS
+        /// </summary>
+        /// <param name="invoiceID"></param>
+        /// <returns></returns>
         public List<IConsultantLineModel> GetALLConsultantLinesFromInvoiceID(int invoiceID)
         {
             List<IConsultantLineModel> result = new List<IConsultantLineModel>();

@@ -15,7 +15,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Retrieves a List of Invites for the project
+        /// Retrieves a List of Invites for the project //MS
         /// </summary>
         public List<IMessageModel> GetAllMessageFromProjectID(int projectID)
         {
@@ -40,7 +40,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Retrieves a List of Invites belonging to a user with the specified Id.
+        /// Retrieves a List of Invites belonging to a user with the specified Id. //MS
         /// </summary>
         public List<IMessageModel> GetAllMessageFromUserId(int userId)
         {
@@ -65,7 +65,7 @@ namespace DAL.Repository
         }
 
         /// <summary>
-        /// Adds a message to the database.
+        /// Adds a message to the database. //MS
         /// </summary>
         public void AddMessage(IMessageModel messageModel)
         {

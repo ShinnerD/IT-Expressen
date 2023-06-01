@@ -2,6 +2,7 @@
 
 namespace DAL.Models
 {
+
     public class ConsultantLineModel : IConsultantLineModel
     {
         public int LineID { get; set; }

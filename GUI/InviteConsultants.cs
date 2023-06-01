@@ -6,7 +6,9 @@ namespace GUI
 {
     public partial class InviteConsultants : Form
     {
-        //Initializeing og the service/models need for the form /MS
+        /// <summary>
+        /// Initializeing og the service/models need for the form /MS
+        /// </summary>
         private readonly IDomainServiceManager ServiceManager;
 
         private int ProjectID { get; set; }
@@ -18,7 +20,12 @@ namespace GUI
 
         private IInviteService invService;
 
-        //Constructor method loaded with project ID. All relevent data is loaded /MS
+        /// <summary>
+        /// Constructor method loaded with project ID. All relevent data is loaded /MS
+        /// </summary>
+        /// <param name="serviceManager"></param>
+        /// <param name="projectID"></param>
+        /// <exception cref="ArgumentNullException"></exception>
         public InviteConsultants(IDomainServiceManager serviceManager, int projectID)
         {
             ServiceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
@@ -32,14 +39,19 @@ namespace GUI
             LoadProjectData();
         }
 
-        //Constructor method loaded with project model. All relevent data is loaded /MS
+        /// <summary>
+        /// Constructor method loaded with project model. All relevent data is loaded /MS
+        /// </summary>
+        /// <param name="ProjectsSpecs"></param>
         public InviteConsultants(IProjectModel ProjectsSpecs)
         {
             InitializeComponent();
             ProjectGet = ProjectsSpecs;
         }
 
-        //Gets data on projects and specializations /MS
+        /// <summary>
+        /// Gets data on projects and specializations /MS
+        /// </summary>
         private void GetProjectInfo()
         {
             IProjectService projectService = ServiceManager.ProjectService;
@@ -47,7 +59,9 @@ namespace GUI
             ProjectGet = projectService.GetProject(ProjectID);
         }
 
-        //Loads the data transfered into textboxes, and updates the invites list so the user can see the information about the given project //MS
+        /// <summary>
+        /// Loads the data transfered into textboxes, and updates the invites list so the user can see the information about the given project //MS
+        /// </summary>
         private void LoadProjectData()
         {
             var selectedProject = ServiceManager.ProjectService.GetProject(ProjectID);
@@ -92,7 +106,9 @@ namespace GUI
             }
         }
 
-        //Datagridview to see all consultants that has been invited to the project //MS
+        /// <summary>
+        /// Datagridview to see all consultants that has been invited to the project //MS
+        /// </summary>
         private void invitedConsultants()
         {
             dgv_ConsultantList.AutoGenerateColumns = false;
