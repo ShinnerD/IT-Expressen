@@ -153,19 +153,22 @@ namespace GUI
                 {
                     this.Hide();
                     GUI.Manager a = new Manager(ServiceManager, targetUser.UserName);
-                    a.Show();
+                    a.ShowDialog();
+                    this.Show();
                 }
                 if (targetUser.Password == tb_Password.Text && targetUser.UserType == "consultant")
                 {
                     this.Hide();
                     GUI.Consultant a = new Consultant(ServiceManager, targetUser.UserName);
-                    a.Show();
+                    a.ShowDialog();
+                    this.Show();
                 }
                 if (targetUser.Password == tb_Password.Text && targetUser.UserType == "admin")
                 {
                     this.Hide();
                     AdminMain a = new AdminMain(ServiceManager, targetUser.UserName);
-                    a.Show();
+                    a.ShowDialog();
+                    this.Show();
                 }
             }
             catch (Exception ex)
@@ -188,7 +191,7 @@ namespace GUI
         /// </summary>
         public async void WakeUpDB()
         {
-            //await Task.Delay(3000);
+            await Task.Delay(3000);
             try
             {
                 ServiceManager.ProjectService.UpdateAllProjectStatus(); //<-- Execution of stored procedure to update project status column.
