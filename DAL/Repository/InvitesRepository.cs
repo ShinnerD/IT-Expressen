@@ -172,7 +172,7 @@ namespace DAL.Repository
                 IInvitesModel Invite = new InvitesModel();
 
                 Invite.ProjectId = dto.Project_ID;
-                Invite.UserId = dto.Project_ID;
+                Invite.UserId = dto.User_ID;
                 Invite.InviteDate = dto.Invite_Date;
                 Invite.InviteStatus = dto.Invite_status;
                 Invite.AcceptDate = dto.Accept_date;

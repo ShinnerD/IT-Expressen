@@ -147,19 +147,18 @@ namespace GUI
             {
                 IProjectService projectService = ServiceManager.ProjectService;
 
-                var targetProject = (int)dgv_ConsultantsInvites.SelectedCells[0].Value;
+                //int targetProject = int.Parse(dgv_ConsultantsInvites.SelectedCells["ProjectId"].Value);
 
-                var selectedProject = ServiceManager.ProjectService.GetProject(targetProject);
+                //var selectedProject = ServiceManager.ProjectService.GetProject(targetProject);
 
                 var selectedInvite = dgv_ConsultantsInvites.SelectedRows[0].DataBoundItem as IInvitesModel;
 
                 IInviteService inviteService = ServiceManager.InviteService;
 
-
                 selectedInvite.InviteStatus = "Accepted";
                 selectedInvite.AcceptDate = DateTime.Now;
 
-                inviteService.UpdateInviteStatus(selectedInvite, selectedProject.ProjectId);
+                inviteService.UpdateInviteStatus(selectedInvite, selectedInvite.ProjectId);
 
                 LoadInvitesToDGV();
             }
